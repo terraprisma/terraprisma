@@ -40,7 +40,7 @@ fn get_dotnet_runtimes(major: &i32) -> Option<Vec<String>> {
         return None;
     };
 
-    let pattern = format!(r"dMicrosoft.NETCore.App {}\.[0-9]+\.[0-9]+", major);
+    let pattern = format!(r"Microsoft.NETCore.App {}\.[0-9]+\.[0-9]+", major);
     let regex = Regex::new(&pattern[..]).unwrap();
 
     if !regex.is_match(&dotnet_list_runtimes.stdout) {
