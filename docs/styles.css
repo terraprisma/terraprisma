@@ -1,0 +1,108 @@
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.4;
+  color: CanvasText;
+  background: Canvas;
+  font-family: system-ui, -apple-system, Cantarell, Geneva, Arial, sans-serif;
+}
+
+body {
+  margin: 0px;
+}
+
+main {
+  max-width: 60em;
+  margin: 6em auto;
+  padding: 1em;
+}
+
+h1 {
+  font-weight: bolder;
+  font-size: 36px;
+  border-bottom-color: ButtonBorder;
+  border-bottom-style: solid;
+  border-bottom-width: 0.05ch;
+  padding-bottom: 0.2ch;
+  margin-bottom: 1ch;
+}
+
+.header-bg-fade {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), Canvas), url("ocean.webp");
+  background-size: cover;
+  background-position-x: 0%;
+  background-position-y: 90%;
+  padding-top: 30vh;
+  padding-bottom: 2vh;
+  max-height: 0px;
+}
+
+.header {
+  max-width: 60em;
+  padding: 0 1em 0.25em 1em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header-buttons {
+  max-width: 60em;
+  margin: 0.25em auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 2em;
+}
+
+.prominent-header-button {
+  color: AccentColorText;
+  background: AccentColor;
+  border-radius: 5px;
+  padding: 1em 2em;
+}
+
+.prominent-header-button-text {
+  color: AccentColorText;
+  background: AccentColor;
+  font-weight: bold;
+}
+
+.header-button {
+  color: ButtonText;
+  background: ButtonFace;
+  border-radius: 5px;
+  padding: 1em 2em;
+}
+
+.header-button-text {
+  color: ButtonText;
+  background: ButtonFace;
+  font-weight: bold;
+}
+
+.button-link {
+  text-decoration: none;
+}
+
+.badges {
+  max-width: 60em;
+  margin: 2em auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.badge {
+  flex: 1 0 10em;
+  text-align: center;
+}
+
+.badge-title {
+  font-weight: bold;
+}
+
+.badge-subtitle {
+  
+}
