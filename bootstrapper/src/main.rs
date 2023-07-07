@@ -1,9 +1,9 @@
-use std::{str, process::Command, path::PathBuf, env, io::{Read, Cursor}};
+use std::{str, process::Command, path::PathBuf, env, io::{Read, Cursor}}    ;
 
 use flate2::read::{GzDecoder};
 use regex::bytes::Regex;
 
-use which::which_global;
+use which::{which_global, which_in};
 
 const VERSION: Option<&str> = option_env!("CARGO_PKG_VERSION");
 
@@ -16,13 +16,13 @@ fn main() {
     });
 
     let dotnet_path = check_dotnet(&dotnet_version);
-    println!("dotnet path: {}", dotnet_path);
+    println!("{}", dotnet_path.display());
 }
 
 // TODO check existing local .NET runtime?
-fn check_dotnet(major: &i32) -> &str {
+fn check_dotnet(major: &i32) -> PathBuf {
     match which_global("dotnet") {
-        Ok(_) => {
+        Ok(path) => {
             match get_dotnet_runtimes(major) {
                 Some(vers) => {
                     println!("{} compatible runtime(s) installed: ", vers.len());
@@ -30,7 +30,7 @@ fn check_dotnet(major: &i32) -> &str {
                         println!("  {}", rt);
                     }
 
-                    return "dotnet";
+                    return path;
                 },
                 None => {
                     println!("Microsoft.NETCore.App {} runtime not found. Installing self contained runtime...", major);
@@ -71,7 +71,7 @@ fn get_dotnet_runtimes(major: &i32) -> Option<Vec<String>> {
     return Some(runtimes);
 }
 
-fn download_and_extract_dotnet_runtime(major: &i32) -> &str {
+fn download_and_extract_dotnet_runtime(major: &i32) -> PathBuf {
     let version_url: String = version_url(major);
     let client = ureq::agent();
 
@@ -80,7 +80,6 @@ fn download_and_extract_dotnet_runtime(major: &i32) -> &str {
         Err(e) => panic!("Error while fetching dotnet version ({}): {}", version_url, e),
         Ok(version) => {
             let version_text = version.into_string().unwrap();
-            println!("dotnet version: {}", version_text);
             let runtime_url = runtime_url(&version_text);
 
             match client.get(&runtime_url).call() {
@@ -92,20 +91,23 @@ fn download_and_extract_dotnet_runtime(major: &i32) -> &str {
                         runtime.into_reader().read_to_end(&mut buf).unwrap();
                         let target_dir = PathBuf::from("dotnet");
                         zip_extract::extract(Cursor::new(buf), &target_dir, true).unwrap();
-
-                        return "./dotnet/dotnet.exe";
                     } else if runtime_url.ends_with(".tar.gz") {
                         let gzip = GzDecoder::new(runtime.into_reader());
                         let mut tar = tar::Archive::new(gzip);
                         tar.unpack("dotnet").unwrap();
-
-                        return "./dotnet/dotnet.exe";
                     }
 
-                    panic!("Unknown archive extension on {}", runtime_url);
+                    return find_dotnet_in("dotnet").unwrap();
                 }
             }
         },
+    }
+}
+
+fn find_dotnet_in(path: &str) -> Option<PathBuf> {
+    match which_in("dotnet", Some(path), env::current_dir().unwrap()) {
+        Ok(buf) => Some(buf),
+        Err(_) => None,
     }
 }
 
