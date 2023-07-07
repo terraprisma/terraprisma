@@ -1,10 +1,10 @@
 [package]
-name = "terraprisma-boostrapper"
+name = "terraprisma-installer"
 edition = "2021"
 
 version = "0.1.0"
 authors = ["pbone"]
-description = "Native bootstrapper for Terraprisma."
+description = "Native installer for Terraprisma."
 license-file = "../LICENSE"
 
 [dependencies]

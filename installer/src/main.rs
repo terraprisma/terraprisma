@@ -5,15 +5,13 @@ use regex::bytes::Regex;
 
 use which::{which_global, which_in};
 
-const VERSION: Option<&str> = option_env!("CARGO_PKG_VERSION");
+const NAME: &str = env!("CARGO_PKG_NAME");
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn main() {
     let dotnet_version = 7;
 
-    println!("terraprisma-bootstrapper{}", match VERSION {
-        Some(v) => format!(" v{}", v),
-        None => format!(", unknown version"),
-    });
+    println!("{}{}", NAME, format!("v{}", VERSION));
 
     let dotnet_path = check_dotnet(&dotnet_version);
     println!("{}", dotnet_path.display());
