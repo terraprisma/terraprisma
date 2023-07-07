@@ -10,6 +10,7 @@ license-file = "../LICENSE"
 [dependencies]
 flate2 = "1.0.26"
 regex = "1.9.0"
+steamlocate = "1.2.1"
 tar = "0.4.38"
 ureq = "2.7.1"
 which = "4.4.0"
