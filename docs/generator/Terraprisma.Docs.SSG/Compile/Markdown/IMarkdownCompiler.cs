@@ -1,6 +1,6 @@
 using System;
 
-namespace Terraprisma.Ssg.Compile.Markdown
+namespace Terraprisma.Docs.SSG.Compile.Markdown
 {
     public interface IMarkdownCompiler
     {

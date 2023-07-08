@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using Spectre.Console.Cli;
 
-namespace Terraprisma.Ssg
+namespace Terraprisma.Docs.SSG
 {
     [Description("Generate a static site from inputs.")]
     public sealed class GenerateCommand : Command<GenerateCommand.Settings>

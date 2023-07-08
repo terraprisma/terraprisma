@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Terraprisma.Ssg.Compile
+namespace Terraprisma.Docs.SSG.Compile
 {
     public class CompilerDispatcher
     {

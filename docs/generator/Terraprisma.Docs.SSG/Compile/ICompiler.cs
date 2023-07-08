@@ -1,6 +1,6 @@
 using System;
 
-namespace Terraprisma.Ssg.Compile
+namespace Terraprisma.Docs.SSG.Compile
 {
     public interface ICompiler
     {
