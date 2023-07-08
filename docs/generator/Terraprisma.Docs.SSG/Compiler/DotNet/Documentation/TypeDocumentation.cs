@@ -14,6 +14,11 @@ public sealed class TypeDocumentation : MemberDocumentation {
 
     public AbstractKind AbstractKind { get; set; }
 
+    // Descending order.
+    public List<string>? Inheritance { get; set; }
+
+    public List<string>? Implements { get; set; }
+
     public List<GenericParameter>? GenericParameters { get; set; }
 
     public List<TypeDocumentation>? NestedTypes { get; set; }
@@ -72,12 +77,33 @@ public sealed class TypeDocumentation : MemberDocumentation {
         typeDoc.SealedKind = typeDefinition.IsSealed ? SealedKind.Sealed : SealedKind.Unsealed;
         typeDoc.AbstractKind = typeDefinition.IsAbstract ? AbstractKind.Abstract : AbstractKind.NotAbstract;
 
+        var baseType = typeDefinition.BaseType;
+
+        if (baseType is not null) {
+            typeDoc.Inheritance = new List<string>();
+
+            while (baseType is not null) {
+                typeDoc.Inheritance.Add(baseType.FullName);
+                // TODO: Ouch..., resolving sucks. Watch this for issues later.
+                baseType = baseType.Resolve().BaseType;
+            }
+        }
+
+        if (typeDefinition.HasInterfaces) {
+            typeDoc.Implements = new List<string>();
+
+            foreach (var @interface in typeDefinition.Interfaces)
+                typeDoc.Implements.Add(@interface.InterfaceType.FullName);
+        }
+
         if (typeDefinition.HasGenericParameters) {
             typeDoc.GenericParameters = new List<GenericParameter>();
-            foreach (var genericParameter in typeDefinition.GenericParameters)
+
+            foreach (var genericParameter in typeDefinition.GenericParameters) {
                 typeDoc.GenericParameters.Add(new GenericParameter {
                     Name = genericParameter.Name,
                 });
+            }
         }
 
         if (typeDefinition.HasNestedTypes) {
