@@ -11,6 +11,10 @@ namespace Terraprisma.Docs.SSG.Compiler.DotNet;
 ///     the compiled assembly, along with a resulting summary file.
 /// </summary>
 public sealed class DotNetCompiler : ICompiler {
+    private static readonly List<string> name_blacklist = new() {
+        "-<module>", // <Module>
+    };
+
     public Dictionary<string, string> Compile(CompilationContext context, CompilationNamespace ns) {
         if (!File.Exists(ns.Input))
             throw new FileNotFoundException($"The file {ns.Input} does not exist.");
@@ -49,13 +53,12 @@ public sealed class DotNetCompiler : ICompiler {
         return (outputPath, summaryPath);
     }
 
-    private Dictionary<string, string> GenerateDocumentationFromAssembly(string assemblyFilePath, string? summaryFilePath) {
-        var typeDocs = CreateDocsFromAssembly(assemblyFilePath);
-
-        return new Dictionary<string, string>();
+    private static Dictionary<string, string> GenerateDocumentationFromAssembly(string assemblyFilePath, string? summaryFilePath) {
+        var typeDocs = CreateDocsFromAssembly(assemblyFilePath).Where(x => !name_blacklist.Contains(x.ToString()));
+        return typeDocs.ToDictionary(x => x.ToString(), GenerateHtmlBodyFromType);
     }
 
-    private List<TypeDocumentation> CreateDocsFromAssembly(string assemblyFilePath) {
+    private static List<TypeDocumentation> CreateDocsFromAssembly(string assemblyFilePath) {
         var module = ModuleDefinition.ReadModule(assemblyFilePath);
         var typeDocs = new List<TypeDocumentation>();
 
@@ -65,6 +68,10 @@ public sealed class DotNetCompiler : ICompiler {
             typeDocs.Add(AddMemberDocsForType(type));
 
         return typeDocs;
+    }
+
+    private static string GenerateHtmlBodyFromType(TypeDocumentation typeDoc) {
+        return "";
     }
 
     private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {
