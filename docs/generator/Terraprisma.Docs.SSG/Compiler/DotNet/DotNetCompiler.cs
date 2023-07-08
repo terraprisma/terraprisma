@@ -19,10 +19,9 @@ public sealed class DotNetCompiler : ICompiler {
         if (!File.Exists(ns.Input))
             throw new FileNotFoundException($"The file {ns.Input} does not exist.");
 
-        if (!MSBuildLocator.IsRegistered) {
-            var instance = MSBuildLocator.QueryVisualStudioInstances().First();
-            MSBuildLocator.RegisterInstance(instance);
-        }
+        if (!MSBuildLocator.IsRegistered)
+            MSBuildLocator.RegisterInstance(MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(
+               instance => instance.Version).First());
 
         var (assemblyFilePath, summaryFilePath) = CompileMsBuildProject(ns.Input);
         return GenerateDocumentationFromAssembly(assemblyFilePath, summaryFilePath);
@@ -36,10 +35,10 @@ public sealed class DotNetCompiler : ICompiler {
         var outputFileName = project.GetPropertyValue("AssemblyName") + ".dll";
         var summaryFileName = project.GetPropertyValue("DocumentationFile");
 
-        var outputPath = Path.Combine(Path.GetDirectoryName(projectPath)!, outputDir, outputFileName);
-        var summaryPath = Path.Combine(Path.GetDirectoryName(projectPath)!, outputDir, summaryFileName);
+        var outputPath = Path.Combine(Path.GetDirectoryName(projectPath)!, outputDir, outputFileName).Replace('\\', Path.DirectorySeparatorChar);
+        var summaryPath = Path.Combine(Path.GetDirectoryName(projectPath)!, outputDir, summaryFileName).Replace('\\', Path.DirectorySeparatorChar);
 
-        if (!project.Build())
+        if (!project.Build(new Microsoft.Build.Logging.ConsoleLogger()))
             throw new Exception("Failed to build project.");
 
         if (!File.Exists(outputPath))
