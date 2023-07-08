@@ -17,7 +17,14 @@ public class MethodDocumentation : MemberDocumentation {
 
     public List<Parameter>? Parameters { get; set; }
 
-    public MethodDocumentation(string @namespace, string name, string assemblyName) : base(@namespace, name, assemblyName) { }
+    public string ReturnType { get; }
+
+    public bool ReturnTypeIsGeneric { get; }
+
+    public MethodDocumentation(string @namespace, string name, string assemblyName, string returnType, bool returnTypeIsGeneric) : base(@namespace, name, assemblyName) {
+        ReturnType = returnType;
+        ReturnTypeIsGeneric = returnTypeIsGeneric;
+    }
 
     public override string ToString() {
         var name = /*Parent +*/ "-ctor";
@@ -45,7 +52,9 @@ public class MethodDocumentation : MemberDocumentation {
         var methodDoc = new MethodDocumentation(
             @namespace: parent.Namespace,
             name: NormalizeName(methodDefinition.FullName),
-            assemblyName: methodDefinition.Module.Assembly.Name.Name
+            assemblyName: methodDefinition.Module.Assembly.Name.Name,
+            returnType: methodDefinition.ReturnType.FullName,
+            returnTypeIsGeneric: methodDefinition.ReturnType.IsGenericParameter
         );
 
         if (methodDefinition.IsPublic)

@@ -5,13 +5,15 @@ using GenericParameter = Terraprisma.Docs.SSG.Compiler.DotNet.Documentation.Mode
 namespace Terraprisma.Docs.SSG.Compiler.DotNet.Documentation;
 
 public sealed class ConstructorDocumentation : MethodDocumentation {
-    public ConstructorDocumentation(string @namespace, string name, string assemblyName) : base(@namespace, name, assemblyName) { }
+    public ConstructorDocumentation(string @namespace, string name, string assemblyName, string returnType, bool returnTypeIsGeneric) : base(@namespace, name, assemblyName, returnType, returnTypeIsGeneric) { }
 
     public static ConstructorDocumentation FromConstructorDefinition(MethodDefinition methodDefinition, TypeDocumentation parent) {
         var ctorDoc = new ConstructorDocumentation(
             @namespace: parent.Namespace,
             name: NormalizeName(methodDefinition.FullName),
-            assemblyName: methodDefinition.Module.Assembly.Name.Name
+            assemblyName: methodDefinition.Module.Assembly.Name.Name,
+            returnType: methodDefinition.ReturnType.FullName,
+            returnTypeIsGeneric: methodDefinition.ReturnType.IsGenericParameter
         );
 
         // Only some are possible with constructors but who cares?
