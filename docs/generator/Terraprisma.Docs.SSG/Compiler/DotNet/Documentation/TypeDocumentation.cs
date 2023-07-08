@@ -126,7 +126,7 @@ public sealed class TypeDocumentation : MemberDocumentation {
             if (methods.Count > 0) {
                 typeDoc.Methods = new List<MethodDocumentation>();
                 foreach (var method in methods)
-                    typeDoc.Methods.Add(MethodDocumentation.FromMethodDefinition(method));
+                    typeDoc.Methods.Add(MethodDocumentation.FromMethodDefinition(method, typeDoc));
             }
         }
 

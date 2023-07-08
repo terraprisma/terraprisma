@@ -5,42 +5,13 @@ using GenericParameter = Terraprisma.Docs.SSG.Compiler.DotNet.Documentation.Mode
 namespace Terraprisma.Docs.SSG.Compiler.DotNet.Documentation;
 
 public sealed class ConstructorDocumentation : MethodDocumentation {
-    public AccessModifierKind AccessModifier { get; set; }
-
-    public List<GenericParameter>? GenericParameters { get; set; }
-
-    public List<Parameter>? Parameters { get; set; }
-
-    public ConstructorDocumentation(string @namespace, string name, string assemblyName, TypeDocumentation parent) : base(@namespace, name, assemblyName, parent) { }
-
-    public override string ToString() {
-        var name = /*Parent +*/ "-ctor";
-
-        if (GenericParameters is not null)
-            name += $"-{GenericParameters.Count}";
-
-        name += '(';
-
-        var first = true;
-
-        if (Parameters is not null) {
-            if (!first)
-                name += '-';
-            first = true;
-            foreach (var parameter in Parameters)
-                name += NormalizeParameterName(parameter);
-        }
-
-        name += ')';
-        return name;
-    }
+    public ConstructorDocumentation(string @namespace, string name, string assemblyName) : base(@namespace, name, assemblyName) { }
 
     public static ConstructorDocumentation FromConstructorDefinition(MethodDefinition methodDefinition, TypeDocumentation parent) {
         var ctorDoc = new ConstructorDocumentation(
             @namespace: parent.Namespace,
             name: NormalizeName(methodDefinition.FullName),
-            assemblyName: methodDefinition.Module.Assembly.Name.Name,
-            parent: parent
+            assemblyName: methodDefinition.Module.Assembly.Name.Name
         );
 
         // Only some are possible with constructors but who cares?
