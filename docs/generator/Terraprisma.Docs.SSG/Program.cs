@@ -1,20 +1,9 @@
-﻿using Spectre.Console.Cli;
-using Terraprisma.Docs.SSG.Compile;
+﻿using CliFx;
 
-namespace Terraprisma.Docs.SSG
-{
-    public class Program
-    {
-        public static int Main(string[] args)
-        {
-            var app = new CommandApp();
-            app.Configure(config =>
-            {
-                config.SetApplicationName("terraprisma-ssg");
-                config.AddCommand<GenerateCommand>("generate");
-            });
+namespace Terraprisma.Docs.SSG;
 
-            return app.Run(args);
-        }
+internal static class Program {
+    internal static async Task<int> Main(string[] args) {
+        return await new CliApplicationBuilder().AddCommandsFromThisAssembly().Build().RunAsync(args);
     }
 }
