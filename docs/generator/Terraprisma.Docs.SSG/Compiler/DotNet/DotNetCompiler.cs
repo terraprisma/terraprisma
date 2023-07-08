@@ -19,9 +19,10 @@ public sealed class DotNetCompiler : ICompiler {
         if (!File.Exists(ns.Input))
             throw new FileNotFoundException($"The file {ns.Input} does not exist.");
 
-        if (!MSBuildLocator.IsRegistered)
-            MSBuildLocator.RegisterInstance(MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(
-               instance => instance.Version).First());
+        if (!MSBuildLocator.IsRegistered) {
+            var instance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(x => x.Version).First();
+            MSBuildLocator.RegisterInstance(instance);
+        }
 
         var (assemblyFilePath, summaryFilePath) = CompileMsBuildProject(ns.Input);
         return GenerateDocumentationFromAssembly(assemblyFilePath, summaryFilePath);
