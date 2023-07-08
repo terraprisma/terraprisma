@@ -3,6 +3,9 @@ using Microsoft.Build.Definition;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Locator;
+using Mono.Cecil;
+using Mono.Cecil.Rocks;
+using Terraprisma.Docs.SSG.Compiler.DotNet.Documentation;
 using Terraprisma.Docs.SSG.Configuration;
 
 namespace Terraprisma.Docs.SSG.Compiler.DotNet;
@@ -51,6 +54,80 @@ public sealed class DotNetCompiler : ICompiler {
     }
 
     private Dictionary<string, string> GenerateDocumentationFromAssembly(string assemblyFilePath, string? summaryFilePath) {
+        var typeDocs = CreateDocsFromAssembly(assemblyFilePath);
+
         return new Dictionary<string, string>();
+    }
+
+    private List<TypeDocumentation> CreateDocsFromAssembly(string assemblyFilePath) {
+        var module = ModuleDefinition.ReadModule(assemblyFilePath);
+        var typeDocs = new List<TypeDocumentation>();
+
+        // use Types and not GetTypes as we handle nested types ourselves.
+        var types = module.Types; //module.GetTypes();
+        foreach (var type in types)
+            typeDocs.Add(AddMemberDocsForType(type));
+
+        return typeDocs;
+    }
+
+    private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {
+        var typeDoc = new TypeDocumentation(type.Namespace, type.Name);
+        
+        /*foreach (var constructor in type.GetConstructors()) {
+            memberDocs.Add(
+                constructor.FullName,
+                new DotNetMemberDocumentation {
+                    Name = constructor.Name,
+                    FullName = constructor.FullName,
+                }
+            );
+        }
+
+        foreach (var method in type.GetMethods()) {
+            // Exclude properties.
+            if (method.IsGetter || method.IsSetter)
+                continue;
+
+            memberDocs.Add(
+                method.FullName,
+                new DotNetMemberDocumentation {
+                    Name = method.Name,
+                    FullName = method.FullName,
+                }
+            );
+        }
+
+        foreach (var property in type.Properties) {
+            memberDocs.Add(
+                property.FullName,
+                new DotNetMemberDocumentation {
+                    Name = property.Name,
+                    FullName = property.FullName,
+                }
+            );
+        }
+
+        foreach (var field in type.Fields) {
+            memberDocs.Add(
+                field.FullName,
+                new DotNetMemberDocumentation {
+                    Name = field.Name,
+                    FullName = field.FullName,
+                }
+            );
+        }
+
+        foreach (var @event in type.Events) {
+            memberDocs.Add(
+                @event.FullName,
+                new DotNetMemberDocumentation {
+                    Name = @event.Name,
+                    FullName = @event.FullName,
+                }
+            );
+        }*/
+
+        return typeDoc;
     }
 }
