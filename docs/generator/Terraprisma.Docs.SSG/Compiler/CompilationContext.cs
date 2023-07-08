@@ -9,6 +9,21 @@ namespace Terraprisma.Docs.SSG.Compiler;
 ///     settings, and transient data.
 /// </summary>
 public sealed class CompilationContext {
+    // TODO: Add styles.css
+    private static readonly string html_template = @"
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel=""stylesheet"" href=""styles.css"">
+        <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
+        <title>{0}</title>
+    </head>
+    <body>
+{1}
+    </body>
+</html>
+".Trim();
+
     public Dictionary<string, ICompiler> Compilers { get; } = new();
 
     public CompilerConfiguration Config { get; }
@@ -42,6 +57,13 @@ public sealed class CompilationContext {
                     foreach (var fileName in compiledHtml.Keys)
                         Console.WriteLine($"            {fileName}");
                 }
+
+                foreach (var (fileName, html) in compiledHtml) {
+                    var outputDir = ns.Root ? project.OutputDir : Path.Combine(project.OutputDir, name);
+                    var path = Path.Combine(outputDir, fileName) + ".html";
+                    Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+                    File.WriteAllText(path, ContextualizeHtml(fileName, html));
+                }
             }
             catch {
                 Console.WriteLine($"    Compilation of namespace '{name}' failed.");
@@ -50,6 +72,11 @@ public sealed class CompilationContext {
 
             Console.WriteLine($"    Compiled namespace '{name}'.");
         }
+    }
+
+    // TODO: Provide a way to specify the title lol
+    private static string ContextualizeHtml(string fileName, string html) {
+        return string.Format(html_template, fileName, html);
     }
 
     public static CompilationContext MakeDefault(CompilerConfiguration config) {
