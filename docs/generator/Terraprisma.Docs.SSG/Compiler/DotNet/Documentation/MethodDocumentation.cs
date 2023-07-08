@@ -27,7 +27,7 @@ public class MethodDocumentation : MemberDocumentation {
     }
 
     public override string ToString() {
-        var name = /*Parent +*/ $"-{NormalizeName(Name)}";
+        var name = NormalizeName(Name);
 
         if (GenericParameters is not null)
             name += $"-{GenericParameters.Count}";
