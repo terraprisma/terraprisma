@@ -43,7 +43,7 @@ public sealed class CompilationContext {
                         Console.WriteLine($"        {fileName}");
                 }
             }
-            catch (Exception e) {
+            catch {
                 Console.WriteLine($"    Compilation of namespace '{name}' failed.");
                 throw;
             }
