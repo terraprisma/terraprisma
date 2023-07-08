@@ -3,7 +3,9 @@
 namespace Terraprisma.Docs.SSG.Compiler.DotNet.Documentation;
 
 public sealed class FieldDocumentation : MemberDocumentation {
-    public static FieldDefinition FromFieldDefinition(FieldDefinition fieldDefinition) {
+    public FieldDocumentation(string @namespace, string name, string assemblyName) : base(@namespace, name, assemblyName) { }
+
+    public static FieldDocumentation FromFieldDefinition(FieldDefinition fieldDefinition) {
         return default!;
     }
 }

@@ -72,62 +72,6 @@ public sealed class DotNetCompiler : ICompiler {
     }
 
     private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {
-        var typeDoc = new TypeDocumentation(type.Namespace, type.Name);
-        
-        /*foreach (var constructor in type.GetConstructors()) {
-            memberDocs.Add(
-                constructor.FullName,
-                new DotNetMemberDocumentation {
-                    Name = constructor.Name,
-                    FullName = constructor.FullName,
-                }
-            );
-        }
-
-        foreach (var method in type.GetMethods()) {
-            // Exclude properties.
-            if (method.IsGetter || method.IsSetter)
-                continue;
-
-            memberDocs.Add(
-                method.FullName,
-                new DotNetMemberDocumentation {
-                    Name = method.Name,
-                    FullName = method.FullName,
-                }
-            );
-        }
-
-        foreach (var property in type.Properties) {
-            memberDocs.Add(
-                property.FullName,
-                new DotNetMemberDocumentation {
-                    Name = property.Name,
-                    FullName = property.FullName,
-                }
-            );
-        }
-
-        foreach (var field in type.Fields) {
-            memberDocs.Add(
-                field.FullName,
-                new DotNetMemberDocumentation {
-                    Name = field.Name,
-                    FullName = field.FullName,
-                }
-            );
-        }
-
-        foreach (var @event in type.Events) {
-            memberDocs.Add(
-                @event.FullName,
-                new DotNetMemberDocumentation {
-                    Name = @event.Name,
-                    FullName = @event.FullName,
-                }
-            );
-        }*/
-
-        return typeDoc;
+        return TypeDocumentation.FromTypeDefinition(type);
     }
 }
