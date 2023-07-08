@@ -1,10 +1,6 @@
-﻿using Microsoft.Build.Construction;
-using Microsoft.Build.Definition;
-using Microsoft.Build.Evaluation;
-using Microsoft.Build.Execution;
+﻿using Microsoft.Build.Evaluation;
 using Microsoft.Build.Locator;
 using Mono.Cecil;
-using Mono.Cecil.Rocks;
 using Terraprisma.Docs.SSG.Compiler.DotNet.Documentation;
 using Terraprisma.Docs.SSG.Configuration;
 
