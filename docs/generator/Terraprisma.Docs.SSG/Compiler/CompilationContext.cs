@@ -25,8 +25,8 @@ public sealed class CompilationContext {
         if (!Config.Projects.TryGetValue(projectName, out var project))
             throw new InvalidOperationException($"Cannot compile unknown project '{project}'.");
 
-        foreach (var ns in project.Namespaces.Values) {
-            Console.WriteLine($"    Compiling namespace '{ns}'.");
+        foreach (var (name, ns) in project.Namespaces) {
+            Console.WriteLine($"    Compiling namespace '{name}'.");
 
             try {
                 if (!Compilers.TryGetValue(ns.Type, out var compiler))
@@ -44,11 +44,11 @@ public sealed class CompilationContext {
                 }
             }
             catch (Exception e) {
-                Console.WriteLine($"    Compilation of namespace '{ns}' failed.");
+                Console.WriteLine($"    Compilation of namespace '{name}' failed.");
                 throw;
             }
 
-            Console.WriteLine($"    Compiled namespace '{ns}'.");
+            Console.WriteLine($"    Compiled namespace '{name}'.");
         }
     }
 
