@@ -33,14 +33,14 @@ public sealed class CompilationContext {
                     throw new InvalidOperationException($"Unknown compiler type '{ns.Type}'.");
 
                 var compiledHtml = compiler.Compile(this, ns);
-                Console.WriteLine("    Compiled to resulting files:");
+                Console.WriteLine("        Compiled to resulting files:");
 
                 if (compiledHtml.Count == 0) {
-                    Console.WriteLine("        <empty>");
+                    Console.WriteLine("            <empty>");
                 }
                 else {
                     foreach (var fileName in compiledHtml.Keys)
-                        Console.WriteLine($"        {fileName}");
+                        Console.WriteLine($"            {fileName}");
                 }
             }
             catch {
