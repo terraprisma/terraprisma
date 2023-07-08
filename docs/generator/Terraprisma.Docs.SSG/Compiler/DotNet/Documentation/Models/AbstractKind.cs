@@ -2,5 +2,6 @@
 
 public enum AbstractKind {
     Abstract,
+    Virtual,
     NotAbstract,
 }

@@ -64,6 +64,8 @@ public class MethodDocumentation : MemberDocumentation {
         methodDoc.InstanceKind = methodDefinition.IsStatic ? InstanceKind.Static : InstanceKind.Instance;
         methodDoc.SealedKind = methodDefinition.IsFinal ? SealedKind.Sealed : SealedKind.Unsealed;
         methodDoc.AbstractKind = methodDefinition.IsAbstract ? AbstractKind.Abstract : AbstractKind.NotAbstract;
+        if (methodDefinition.IsVirtual)
+            methodDoc.AbstractKind = AbstractKind.Virtual;
 
         if (methodDefinition.HasGenericParameters) {
             methodDoc.GenericParameters = new List<GenericParameter>();
