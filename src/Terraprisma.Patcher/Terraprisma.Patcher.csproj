@@ -5,7 +5,7 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
 
-        <DocumentationFile>Terraprisma.Patcher.xml</DocumentationFile>
+        <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     </PropertyGroup>
 
 </Project>
