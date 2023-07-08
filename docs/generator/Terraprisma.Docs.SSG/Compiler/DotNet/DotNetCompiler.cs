@@ -55,7 +55,10 @@ public sealed class DotNetCompiler : ICompiler {
 
     private static Dictionary<string, string> GenerateDocumentationFromAssembly(string assemblyFilePath, string? summaryFilePath) {
         var typeDocs = CreateDocsFromAssembly(assemblyFilePath).Where(x => !name_blacklist.Contains(x.ToString()));
-        return typeDocs.ToDictionary(x => x.ToString(), GenerateHtmlBodyFromType);
+        var output = new Dictionary<string, string>();
+        foreach (var typeDoc in typeDocs)
+            GenerateOutputsFromType(typeDoc, output);
+        return output;
     }
 
     private static List<TypeDocumentation> CreateDocsFromAssembly(string assemblyFilePath) {
@@ -70,8 +73,13 @@ public sealed class DotNetCompiler : ICompiler {
         return typeDocs;
     }
 
-    private static string GenerateHtmlBodyFromType(TypeDocumentation typeDoc) {
-        return "";
+    private static void GenerateOutputsFromType(TypeDocumentation typeDoc, Dictionary<string, string> output) {
+        if (name_blacklist.Contains(typeDoc.ToString()))
+            return;
+
+        // TODO: Just marking for now. We need a page for the type and a page
+        // for each of its members.
+        output.Add(typeDoc.ToString(), "");
     }
 
     private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {
