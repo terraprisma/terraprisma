@@ -46,6 +46,7 @@ public sealed class EventDocumentation : MemberWithSelfTypeDocumentation {
         eventDoc.SealedKind = eventDefinition.AddMethod.IsFinal ? SealedKind.Sealed : SealedKind.Unsealed;
         if (eventDefinition.AddMethod.IsVirtual)
             eventDoc.AbstractKind = AbstractKind.Virtual;
-        return default!;
+
+        return eventDoc;
     }
 }

@@ -22,6 +22,10 @@ public sealed class PropertyDocumentation : MemberWithSelfTypeDocumentation {
 
     public PropertyDocumentation(string @namespace, string name, string assemblyName, string selfType, bool selfTypeIsGeneric) : base(@namespace, name, assemblyName, selfType, selfTypeIsGeneric) { }
 
+    public override string ToString() {
+        return NormalizeName(Name);
+    }
+
     public static PropertyDocumentation FromPropertyDefinition(PropertyDefinition propertyDefinition) {
         var propertyDoc = new PropertyDocumentation(
             @namespace: propertyDefinition.DeclaringType.Namespace,

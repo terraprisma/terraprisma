@@ -27,7 +27,7 @@ public class MethodDocumentation : MemberDocumentation {
     }
 
     public override string ToString() {
-        var name = /*Parent +*/ "-ctor";
+        var name = /*Parent +*/ $"-{NormalizeName(Name)}";
 
         if (GenericParameters is not null)
             name += $"-{GenericParameters.Count}";
@@ -37,11 +37,12 @@ public class MethodDocumentation : MemberDocumentation {
         var first = true;
 
         if (Parameters is not null) {
-            if (!first)
-                name += '-';
-            first = true;
-            foreach (var parameter in Parameters)
+            foreach (var parameter in Parameters) {
+                if (!first)
+                    name += '-';
+                first = false;
                 name += NormalizeParameterName(parameter);
+            }
         }
 
         name += ')';
@@ -51,7 +52,7 @@ public class MethodDocumentation : MemberDocumentation {
     public static MethodDocumentation FromMethodDefinition(MethodDefinition methodDefinition, TypeDocumentation parent) {
         var methodDoc = new MethodDocumentation(
             @namespace: parent.Namespace,
-            name: NormalizeName(methodDefinition.FullName),
+            name: NormalizeName(methodDefinition.Name),
             assemblyName: methodDefinition.Module.Assembly.Name.Name,
             returnType: methodDefinition.ReturnType.FullName,
             returnTypeIsGeneric: methodDefinition.ReturnType.IsGenericParameter

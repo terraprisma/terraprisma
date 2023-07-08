@@ -135,7 +135,8 @@ public sealed class TypeDocumentation : MemberDocumentation {
                     typeDoc.Constructors.Add(ConstructorDocumentation.FromConstructorDefinition(ctor, typeDoc));
             }
 
-            var methods = typeDefinition.GetMethods().Where(x => !x.IsGetter && !x.IsSetter).ToList();
+            // TODO: Special handling of add_, remove_, etc.
+            var methods = typeDefinition.GetMethods().Where(x => !x.IsGetter && !x.IsSetter && !x.Name.StartsWith("add_") && !x.Name.StartsWith("remove_")).ToList();
 
             if (methods.Count > 0) {
                 typeDoc.Methods = new List<MethodDocumentation>();
@@ -146,8 +147,13 @@ public sealed class TypeDocumentation : MemberDocumentation {
 
         if (typeDefinition.HasFields) {
             typeDoc.Fields = new List<FieldDocumentation>();
-            foreach (var field in typeDefinition.Fields)
+
+            foreach (var field in typeDefinition.Fields) {
+                if (typeDefinition.Events.Any(x => x.Name == field.Name))
+                    continue;
+
                 typeDoc.Fields.Add(FieldDocumentation.FromFieldDefinition(field));
+            }
         }
 
         if (typeDefinition.HasProperties) {

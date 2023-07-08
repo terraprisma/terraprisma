@@ -80,6 +80,40 @@ public sealed class DotNetCompiler : ICompiler {
         // TODO: Just marking for now. We need a page for the type and a page
         // for each of its members.
         output.Add(typeDoc.ToString(), "");
+
+        if (typeDoc.Constructors is not null) {
+            foreach (var constructor in typeDoc.Constructors)
+                output.Add($"{typeDoc}/{constructor}", "");
+        }
+
+        if (typeDoc.Fields is not null) {
+            foreach (var field in typeDoc.Fields) {
+                if (field.Name.EndsWith("k__backingfield"))
+                    continue;
+
+                output.Add($"{typeDoc}/{field}", "");
+            }
+        }
+
+        if (typeDoc.Properties is not null) {
+            foreach (var property in typeDoc.Properties)
+                output.Add($"{typeDoc}/{property}", "");
+        }
+
+        if (typeDoc.Methods is not null) {
+            foreach (var method in typeDoc.Methods)
+                output.Add($"{typeDoc}/{method}", "");
+        }
+
+        if (typeDoc.Events is not null) {
+            foreach (var @event in typeDoc.Events)
+                output.Add($"{typeDoc}/{@event}", "");
+        }
+
+        if (typeDoc.NestedTypes is not null) {
+            foreach (var nestedType in typeDoc.NestedTypes)
+                GenerateOutputsFromType(nestedType, output);
+        }
     }
 
     private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {

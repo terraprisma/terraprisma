@@ -10,7 +10,7 @@ public sealed class ConstructorDocumentation : MethodDocumentation {
     public static ConstructorDocumentation FromConstructorDefinition(MethodDefinition methodDefinition, TypeDocumentation parent) {
         var ctorDoc = new ConstructorDocumentation(
             @namespace: parent.Namespace,
-            name: NormalizeName(methodDefinition.FullName),
+            name: NormalizeName(methodDefinition.Name),
             assemblyName: methodDefinition.Module.Assembly.Name.Name,
             returnType: methodDefinition.ReturnType.FullName,
             returnTypeIsGeneric: methodDefinition.ReturnType.IsGenericParameter
