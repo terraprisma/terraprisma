@@ -1,4 +1,5 @@
 ﻿using Mono.Cecil;
+using Terraprisma.Docs.SSG.Compiler.DotNet.Documentation.Models;
 
 namespace Terraprisma.Docs.SSG.Compiler.DotNet.Documentation;
 
@@ -20,5 +21,9 @@ public abstract class MemberDocumentation {
         // Namespace.myType.MyMethod(System.Int32) -> namespace-mytype-my-method(system-int32)
         // Namespace.myType.MyMethod(System.Int32,System.String) -> namespace-mytype-my-method(system-int32-system-string)
         return name.ToLower().Replace('.', '-').Replace(',', '-').Replace('`', '-');
+    }
+
+    protected static string NormalizeParameterName(Parameter parameter) {
+        return NormalizeName(parameter.TypeOrGenericName);
     }
 }
