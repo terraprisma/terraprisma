@@ -6,6 +6,8 @@ using GenericParameter = Terraprisma.Docs.SSG.Compiler.DotNet.Documentation.Mode
 namespace Terraprisma.Docs.SSG.Compiler.DotNet.Documentation;
 
 public sealed class TypeDocumentation : MemberDocumentation {
+    public TypeKind TypeKind { get; set; }
+
     public AccessModifierKind AccessModifier { get; set; }
 
     public InstanceKind InstanceKind { get; set; }
@@ -47,6 +49,18 @@ public sealed class TypeDocumentation : MemberDocumentation {
 
     public static TypeDocumentation FromTypeDefinition(TypeDefinition typeDefinition) {
         var typeDoc = new TypeDocumentation(typeDefinition.Namespace, typeDefinition.Name, typeDefinition.Module.Name);
+
+        typeDoc.TypeKind = typeDefinition switch {
+            { IsEnum: true } => TypeKind.Enum,
+            { IsValueType: true } => TypeKind.Struct,
+            { IsInterface: true } => TypeKind.Interface,
+            { IsClass: true } => TypeKind.Class,
+            // Special exceptions for delegates since MSDocs does it, also there
+            // is not format distinction, just type inheritance.
+            { BaseType.FullName: "System.Delegate" } => TypeKind.Delegate,
+            { BaseType.FullName: "System.MulticastDelegate" } => TypeKind.Delegate,
+            _ => throw new Exception($"Unknown type kind for type {typeDefinition.FullName}")
+        };
 
         // NotPublic = internal
         // Public = public
