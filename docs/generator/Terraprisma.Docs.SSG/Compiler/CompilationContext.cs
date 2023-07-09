@@ -1,4 +1,5 @@
-﻿using Terraprisma.Docs.SSG.Compiler.DotNet;
+﻿using HtmlAgilityPack;
+using Terraprisma.Docs.SSG.Compiler.DotNet;
 using Terraprisma.Docs.SSG.Compiler.Markdown;
 using Terraprisma.Docs.SSG.Configuration;
 
@@ -9,30 +10,6 @@ namespace Terraprisma.Docs.SSG.Compiler;
 ///     settings, and transient data.
 /// </summary>
 public sealed class CompilationContext {
-    private static readonly string html_template = @"
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel=""stylesheet"" href=""/styles-docs.css"">
-        <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
-        <title>{0}</title>
-    </head>
-    <body>
-        <div class=""main-view"">
-            <div class=""left-sidebar"">
-                <p>left sidebar</p>
-            </div>
-            <main>
-{1}
-            </main>
-            <div class=""right-sidebar"">
-                <p>right sidebar</p>
-            </div>
-        </div>
-    </body>
-</html>
-".Trim();
-
     public Dictionary<string, ICompiler> Compilers { get; } = new();
 
     public CompilerConfiguration Config { get; }
@@ -71,7 +48,10 @@ public sealed class CompilationContext {
                     var outputDir = ns.Root ? project.OutputDir : Path.Combine(project.OutputDir, name);
                     var path = Path.Combine(outputDir, fileName) + ".html";
                     Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-                    File.WriteAllText(path, ContextualizeHtml(fileName, html));
+
+                    // TODO: Use actual title instead of fileName
+                    var doc = MakeDefaultDocument(fileName, HtmlNode.CreateNode($"<main>{html}</main>"));
+                    doc.Save(path);
                 }
             }
             catch {
@@ -83,9 +63,55 @@ public sealed class CompilationContext {
         }
     }
 
-    // TODO: Provide a way to specify the title lol
-    private static string ContextualizeHtml(string fileName, string html) {
-        return string.Format(html_template, fileName, html);
+    private static HtmlDocument MakeDefaultDocument(string title, HtmlNode pageContents) {
+        var htmlDoc = new HtmlDocument();
+
+        var htmlNode = htmlDoc.CreateElement("html");
+
+        // <head>
+        var headNode = htmlDoc.CreateElement("head");
+        var linkNode = htmlDoc.CreateElement("link");
+        linkNode.SetAttributeValue("rel", "stylesheet");
+        linkNode.SetAttributeValue("href", "/styles-docs.css");
+        headNode.AppendChild(linkNode);
+        var metaNode = htmlDoc.CreateElement("meta");
+        metaNode.SetAttributeValue("name", "viewport");
+        metaNode.SetAttributeValue("content", "width=device-width, initial-scale=1");
+        headNode.AppendChild(metaNode);
+        var titleNode = htmlDoc.CreateElement("title");
+        titleNode.AppendChild(htmlDoc.CreateTextNode(title));
+        headNode.AppendChild(titleNode);
+        htmlNode.AppendChild(headNode);
+
+        // <body>
+        var bodyNode = htmlDoc.CreateElement("body");
+        var mainViewNode = htmlDoc.CreateElement("div");
+        mainViewNode.SetAttributeValue("class", "main-view");
+        var leftSidebarNode = htmlDoc.CreateElement("div");
+        leftSidebarNode.SetAttributeValue("class", "left-sidebar");
+        var leftSidebarP = htmlDoc.CreateElement("p");
+        leftSidebarP.AppendChild(htmlDoc.CreateTextNode("left sidebar"));
+        leftSidebarNode.AppendChild(leftSidebarP);
+        mainViewNode.AppendChild(leftSidebarNode);
+        mainViewNode.AppendChild(pageContents);
+        var rightSidebarNode = htmlDoc.CreateElement("div");
+        rightSidebarNode.SetAttributeValue("class", "right-sidebar");
+        var rightSidebarP = htmlDoc.CreateElement("p");
+        rightSidebarP.AppendChild(htmlDoc.CreateTextNode("right sidebar"));
+        rightSidebarNode.AppendChild(rightSidebarP);
+        mainViewNode.AppendChild(rightSidebarNode);
+        bodyNode.AppendChild(mainViewNode);
+        htmlNode.AppendChild(bodyNode);
+
+        // Append the generated <html> element.
+        htmlDoc.DocumentNode.AppendChild(htmlNode);
+
+        // All this work just to add <!DOCTYPE html> to the start of the
+        // document... maybe it's just easier to prepend later... lol
+        var doctypeHtml = htmlDoc.CreateComment("<!DOCTYPE html>");
+        htmlDoc.DocumentNode.InsertBefore(doctypeHtml, htmlNode);
+
+        return htmlDoc;
     }
 
     public static CompilationContext MakeDefault(CompilerConfiguration config) {

@@ -79,7 +79,7 @@ public sealed class DotNetCompiler : ICompiler {
 
         // TODO: Just marking for now. We need a page for the type and a page
         // for each of its members.
-        output.Add(typeDoc.ToString(), "");
+        output.Add(typeDoc.ToString(), MakeTypePage(typeDoc));
 
         if (typeDoc.Constructors is not null) {
             foreach (var constructor in typeDoc.Constructors)
@@ -114,6 +114,12 @@ public sealed class DotNetCompiler : ICompiler {
             foreach (var nestedType in typeDoc.NestedTypes)
                 GenerateOutputsFromType(nestedType, output);
         }
+    }
+
+    private static string MakeTypePage(TypeDocumentation typeDoc) {
+        return @"
+
+".Trim();
     }
 
     private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {
