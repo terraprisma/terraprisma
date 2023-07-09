@@ -50,8 +50,9 @@
               # before the dotnet_sdk/bin symlink that Nix adds.
               # We also set DOTNET_ROOT, because the PATH changing trick
               # seems to only work when this is properly set.
-              export DOTNET_ROOT=${dotnet_devenv_sdk}
-              export PATH=${dotnet_devenv_sdk}:$PATH
+              export DOTNET_ROOT="${dotnet_devenv_sdk}"
+              export DOTNET_ROOT_X64=$DOTNET_ROOT # Ugly hack but .NET seems to break without it
+              export PATH="${dotnet_devenv_sdk}:$PATH"
             '';
           };
         }

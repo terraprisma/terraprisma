@@ -176,6 +176,19 @@ public sealed class DotNetCompiler : ICompiler {
 
         mainNode.AppendChild(classHeaderDiv);
 
+        var classCtorTable = HtmlNode.CreateNode("<table></table>");
+
+        if (typeDoc.Constructors is not null && typeDoc.Constructors.Count > 0) {
+            foreach (var ctor in typeDoc.Constructors) {
+                var ctorRow = HtmlNode.CreateNode("<tr></tr>");
+                ctorRow.AppendChild(HtmlNode.CreateNode($"<p><b>{ctor.Name}</b></p>"));
+                ctorRow.AppendChild(HtmlNode.CreateNode("<p>empty summary because we don't support them yet</p>"));
+                classCtorTable.AppendChild(ctorRow);
+            }
+        }
+
+        mainNode.AppendChild(classCtorTable);
+
         return new CompiledPage(readableTypeName, mainNode);
     }
 
