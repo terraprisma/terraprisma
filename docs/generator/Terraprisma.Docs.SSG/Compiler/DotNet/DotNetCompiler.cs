@@ -1,4 +1,5 @@
-﻿using Microsoft.Build.Evaluation;
+﻿using HtmlAgilityPack;
+using Microsoft.Build.Evaluation;
 using Microsoft.Build.Locator;
 using Mono.Cecil;
 using Terraprisma.Docs.SSG.Compiler.DotNet.Documentation;
@@ -117,7 +118,18 @@ public sealed class DotNetCompiler : ICompiler {
     }
 
     private static CompiledPage MakeTypePage(TypeDocumentation typeDoc) {
-        return CompiledPage.EMPTY;
+        var mainNode = HtmlNode.CreateNode("<main></main>");
+
+        var classHeaderDiv = HtmlNode.CreateNode("<div class=\"class-header\"></div>");
+        var classHeaderNamespaceCode = HtmlNode.CreateNode($"<code class=\"class-header-namespace\">{typeDoc.Namespace}</code>");
+        classHeaderDiv.AppendChild(classHeaderNamespaceCode);
+        // TODO: Format name.
+        var classHeaderClassdefDiv = HtmlNode.CreateNode($"<div class=\"class-header-classdef\"><code>{typeDoc.Name}</code></div>");
+        classHeaderDiv.AppendChild(classHeaderClassdefDiv);
+        mainNode.AppendChild(classHeaderDiv);
+
+        // TODO: Format title more (include generic parameters).
+        return new CompiledPage(typeDoc.Namespace + "." + typeDoc.Name, mainNode);
     }
 
     private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {
