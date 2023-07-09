@@ -3,6 +3,7 @@
 
 { fetchNuGet }: [
   (fetchNuGet { pname = "CliFx"; version = "2.3.4"; sha256 = "14nj8w3j0hbsr5cghj39jx2sh5cg3wsvl517dk8whva5kgy3q1mf"; })
+  (fetchNuGet { pname = "HtmlAgilityPack"; version = "1.11.49"; sha256 = "0hcbygyjmfgy25i104wfcjk3mznixv7g7x98d9j2bd5wj5ckipm2"; })
   (fetchNuGet { pname = "Markdig"; version = "0.31.0"; sha256 = "0iic44i47wp18jbbpl44iifhj2mfnil9gakkw3bzp7zif3rhl19m"; })
   (fetchNuGet { pname = "Microsoft.Build"; version = "17.6.3"; sha256 = "00fw5axw3g15kv8k06z9zkh5i2xqi4dikj7jivlc2rqlcpzf8j98"; })
   (fetchNuGet { pname = "Microsoft.Build.Framework"; version = "17.6.3"; sha256 = "0gj182wih2rr90c045a7x1cy04szv83zr21c725h70s7dcshdvn6"; })
