@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+
+        <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
+
+</Project>
