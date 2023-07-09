@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using System.Text;
+using HtmlAgilityPack;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Locator;
 using Mono.Cecil;
@@ -176,18 +177,36 @@ public sealed class DotNetCompiler : ICompiler {
 
         mainNode.AppendChild(classHeaderDiv);
 
+        var classCtorDiv = HtmlNode.CreateNode("<div class=\"class-constructors\"></div>");
         var classCtorTable = HtmlNode.CreateNode("<table></table>");
 
         if (typeDoc.Constructors is not null && typeDoc.Constructors.Count > 0) {
             foreach (var ctor in typeDoc.Constructors) {
                 var ctorRow = HtmlNode.CreateNode("<tr></tr>");
-                ctorRow.AppendChild(HtmlNode.CreateNode($"<p><b>{ctor.Name}</b></p>"));
-                ctorRow.AppendChild(HtmlNode.CreateNode("<p>empty summary because we don't support them yet</p>"));
+                var ctorParameterString = "";
+                if (ctor.Parameters is not null && ctor.Parameters.Count > 0) {
+                    for (var i = 0; i < ctor.Parameters.Count; i++) {
+                        ctorParameterString += ctor.Parameters[i].TypeOrGenericName;
+                        if (i < ctor.Parameters.Count - 1)
+                            ctorParameterString += ", ";
+                    }
+                }
+                
+                ctorRow.AppendChild(
+                    HtmlNode.CreateNode($"""
+                    <p>
+                        <b>{typeDoc.Name}({ctorParameterString})</b>
+                        <br>
+                        Temporary summary that's also really long because I need it to be for testing
+                    </p>
+                    """)
+                );
                 classCtorTable.AppendChild(ctorRow);
             }
         }
 
-        mainNode.AppendChild(classCtorTable);
+        classCtorDiv.AppendChild(classCtorTable);
+        mainNode.AppendChild(classCtorDiv);
 
         return new CompiledPage(readableTypeName, mainNode);
     }

@@ -1,5 +1,5 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light dark;
 }
 
 html {
@@ -69,10 +69,6 @@ main {
   font-size: 36px;
 }
 
-.class-summary {
-  
-}
-
 .summary::before {
   display: block;
   margin-bottom: 1ch;
@@ -87,4 +83,12 @@ main {
   font-weight: bold;
   font-size: 27px;
   content: "Remarks";
+}
+
+.class-constructors::before {
+  display: block;
+  margin-bottom: 1ch;
+  font-weight: bold;
+  font-size: 27px;
+  content: "Constructors";
 }
