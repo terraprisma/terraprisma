@@ -118,18 +118,65 @@ public sealed class DotNetCompiler : ICompiler {
     }
 
     private static CompiledPage MakeTypePage(TypeDocumentation typeDoc) {
+        var readableTypeName = typeDoc.Name;
+
+        if (typeDoc.GenericParameters is not null) {
+            readableTypeName = readableTypeName[..readableTypeName.IndexOf('`')];
+            readableTypeName += "<";
+
+            for (var i = 0; i < typeDoc.GenericParameters.Count; i++) {
+                var genericParameter = typeDoc.GenericParameters[i];
+                readableTypeName += genericParameter.Name;
+                if (i < typeDoc.GenericParameters.Count - 1)
+                    readableTypeName += ", ";
+            }
+
+            readableTypeName += ">";
+        }
+
+        var htmlReadableTypeName = readableTypeName.Replace("<", "&lt;").Replace(">", "&gt;");
+
         var mainNode = HtmlNode.CreateNode("<main></main>");
 
         var classHeaderDiv = HtmlNode.CreateNode("<div class=\"class-header\"></div>");
+
         var classHeaderNamespaceCode = HtmlNode.CreateNode($"<code class=\"class-header-namespace\">{typeDoc.Namespace}</code>");
         classHeaderDiv.AppendChild(classHeaderNamespaceCode);
-        // TODO: Format name.
-        var classHeaderClassdefDiv = HtmlNode.CreateNode($"<div class=\"class-header-classdef\"><code>{typeDoc.Name}</code></div>");
+
+        var classHeaderClassdefDiv = HtmlNode.CreateNode($"<div class=\"class-header-classdef\"><code>{htmlReadableTypeName}</code></div>");
         classHeaderDiv.AppendChild(classHeaderClassdefDiv);
+
+        var metadata = "";
+        var appendLineBreak = false;
+
+        if (typeDoc.Inheritance is not null && typeDoc.Inheritance.Count > 0) {
+            metadata += $"Subclass of: <code>{typeDoc.Inheritance[0]}</code>";
+            appendLineBreak = true;
+        }
+
+        // TODO: Maybe try to have superclasses too.
+
+        if (typeDoc.Implements is not null && typeDoc.Implements.Count > 0) {
+            if (appendLineBreak)
+                metadata += "<br>";
+            metadata += "Implements: ";
+
+            for (var i = 0; i < typeDoc.Implements.Count; i++) {
+                metadata += $"<code>{typeDoc.Implements[i]}</code>";
+
+                if (i < typeDoc.Implements.Count - 1)
+                    metadata += ", ";
+            }
+
+            appendLineBreak = true;
+        }
+
+        var metadataP = HtmlNode.CreateNode($"<p>{metadata}</p>");
+        classHeaderDiv.AppendChild(metadataP);
+
         mainNode.AppendChild(classHeaderDiv);
 
-        // TODO: Format title more (include generic parameters).
-        return new CompiledPage(typeDoc.Namespace + "." + typeDoc.Name, mainNode);
+        return new CompiledPage(readableTypeName, mainNode);
     }
 
     private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {
