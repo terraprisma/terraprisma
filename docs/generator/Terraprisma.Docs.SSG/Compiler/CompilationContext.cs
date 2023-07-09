@@ -9,19 +9,26 @@ namespace Terraprisma.Docs.SSG.Compiler;
 ///     settings, and transient data.
 /// </summary>
 public sealed class CompilationContext {
-    // TODO: Add styles.css
     private static readonly string html_template = @"
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel=""stylesheet"" href=""/styles.css"">
+        <link rel=""stylesheet"" href=""/styles-docs.css"">
         <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
         <title>{0}</title>
     </head>
     <body>
-        <main>
+        <div class=""main-view"">
+            <div class=""left-sidebar"">
+                <p>left sidebar</p>
+            </div>
+            <main>
 {1}
-        </main>
+            </main>
+            <div class=""right-sidebar"">
+                <p>right sidebar</p>
+            </div>
+        </div>
     </body>
 </html>
 ".Trim();
