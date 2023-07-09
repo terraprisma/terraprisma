@@ -19,7 +19,9 @@ public sealed class CompilationContext {
         <title>{0}</title>
     </head>
     <body>
+        <main>
 {1}
+        </main>
     </body>
 </html>
 ".Trim();
