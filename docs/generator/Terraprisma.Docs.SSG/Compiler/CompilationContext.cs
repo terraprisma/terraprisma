@@ -14,7 +14,7 @@ public sealed class CompilationContext {
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel=""stylesheet"" href=""styles.css"">
+        <link rel=""stylesheet"" href=""/styles.css"">
         <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
         <title>{0}</title>
     </head>
