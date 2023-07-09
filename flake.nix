@@ -33,6 +33,7 @@
         let
           dotnet_devenv_sdk = (with nixpkgsFor.${system}.dotnetCorePackages; combinePackages [
             sdk_7_0
+            sdk_6_0
           ]);
         in
         {
