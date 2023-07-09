@@ -15,7 +15,7 @@ public sealed class DotNetCompiler : ICompiler {
         "-<module>", // <Module>
     };
 
-    public Dictionary<string, string> Compile(CompilationContext context, CompilationNamespace ns) {
+    public Dictionary<string, CompiledPage> Compile(CompilationContext context, CompilationNamespace ns) {
         if (!File.Exists(ns.Input))
             throw new FileNotFoundException($"The file {ns.Input} does not exist.");
 
@@ -53,9 +53,9 @@ public sealed class DotNetCompiler : ICompiler {
         return (outputPath, summaryPath);
     }
 
-    private static Dictionary<string, string> GenerateDocumentationFromAssembly(string assemblyFilePath, string? summaryFilePath) {
+    private static Dictionary<string, CompiledPage> GenerateDocumentationFromAssembly(string assemblyFilePath, string? summaryFilePath) {
         var typeDocs = CreateDocsFromAssembly(assemblyFilePath).Where(x => !name_blacklist.Contains(x.ToString()));
-        var output = new Dictionary<string, string>();
+        var output = new Dictionary<string, CompiledPage>();
         foreach (var typeDoc in typeDocs)
             GenerateOutputsFromType(typeDoc, output);
         return output;
@@ -73,7 +73,7 @@ public sealed class DotNetCompiler : ICompiler {
         return typeDocs;
     }
 
-    private static void GenerateOutputsFromType(TypeDocumentation typeDoc, Dictionary<string, string> output) {
+    private static void GenerateOutputsFromType(TypeDocumentation typeDoc, Dictionary<string, CompiledPage> output) {
         if (name_blacklist.Contains(typeDoc.ToString()))
             return;
 
@@ -83,7 +83,7 @@ public sealed class DotNetCompiler : ICompiler {
 
         if (typeDoc.Constructors is not null) {
             foreach (var constructor in typeDoc.Constructors)
-                output.Add($"{typeDoc}/{constructor}", "");
+                output.Add($"{typeDoc}/{constructor}", CompiledPage.EMPTY);
         }
 
         if (typeDoc.Fields is not null) {
@@ -91,23 +91,23 @@ public sealed class DotNetCompiler : ICompiler {
                 if (field.Name.EndsWith("k__backingfield"))
                     continue;
 
-                output.Add($"{typeDoc}/{field}", "");
+                output.Add($"{typeDoc}/{field}", CompiledPage.EMPTY);
             }
         }
 
         if (typeDoc.Properties is not null) {
             foreach (var property in typeDoc.Properties)
-                output.Add($"{typeDoc}/{property}", "");
+                output.Add($"{typeDoc}/{property}", CompiledPage.EMPTY);
         }
 
         if (typeDoc.Methods is not null) {
             foreach (var method in typeDoc.Methods)
-                output.Add($"{typeDoc}/{method}", "");
+                output.Add($"{typeDoc}/{method}", CompiledPage.EMPTY);
         }
 
         if (typeDoc.Events is not null) {
             foreach (var @event in typeDoc.Events)
-                output.Add($"{typeDoc}/{@event}", "");
+                output.Add($"{typeDoc}/{@event}", CompiledPage.EMPTY);
         }
 
         if (typeDoc.NestedTypes is not null) {
@@ -116,10 +116,8 @@ public sealed class DotNetCompiler : ICompiler {
         }
     }
 
-    private static string MakeTypePage(TypeDocumentation typeDoc) {
-        return @"
-
-".Trim();
+    private static CompiledPage MakeTypePage(TypeDocumentation typeDoc) {
+        return CompiledPage.EMPTY;
     }
 
     private static TypeDocumentation AddMemberDocsForType(TypeDefinition type) {

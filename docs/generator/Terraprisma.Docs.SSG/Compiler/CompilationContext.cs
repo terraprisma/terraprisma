@@ -44,13 +44,13 @@ public sealed class CompilationContext {
                         Console.WriteLine($"            {fileName}");
                 }
 
-                foreach (var (fileName, html) in compiledHtml) {
+                foreach (var (fileName, compiledPage) in compiledHtml) {
                     var outputDir = ns.Root ? project.OutputDir : Path.Combine(project.OutputDir, name);
                     var path = Path.Combine(outputDir, fileName) + ".html";
                     Directory.CreateDirectory(Path.GetDirectoryName(path)!);
 
                     // TODO: Use actual title instead of fileName
-                    var doc = MakeDefaultDocument(fileName, HtmlNode.CreateNode($"<main>{html}</main>"));
+                    var doc = MakeDefaultDocument(compiledPage);
                     doc.Save(path);
                 }
             }
@@ -63,7 +63,7 @@ public sealed class CompilationContext {
         }
     }
 
-    private static HtmlDocument MakeDefaultDocument(string title, HtmlNode pageContents) {
+    private static HtmlDocument MakeDefaultDocument(CompiledPage page) {
         var htmlDoc = new HtmlDocument();
 
         var htmlNode = htmlDoc.CreateElement("html");
@@ -79,7 +79,7 @@ public sealed class CompilationContext {
         metaNode.SetAttributeValue("content", "width=device-width, initial-scale=1");
         headNode.AppendChild(metaNode);
         var titleNode = htmlDoc.CreateElement("title");
-        titleNode.AppendChild(htmlDoc.CreateTextNode(title));
+        titleNode.AppendChild(htmlDoc.CreateTextNode(page.Title));
         headNode.AppendChild(titleNode);
         htmlNode.AppendChild(headNode);
 
@@ -93,7 +93,7 @@ public sealed class CompilationContext {
         leftSidebarP.AppendChild(htmlDoc.CreateTextNode("left sidebar"));
         leftSidebarNode.AppendChild(leftSidebarP);
         mainViewNode.AppendChild(leftSidebarNode);
-        mainViewNode.AppendChild(pageContents);
+        mainViewNode.AppendChild(page.Html);
         var rightSidebarNode = htmlDoc.CreateElement("div");
         rightSidebarNode.SetAttributeValue("class", "right-sidebar");
         var rightSidebarP = htmlDoc.CreateElement("p");

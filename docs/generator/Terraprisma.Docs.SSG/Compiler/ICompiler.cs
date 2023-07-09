@@ -18,9 +18,9 @@ namespace Terraprisma.Docs.SSG.Compiler {
         ///     A map of relative URL paths to the bodies of HTML documents.
         ///     <br />
         ///     The key is a lowercase relative URI (<c>example.text.file</c>)
-        ///     which points to the body of an HTML document, minus the
-        ///     wrapping <c>body</c> tags.
+        ///     which points to the body of an HTML document, wrapped in
+        ///     <c>main</c>.
         /// </returns>
-        Dictionary<string, string> Compile(CompilationContext context, CompilationNamespace ns);
+        Dictionary<string, CompiledPage> Compile(CompilationContext context, CompilationNamespace ns);
     }
 }
