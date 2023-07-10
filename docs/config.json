@@ -10,12 +10,12 @@
                 },
                 "terraprisma.launcher": {
                     "type": "dotnet",
-                    "input": "../src/Terraprisma.Launcher/Terraprisma.Launcher.csproj",
+                    "input": "../terraprisma/src/Terraprisma.Launcher/Terraprisma.Launcher.csproj",
                     "options": { }
                 },
                 "terraprisma.patcher": {
                     "type": "dotnet",
-                    "input": "../src/Terraprisma.Patcher/Terraprisma.Patcher.csproj",
+                    "input": "../terraprisma/src/Terraprisma.Patcher/Terraprisma.Patcher.csproj",
                     "options": { }
                 }
             },
