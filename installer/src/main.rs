@@ -99,4 +99,13 @@ fn install_launcher_to_path(mut path: PathBuf, dotnet_version: i32) {
 
     let dotnet_path = check_dotnet(&dotnet_version).unwrap();
     println!("{}", dotnet_path.display());
+
+    println!("Writing dotnet helper scripts...");
+    let dotnet_sh = include_str!("../scripts/dotnet.sh");
+    let dotnet_bat = include_str!("../scripts/dotnet.bat");
+
+    // Note that we set the current dir earlier in this code, change this if
+    // that ever changes!
+    fs::write("dotnet.sh", dotnet_sh).unwrap();
+    fs::write("dotnet.bat", dotnet_bat).unwrap();
 }
