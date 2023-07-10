@@ -196,8 +196,6 @@ public sealed class DotNetCompiler : ICompiler {
                     HtmlNode.CreateNode($"""
                     <p>
                         <b>{typeDoc.Name}({ctorParameterString})</b>
-                        <br>
-                        Temporary summary that's also really long because I need it to be for testing
                     </p>
                     """)
                 );
@@ -207,6 +205,53 @@ public sealed class DotNetCompiler : ICompiler {
 
         classCtorDiv.AppendChild(classCtorTable);
         mainNode.AppendChild(classCtorDiv);
+
+        var classPropertiesDiv = HtmlNode.CreateNode("<div class=\"class-properties\"></div>");
+        var classPropertiesTable = HtmlNode.CreateNode("<table></table>");
+
+        if (typeDoc.Properties is not null && typeDoc.Properties.Count > 0) {
+            foreach (var prop in typeDoc.Properties) {
+                var propRow = HtmlNode.CreateNode("<tr></tr>");
+                propRow.AppendChild(HtmlNode.CreateNode($"<p><b>{prop.Name}</b></p>"));
+                classPropertiesTable.AppendChild(propRow);
+            }
+        }
+
+        classPropertiesDiv.AppendChild(classPropertiesTable);
+        mainNode.AppendChild(classPropertiesDiv);
+
+        var classMethodsDiv = HtmlNode.CreateNode("<div class=\"class-methods\"></div>");
+        var classMethodsTable = HtmlNode.CreateNode("<table></table>");
+
+        if (typeDoc.Methods is not null && typeDoc.Methods.Count > 0) {
+            foreach (var method in typeDoc.Methods) {
+                var methodParameterString = "";
+                if (method.Parameters is not null && method.Parameters.Count > 0) {
+                    for (var i = 0; i < method.Parameters.Count; i++) {
+                        methodParameterString += method.Parameters[i].TypeOrGenericName;
+                        if (i < method.Parameters.Count - 1)
+                            methodParameterString += ", ";
+                    }
+                }
+                var methodGenericParameterString = "";
+                if (method.GenericParameters is not null && method.GenericParameters.Count > 0) {
+                    methodGenericParameterString = "&lt;";
+                    for (var i = 0; i < method.GenericParameters.Count; i++) {
+                        methodGenericParameterString += method.GenericParameters[i].Name;
+                        if (i < method.GenericParameters.Count - 1)
+                            methodGenericParameterString += ", ";
+                        else
+                            methodGenericParameterString += "&gt;";
+                    }
+                }
+                var methodRow = HtmlNode.CreateNode("<tr></tr>");
+                methodRow.AppendChild(HtmlNode.CreateNode($"<p><b>{method.Name}{methodGenericParameterString}({methodParameterString})</b></p>"));
+                classMethodsTable.AppendChild(methodRow);
+            }
+        }
+
+        classMethodsDiv.AppendChild(classMethodsTable);
+        mainNode.AppendChild(classMethodsDiv);
 
         return new CompiledPage(readableTypeName, mainNode);
     }

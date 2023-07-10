@@ -92,3 +92,19 @@ main {
   font-size: 27px;
   content: "Constructors";
 }
+
+.class-properties::before {
+  display: block;
+  margin-bottom: 1ch;
+  font-weight: bold;
+  font-size: 27px;
+  content: "Properties";
+}
+
+.class-methods::before {
+  display: block;
+  margin-bottom: 1ch;
+  font-weight: bold;
+  font-size: 27px;
+  content: "Methods";
+}
