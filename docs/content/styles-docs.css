@@ -1,0 +1,110 @@
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.2;
+  color: CanvasText;
+  background: Canvas;
+  font-family: system-ui, -apple-system, Cantarell, Geneva, Arial, sans-serif;
+}
+
+body {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-view {
+  display: flex;
+  flex: 0 0 100vh;
+}
+
+.left-sidebar {
+  background: ButtonFace;
+  flex: 1 3 auto;
+  margin: 0 auto;
+  padding: 2em 2em;
+  z-index: 2;
+  max-width: 30em;
+  border-right-style: solid;
+  border-right-color: ButtonBorder;
+  border-right-width: 0.0ch;
+}
+
+main {
+  flex: 2 0 auto;
+  max-width: 50em;
+  margin: 0 auto;
+  padding: 2em 2em;
+}
+
+.right-sidebar {
+  background: ButtonFace;
+  flex: 1 3 auto;
+  margin: 0 auto;
+  padding: 2em 2em;
+  z-index: 2;
+  max-width: 30em;
+  border-left-style: solid;
+  border-left-color: ButtonBorder;
+  border-left-width: 0.0ch;
+}
+
+.class-header {
+  padding-bottom: 0.2ch;
+  margin-bottom: 1ch;
+  border-bottom-color: ButtonBorder;
+  border-bottom-style: solid;
+  border-bottom-width: 0.05ch;
+}
+
+.class-header-namespace {
+  
+}
+
+.class-header-classdef {
+  font-weight: bolder;
+  font-size: 36px;
+}
+
+.summary::before {
+  display: block;
+  margin-bottom: 1ch;
+  font-weight: bold;
+  font-size: 27px;
+  content: "Summary";
+}
+
+.remarks::before {
+  display: block;
+  margin-bottom: 1ch;
+  font-weight: bold;
+  font-size: 27px;
+  content: "Remarks";
+}
+
+.class-constructors::before {
+  display: block;
+  margin-bottom: 1ch;
+  font-weight: bold;
+  font-size: 27px;
+  content: "Constructors";
+}
+
+.class-properties::before {
+  display: block;
+  margin-bottom: 1ch;
+  font-weight: bold;
+  font-size: 27px;
+  content: "Properties";
+}
+
+.class-methods::before {
+  display: block;
+  margin-bottom: 1ch;
+  font-weight: bold;
+  font-size: 27px;
+  content: "Methods";
+}
