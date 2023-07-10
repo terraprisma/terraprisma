@@ -1,9 +1,13 @@
-use std::{env, fs, io::{stdin, stdout, Write}};
+mod locators;
 
-use crate::{dotnet::check_dotnet, steam::check_steam};
+use std::{
+    env, fs,
+    io::{stdin, stdout, Write},
+};
+
+use crate::{dotnet::check_dotnet, locators::locate_game_install_path};
 
 mod dotnet;
-mod steam;
 
 const NAME: &str = env!("CARGO_PKG_NAME");
 const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -16,20 +20,25 @@ fn main() {
     println!("{} {}", NAME, format!("v{}", VERSION));
 
     // TODO GOG support
-    let mut terraria_path = check_steam();
-    println!("{}", terraria_path.display());
+    let install_path = locate_game_install_path();
+    match install_path {
+        None => panic!("Terraria is not installed"),
+        Some(mut terraria_path) => {
+            println!("{}", terraria_path.display());
 
-    terraria_path.push("Terraprisma");
-    fs::create_dir_all(&terraria_path).unwrap();
-    env::set_current_dir(terraria_path).unwrap();
+            terraria_path.push("Terraprisma");
+            fs::create_dir_all(&terraria_path).unwrap();
+            env::set_current_dir(terraria_path).unwrap();
 
-    let dotnet_path = check_dotnet(&dotnet_version).unwrap();
-    println!("{}", dotnet_path.display());
+            let dotnet_path = check_dotnet(&dotnet_version).unwrap();
+            println!("{}", dotnet_path.display());
+        }
+    }
 }
 
 fn prompt(message: &str) -> bool {
     print!("{message} (y/n): ");
-    stdout().flush().unwrap(); 
+    stdout().flush().unwrap();
     let mut buf = String::with_capacity(1);
     stdin().read_line(&mut buf).unwrap();
 
@@ -39,6 +48,6 @@ fn prompt(message: &str) -> bool {
         _ => {
             println!("Invalid input. Please type \"y\" for yes or \"n\" for no");
             return prompt(message);
-        },
+        }
     }
 }
