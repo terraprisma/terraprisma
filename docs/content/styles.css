@@ -23,6 +23,9 @@ main {
 h1 {
   font-weight: bolder;
   font-size: 36px;
+}
+
+.header-title {
   border-bottom-color: ButtonBorder;
   border-bottom-style: solid;
   border-bottom-width: 0.05ch;
