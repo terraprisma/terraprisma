@@ -20,6 +20,21 @@ fn main() {
 
     println!("{} {}", NAME, format!("v{}", VERSION));
 
+    // Support manually specifying a path to install the launcher to.
+    let args = std::env::args();
+    let user_path = args.skip(1).next();
+    match user_path {
+        None => {}
+        Some(p) => {
+            let path = PathBuf::from(p);
+            if !path.exists() || !path.is_dir() {
+                panic!("The path '{}' does not exist.", path.display());
+            }
+            install_launcher_to_path(path, dotnet_version);
+            return;
+        }
+    }
+
     // TODO GOG support
     let install_path = locate_game_install_path();
 
