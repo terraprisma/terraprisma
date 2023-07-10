@@ -1,12 +1,18 @@
-use std::{str, path::PathBuf, process::Command, io::{self, Cursor}, env};
+use std::{
+    env,
+    io::{self, Cursor},
+    path::PathBuf,
+    process::Command,
+    str,
+};
 
 use flate2::read::GzDecoder;
 use regex::bytes::Regex;
 use ureq::Response;
 use which::{which_global, which_in};
-use zip::{ZipArchive, result::ZipError};
+use zip::{result::ZipError, ZipArchive};
 
-use crate::prompt;
+use crate::prompt_bool;
 
 #[derive(Debug)]
 pub enum Error {
@@ -22,10 +28,13 @@ type DotnetResult<T> = Result<T, Error>;
 pub fn check_dotnet(major: &i32) -> DotnetResult<PathBuf> {
     fn not_found(major: &i32) -> DotnetResult<PathBuf> {
         println!("Microsoft.NETCore.App {} runtime not found.", major);
-        match prompt("Would you like to download a self-contained runtime?") {
+        match prompt_bool("Would you like to download a self-contained runtime?") {
             true => download_and_extract_dotnet_runtime(major, "./dotnet"),
             // TODO better exit
-            false => {println!("Exiting"); panic!("")},
+            false => {
+                println!("Exiting");
+                panic!("")
+            }
         }
     }
 
@@ -38,7 +47,7 @@ pub fn check_dotnet(major: &i32) -> DotnetResult<PathBuf> {
                 }
 
                 return Ok(path);
-            },
+            }
             None => not_found(major),
         },
         Err(_) => not_found(major),
@@ -48,7 +57,8 @@ pub fn check_dotnet(major: &i32) -> DotnetResult<PathBuf> {
 fn get_installed_dotnet_runtimes(major: &i32) -> Option<Vec<String>> {
     let dotnet_list_runtimes = Command::new("dotnet")
         .args(["--list-runtimes"])
-        .output().unwrap();
+        .output()
+        .unwrap();
 
     if !dotnet_list_runtimes.status.success() {
         println!(".NET {} not found", major);
@@ -80,12 +90,12 @@ fn download_and_extract_dotnet_runtime(major: &i32, into_path: &str) -> DotnetRe
             Ok(version) => {
                 let version_text = version.into_string().unwrap();
                 let runtime_url = runtime_url(&version_text);
-    
+
                 match client.get(&runtime_url).call() {
                     Err(e) => Err(Error::DownloadingRuntime(e)),
                     Ok(r) => Ok(r),
                 }
-            },
+            }
         }
     }
 
@@ -100,10 +110,10 @@ fn download_and_extract_dotnet_runtime(major: &i32, into_path: &str) -> DotnetRe
                 Err(e) => Err(Error::ExtractingArchive(e)),
                 Ok(_) => match ZipArchive::new(Cursor::new(buf)) {
                     Err(e) => match e {
-                        ZipError::FileNotFound | ZipError::Io(_) =>
-                            unreachable!(),
-                        ZipError::InvalidArchive(e) | ZipError::UnsupportedArchive(e) =>
-                            Err(Error::InvalidArchive(e.to_string())),
+                        ZipError::FileNotFound | ZipError::Io(_) => unreachable!(),
+                        ZipError::InvalidArchive(e) | ZipError::UnsupportedArchive(e) => {
+                            Err(Error::InvalidArchive(e.to_string()))
+                        }
                     },
                     Ok(mut zip) => match zip.extract(into_path) {
                         Err(e) => match e {
@@ -111,8 +121,8 @@ fn download_and_extract_dotnet_runtime(major: &i32, into_path: &str) -> DotnetRe
                             _ => unreachable!(),
                         },
                         Ok(_) => Ok(find_dotnet_in(into_path).unwrap()),
-                    }
-                }
+                    },
+                },
             }
         }
 
@@ -130,11 +140,10 @@ fn download_and_extract_dotnet_runtime(major: &i32, into_path: &str) -> DotnetRe
         } else if runtime.get_url().ends_with(".tar.gz") {
             extract_tar_gz(runtime, into_path)
         } else {
-            return Err(Error::InvalidArchive(
-                format!("Unknown archive format {}",
-                    get_archive_from_url(runtime.get_url())
-                ))
-            );
+            return Err(Error::InvalidArchive(format!(
+                "Unknown archive format {}",
+                get_archive_from_url(runtime.get_url())
+            )));
         }
     }
 
@@ -161,20 +170,25 @@ fn version_url(major: &i32) -> String {
 fn runtime_url(specific_version: &String) -> String {
     format!(
         "{}/Runtime/{}/{}",
-        AZURE_FEED, specific_version, get_runtime_dist_name(specific_version)
+        AZURE_FEED,
+        specific_version,
+        get_runtime_dist_name(specific_version)
     )
 }
 
 fn get_runtime_dist_name(specific_version: &String) -> String {
-    format!("dotnet-runtime-{}-{}-{}.{}", specific_version, dotnet_target_os(), dotnet_target_arch(),
-    match dotnet_target_os() {
-        "win" => "zip",
-        "osx" | "linux" => "tar.gz",
-        s => panic!("Unknown OS {}", s),
-    })
+    format!(
+        "dotnet-runtime-{}-{}-{}.{}",
+        specific_version,
+        dotnet_target_os(),
+        dotnet_target_arch(),
+        match dotnet_target_os() {
+            "win" => "zip",
+            "osx" | "linux" => "tar.gz",
+            s => panic!("Unknown OS {}", s),
+        }
+    )
 }
-
-
 
 fn dotnet_target_os() -> &'static str {
     match env::consts::OS {
