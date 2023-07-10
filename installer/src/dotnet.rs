@@ -27,15 +27,19 @@ type DotnetResult<T> = Result<T, Error>;
 // TODO manage having multiple local dotnet runtimes
 pub fn check_dotnet(major: &i32) -> DotnetResult<PathBuf> {
     fn not_found(major: &i32) -> DotnetResult<PathBuf> {
-        println!("Microsoft.NETCore.App {} runtime not found.", major);
-        match prompt_bool("Would you like to download a self-contained runtime?") {
+        println!(
+            "Microsoft.NETCore.App {} runtime not found, installing locally...",
+            major
+        );
+        /*match prompt_bool("Would you like to download a self-contained runtime?") {
             true => download_and_extract_dotnet_runtime(major, "./dotnet"),
             // TODO better exit
             false => {
                 println!("Exiting");
                 panic!("")
             }
-        }
+        }*/
+        download_and_extract_dotnet_runtime(major, "./dotnet")
     }
 
     match which_global("dotnet") {
