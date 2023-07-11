@@ -1,111 +1,59 @@
-mod locators;
+use std::env;
 
-use std::{
-    env, fs,
-    io::{stdin, stdout, Write},
-    path::PathBuf,
-};
-
-use crate::{dotnet::check_dotnet, locators::locate_game_install_path};
+use netcorehost::{nethost, pdcstr};
 
 mod dotnet;
 
 const NAME: &str = env!("CARGO_PKG_NAME");
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
+const DOTNET_VERSION: i32 = 7;
+
 // TODO better handling of errors - print them into a log and exit instead of panic!
 // TODO app icon
 fn main() {
-    let dotnet_version = 7;
-
     println!("{} {}", NAME, format!("v{}", VERSION));
 
-    // Support manually specifying a path to install the launcher to.
-    let args = std::env::args();
-    let user_path = args.skip(1).next();
-    match user_path {
-        None => {}
-        Some(p) => {
-            let path = PathBuf::from(p);
-            if !path.exists() || !path.is_dir() {
-                panic!("The path '{}' does not exist.", path.display());
+    // TODO: Let the user override the install/expected local path with an
+    // argument?
+    let mut net_install_path = env::current_dir().unwrap();
+    net_install_path.push("dotnet");
+
+    let dotnet_global_installed = dotnet::check_global_dotnet(DOTNET_VERSION);
+    if dotnet_global_installed {
+        print!("Global .NET {} runtime found", DOTNET_VERSION);
+    } else {
+        // Assume that if the local dir exists, it's been installed.
+        // Hopefully this assumption is safe.
+        if !net_install_path.exists() {
+            print!("Local .NET {} runtime not found", DOTNET_VERSION);
+            match dotnet::download_and_extract_dotnet_runtime(
+                DOTNET_VERSION,
+                net_install_path.to_str().unwrap(),
+            ) {
+                Ok(_) => println!(" - installed"),
+                Err(e) => panic!(" - failed to install: {:?}", e),
             }
-            install_launcher_to_path(path, dotnet_version);
-            return;
+        } else {
+            println!("Local .NET {} runtime found", DOTNET_VERSION);
         }
+
+        env::set_var("DOTNET_ROOT", net_install_path.to_str().unwrap());
     }
 
-    // TODO GOG support
-    let install_path = locate_game_install_path();
-
-    // TODO: This mostly oes for the user-specific path, but we should verify
-    // that the path we're using is actually a valid Terraria install. We at
-    // least need to care about if the Terraria binary is there, as well as a
-    // content folder (even more important, arguably). Maybe this is a job for
-    // the Terraprisma launcher instead?
-    match install_path {
-        None => {
-            println!("A Terraria installation could not be automatically resolved.");
-            let mut user_path =
-                prompt_string("Please enter the path to your Terraria installation: ");
-            // TODO: Handle if the user enters their Terraria.exe path instead
-            // of Terraria directory path.
-            while !PathBuf::from(&user_path).exists() || !PathBuf::from(&user_path).is_dir() {
-                println!("The path '{}' does not exist.", user_path);
-                user_path = prompt_string("Please enter the path to your Terraria installation: ");
-            }
-            install_launcher_to_path(PathBuf::from(user_path), dotnet_version);
-        }
-        Some(terraria_path) => {
-            install_launcher_to_path(terraria_path, dotnet_version);
-        }
+    // If DOTNET_ROOT is set, print it out.
+    match env::var("DOTNET_ROOT") {
+        Ok(_) => println!("Using .NET runtime at {}", env::var("DOTNET_ROOT").unwrap()),
+        Err(_) => {}
     }
-}
 
-fn prompt_bool(message: &str) -> bool {
-    print!("{message} (y/n): ");
-    stdout().flush().unwrap();
-    let mut buf = String::with_capacity(1);
-    stdin().read_line(&mut buf).unwrap();
-
-    match buf.to_lowercase()[0..buf.len() - 2].as_ref() {
-        "y" | "yes" => true,
-        "n" | "no" => false,
-        _ => {
-            println!("Invalid input. Please type \"y\" for yes or \"n\" for no");
-            return prompt_bool(message);
-        }
+    if !std::path::Path::new("./bin/Terraprisma.Launcher.dll").exists() {
+        panic!("Assembly not found");
     }
-}
 
-fn prompt_string(message: &str) -> String {
-    print!("{}", message);
-    stdout().flush().unwrap();
-
-    let mut input = String::new();
-    stdin().read_line(&mut input).unwrap();
-
-    input.trim().to_owned()
-}
-
-fn install_launcher_to_path(mut path: PathBuf, dotnet_version: i32) {
-    println!("Determined installation location '{}'.", path.display());
-
-    path.push("Terraprisma");
-    println!("Installing to '{}'.", path.display());
-
-    fs::create_dir_all(&path).unwrap();
-    env::set_current_dir(path).unwrap();
-
-    let dotnet_path = check_dotnet(&dotnet_version).unwrap();
-    println!("{}", dotnet_path.display());
-
-    println!("Writing dotnet helper scripts...");
-    let dotnet_sh = include_str!("../scripts/dotnet.sh");
-    let dotnet_bat = include_str!("../scripts/dotnet.bat");
-
-    // Note that we set the current dir earlier in this code, change this if
-    // that ever changes!
-    fs::write("dotnet.sh", dotnet_sh).unwrap();
-    fs::write("dotnet.bat", dotnet_bat).unwrap();
+    let hostfxr = nethost::load_hostfxr().unwrap();
+    let context = hostfxr
+        .initialize_for_dotnet_command_line(pdcstr!("./bin/Terraprisma.Launcher.dll"))
+        .unwrap();
+    context.run_app().as_hosting_exit_code().unwrap();
 }
