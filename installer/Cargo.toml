@@ -1,5 +1,5 @@
 [package]
-name = "terraprisma-installer"
+name = "nightglow-bootstrapper"
 edition = "2021"
 
 version = "1.0.0"
