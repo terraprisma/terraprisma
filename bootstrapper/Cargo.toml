@@ -1,5 +1,5 @@
 [package]
-name = "nightglow-bootstrapper"
+name = "bootstrapper"
 edition = "2021"
 
 version = "1.0.0"
