@@ -4,5 +4,40 @@
         <name>Terraprisma.Launcher</name>
     </assembly>
     <members>
+        <member name="T:Terraprisma.Launcher.GameLaunchers.Steam.StreamDataProvider">
+            <summary>
+                Provides sometimes-platform-dependent data for Steam, such as paths.
+            </summary>
+        </member>
+        <member name="M:Terraprisma.Launcher.GameLaunchers.Steam.StreamDataProvider.GetSteamInstallPath">
+            <summary>
+                Finds the platform-dependent Steam installation path.
+            </summary>
+            <returns>
+                The existing path to the system's Steam install, or
+                <see langword="null"/> if no path could be found or none exist.
+            </returns>
+        </member>
+        <member name="T:Terraprisma.Launcher.MainCommand">
+            <summary>
+                The main command of the launcher.
+            </summary>
+        </member>
+        <member name="P:Terraprisma.Launcher.MainCommand.LauncherDirectory">
+            <summary>
+                The directory of the launcher, where patches should be installed to.
+            </summary>
+        </member>
+        <member name="P:Terraprisma.Launcher.MainCommand.TerrariaPath">
+            <summary>
+                The directory of the Terraria installation, assumed to be the
+                directory above the launcher directory if not specified.
+            </summary>
+        </member>
+        <member name="T:Terraprisma.Launcher.Patcher.IPatchProvider">
+            <summary>
+                Provides an arbitrary amount of game patches.
+            </summary>
+        </member>
     </members>
 </doc>

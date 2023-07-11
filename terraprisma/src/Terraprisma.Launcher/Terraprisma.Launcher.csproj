@@ -10,7 +10,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Terraprisma.Patcher\Terraprisma.Patcher.csproj"/>
+        <ProjectReference Include="..\Terraprisma.Patcher\Terraprisma.Patcher.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CliFx" Version="2.3.4" />
+        <PackageReference Include="VDFParser.dotnet" Version="1.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Patcher" />
     </ItemGroup>
 
 </Project>
