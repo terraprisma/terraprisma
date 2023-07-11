@@ -1,0 +1,17 @@
+[package]
+name = "bootstrapper"
+edition = "2021"
+
+version = "1.0.0"
+authors = ["pbone, tomat"]
+description = "The Nightglow Launcher's bootstrapper - .NET host and local installer."
+license-file = "../LICENSE"
+
+[dependencies]
+flate2 = "1.0.26"
+regex = "1.9.0"
+tar = "0.4.38"
+ureq = "2.7.1"
+which = "4.4.0"
+zip = "0.6.6"
+netcorehost = "0.14.0"

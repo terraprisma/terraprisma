@@ -12,8 +12,6 @@ use ureq::Response;
 use which::{which_global, which_in};
 use zip::{result::ZipError, ZipArchive};
 
-use crate::prompt_bool;
-
 #[derive(Debug)]
 pub enum Error {
     FetchingVersion(ureq::Error),
@@ -24,41 +22,25 @@ pub enum Error {
 
 type DotnetResult<T> = Result<T, Error>;
 
-// TODO manage having multiple local dotnet runtimes
-pub fn check_dotnet(major: &i32) -> DotnetResult<PathBuf> {
-    fn not_found(major: &i32) -> DotnetResult<PathBuf> {
-        println!(
-            "Microsoft.NETCore.App {} runtime not found, installing locally...",
-            major
-        );
-        /*match prompt_bool("Would you like to download a self-contained runtime?") {
-            true => download_and_extract_dotnet_runtime(major, "./dotnet"),
-            // TODO better exit
-            false => {
-                println!("Exiting");
-                panic!("")
-            }
-        }*/
-        download_and_extract_dotnet_runtime(major, "./dotnet")
-    }
-
+// Whether a global .NET runtime of the given major version is installed.
+pub fn check_global_dotnet(major: i32) -> bool {
     match which_global("dotnet") {
-        Ok(path) => match get_installed_dotnet_runtimes(major) {
+        Ok(_) => match get_installed_dotnet_runtimes(major) {
             Some(vers) => {
                 println!("{} compatible runtime(s) installed: ", vers.len());
                 for rt in vers.iter() {
                     println!("  {}", rt);
                 }
 
-                return Ok(path);
+                return true;
             }
-            None => not_found(major),
+            None => false,
         },
-        Err(_) => not_found(major),
+        Err(_) => false,
     }
 }
 
-fn get_installed_dotnet_runtimes(major: &i32) -> Option<Vec<String>> {
+fn get_installed_dotnet_runtimes(major: i32) -> Option<Vec<String>> {
     let dotnet_list_runtimes = Command::new("dotnet")
         .args(["--list-runtimes"])
         .output()
@@ -85,7 +67,7 @@ fn get_installed_dotnet_runtimes(major: &i32) -> Option<Vec<String>> {
     return Some(runtimes);
 }
 
-fn download_and_extract_dotnet_runtime(major: &i32, into_path: &str) -> DotnetResult<PathBuf> {
+pub fn download_and_extract_dotnet_runtime(major: i32, into_path: &str) -> DotnetResult<PathBuf> {
     fn download_runtime(&major: &i32) -> DotnetResult<Response> {
         let client = ureq::agent();
 
