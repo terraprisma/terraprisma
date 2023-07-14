@@ -1,9 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CliFx.Attributes;
 using CliFx.Infrastructure;
-using GLib;
-using Terraprisma.Nightglow.UI;
-using Application = Gtk.Application;
 
 namespace Terraprisma.Nightglow.Commands;
 
@@ -13,17 +10,14 @@ namespace Terraprisma.Nightglow.Commands;
 [Command]
 public sealed class MainCommand : BaseCommand {
     protected override ValueTask ExecuteAsync(IConsole console) {
-        Application.Init();
-
-        var app = new Application("dev.tomat.terraprisma.nightglow", ApplicationFlags.None);
-        app.Register(Cancellable.Current);
-
-        var win = new MainWindow("Nightglow");
-        app.AddWindow(win);
-
-        win.Show();
-        Application.Run();
-
+        var application = Gtk.Application.New("dev.tomat.terraprisma.nightglow", Gio.ApplicationFlags.FlagsNone);
+        application.OnActivate += (sender, args) => {
+            var window = Gtk.ApplicationWindow.New((Gtk.Application)sender);
+            window.Title = "Nightglow";
+            window.SetDefaultSize(800, 600);
+            window.Show();
+        };
+        application.Run();
         return default;
     }
 }

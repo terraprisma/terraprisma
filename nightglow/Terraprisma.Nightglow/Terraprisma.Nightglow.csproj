@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="CliFx" Version="2.3.4" />
-        <PackageReference Include="GtkSharp" Version="3.24.24.95" />
+        <PackageReference Include="GirCore.Gtk-4.0" Version="0.3.0" />
     </ItemGroup>
 
 </Project>
