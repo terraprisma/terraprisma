@@ -192,13 +192,7 @@ public sealed class DotNetCompiler : ICompiler {
                     }
                 }
                 
-                ctorRow.AppendChild(
-                    HtmlNode.CreateNode($"""
-                    <p>
-                        <b>{typeDoc.Name}({ctorParameterString})</b>
-                    </p>
-                    """)
-                );
+                ctorRow.AppendChild(HtmlNode.CreateNode($"<p><a href=\"./{typeDoc}/{ctor}.html\"><b>{typeDoc.Name}({ctorParameterString})</b></a></p>"));
                 classCtorTable.AppendChild(ctorRow);
             }
         }
@@ -212,7 +206,7 @@ public sealed class DotNetCompiler : ICompiler {
         if (typeDoc.Properties is not null && typeDoc.Properties.Count > 0) {
             foreach (var prop in typeDoc.Properties) {
                 var propRow = HtmlNode.CreateNode("<tr></tr>");
-                propRow.AppendChild(HtmlNode.CreateNode($"<p><b>{prop.Name}</b></p>"));
+                propRow.AppendChild(HtmlNode.CreateNode($"<p><a href=\"./{typeDoc}/{prop}.html\"><b>{prop.Name}</b></a></p>"));
                 classPropertiesTable.AppendChild(propRow);
             }
         }
@@ -245,7 +239,7 @@ public sealed class DotNetCompiler : ICompiler {
                     }
                 }
                 var methodRow = HtmlNode.CreateNode("<tr></tr>");
-                methodRow.AppendChild(HtmlNode.CreateNode($"<p><b>{method.Name}{methodGenericParameterString}({methodParameterString})</b></p>"));
+                methodRow.AppendChild(HtmlNode.CreateNode($"<p><a href=\"./{typeDoc}/{method}.html\"><b>{method.Name}{methodGenericParameterString}({methodParameterString})</b></a></p>"));
                 classMethodsTable.AppendChild(methodRow);
             }
         }
