@@ -23,7 +23,7 @@ body {
 
 .left-sidebar {
   background: ButtonFace;
-  flex: 1 3 auto;
+  flex: 1 0 16.66666666666666666666666666666%;
   margin: 0 auto;
   padding: 2em 2em;
   z-index: 2;
@@ -34,7 +34,7 @@ body {
 }
 
 main {
-  flex: 2 0 auto;
+  flex: 2 0 66.66666666666666666666666666666%;
   max-width: 50em;
   margin: 0 auto;
   padding: 2em 2em;
@@ -42,7 +42,7 @@ main {
 
 .right-sidebar {
   background: ButtonFace;
-  flex: 1 3 auto;
+  flex: 1 0 16.66666666666666666666666666666%;
   margin: 0 auto;
   padding: 2em 2em;
   z-index: 2;
