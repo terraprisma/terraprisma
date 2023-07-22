@@ -12,21 +12,6 @@
 
     {
       overlay = final: prev: {
-        terraprisma-ssg = with final; buildDotnetModule rec {
-          name = "${pname}-${version}";
-          pname = "terraprisma-ssg";
-          version = "1.0.0";
-
-          src = ./docs/generator;
-          projectFile = "Terraprisma.Docs.sln";
-
-          dotnet-sdk = dotnet-sdk_7;
-          dotnet-runtime = dotnet-sdk_7; # Yes, this is intentional.
-          nugetDeps = ./docs/generator/deps.nix;
-
-          executables = [ "Terraprisma.Docs.SSG" ];
-          meta.mainProgram = "Terraprisma.Docs.SSG";
-        };
       };
 
       devShells = forAllSystems (system:
@@ -60,8 +45,6 @@
 
       packages = forAllSystems (system:
         {
-          inherit (nixpkgsFor.${system}) terraprisma-ssg;
         });
-      defaultPackage = forAllSystems (system: self.packages.${system}.terraprisma-ssg);
     };
 }
