@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Versioning;
 using Mono.Cecil;
@@ -78,6 +82,8 @@ internal static class Program {
         Console.WriteLine(typeof(MP3Sharp.MP3SharpException).Assembly.Location);
         Console.WriteLine(typeof(NVorbis.VorbisReader).Assembly.Location);
         Console.WriteLine(typeof(Microsoft.Xna.Framework.Vector2).Assembly.Location);
+        Console.WriteLine(typeof(System.Windows.Forms.Application));
+        Console.WriteLine(typeof(System.Drawing.Graphics));
     }
 
     private static void PatchRailSdk(string workspace) {
@@ -99,7 +105,7 @@ internal static class Program {
         };
         modder.Read();
         PatchNetVersion(modder.Module);
-        modder.ReadMod(typeof(Program).Assembly.Location);
+        modder.ReadMod(typeof(ReLogic.MonoModRules).Assembly.Location);
         modder.MapDependencies();
         modder.AutoPatch();
         modder.Write();
@@ -113,7 +119,7 @@ internal static class Program {
         };
         modder.Read();
         PatchNetVersion(modder.Module);
-        modder.ReadMod(typeof(Program).Assembly.Location);
+        modder.ReadMod(typeof(Terraria.MonoModRules).Assembly.Location);
         modder.MapDependencies();
         modder.AutoPatch();
         modder.Write();

@@ -1,4 +1,8 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using Mono.Cecil;
 using MonoMod;
 using MethodBody = Mono.Cecil.Cil.MethodBody;
@@ -34,10 +38,11 @@ public sealed class ModernizerModder : MonoModder {
         foreach (var (name, newName) in assembly_remap) {
             var index = Module.AssemblyReferences.IndexOf(Module.AssemblyReferences.FirstOrDefault(x => x.Name == name));
 
-            if (index != -1) {
-                Module.AssemblyReferences.RemoveAt(index);
-                AddReference(newName);
-            }
+            if (index == -1)
+                continue;
+
+            Module.AssemblyReferences.RemoveAt(index);
+            AddReference(newName);
         }
 
         AddReference("System.Runtime");
@@ -45,12 +50,6 @@ public sealed class ModernizerModder : MonoModder {
 
         base.MapDependencies();
     }
-
-    /*public override void MapDependencies(ModuleDefinition main) {
-        // TODO: Use an updated version of Ionic.Zip to avoid this reference.
-        if (!libs_to_remove.Contains(main.Name[..^".dll".Length]))
-            base.MapDependencies(main);
-    }*/
 
     public override IMetadataTokenProvider Relinker(IMetadataTokenProvider mtp, IGenericParameterProvider context) {
         var relinkedMember = base.Relinker(mtp, context);
@@ -80,17 +79,6 @@ public sealed class ModernizerModder : MonoModder {
                 AddReference(newName);
             }
         }
-    }
-
-    public override void PatchRefsInMethod(MethodDefinition method) {
-        base.PatchRefsInMethod(method);
-
-        // The conditions for inlining in Mono are sane and known, let's use
-        // that.
-        if (!method.ImplAttributes.HasFlag(MethodImplAttributes.AggressiveInlining) || !MonoCanInline(method.Body))
-            return;
-
-        method.ImplAttributes |= MethodImplAttributes.AggressiveInlining;
     }
 
     private void AddReference(AssemblyName name) {
