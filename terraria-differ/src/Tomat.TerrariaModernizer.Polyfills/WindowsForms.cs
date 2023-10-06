@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿
+
+/*using System.Runtime.InteropServices;
 using System.Text;
 
 // ReSharper disable once CheckNamespace
@@ -131,3 +133,13 @@ public static class Application {
         // no-op
     }
 }
+
+public static class MessageBox { }
+public enum DialogResult { }
+public class Form { }
+public class Control { }
+public enum FormBorderStyle { }
+public enum FormWindowState { }
+public class Screen { }
+public enum MessageBoxButtons { }
+*/

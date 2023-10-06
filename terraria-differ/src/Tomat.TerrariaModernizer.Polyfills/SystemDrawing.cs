@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+﻿/*using System.Runtime.InteropServices;
 
 // ReSharper disable once CheckNamespace
 namespace System.Drawing;
@@ -21,3 +21,4 @@ public partial class Graphics {
     [LibraryImport("user32.dll")]
     private static partial nint GetDC(nint hWnd);
 }
+*/

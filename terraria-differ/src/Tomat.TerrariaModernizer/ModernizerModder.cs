@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Mono.Cecil;
 using MonoMod;
+using Newtonsoft.Json.Linq;
 using MethodBody = Mono.Cecil.Cil.MethodBody;
 
 namespace Tomat.TerrariaModernizer;
@@ -54,14 +55,11 @@ public sealed class ModernizerModder : MonoModder {
     }
 
     public override IMetadataTokenProvider Relinker(IMetadataTokenProvider mtp, IGenericParameterProvider context) {
-        // Module.AssemblyReferences.Remove(Module.AssemblyReferences.FirstOrDefault(x => x.Name == lib));
-
         var relinkedMember = base.Relinker(mtp, context);
 
-        if (relinkedMember is TypeReference type && libs_to_remove.Contains(type.Scope.Name)) {
-            /*var a = Module.ImportReference(Module.ImportReference(Type.GetType(type.FullName)) ?? FindType(type.FullName));
-            return a;*/
-            return Module.ImportReference(FindType(type.FullName));
+        if (relinkedMember is TypeReference type) {
+            if (libs_to_remove.Contains(type.Scope.Name))
+                return Module.ImportReference(FindType(type.FullName));
         }
 
         return relinkedMember;
