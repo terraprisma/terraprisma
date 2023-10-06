@@ -1,0 +1,33 @@
+--- decompiled/TerrariaServerWindows/Terraria/GameContent/UI/States/UIWorldCreation.cs
++++ decompiled/TerrariaServerMac/Terraria/GameContent/UI/States/UIWorldCreation.cs
+@@ -765,7 +_,7 @@
+ 	{
+ 		processedSeed = _optionSeed;
+ 		ProcessSpecialWorldSeeds(processedSeed);
+-		string[] array = _optionSeed.Split('.');
++		string[] array = _optionSeed.Split(new char[1] { '.' });
+ 		if (array.Length != 4)
+ 		{
+ 			return;
+@@ -963,8 +_,8 @@
+ 			{
+ 				array3[n].Down = uILinkPoint2.ID;
+ 			}
+-			array3[array3.Length - 1].Down = uILinkPoint3.ID;
+-			uILinkPoint3.Up = array3[array3.Length - 1].ID;
++			array3[^1].Down = uILinkPoint3.ID;
++			uILinkPoint3.Up = array3[^1].ID;
+ 			uILinkPoint2.Up = array3[0].ID;
+ 		}
+ 		else
+@@ -973,8 +_,8 @@
+ 			{
+ 				array2[num2].Down = uILinkPoint2.ID;
+ 			}
+-			array2[array2.Length - 1].Down = uILinkPoint3.ID;
+-			uILinkPoint3.Up = array2[array2.Length - 1].ID;
++			array2[^1].Down = uILinkPoint3.ID;
++			uILinkPoint3.Up = array2[^1].ID;
+ 			uILinkPoint2.Up = array2[0].ID;
+ 		}
+ 		uILinkPoint3.Left = uILinkPoint2.ID;

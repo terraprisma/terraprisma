@@ -1,0 +1,11 @@
+--- decompiled/TerrariaServerWindows/Terraria/HitTile.cs
++++ decompiled/TerrariaServerMac/Terraria/HitTile.cs
+@@ -192,7 +_,7 @@
+ 		hitTileObject.damage += damageAmount;
+ 		hitTileObject.timeToLive = 60;
+ 		hitTileObject.animationTimeElapsed = 0;
+-		hitTileObject.animationDirection = (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2() * 2f;
++		hitTileObject.animationDirection = (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2() * 2f;
+ 		SortSlots(tileId);
+ 		return hitTileObject.damage;
+ 	}

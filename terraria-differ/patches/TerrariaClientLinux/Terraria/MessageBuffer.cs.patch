@@ -1,0 +1,11 @@
+--- decompiled/TerrariaClientWindows/Terraria/MessageBuffer.cs
++++ decompiled/TerrariaClientLinux/Terraria/MessageBuffer.cs
+@@ -3597,7 +_,7 @@
+ 					{
+ 						int type4 = 90;
+ 						float num61 = 0f;
+-						float num62 = (float)Math.PI / 15f;
++						float num62 = MathF.PI / 15f;
+ 						Vector2 spinningpoint = new Vector2(0f, -8f);
+ 						Vector2 vector4 = new Vector2(-3f);
+ 						float num63 = 0f;

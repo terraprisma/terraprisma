@@ -1,0 +1,11 @@
+--- decompiled/TerrariaServerWindows/Terraria/Graphics/CameraModifiers/PunchCameraModifier.cs
++++ decompiled/TerrariaServerMac/Terraria/Graphics/CameraModifiers/PunchCameraModifier.cs
+@@ -36,7 +_,7 @@
+ 
+ 	public void Update(ref CameraInfo cameraInfo)
+ 	{
+-		float num = (float)Math.Cos((float)_framesLasted / 60f * _vibrationCyclesPerSecond * ((float)Math.PI * 2f));
++		float num = (float)Math.Cos((float)_framesLasted / 60f * _vibrationCyclesPerSecond * (MathF.PI * 2f));
+ 		float num2 = Utils.Remap(_framesLasted, 0f, _framesToLast, 1f, 0f);
+ 		float num3 = Utils.Remap(Vector2.Distance(_startPosition, cameraInfo.OriginalCameraCenter), 0f, _distanceFalloff, 1f, 0f);
+ 		if (_distanceFalloff == -1f)

@@ -1,0 +1,32 @@
+--- decompiled/TerrariaServerWindows/Terraria/UI/GameInterfaceLayer.cs
++++ decompiled/TerrariaServerMac/Terraria/UI/GameInterfaceLayer.cs
+@@ -19,24 +_,24 @@
+ 
+ 	public bool Draw()
+ 	{
+-		Matrix transformMatrix;
++		Matrix transformationMatrix;
+ 		if (ScaleType == InterfaceScaleType.Game)
+ 		{
+ 			PlayerInput.SetZoom_World();
+-			transformMatrix = Main.GameViewMatrix.ZoomMatrix;
++			transformationMatrix = Main.GameViewMatrix.ZoomMatrix;
+ 		}
+ 		else if (ScaleType == InterfaceScaleType.UI)
+ 		{
+ 			PlayerInput.SetZoom_UI();
+-			transformMatrix = Main.UIScaleMatrix;
++			transformationMatrix = Main.UIScaleMatrix;
+ 		}
+ 		else
+ 		{
+ 			PlayerInput.SetZoom_Unscaled();
+-			transformMatrix = Matrix.Identity;
++			transformationMatrix = Matrix.Identity;
+ 		}
+ 		bool result = false;
+-		Main.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, transformMatrix);
++		Main.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, transformationMatrix);
+ 		try
+ 		{
+ 			result = DrawSelf();

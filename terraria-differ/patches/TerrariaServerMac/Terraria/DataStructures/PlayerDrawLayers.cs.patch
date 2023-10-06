@@ -1,0 +1,266 @@
+--- decompiled/TerrariaServerWindows/Terraria/DataStructures/PlayerDrawLayers.cs
++++ decompiled/TerrariaServerMac/Terraria/DataStructures/PlayerDrawLayers.cs
+@@ -225,8 +_,8 @@
+ 			Texture2D value2 = TextureAssets.GlowMask[217].Value;
+ 			bool num = !drawinfo.drawPlayer.setForbiddenCooldownLocked;
+ 			int num2 = 0;
+-			num2 = (int)(((float)drawinfo.drawPlayer.miscCounter / 300f * ((float)Math.PI * 2f)).ToRotationVector2().Y * 6f);
++			num2 = (int)(((float)drawinfo.drawPlayer.miscCounter / 300f * (MathF.PI * 2f)).ToRotationVector2().Y * 6f);
+-			float num3 = ((float)drawinfo.drawPlayer.miscCounter / 75f * ((float)Math.PI * 2f)).ToRotationVector2().X * 4f;
++			float num3 = ((float)drawinfo.drawPlayer.miscCounter / 75f * (MathF.PI * 2f)).ToRotationVector2().X * 4f;
+ 			Color color2 = new Color(80, 70, 40, 0) * (num3 / 8f + 0.5f) * 0.8f;
+ 			if (!num)
+ 			{
+@@ -249,7 +_,7 @@
+ 			drawinfo.DrawDataCache.Add(item);
+ 			for (float num6 = 0f; num6 < 4f; num6 += 1f)
+ 			{
+-				item = new DrawData(value2, vector + (num6 * ((float)Math.PI / 2f)).ToRotationVector2() * num3, null, color2, drawinfo.drawPlayer.bodyRotation, value.Size() / 2f, 1f, drawinfo.playerEffect);
++				item = new DrawData(value2, vector + (num6 * (MathF.PI / 2f)).ToRotationVector2() * num3, null, color2, drawinfo.drawPlayer.bodyRotation, value.Size() / 2f, 1f, drawinfo.playerEffect);
+ 				drawinfo.DrawDataCache.Add(item);
+ 			}
+ 		}
+@@ -288,8 +_,8 @@
+ 			Texture2D value = TextureAssets.Extra[152].Value;
+ 			Texture2D value2 = TextureAssets.Extra[152].Value;
+ 			int num = 0;
+-			num = (int)(((float)drawinfo.drawPlayer.miscCounter / 300f * ((float)Math.PI * 2f)).ToRotationVector2().Y * 6f);
++			num = (int)(((float)drawinfo.drawPlayer.miscCounter / 300f * (MathF.PI * 2f)).ToRotationVector2().Y * 6f);
+-			float num2 = ((float)drawinfo.drawPlayer.miscCounter / 75f * ((float)Math.PI * 2f)).ToRotationVector2().X * 4f;
++			float num2 = ((float)drawinfo.drawPlayer.miscCounter / 75f * (MathF.PI * 2f)).ToRotationVector2().X * 4f;
+ 			Color color2 = new Color(80, 70, 40, 0) * (num2 / 8f + 0.5f) * 0.8f;
+ 			Vector2 vector = new Vector2((int)(drawinfo.Position.X - Main.screenPosition.X - (float)(drawinfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawinfo.drawPlayer.width / 2)), (int)(drawinfo.Position.Y - Main.screenPosition.Y + (float)drawinfo.drawPlayer.height - (float)drawinfo.drawPlayer.bodyFrame.Height + 4f)) + drawinfo.drawPlayer.bodyPosition + new Vector2(drawinfo.drawPlayer.bodyFrame.Width / 2, drawinfo.drawPlayer.bodyFrame.Height / 2);
+ 			int num3 = 8;
+@@ -302,7 +_,7 @@
+ 			drawinfo.DrawDataCache.Add(item);
+ 			for (float num5 = 0f; num5 < 4f; num5 += 1f)
+ 			{
+-				item = new DrawData(value2, vector + (num5 * ((float)Math.PI / 2f)).ToRotationVector2() * num2, null, color2, drawinfo.drawPlayer.bodyRotation, value.Size() / 2f, 1f, drawinfo.playerEffect);
++				item = new DrawData(value2, vector + (num5 * (MathF.PI / 2f)).ToRotationVector2() * num2, null, color2, drawinfo.drawPlayer.bodyRotation, value.Size() / 2f, 1f, drawinfo.playerEffect);
+ 				item.shader = drawinfo.cHead;
+ 				drawinfo.DrawDataCache.Add(item);
+ 			}
+@@ -661,9 +_,9 @@
+ 			drawinfo.DrawDataCache.Add(item);
+ 			if (drawinfo.shadow == 0f)
+ 			{
+-				float num5 = ((float)drawinfo.drawPlayer.miscCounter / 75f * ((float)Math.PI * 2f)).ToRotationVector2().X * 4f;
++				float num5 = ((float)drawinfo.drawPlayer.miscCounter / 75f * (MathF.PI * 2f)).ToRotationVector2().X * 4f;
+ 				Color color4 = new Color(70, 70, 70, 0) * (num5 / 8f + 0.5f) * 0.4f;
+-				for (float num6 = 0f; num6 < (float)Math.PI * 2f; num6 += (float)Math.PI / 2f)
++				for (float num6 = 0f; num6 < MathF.PI * 2f; num6 += MathF.PI / 2f)
+ 				{
+ 					item = new DrawData(TextureAssets.Wings[drawinfo.drawPlayer.wings].Value, vec2.Floor() + num6.ToRotationVector2() * num5, new Rectangle(0, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 6 * drawinfo.drawPlayer.wingFrame, TextureAssets.Wings[drawinfo.drawPlayer.wings].Width(), TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 6), color4, drawinfo.drawPlayer.bodyRotation, new Vector2(TextureAssets.Wings[drawinfo.drawPlayer.wings].Width() / 2, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 12), 1f, drawinfo.playerEffect);
+ 					item.shader = drawinfo.cWings;
+@@ -728,7 +_,7 @@
+ 					rectangle3.Width -= 2;
+ 					rectangle3.Height -= 2;
+ 					int num10 = (k - num7) % (int)num9;
+-					Vector2 vector10 = new Vector2(0f, 0.5f).RotatedBy((drawinfo.drawPlayer.miscCounterNormalized * (2f + (float)num10) + (float)num10 * 0.5f + (float)j * 1.3f) * ((float)Math.PI * 2f)) * (num10 + 1);
++					Vector2 vector10 = new Vector2(0f, 0.5f).RotatedBy((drawinfo.drawPlayer.miscCounterNormalized * (2f + (float)num10) + (float)num10 * 0.5f + (float)j * 1.3f) * (MathF.PI * 2f)) * (num10 + 1);
+ 					vec4 += vector10;
+ 					vec4 += vector9 * ((float)num10 / num9);
+ 					vec4 += zero;
+@@ -873,7 +_,7 @@
+ 				Vector2 vector14 = drawinfo.drawPlayer.shadowPos[num14] - drawinfo.drawPlayer.position;
+ 				for (float num15 = 0f; num15 < 1f; num15 += 0.01f)
+ 				{
+-					Vector2 vector15 = new Vector2(2f, 0f).RotatedBy(num15 / 0.04f * ((float)Math.PI * 2f));
++					Vector2 vector15 = new Vector2(2f, 0f).RotatedBy(num15 / 0.04f * (MathF.PI * 2f));
+ 					item = new DrawData(TextureAssets.GlowMask[251].Value, vector15 + vector14 * num15 + vector12, new Rectangle(0, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 4 * drawinfo.drawPlayer.wingFrame, TextureAssets.Wings[drawinfo.drawPlayer.wings].Width(), TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 4), color10 * (1f - num15), drawinfo.drawPlayer.bodyRotation, new Vector2(TextureAssets.Wings[drawinfo.drawPlayer.wings].Width() / 2, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 8), 1f, drawinfo.playerEffect);
+ 					item.shader = drawinfo.cWings;
+ 					drawinfo.DrawDataCache.Add(item);
+@@ -894,7 +_,7 @@
+ 			Vector2 spinningpoint = new Vector2(0f, 2f - drawinfo.shadow * 2f);
+ 			for (int m = 0; m < 4; m++)
+ 			{
+-				item = new DrawData(TextureAssets.GlowMask[213].Value, spinningpoint.RotatedBy((float)Math.PI / 2f * (float)m) + vector12.Floor(), new Rectangle(0, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 4 * drawinfo.drawPlayer.wingFrame, TextureAssets.Wings[drawinfo.drawPlayer.wings].Width(), TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 4), new Color(127, 127, 127, 127) * drawinfo.stealth * (1f - drawinfo.shadow), drawinfo.drawPlayer.bodyRotation, new Vector2(TextureAssets.Wings[drawinfo.drawPlayer.wings].Width() / 2, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 8), 1f, drawinfo.playerEffect);
++				item = new DrawData(TextureAssets.GlowMask[213].Value, spinningpoint.RotatedBy(MathF.PI / 2f * (float)m) + vector12.Floor(), new Rectangle(0, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 4 * drawinfo.drawPlayer.wingFrame, TextureAssets.Wings[drawinfo.drawPlayer.wings].Width(), TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 4), new Color(127, 127, 127, 127) * drawinfo.stealth * (1f - drawinfo.shadow), drawinfo.drawPlayer.bodyRotation, new Vector2(TextureAssets.Wings[drawinfo.drawPlayer.wings].Width() / 2, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 8), 1f, drawinfo.playerEffect);
+ 				item.shader = drawinfo.cWings;
+ 				drawinfo.DrawDataCache.Add(item);
+ 			}
+@@ -902,11 +_,11 @@
+ 		else if (drawinfo.drawPlayer.wings == 31)
+ 		{
+ 			Color color11 = new Color(255, 255, 255, 0);
+-			color11 = Color.Lerp(Color.HotPink, Color.Crimson, (float)Math.Cos((float)Math.PI * 2f * ((float)drawinfo.drawPlayer.miscCounter / 100f)) * 0.4f + 0.5f);
++			color11 = Color.Lerp(Color.HotPink, Color.Crimson, (float)Math.Cos(MathF.PI * 2f * ((float)drawinfo.drawPlayer.miscCounter / 100f)) * 0.4f + 0.5f);
+ 			color11.A = 0;
+ 			for (int n = 0; n < 4; n++)
+ 			{
+-				Vector2 vector16 = new Vector2((float)Math.Cos((float)Math.PI * 2f * ((float)drawinfo.drawPlayer.miscCounter / 60f)) * 0.5f + 0.5f, 0f).RotatedBy((float)n * ((float)Math.PI / 2f)) * 1f;
++				Vector2 vector16 = new Vector2((float)Math.Cos(MathF.PI * 2f * ((float)drawinfo.drawPlayer.miscCounter / 60f)) * 0.5f + 0.5f, 0f).RotatedBy((float)n * (MathF.PI / 2f)) * 1f;
+ 				item = new DrawData(TextureAssets.Wings[drawinfo.drawPlayer.wings].Value, vector12.Floor() + vector16, new Rectangle(0, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 4 * drawinfo.drawPlayer.wingFrame, TextureAssets.Wings[drawinfo.drawPlayer.wings].Width(), TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 4), color11 * drawinfo.stealth * (1f - drawinfo.shadow) * 0.5f, drawinfo.drawPlayer.bodyRotation, new Vector2(TextureAssets.Wings[drawinfo.drawPlayer.wings].Width() / 2, TextureAssets.Wings[drawinfo.drawPlayer.wings].Height() / 8), 1f, drawinfo.playerEffect);
+ 				item.shader = drawinfo.cWings;
+ 				drawinfo.DrawDataCache.Add(item);
+@@ -1214,7 +_,7 @@
+ 			Rectangle rectangle = value3.Frame(1, 4);
+ 			Vector2 origin = rectangle.Size() / 2f;
+ 			Vector2 position2 = vector3 + new Vector2(drawinfo.drawPlayer.direction * -2, drawinfo.drawPlayer.gravDir * 4f);
+-			drawinfo.DrawDataCache.Add(new DrawData(value3, position2, rectangle, drawinfo.colorArmorBody, bodyRotation + (float)Math.PI / 4f * (float)drawinfo.drawPlayer.direction, origin, 0.8f, drawinfo.playerEffect));
++			drawinfo.DrawDataCache.Add(new DrawData(value3, position2, rectangle, drawinfo.colorArmorBody, bodyRotation + MathF.PI / 4f * (float)drawinfo.drawPlayer.direction, origin, 0.8f, drawinfo.playerEffect));
+ 		}
+ 	}
+ 
+@@ -1816,8 +_,8 @@
+ 			int num2 = drawinfo.drawPlayer.babyBird.ToInt();
+ 			Vector2 vector2 = DrawPlayer_21_Head_GetSpecialHatDrawPosition(ref drawinfo, ref helmetOffset, new Vector2(1 + num2 * 2, -26 + drawinfo.drawPlayer.babyBird.ToInt() * -6));
+ 			int hatStacks = GetHatStacks(ref drawinfo, 4955);
+-			float num3 = (float)Math.PI / 60f;
++			float num3 = MathF.PI / 60f;
+-			float num4 = num3 * drawinfo.drawPlayer.position.X % ((float)Math.PI * 2f);
++			float num4 = num3 * drawinfo.drawPlayer.position.X % (MathF.PI * 2f);
+ 			for (int num5 = hatStacks - 1; num5 >= 0; num5--)
+ 			{
+ 				float x = Vector2.UnitY.RotatedBy(num4 + num3 * (float)num5).X * ((float)num5 / 30f) * 2f - (float)(num5 * 2 * drawinfo.drawPlayer.direction);
+@@ -1839,8 +_,8 @@
+ 				if (drawinfo.drawPlayer.head == 13)
+ 				{
+ 					int hatStacks2 = GetHatStacks(ref drawinfo, 205);
+-					float num6 = (float)Math.PI / 60f;
++					float num6 = MathF.PI / 60f;
+-					float num7 = num6 * drawinfo.drawPlayer.position.X % ((float)Math.PI * 2f);
++					float num7 = num6 * drawinfo.drawPlayer.position.X % (MathF.PI * 2f);
+ 					for (int i = 0; i < hatStacks2; i++)
+ 					{
+ 						float num8 = Vector2.UnitY.RotatedBy(num7 + num6 * (float)i).X * ((float)i / 30f) * 2f;
+@@ -1857,8 +_,8 @@
+ 					Vector2 origin2 = rectangle2.Size() / 2f;
+ 					Vector2 vector3 = DrawPlayer_21_Head_GetSpecialHatDrawPosition(ref drawinfo, ref helmetOffset, new Vector2(0f, -9f));
+ 					int hatStacks3 = GetHatStacks(ref drawinfo, 5004);
+-					float num9 = (float)Math.PI / 60f;
++					float num9 = MathF.PI / 60f;
+-					float num10 = num9 * drawinfo.drawPlayer.position.X % ((float)Math.PI * 2f);
++					float num10 = num9 * drawinfo.drawPlayer.position.X % (MathF.PI * 2f);
+ 					int num11 = hatStacks3 * 4 + 2;
+ 					int num12 = 0;
+ 					bool flag4 = (Main.GlobalTimeWrappedHourly + 180f) % 600f < 60f;
+@@ -2284,8 +_,8 @@
+ 			Vector2 pos2 = advancedShadow3.Position + vector2 + advancedShadow3.HeadgearOffset;
+ 			pos = drawinfo.drawPlayer.RotatedRelativePoint(pos, reverseRotation: true, addGfxOffY: false);
+ 			pos2 = drawinfo.drawPlayer.RotatedRelativePoint(pos2, reverseRotation: true, addGfxOffY: false);
+-			float num6 = (pos2 - pos).ToRotation() - (float)Math.PI / 2f;
++			float num6 = (pos2 - pos).ToRotation() - MathF.PI / 2f;
+-			num6 = (float)Math.PI / 2f * (float)drawinfo.drawPlayer.direction;
++			num6 = MathF.PI / 2f * (float)drawinfo.drawPlayer.direction;
+ 			float num7 = Math.Abs(pos2.X - pos.X);
+ 			Vector2 scale = new Vector2(x, num7 / (float)value.Height);
+ 			float num8 = 1f - (float)num5 / (float)num;
+@@ -2342,7 +_,7 @@
+ 				pos2 += vector4;
+ 				pos = drawinfo.drawPlayer.RotatedRelativePoint(pos, reverseRotation: true, addGfxOffY: false);
+ 				pos2 = drawinfo.drawPlayer.RotatedRelativePoint(pos2, reverseRotation: true, addGfxOffY: false);
+-				float rotation = (pos2 - pos).ToRotation() - (float)Math.PI / 2f;
++				float rotation = (pos2 - pos).ToRotation() - MathF.PI / 2f;
+ 				float num6 = Vector2.Distance(pos, pos2);
+ 				Vector2 scale = new Vector2(x, num6 / (float)value.Height);
+ 				float num7 = 1f - (float)num5 / (float)num;
+@@ -2412,14 +_,14 @@
+ 		DrawData item;
+ 		if (drawinfo.drawPlayer.shieldRaised)
+ 		{
+-			float num = (float)Math.Sin(Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f));
++			float num = (float)Math.Sin(Main.GlobalTimeWrappedHourly * (MathF.PI * 2f));
+ 			float x = 2.5f + 1.5f * num;
+ 			Color colorArmorBody = drawinfo.colorArmorBody;
+ 			colorArmorBody.A = 0;
+ 			colorArmorBody *= 0.45f - num * 0.15f;
+ 			for (float num2 = 0f; num2 < 4f; num2 += 1f)
+ 			{
+-				item = new DrawData(TextureAssets.AccShield[drawinfo.drawPlayer.shield].Value, zero2 + new Vector2((int)(drawinfo.Position.X - Main.screenPosition.X - (float)(bodyFrame.Width / 2) + (float)(drawinfo.drawPlayer.width / 2)), (int)(drawinfo.Position.Y - Main.screenPosition.Y + (float)drawinfo.drawPlayer.height - (float)drawinfo.drawPlayer.bodyFrame.Height + 4f)) + drawinfo.drawPlayer.bodyPosition + new Vector2(bodyFrame.Width / 2, drawinfo.drawPlayer.bodyFrame.Height / 2) + zero + new Vector2(x, 0f).RotatedBy(num2 / 4f * ((float)Math.PI * 2f)), bodyFrame, colorArmorBody, drawinfo.drawPlayer.bodyRotation, bodyVect, 1f, drawinfo.playerEffect);
++				item = new DrawData(TextureAssets.AccShield[drawinfo.drawPlayer.shield].Value, zero2 + new Vector2((int)(drawinfo.Position.X - Main.screenPosition.X - (float)(bodyFrame.Width / 2) + (float)(drawinfo.drawPlayer.width / 2)), (int)(drawinfo.Position.Y - Main.screenPosition.Y + (float)drawinfo.drawPlayer.height - (float)drawinfo.drawPlayer.bodyFrame.Height + 4f)) + drawinfo.drawPlayer.bodyPosition + new Vector2(bodyFrame.Width / 2, drawinfo.drawPlayer.bodyFrame.Height / 2) + zero + new Vector2(x, 0f).RotatedBy(num2 / 4f * (MathF.PI * 2f)), bodyFrame, colorArmorBody, drawinfo.drawPlayer.bodyRotation, bodyVect, 1f, drawinfo.playerEffect);
+ 				item.shader = drawinfo.cShield;
+ 				drawinfo.DrawDataCache.Add(item);
+ 			}
+@@ -2430,7 +_,7 @@
+ 		if (drawinfo.drawPlayer.shieldRaised)
+ 		{
+ 			Color colorArmorBody2 = drawinfo.colorArmorBody;
+-			float num3 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * (float)Math.PI);
++			float num3 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * MathF.PI);
+ 			colorArmorBody2.A = (byte)((float)(int)colorArmorBody2.A * (0.5f + 0.5f * num3));
+ 			colorArmorBody2 *= 0.5f + 0.5f * num3;
+ 			item = new DrawData(TextureAssets.AccShield[drawinfo.drawPlayer.shield].Value, zero2 + new Vector2((int)(drawinfo.Position.X - Main.screenPosition.X - (float)(bodyFrame.Width / 2) + (float)(drawinfo.drawPlayer.width / 2)), (int)(drawinfo.Position.Y - Main.screenPosition.Y + (float)drawinfo.drawPlayer.height - (float)drawinfo.drawPlayer.bodyFrame.Height + 4f)) + drawinfo.drawPlayer.bodyPosition + new Vector2(bodyFrame.Width / 2, drawinfo.drawPlayer.bodyFrame.Height / 2) + zero, bodyFrame, colorArmorBody2, drawinfo.drawPlayer.bodyRotation, bodyVect, 1f, drawinfo.playerEffect);
+@@ -2468,9 +_,9 @@
+ 			float num = (drawinfo.drawPlayer.solarShieldPos[0] * new Vector2(1f, 0.5f)).ToRotation();
+ 			if (drawinfo.drawPlayer.direction == -1)
+ 			{
+-				num += (float)Math.PI;
++				num += MathF.PI;
+ 			}
+-			num += (float)Math.PI / 50f * (float)drawinfo.drawPlayer.direction;
++			num += MathF.PI / 50f * (float)drawinfo.drawPlayer.direction;
+ 			DrawData item = new DrawData(value, new Vector2((int)(drawinfo.Position.X - Main.screenPosition.X + (float)(drawinfo.drawPlayer.width / 2)), (int)(drawinfo.Position.Y - Main.screenPosition.Y + (float)(drawinfo.drawPlayer.height / 2))) + drawinfo.drawPlayer.solarShieldPos[0], null, color, num, value.Size() / 2f, 1f, drawinfo.playerEffect);
+ 			item.shader = drawinfo.cBody;
+ 			drawinfo.DrawDataCache.Add(item);
+@@ -2608,7 +_,7 @@
+ 			float num6 = x;
+ 			_ = drawinfo.drawPlayer.direction;
+ 			x = num6 - 0f;
+-			num5 -= (float)Math.PI / 2f * (float)drawinfo.drawPlayer.direction;
++			num5 -= MathF.PI / 2f * (float)drawinfo.drawPlayer.direction;
+ 			origin.Y = 2f;
+ 			origin.X += 2 * drawinfo.drawPlayer.direction;
+ 		}
+@@ -2673,12 +_,12 @@
+ 				Rectangle rectangle3 = texture2D.Frame();
+ 				Vector2 vector5 = new Vector2(rectangle3.Width / 2 * drawinfo.drawPlayer.direction, 0f);
+ 				Vector2 origin4 = rectangle3.Size() / 2f;
+-				float num7 = ((float)drawinfo.drawPlayer.miscCounter / 75f * ((float)Math.PI * 2f)).ToRotationVector2().X * 1f + 0f;
++				float num7 = ((float)drawinfo.drawPlayer.miscCounter / 75f * (MathF.PI * 2f)).ToRotationVector2().X * 1f + 0f;
+ 				Color color2 = new Color(120, 40, 222, 0) * (num7 / 2f * 0.3f + 0.85f) * 0.5f;
+ 				num7 = 2f;
+ 				for (float num8 = 0f; num8 < 4f; num8 += 1f)
+ 				{
+-					item = new DrawData(TextureAssets.GlowMask[218].Value, (drawinfo.ItemLocation - Main.screenPosition + vector5).Floor() + (num8 * ((float)Math.PI / 2f)).ToRotationVector2() * num7, rectangle3, color2, drawinfo.drawPlayer.itemRotation, origin4, adjustedItemScale, drawinfo.itemEffect);
++					item = new DrawData(TextureAssets.GlowMask[218].Value, (drawinfo.ItemLocation - Main.screenPosition + vector5).Floor() + (num8 * (MathF.PI / 2f)).ToRotationVector2() * num7, rectangle3, color2, drawinfo.drawPlayer.itemRotation, origin4, adjustedItemScale, drawinfo.itemEffect);
+ 					drawinfo.DrawDataCache.Add(item);
+ 				}
+ 				item = new DrawData(texture2D, (drawinfo.ItemLocation - Main.screenPosition + vector5).Floor(), rectangle3, heldItem.GetAlpha(drawinfo.itemColor).MultiplyRGBA(new Color(new Vector4(0.5f, 0.5f, 0.5f, 0.8f))), drawinfo.drawPlayer.itemRotation, origin4, adjustedItemScale, drawinfo.itemEffect);
+@@ -2701,7 +_,7 @@
+ 				}
+ 				if (num == 3870)
+ 				{
+-					Vector2 vector6 = (drawinfo.drawPlayer.itemRotation + (float)Math.PI / 4f * (float)drawinfo.drawPlayer.direction).ToRotationVector2() * new Vector2((float)(-drawinfo.drawPlayer.direction) * 1.5f, drawinfo.drawPlayer.gravDir) * 3f;
++					Vector2 vector6 = (drawinfo.drawPlayer.itemRotation + MathF.PI / 4f * (float)drawinfo.drawPlayer.direction).ToRotationVector2() * new Vector2((float)(-drawinfo.drawPlayer.direction) * 1.5f, drawinfo.drawPlayer.gravDir) * 3f;
+ 					num10 = (int)vector6.X;
+ 					num11 = (int)vector6.Y;
+ 				}
+@@ -2778,11 +_,11 @@
+ 			}
+ 			if (num == 3788)
+ 			{
+-				float num13 = ((float)drawinfo.drawPlayer.miscCounter / 75f * ((float)Math.PI * 2f)).ToRotationVector2().X * 1f + 0f;
++				float num13 = ((float)drawinfo.drawPlayer.miscCounter / 75f * (MathF.PI * 2f)).ToRotationVector2().X * 1f + 0f;
+ 				Color color3 = new Color(80, 40, 252, 0) * (num13 / 2f * 0.3f + 0.85f) * 0.5f;
+ 				for (float num14 = 0f; num14 < 4f; num14 += 1f)
+ 				{
+-					item = new DrawData(TextureAssets.GlowMask[220].Value, new Vector2((int)(drawinfo.ItemLocation.X - Main.screenPosition.X + vector9.X), (int)(drawinfo.ItemLocation.Y - Main.screenPosition.Y + vector9.Y)) + (num14 * ((float)Math.PI / 2f) + drawinfo.drawPlayer.itemRotation).ToRotationVector2() * num13, null, color3, drawinfo.drawPlayer.itemRotation, origin7, adjustedItemScale, drawinfo.itemEffect);
++					item = new DrawData(TextureAssets.GlowMask[220].Value, new Vector2((int)(drawinfo.ItemLocation.X - Main.screenPosition.X + vector9.X), (int)(drawinfo.ItemLocation.Y - Main.screenPosition.Y + vector9.Y)) + (num14 * (MathF.PI / 2f) + drawinfo.drawPlayer.itemRotation).ToRotationVector2() * num13, null, color3, drawinfo.drawPlayer.itemRotation, origin7, adjustedItemScale, drawinfo.itemEffect);
+ 					drawinfo.DrawDataCache.Add(item);
+ 				}
+ 			}
+@@ -3289,12 +_,12 @@
+ 				num3 += 0f;
+ 				break;
+ 		}
+-		float num4 = (float)drawinfo.drawPlayer.miscCounter / 300f * ((float)Math.PI * 2f);
++		float num4 = (float)drawinfo.drawPlayer.miscCounter / 300f * (MathF.PI * 2f);
+ 		if (!(num > 0f))
+ 		{
+ 			return;
+ 		}
+-		float num5 = (float)Math.PI * 2f / num;
++		float num5 = MathF.PI * 2f / num;
+ 		float num6 = 0f;
+ 		Vector2 vector = new Vector2(1.3f, 0.65f);
+ 		if (!flag)
+@@ -3386,7 +_,7 @@
+ 			DrawData item;
+ 			for (int i = 0; i < 2; i++)
+ 			{
+-				Vector2 vector3 = new Vector2((i == 0) ? (0f - num3) : num3, 0f).RotatedBy(num2 * ((float)Math.PI * 2f) * ((i == 0) ? 1f : (-1f)));
++				Vector2 vector3 = new Vector2((i == 0) ? (0f - num3) : num3, 0f).RotatedBy(num2 * (MathF.PI * 2f) * ((i == 0) ? 1f : (-1f)));
+ 				item = new DrawData(value, vector2 + vector3, value2, color2 * 0.65f, 0f, origin, 1f, (drawinfo.drawPlayer.gravDir == -1f) ? SpriteEffects.FlipVertically : SpriteEffects.None);
+ 				item.shader = drawinfo.cHead;
+ 				item.ignorePlayerRotation = true;

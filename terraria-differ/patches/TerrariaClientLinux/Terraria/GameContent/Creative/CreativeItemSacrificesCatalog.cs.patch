@@ -1,0 +1,11 @@
+--- decompiled/TerrariaClientWindows/Terraria/GameContent/Creative/CreativeItemSacrificesCatalog.cs
++++ decompiled/TerrariaClientLinux/Terraria/GameContent/Creative/CreativeItemSacrificesCatalog.cs
+@@ -23,7 +_,7 @@
+ 			{
+ 				continue;
+ 			}
+-			string[] array2 = text.Split('\t');
++			string[] array2 = text.Split(new char[1] { '\t' });
+ 			if (array2.Length >= 3 && ItemID.Search.TryGetId(array2[0], out var id))
+ 			{
+ 				int value = 0;

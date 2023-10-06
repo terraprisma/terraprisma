@@ -1,0 +1,11 @@
+--- decompiled/TerrariaClientWindows/Terraria/GameContent/Shaders/WaterShaderData.cs
++++ decompiled/TerrariaClientLinux/Terraria/GameContent/Shaders/WaterShaderData.cs
+@@ -166,7 +_,7 @@
+ 			destination.X += vector2.X;
+ 			destination.Y += vector2.Y;
+ 			graphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
+-			tileBatch.Draw(_viscosityMaskChain[_activeViscosityMask], destination, rectangle, new VertexColors(Color.White), rectangle.Size(), SpriteEffects.FlipHorizontally, -(float)Math.PI / 2f);
++			tileBatch.Draw(_viscosityMaskChain[_activeViscosityMask], destination, rectangle, new VertexColors(Color.White), rectangle.Size(), SpriteEffects.FlipHorizontally, -MathF.PI / 2f);
+ 			tileBatch.End();
+ 			_activeViscosityMask++;
+ 			_activeViscosityMask %= _viscosityMaskChain.Length;

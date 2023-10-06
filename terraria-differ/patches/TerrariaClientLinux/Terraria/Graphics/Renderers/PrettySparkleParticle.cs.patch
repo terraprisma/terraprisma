@@ -1,0 +1,20 @@
+--- decompiled/TerrariaClientWindows/Terraria/Graphics/Renderers/PrettySparkleParticle.cs
++++ decompiled/TerrariaClientLinux/Terraria/Graphics/Renderers/PrettySparkleParticle.cs
+@@ -77,7 +_,7 @@
+ 		SpriteEffects effects = SpriteEffects.None;
+ 		if (DrawHorizontalAxis)
+ 		{
+-			spritebatch.Draw(value, position, null, color2, (float)Math.PI / 2f + Rotation, origin, vector, effects, 0f);
++			spritebatch.Draw(value, position, null, color2, MathF.PI / 2f + Rotation, origin, vector, effects, 0f);
+ 		}
+ 		if (DrawVerticalAxis)
+ 		{
+@@ -85,7 +_,7 @@
+ 		}
+ 		if (DrawHorizontalAxis)
+ 		{
+-			spritebatch.Draw(value, position, null, color3, (float)Math.PI / 2f + Rotation, origin, vector * 0.6f, effects, 0f);
++			spritebatch.Draw(value, position, null, color3, MathF.PI / 2f + Rotation, origin, vector * 0.6f, effects, 0f);
+ 		}
+ 		if (DrawVerticalAxis)
+ 		{

@@ -1,0 +1,29 @@
+--- decompiled/TerrariaServerWindows/Terraria/GameContent/Skies/AmbientSky.cs
++++ decompiled/TerrariaServerMac/Terraria/GameContent/Skies/AmbientSky.cs
+@@ -1295,7 +_,7 @@
+ 
+ 		private void ZigzagMove(int frameCount)
+ 		{
+-			Velocity = new Vector2(_direction * 3, (float)Math.Cos((float)frameCount / 1200f * ((float)Math.PI * 2f)) * _waviness);
++			Velocity = new Vector2(_direction * 3, (float)Math.Cos((float)frameCount / 1200f * (MathF.PI * 2f)) * _waviness);
+ 		}
+ 
+ 		private void ChasePlayerTop(int frameCount)
+@@ -1319,7 +_,7 @@
+ 			Depth = random.NextFloat() * 3f + 3f;
+ 			Texture = Main.Assets.Request<Texture2D>("Images/Backgrounds/Ambience/Meteor");
+ 			Frame = new SpriteFrame(1, 4);
+-			Vector2 vector = ((float)Math.PI / 4f + random.NextFloat() * ((float)Math.PI / 2f)).ToRotationVector2();
++			Vector2 vector = (MathF.PI / 4f + random.NextFloat() * (MathF.PI / 2f)).ToRotationVector2();
+ 			float num = (float)(Main.worldSurface * 16.0 - 0.0) / vector.Y;
+ 			float num2 = 1200f;
+ 			float num3 = num / num2;
+@@ -1332,7 +_,7 @@
+ 			BrightnessLerper = 0.5f;
+ 			FinalOpacityMultiplier = 1f;
+ 			FramingSpeed = 5;
+-			Rotation = Velocity.ToRotation() + (float)Math.PI / 2f;
++			Rotation = Velocity.ToRotation() + MathF.PI / 2f;
+ 		}
+ 	}
+ 

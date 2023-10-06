@@ -1,0 +1,97 @@
+--- decompiled/TerrariaServerWindows/Terraria/GameContent/Drawing/TileDrawing.cs
++++ decompiled/TerrariaServerLinux/Terraria/GameContent/Drawing/TileDrawing.cs
+@@ -1075,11 +_,11 @@
+ 						break;
+ 					}
+ 					drawData.drawTexture = GetTileDrawTexture(drawData.tileCache, tileX, tileY);
+-					color2 = Main.hslToRgb(0.7f + (float)Math.Sin((float)Math.PI * 2f * Main.GlobalTimeWrappedHourly * 0.16f + (float)tileX * 0.3f + (float)tileY * 0.7f) * 0.16f, 1f, 0.5f);
++					color2 = Main.hslToRgb(0.7f + (float)Math.Sin(MathF.PI * 2f * Main.GlobalTimeWrappedHourly * 0.16f + (float)tileX * 0.3f + (float)tileY * 0.7f) * 0.16f, 1f, 0.5f);
+ 					color2.A /= 2;
+ 					color2 *= 0.3f;
+ 					int num10 = 72;
+-					for (float num11 = 0f; num11 < (float)Math.PI * 2f; num11 += (float)Math.PI / 2f)
++					for (float num11 = 0f; num11 < MathF.PI * 2f; num11 += MathF.PI / 2f)
+ 					{
+ 						Main.spriteBatch.Draw(drawData.drawTexture, vector + num11.ToRotationVector2() * 2f, new Rectangle(drawData.tileFrameX + drawData.addFrX, drawData.tileFrameY + drawData.addFrY + num10, drawData.tileWidth, drawData.tileHeight), color2, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+ 					}
+@@ -2094,7 +_,7 @@
+ 					float y = (float)Utils.RandomInt(ref tileFlameData.flameSeed, tileFlameData.flameRangeYMin, tileFlameData.flameRangeYMax) * tileFlameData.flameRangeMultY;
+ 					for (float num3 = 0f; num3 < 1f; num3 += 0.25f)
+ 					{
+-						Main.spriteBatch.Draw(tileFlameData.flameTexture, vector + new Vector2(x, y) + Vector2.UnitX.RotatedBy(num3 * ((float)Math.PI * 2f)) * 2f, value, color2, 0f, _zero, 1f, drawData.tileSpriteEffect, 0f);
++						Main.spriteBatch.Draw(tileFlameData.flameTexture, vector + new Vector2(x, y) + Vector2.UnitX.RotatedBy(num3 * (MathF.PI * 2f)) * 2f, value, color2, 0f, _zero, 1f, drawData.tileSpriteEffect, 0f);
+ 					}
+ 					Main.spriteBatch.Draw(tileFlameData.flameTexture, vector, value, Color.White * graveyardVisualIntensity, 0f, _zero, 1f, drawData.tileSpriteEffect, 0f);
+ 				}
+@@ -6866,7 +_,7 @@
+ 					color6 *= 1f - num16 * 0.5f;
+ 					color6.A = 0;
+ 					int num17 = 2;
+-					Vector2 position2 = vector + ((float)j / (float)num15 * ((float)Math.PI * 2f)).ToRotationVector2() * ((float)num17 * num16 + 2f);
++					Vector2 position2 = vector + ((float)j / (float)num15 * (MathF.PI * 2f)).ToRotationVector2() * ((float)num17 * num16 + 2f);
+ 					Main.spriteBatch.Draw(value6, position2, value7, color6, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+ 				}
+ 				Main.spriteBatch.Draw(value6, vector, value7, new Color(255, 255, 255, 0) * 0.1f, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+@@ -7490,18 +_,18 @@
+ 				Rectangle rectangle = value.Frame(horizontalFrames, verticalFrames, 0, frameY);
+ 				Vector2 origin = rectangle.Size() / 2f;
+ 				Vector2 vector = p.ToWorldCoordinates(24f, 64f);
+-				float num4 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f) / 5f);
++				float num4 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * (MathF.PI * 2f) / 5f);
+ 				Vector2 vector2 = vector + new Vector2(0f, -40f) + new Vector2(0f, num4 * 4f);
+ 				Color color = Lighting.GetColor(p.X, p.Y);
+ 				SpriteEffects effects = (num3 ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+ 				Main.spriteBatch.Draw(value, vector2 - Main.screenPosition, rectangle, color, 0f, origin, 1f, effects, 0f);
+-				float num5 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f) / 2f) * 0.3f + 0.7f;
++				float num5 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * (MathF.PI * 2f) / 2f) * 0.3f + 0.7f;
+ 				Color color2 = color;
+ 				color2.A = 0;
+ 				color2 = color2 * 0.1f * num5;
+ 				for (float num6 = 0f; num6 < 1f; num6 += 1f / 6f)
+ 				{
+-					Main.spriteBatch.Draw(value, vector2 - Main.screenPosition + ((float)Math.PI * 2f * num6).ToRotationVector2() * (6f + num4 * 2f), rectangle, color2, 0f, origin, 1f, effects, 0f);
++					Main.spriteBatch.Draw(value, vector2 - Main.screenPosition + (MathF.PI * 2f * num6).ToRotationVector2() * (6f + num4 * 2f), rectangle, color2, 0f, origin, 1f, effects, 0f);
+ 				}
+ 			}
+ 		}
+@@ -7530,7 +_,7 @@
+ 			value.Frame(horizontalFrames, verticalFrames, 0, frameY);
+ 			Vector2 origin = rectangle.Size() / 2f;
+ 			Vector2 vector = p.ToWorldCoordinates(24f, 64f);
+-			float num5 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f) / 5f);
++			float num5 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * (MathF.PI * 2f) / 5f);
+ 			Vector2 vector2 = vector + new Vector2(0f, -40f) + new Vector2(0f, num5 * 4f);
+ 			bool flag = _rand.Next(4) == 0;
+ 			if (_isActiveAndNotPaused && flag && _rand.Next(10) == 0)
+@@ -7541,11 +_,11 @@
+ 			Color color = Lighting.GetColor(p.X, p.Y);
+ 			color = Color.Lerp(color, Color.White, 0.8f);
+ 			Main.spriteBatch.Draw(value, vector2 - Main.screenPosition, rectangle, color * 0.7f, 0f, origin, 1f, SpriteEffects.None, 0f);
+-			float num6 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f) / 1f) * 0.2f + 0.8f;
++			float num6 = (float)Math.Sin(Main.GlobalTimeWrappedHourly * (MathF.PI * 2f) / 1f) * 0.2f + 0.8f;
+ 			Color color2 = new Color(255, 255, 255, 0) * 0.1f * num6;
+ 			for (float num7 = 0f; num7 < 1f; num7 += 1f / 6f)
+ 			{
+-				Main.spriteBatch.Draw(value, vector2 - Main.screenPosition + ((float)Math.PI * 2f * num7).ToRotationVector2() * (6f + num5 * 2f), rectangle, color2, 0f, origin, 1f, SpriteEffects.None, 0f);
++				Main.spriteBatch.Draw(value, vector2 - Main.screenPosition + (MathF.PI * 2f * num7).ToRotationVector2() * (6f + num5 * 2f), rectangle, color2, 0f, origin, 1f, SpriteEffects.None, 0f);
+ 			}
+ 			int num8 = 0;
+ 			if (Main.InSmartCursorHighlightArea(p.X, p.Y, out var actuallySelected))
+@@ -7966,7 +_,7 @@
+ 					Main.spriteBatch.Draw(glowTexture, position, glowSourceRect, glowColor, num6, new Vector2(tileWidth / 2, halfBrickHeight - tileTop), 1f, tileSpriteEffect, 0f);
+ 				}
+ 			}
+-			vector += (num6 + (float)Math.PI / 2f).ToRotationVector2() * 16f;
++			vector += (num6 + MathF.PI / 2f).ToRotationVector2() * 16f;
+ 		}
+ 	}
+ 
+@@ -8022,7 +_,7 @@
+ 				{
+ 					Main.spriteBatch.Draw(tileDrawTexture, position, new Rectangle(tileFrameX + addFrX, tileFrameY + addFrY, tileWidth, tileHeight - halfBrickHeight), color, num7, new Vector2(tileWidth / 2, halfBrickHeight - tileTop + tileHeight), 1f, tileSpriteEffect, 0f);
+ 				}
+-				vector += (num7 - (float)Math.PI / 2f).ToRotationVector2() * 16f;
++				vector += (num7 - MathF.PI / 2f).ToRotationVector2() * 16f;
+ 			}
+ 		}
+ 	}
