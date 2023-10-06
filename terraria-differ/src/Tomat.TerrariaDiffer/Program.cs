@@ -55,6 +55,7 @@ internal static class Program {
         }
 
         DecompileAndDiff(decompilation_configuration);
+        
     }
 
     private static void NullifyInstance(Type type) {

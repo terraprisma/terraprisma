@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetPatcher", "DotnetPatc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffPatch", "DotnetPatcher\DiffPatch\DiffPatch.csproj", "{42945D84-1448-4642-82B7-5066FE4092C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomat.TerrariaModernizer", "Tomat.TerrariaModernizer\Tomat.TerrariaModernizer.csproj", "{C5EA347A-DFB8-4B60-BFCF-17FD13368715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FNA", "FNA\FNA.csproj", "{F05569DF-27D3-44E0-9EC8-17E1F8D3FAFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{42945D84-1448-4642-82B7-5066FE4092C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42945D84-1448-4642-82B7-5066FE4092C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42945D84-1448-4642-82B7-5066FE4092C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5EA347A-DFB8-4B60-BFCF-17FD13368715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5EA347A-DFB8-4B60-BFCF-17FD13368715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5EA347A-DFB8-4B60-BFCF-17FD13368715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5EA347A-DFB8-4B60-BFCF-17FD13368715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05569DF-27D3-44E0-9EC8-17E1F8D3FAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05569DF-27D3-44E0-9EC8-17E1F8D3FAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05569DF-27D3-44E0-9EC8-17E1F8D3FAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05569DF-27D3-44E0-9EC8-17E1F8D3FAFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
