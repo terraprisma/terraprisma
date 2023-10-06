@@ -99,19 +99,24 @@ internal static class Program {
         const string patches_dir = "patches";
         var dirName = Path.Combine(decompilation_dir, node.WorkspaceName);
 
-        Console.WriteLine($"Decompiling {node.WorkspaceName}...");
+        if (Environment.GetEnvironmentVariable("SKIP_DECOMPILATION") != "1") {
+            Console.WriteLine($"Decompiling {node.WorkspaceName}...");
 
-        if (Directory.Exists(dirName))
-            Directory.Delete(dirName, true);
-        Directory.CreateDirectory(dirName);
+            if (Directory.Exists(dirName))
+                Directory.Delete(dirName, true);
+            Directory.CreateDirectory(dirName);
 
-        var decompiler = new Decompiler(Path.Combine(node.DepotName, node.RelativePathToExecutable), dirName);
-        decompiler.Decompile(new[] { "ReLogic" });
+            var decompiler = new Decompiler(Path.Combine(node.DepotName, node.RelativePathToExecutable), dirName);
+            decompiler.Decompile(new[] { "ReLogic" });
+        }
 
         foreach (var child in node.Children)
             DecompileAndDiff(child, node);
 
         if (parent is null)
+            return;
+
+        if (Environment.GetEnvironmentVariable("SKIP_DIFFING") == "1")
             return;
 
         Console.WriteLine($"Diffing {node.WorkspaceName}...");
