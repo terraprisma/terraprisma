@@ -1,0 +1,49 @@
+--- decompiled/TerrariaClientWindows/Terraria/Collision.cs
++++ decompiled/TerrariaClientLinux/Terraria/Collision.cs
+@@ -33,7 +_,7 @@
+ 
+ 	public static bool down;
+ 
+-	public static float Epsilon = (float)Math.E;
++	public static float Epsilon = MathF.E;
+ 
+ 	private static List<Point> _cacheForConveyorBelts = new List<Point>();
+ 
+@@ -3273,8 +_,8 @@
+ 						return num5 switch
+ 						{
+ 							1 => 0f, 
+-							2 => (float)Math.PI / 4f, 
++							2 => MathF.PI / 4f, 
+-							3 => -(float)Math.PI / 4f, 
++							3 => -MathF.PI / 4f, 
+ 							_ => 0f, 
+ 						};
+ 					}
+@@ -3289,12 +_,12 @@
+ 						case 19:
+ 						case 21:
+ 						case 23:
+-							return -(float)Math.PI / 4f;
++							return -MathF.PI / 4f;
+ 						case 10:
+ 						case 20:
+ 						case 22:
+ 						case 24:
+-							return (float)Math.PI / 4f;
++							return MathF.PI / 4f;
+ 						case 25:
+ 						case 26:
+ 							if (!flag)
+@@ -3302,9 +_,9 @@
+ 								switch (num5)
+ 								{
+ 									case 2:
+-										return (float)Math.PI / 4f;
++										return MathF.PI / 4f;
+ 									case 3:
+-										return -(float)Math.PI / 4f;
++										return -MathF.PI / 4f;
+ 								}
+ 								break;
+ 							}

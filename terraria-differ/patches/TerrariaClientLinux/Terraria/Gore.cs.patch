@@ -1,0 +1,65 @@
+--- decompiled/TerrariaClientWindows/Terraria/Gore.cs
++++ decompiled/TerrariaClientLinux/Terraria/Gore.cs
+@@ -1140,7 +_,7 @@
+ 			vector3 = Collision.TileCollision(vector, vector3, num, num);
+ 			if (flag)
+ 			{
+-				rotation = vector3.ToRotation() + (float)Math.PI / 2f;
++				rotation = vector3.ToRotation() + MathF.PI / 2f;
+ 			}
+ 			vector3.X *= 0.94f;
+ 			if (!flag || ((double)vector3.X > -0.01 && (double)vector3.X < 0.01))
+@@ -1159,7 +_,7 @@
+ 			position.X += velocity.X;
+ 			return;
+ 		}
+-		velocity.Y += (float)Math.PI / 180f;
++		velocity.Y += MathF.PI / 180f;
+ 		Vector2 vector4 = new Vector2(Vector2.UnitY.RotatedBy(velocity.Y).X * 1f, Math.Abs(Vector2.UnitY.RotatedBy(velocity.Y).Y) * 1f);
+ 		int num3 = 4;
+ 		if ((double)position.Y < Main.worldSurface * 16.0)
+@@ -1198,7 +_,7 @@
+ 			velocity.Y = -1f;
+ 		}
+ 		position += vector4;
+-		rotation = vector4.ToRotation() + (float)Math.PI / 2f;
++		rotation = vector4.ToRotation() + MathF.PI / 2f;
+ 		if (timeLeft > 0)
+ 		{
+ 			timeLeft -= GoreID.Sets.DisappearSpeed[type];
+@@ -1241,7 +_,7 @@
+ 			velocity.X = vector.X;
+ 			return;
+ 		}
+-		velocity.Y += (float)Math.PI / 60f;
++		velocity.Y += MathF.PI / 60f;
+ 		Vector2 vector2 = new Vector2(Vector2.UnitY.RotatedBy(velocity.Y).X * 2f, Math.Abs(Vector2.UnitY.RotatedBy(velocity.Y).Y) * 3f);
+ 		vector2 *= 2f;
+ 		int num2 = 32;
+@@ -1260,7 +_,7 @@
+ 			velocity.Y = -1f;
+ 		}
+ 		position += vector2;
+-		rotation = vector2.ToRotation() + (float)Math.PI;
++		rotation = vector2.ToRotation() + MathF.PI;
+ 		if (timeLeft > 0)
+ 		{
+ 			timeLeft--;
+@@ -1390,7 +_,7 @@
+ 		int num2 = GoreID.Sets.SpecialAI[Type];
+ 		if (num2 == 3)
+ 		{
+-			Main.gore[num].velocity = new Vector2((Main.rand.NextFloat() - 0.5f) * 1f, Main.rand.NextFloat() * ((float)Math.PI * 2f));
++			Main.gore[num].velocity = new Vector2((Main.rand.NextFloat() - 0.5f) * 1f, Main.rand.NextFloat() * (MathF.PI * 2f));
+ 			bool flag = (Type >= 910 && Type <= 925) || (Type >= 1113 && Type <= 1121) || (Type >= 1248 && Type <= 1255) || Type == 1257 || Type == 1278;
+ 			SpriteFrame spriteFrame = (Main.gore[num].Frame = new SpriteFrame((byte)((!flag) ? 1u : 32u), 8)
+ 			{
+@@ -1400,7 +_,7 @@
+ 		}
+ 		if (num2 == 1)
+ 		{
+-			Main.gore[num].velocity = new Vector2((Main.rand.NextFloat() - 0.5f) * 3f, Main.rand.NextFloat() * ((float)Math.PI * 2f));
++			Main.gore[num].velocity = new Vector2((Main.rand.NextFloat() - 0.5f) * 3f, Main.rand.NextFloat() * (MathF.PI * 2f));
+ 		}
+ 		if (Type >= 411 && Type <= 430 && TextureAssets.Gore[Type].IsLoaded)
+ 		{

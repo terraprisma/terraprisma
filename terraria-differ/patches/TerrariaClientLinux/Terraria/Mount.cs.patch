@@ -1,0 +1,283 @@
+--- decompiled/TerrariaClientWindows/Terraria/Mount.cs
++++ decompiled/TerrariaClientLinux/Terraria/Mount.cs
+@@ -272,7 +_,7 @@
+ 
+ 	public const int drillTextureWidth = 80;
+ 
+-	public const float drillRotationChange = (float)Math.PI / 60f;
++	public const float drillRotationChange = MathF.PI / 60f;
+ 
+ 	public static int drillPickPower = 210;
+ 
+@@ -2568,7 +_,7 @@
+ 					float num = (vector - mountedPlayer.Center).ToRotation();
+ 					for (int k = 0; k < 2; k++)
+ 					{
+-						float num2 = num + ((Main.rand.Next(2) == 1) ? (-1f) : 1f) * ((float)Math.PI / 2f);
++						float num2 = num + ((Main.rand.Next(2) == 1) ? (-1f) : 1f) * (MathF.PI / 2f);
+ 						float num3 = (float)Main.rand.NextDouble() * 2f + 2f;
+ 						Vector2 vector2 = new Vector2((float)Math.Cos(num2) * num3, (float)Math.Sin(num2) * num3);
+ 						int num4 = Dust.NewDust(vector, 0, 0, 230, vector2.X, vector2.Y);
+@@ -2625,7 +_,7 @@
+ 				float num5 = (vector3 - mountedPlayer.Center).ToRotation();
+ 				for (int n = 0; n < 2; n++)
+ 				{
+-					float num6 = num5 + ((Main.rand.Next(2) == 1) ? (-1f) : 1f) * ((float)Math.PI / 2f);
++					float num6 = num5 + ((Main.rand.Next(2) == 1) ? (-1f) : 1f) * (MathF.PI / 2f);
+ 					float num7 = (float)Main.rand.NextDouble() * 2f + 2f;
+ 					Vector2 vector4 = new Vector2((float)Math.Cos(num6) * num7, (float)Math.Sin(num6) * num7);
+ 					int num8 = Dust.NewDust(vector3, 0, 0, 230, vector4.X, vector4.Y);
+@@ -2945,7 +_,7 @@
+ 			{
+ 				num8 = -0.95f;
+ 			}
+-			float fullRotation = (float)Math.PI / 4f * num8 / 2f;
++			float fullRotation = MathF.PI / 4f * num8 / 2f;
+ 			float num9 = Math.Abs(2f - (float)_frame / 2f) / 2f;
+ 			Lighting.AddLight((int)(mountedPlayer.position.X + (float)(mountedPlayer.width / 2)) / 16, (int)(mountedPlayer.position.Y + (float)(mountedPlayer.height / 2)) / 16, 0.4f, 0.2f * num9, 0f);
+ 			mountedPlayer.fullRotation = fullRotation;
+@@ -2961,17 +_,17 @@
+ 			{
+ 				num10 = -0.95f;
+ 			}
+-			float num11 = (mountedPlayer.fullRotation = (float)Math.PI / 4f * num10 / 2f);
++			float num11 = (mountedPlayer.fullRotation = MathF.PI / 4f * num10 / 2f);
+ 			DrillMountData obj = (DrillMountData)_mountSpecificData;
+ 			float outerRingRotation = obj.outerRingRotation;
+ 			outerRingRotation += mountedPlayer.velocity.X / 80f;
+-			if (outerRingRotation > (float)Math.PI)
++			if (outerRingRotation > MathF.PI)
+ 			{
+-				outerRingRotation -= (float)Math.PI * 2f;
++				outerRingRotation -= MathF.PI * 2f;
+ 			}
+-			else if (outerRingRotation < -(float)Math.PI)
++			else if (outerRingRotation < -MathF.PI)
+ 			{
+-				outerRingRotation += (float)Math.PI * 2f;
++				outerRingRotation += MathF.PI * 2f;
+ 			}
+ 			obj.outerRingRotation = outerRingRotation;
+ 		}
+@@ -2981,8 +_,8 @@
+ 			value = MathHelper.Clamp(value, -1f, 1f);
+ 			float value2 = mountedPlayer.velocity.X / _data.dashSpeed;
+ 			value2 = MathHelper.Clamp(value2, -1f, 1f);
+-			float num12 = -(float)Math.PI / 16f * value * (float)mountedPlayer.direction;
++			float num12 = -MathF.PI / 16f * value * (float)mountedPlayer.direction;
+-			float num13 = (float)Math.PI / 16f * value2;
++			float num13 = MathF.PI / 16f * value2;
+ 			float num14 = (mountedPlayer.fullRotation = num12 + num13);
+ 			mountedPlayer.fullRotationOrigin = new Vector2(mountedPlayer.width / 2, mountedPlayer.height);
+ 		}
+@@ -3008,9 +_,9 @@
+ 		{
+ 			num3 = 1f;
+ 		}
+-		num2 = (float)Math.Sin((float)player.miscCounter / 300f * ((float)Math.PI * 2f) * 3f) * ((float)Math.PI / 4f) * Math.Abs(Main.WindForVisuals) * 0.5f + (float)Math.PI / 4f * (0f - Main.WindForVisuals) * 0.5f;
++		num2 = (float)Math.Sin((float)player.miscCounter / 300f * (MathF.PI * 2f) * 3f) * (MathF.PI / 4f) * Math.Abs(Main.WindForVisuals) * 0.5f + MathF.PI / 4f * (0f - Main.WindForVisuals) * 0.5f;
+ 		num2 *= num3;
+-		return num * (float)Math.Sin((float)player.miscCounter / 150f * ((float)Math.PI * 2f) * 3f) * ((float)Math.PI / 4f) * 0.5f + num * ((float)Math.PI / 4f) * 0.5f + num2;
++		return num * (float)Math.Sin((float)player.miscCounter / 150f * (MathF.PI * 2f) * 3f) * (MathF.PI / 4f) * 0.5f + num * (MathF.PI / 4f) * 0.5f + num2;
+ 	}
+ 
+ 	private Vector2 GetWitchBroomTrinketOriginOffset(Player player)
+@@ -3081,7 +_,7 @@
+ 				}
+ 				if (mountedPlayer.isPerformingPogostickTricks)
+ 				{
+-					mountedPlayer.fullRotation += (float)mountedPlayer.direction * ((float)Math.PI * 2f) / 30f;
++					mountedPlayer.fullRotation += (float)mountedPlayer.direction * (MathF.PI * 2f) / 30f;
+ 				}
+ 				else
+ 				{
+@@ -3176,7 +_,7 @@
+ 				}
+ 				float num10 = num7 / (float)mountedPlayer.width - mountedPlayer.fullRotation;
+ 				float num11 = 0f;
+-				float num12 = (float)Math.PI / 20f;
++				float num12 = MathF.PI / 20f;
+ 				if (num10 < 0f)
+ 				{
+ 					num11 = ((!(num10 > 0f - num12)) ? (0f - num12) : num10);
+@@ -3188,13 +_,13 @@
+ 				if (num11 != 0f)
+ 				{
+ 					mountedPlayer.fullRotation += num11;
+-					if (mountedPlayer.fullRotation > (float)Math.PI / 4f)
++					if (mountedPlayer.fullRotation > MathF.PI / 4f)
+ 					{
+-						mountedPlayer.fullRotation = (float)Math.PI / 4f;
++						mountedPlayer.fullRotation = MathF.PI / 4f;
+ 					}
+-					if (mountedPlayer.fullRotation < -(float)Math.PI / 4f)
++					if (mountedPlayer.fullRotation < -MathF.PI / 4f)
+ 					{
+-						mountedPlayer.fullRotation = -(float)Math.PI / 4f;
++						mountedPlayer.fullRotation = -MathF.PI / 4f;
+ 					}
+ 				}
+ 				break;
+@@ -3231,11 +_,11 @@
+ 						}
+ 						Vector2 vector8 = mountedPlayer.Center + new Vector2(mountedPlayer.width * mountedPlayer.direction, 0f);
+ 						Vector2 vector9 = new Vector2(40f, 30f);
+-						float num22 = (float)Math.PI * 2f * Main.rand.NextFloat();
++						float num22 = MathF.PI * 2f * Main.rand.NextFloat();
+ 						for (float num23 = 0f; num23 < 14f; num23 += 1f)
+ 						{
+ 							Dust dust5 = Main.dust[Dust.NewDust(vector8, 0, 0, type)];
+-							Vector2 vector10 = Vector2.UnitY.RotatedBy(num23 * ((float)Math.PI * 2f) / 14f + num22);
++							Vector2 vector10 = Vector2.UnitY.RotatedBy(num23 * (MathF.PI * 2f) / 14f + num22);
+ 							vector10 *= 0.2f * (float)_frameExtra;
+ 							dust5.position = vector8 + vector10 * vector9;
+ 							dust5.velocity = vector10 + new Vector2(RunSpeed - (float)(Math.Sign(velocity.X) * _frameExtra * 2), 0f);
+@@ -3292,11 +_,11 @@
+ 					_mountSpecificData = true;
+ 					Vector2 vector5 = mountedPlayer.Center + new Vector2(mountedPlayer.width * mountedPlayer.direction, 0f);
+ 					Vector2 vector6 = new Vector2(40f, 30f);
+-					float num17 = (float)Math.PI * 2f * Main.rand.NextFloat();
++					float num17 = MathF.PI * 2f * Main.rand.NextFloat();
+ 					for (float num18 = 0f; num18 < 20f; num18 += 1f)
+ 					{
+ 						Dust dust4 = Main.dust[Dust.NewDust(vector5, 0, 0, 228)];
+-						Vector2 vector7 = Vector2.UnitY.RotatedBy(num18 * ((float)Math.PI * 2f) / 20f + num17);
++						Vector2 vector7 = Vector2.UnitY.RotatedBy(num18 * (MathF.PI * 2f) / 20f + num17);
+ 						vector7 *= 0.8f;
+ 						dust4.position = vector5 + vector7 * vector6;
+ 						dust4.velocity = vector7 + new Vector2(RunSpeed - (float)Math.Sign(velocity.Length()), 0f);
+@@ -3353,11 +_,11 @@
+ 					_mountSpecificData = true;
+ 					Vector2 vector2 = mountedPlayer.Center + new Vector2(mountedPlayer.width * mountedPlayer.direction, 0f);
+ 					Vector2 vector3 = new Vector2(40f, 30f);
+-					float num13 = (float)Math.PI * 2f * Main.rand.NextFloat();
++					float num13 = MathF.PI * 2f * Main.rand.NextFloat();
+ 					for (float num14 = 0f; num14 < 20f; num14 += 1f)
+ 					{
+ 						Dust dust2 = Main.dust[Dust.NewDust(vector2, 0, 0, 6)];
+-						Vector2 vector4 = Vector2.UnitY.RotatedBy(num14 * ((float)Math.PI * 2f) / 20f + num13);
++						Vector2 vector4 = Vector2.UnitY.RotatedBy(num14 * (MathF.PI * 2f) / 20f + num13);
+ 						vector4 *= 0.8f;
+ 						dust2.position = vector2 + vector4 * vector3;
+ 						dust2.velocity = vector4 + new Vector2(RunSpeed - (float)Math.Sign(velocity.Length()), 0f);
+@@ -3894,9 +_,9 @@
+ 		float num = 0f;
+ 		if (playerDirection == -1)
+ 		{
+-			num = (float)Math.PI;
++			num = MathF.PI;
+ 		}
+-		float num2 = (float)Math.PI / 32f;
++		float num2 = MathF.PI / 32f;
+ 		int num3 = 5;
+ 		float num4 = 200f;
+ 		DelegateMethods.v2_1 = worldLocation.ToTileCoordinates().ToVector2();
+@@ -4066,7 +_,7 @@
+ 		{
+ 			case 23:
+ 			{
+-				Vector2 pos3 = mountedPlayer.Center + GetWitchBroomTrinketOriginOffset(mountedPlayer) + (GetWitchBroomTrinketRotation(mountedPlayer) + (float)Math.PI / 2f).ToRotationVector2() * 11f;
++				Vector2 pos3 = mountedPlayer.Center + GetWitchBroomTrinketOriginOffset(mountedPlayer) + (GetWitchBroomTrinketRotation(mountedPlayer) + MathF.PI / 2f).ToRotationVector2() * 11f;
+ 				Vector3 rgb = new Vector3(1f, 0.75f, 0.5f) * 0.85f;
+ 				Vector2 vector11 = mountedPlayer.RotatedRelativePoint(pos3);
+ 				Lighting.AddLight(vector11, rgb);
+@@ -4098,7 +_,7 @@
+ 				{
+ 					if (Main.rand.Next(15) == 0)
+ 					{
+-						Vector2 spinningpoint = ((float)Math.PI * 2f * num15 + num14).ToRotationVector2() * new Vector2(0.5f, 1f) * 4f;
++						Vector2 spinningpoint = (MathF.PI * 2f * num15 + num14).ToRotationVector2() * new Vector2(0.5f, 1f) * 4f;
+ 						spinningpoint = spinningpoint.RotatedBy(mountedPlayer.fullRotation);
+ 						Dust dust3 = Dust.NewDustPerfect(pos4 + spinningpoint, 43, Vector2.Zero, 254, new Color(255, 255, 0, 255), 0.3f);
+ 						dust3.velocity = spinningpoint * 0.025f + pos5.DirectionTo(dust3.position) * 0.5f;
+@@ -4296,10 +_,10 @@
+ 					num6 += 1f;
+ 				}
+ 				Vector2 vector5 = new Vector2(num6 * (float)num5, -19f).RotatedBy(mountedPlayer.fullRotation);
+-				Vector2 vector6 = new Vector2(MathHelper.Lerp(0f, -8f, mountedPlayer.fullRotation / ((float)Math.PI / 4f)), MathHelper.Lerp(0f, 2f, Math.Abs(mountedPlayer.fullRotation / ((float)Math.PI / 4f)))).RotatedBy(mountedPlayer.fullRotation);
++				Vector2 vector6 = new Vector2(MathHelper.Lerp(0f, -8f, mountedPlayer.fullRotation / (MathF.PI / 4f)), MathHelper.Lerp(0f, 2f, Math.Abs(mountedPlayer.fullRotation / (MathF.PI / 4f)))).RotatedBy(mountedPlayer.fullRotation);
+ 				if (num5 == Math.Sign(mountedPlayer.fullRotation))
+ 				{
+-					vector6 *= MathHelper.Lerp(1f, 0.6f, Math.Abs(mountedPlayer.fullRotation / ((float)Math.PI / 4f)));
++					vector6 *= MathHelper.Lerp(1f, 0.6f, Math.Abs(mountedPlayer.fullRotation / (MathF.PI / 4f)));
+ 				}
+ 				Vector2 vector7 = mountedPlayer.Bottom + vector5 + vector6;
+ 				Vector2 vector8 = mountedPlayer.oldPosition + mountedPlayer.Size * new Vector2(0.5f, 1f) + vector5 + vector6;
+@@ -4424,7 +_,7 @@
+ 		for (int i = 0; i < 200; i++)
+ 		{
+ 			NPC nPC = Main.npc[i];
+-			if (nPC.active && nPC.immune[mountedPlayer.whoAmI] <= 0 && !nPC.dontTakeDamage && nPC.Distance(minecartMechPoint) < 300f && nPC.CanBeChasedBy(mountedPlayer) && Collision.CanHitLine(nPC.position, nPC.width, nPC.height, minecartMechPoint, 0, 0) && Math.Abs(MathHelper.WrapAngle(MathHelper.WrapAngle(nPC.AngleFrom(minecartMechPoint)) - MathHelper.WrapAngle((mountedPlayer.fullRotation + (float)num == -1f) ? ((float)Math.PI) : 0f))) < (float)Math.PI / 4f)
++			if (nPC.active && nPC.immune[mountedPlayer.whoAmI] <= 0 && !nPC.dontTakeDamage && nPC.Distance(minecartMechPoint) < 300f && nPC.CanBeChasedBy(mountedPlayer) && Collision.CanHitLine(nPC.position, nPC.width, nPC.height, minecartMechPoint, 0, 0) && Math.Abs(MathHelper.WrapAngle(MathHelper.WrapAngle(nPC.AngleFrom(minecartMechPoint)) - MathHelper.WrapAngle((mountedPlayer.fullRotation + (float)num == -1f) ? MathF.PI : 0f))) < MathF.PI / 4f)
+ 			{
+ 				minecartMechPoint = GetMinecartMechPoint(mountedPlayer, -20, -39);
+ 				Vector2 v = nPC.position + nPC.Size * Utils.RandomVector2(Main.rand, 0f, 1f) - minecartMechPoint;
+@@ -4458,10 +_,10 @@
+ 			num2 -= (float)num3;
+ 		}
+ 		Vector2 vector = new Vector2(num2 * (float)num, offY).RotatedBy(mountedPlayer.fullRotation);
+-		Vector2 vector2 = new Vector2(MathHelper.Lerp(0f, -8f, mountedPlayer.fullRotation / ((float)Math.PI / 4f)), MathHelper.Lerp(0f, 2f, Math.Abs(mountedPlayer.fullRotation / ((float)Math.PI / 4f)))).RotatedBy(mountedPlayer.fullRotation);
++		Vector2 vector2 = new Vector2(MathHelper.Lerp(0f, -8f, mountedPlayer.fullRotation / (MathF.PI / 4f)), MathHelper.Lerp(0f, 2f, Math.Abs(mountedPlayer.fullRotation / (MathF.PI / 4f)))).RotatedBy(mountedPlayer.fullRotation);
+ 		if (num == Math.Sign(mountedPlayer.fullRotation))
+ 		{
+-			vector2 *= MathHelper.Lerp(1f, 0.6f, Math.Abs(mountedPlayer.fullRotation / ((float)Math.PI / 4f)));
++			vector2 *= MathHelper.Lerp(1f, 0.6f, Math.Abs(mountedPlayer.fullRotation / (MathF.PI / 4f)));
+ 		}
+ 		return mountedPlayer.Bottom + vector + vector2;
+ 	}
+@@ -4682,24 +_,24 @@
+ 				float num = v.ToRotation();
+ 				if (num < 0f)
+ 				{
+-					num += (float)Math.PI * 2f;
++					num += MathF.PI * 2f;
+ 				}
+ 				drillMountData.diodeRotationTarget = num;
+-				float num2 = drillMountData.diodeRotation % ((float)Math.PI * 2f);
++				float num2 = drillMountData.diodeRotation % (MathF.PI * 2f);
+ 				if (num2 < 0f)
+ 				{
+-					num2 += (float)Math.PI * 2f;
++					num2 += MathF.PI * 2f;
+ 				}
+ 				if (num2 < num)
+ 				{
+-					if (num - num2 > (float)Math.PI)
++					if (num - num2 > MathF.PI)
+ 					{
+-						num2 += (float)Math.PI * 2f;
++						num2 += MathF.PI * 2f;
+ 					}
+ 				}
+-				else if (num2 - num > (float)Math.PI)
++				else if (num2 - num > MathF.PI)
+ 				{
+-					num2 -= (float)Math.PI * 2f;
++					num2 -= MathF.PI * 2f;
+ 				}
+ 				drillMountData.diodeRotation = num2;
+ 				drillMountData.crosshairPosition = mousePosition;
+@@ -5165,12 +_,12 @@
+ 					playerDrawData.Add(item);
+ 					Color color3 = new Color(new Vector3(0.9f, 0.85f, 0f));
+ 					color3.A /= 2;
+-					float num13 = ((float)drawPlayer.miscCounter / 75f * ((float)Math.PI * 2f)).ToRotationVector2().X * 1f;
++					float num13 = ((float)drawPlayer.miscCounter / 75f * (MathF.PI * 2f)).ToRotationVector2().X * 1f;
+ 					Color color4 = new Color(80, 70, 40, 0) * (num13 / 8f + 0.5f) * 0.8f;
+ 					value.X += width;
+ 					for (int l = 0; l < 4; l++)
+ 					{
+-						item = new DrawData(texture2D, (vector7 + ((float)l * ((float)Math.PI / 2f)).ToRotationVector2() * num13).Floor(), value, color4, num9, origin, scale, spriteEffects);
++						item = new DrawData(texture2D, (vector7 + ((float)l * (MathF.PI / 2f)).ToRotationVector2() * num13).Floor(), value, color4, num9, origin, scale, spriteEffects);
+ 						item.shader = currentShader;
+ 						playerDrawData.Add(item);
+ 					}
+@@ -5213,7 +_,7 @@
+ 						Vector2 v = vector5 - vector6;
+ 						float num12 = v.ToRotation();
+ 						float y = v.Length();
+-						DrawData item = new DrawData(scale: new Vector2(2f, y), texture: TextureAssets.MagicPixel.Value, position: vector6 + Position, sourceRect: value7, color: color2, rotation: num12 - (float)Math.PI / 2f, origin: Vector2.Zero, effect: SpriteEffects.None);
++						DrawData item = new DrawData(scale: new Vector2(2f, y), texture: TextureAssets.MagicPixel.Value, position: vector6 + Position, sourceRect: value7, color: color2, rotation: num12 - MathF.PI / 2f, origin: Vector2.Zero, effect: SpriteEffects.None);
+ 						item.ignorePlayerRotation = true;
+ 						item.shader = currentShader;
+ 						playerDrawData.Add(item);

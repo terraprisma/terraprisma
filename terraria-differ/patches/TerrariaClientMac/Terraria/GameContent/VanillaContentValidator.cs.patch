@@ -1,0 +1,11 @@
+--- decompiled/TerrariaClientWindows/Terraria/GameContent/VanillaContentValidator.cs
++++ decompiled/TerrariaClientMac/Terraria/GameContent/VanillaContentValidator.cs
+@@ -37,7 +_,7 @@
+ 		{
+ 			if (!text.StartsWith("//"))
+ 			{
+-				string[] array2 = text.Split('\t');
++				string[] array2 = text.Split(new char[1] { '\t' });
+ 				if (array2.Length >= 3 && int.TryParse(array2[1], out var result) && int.TryParse(array2[2], out var result2))
+ 				{
+ 					string key = array2[0].Replace('/', '\\');

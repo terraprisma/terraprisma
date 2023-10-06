@@ -1,0 +1,11 @@
+--- decompiled/TerrariaClientWindows/Terraria/GameContent/UI/Chat/ItemTagHandler.cs
++++ decompiled/TerrariaClientMac/Terraria/GameContent/UI/Chat/ItemTagHandler.cs
+@@ -79,7 +_,7 @@
+ 		item.stack = 1;
+ 		if (options != null)
+ 		{
+-			string[] array = options.Split(',');
++			string[] array = options.Split(new char[1] { ',' });
+ 			for (int i = 0; i < array.Length; i++)
+ 			{
+ 				if (array[i].Length == 0)

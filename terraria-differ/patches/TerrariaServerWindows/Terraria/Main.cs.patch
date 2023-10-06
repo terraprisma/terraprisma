@@ -1,0 +1,138 @@
+--- decompiled/TerrariaClientWindows/Terraria/Main.cs
++++ decompiled/TerrariaServerWindows/Terraria/Main.cs
+@@ -66,6 +_,7 @@
+ using Terraria.Map;
+ using Terraria.Net;
+ using Terraria.ObjectData;
++using Terraria.Server;
+ using Terraria.Social;
+ using Terraria.UI;
+ using Terraria.UI.Chat;
+@@ -75,7 +_,7 @@
+ 
+ namespace Terraria;
+ 
+-public class Main : Game
++public class Main : Terraria.Server.Game
+ {
+ 	public delegate void OnPlayerSelected(PlayerFileData player);
+ 
+@@ -5795,7 +_,7 @@
+ 		{
+ 			Map = new WorldMap(maxTilesX, maxTilesY);
+ 			Configuration.Load();
+-			graphics = new GraphicsDeviceManager(this as Game);
++			graphics = new GraphicsDeviceManager(this as Microsoft.Xna.Framework.Game);
+ 			base.Content.RootDirectory = "Content";
+ 		}
+ 	}
+@@ -10195,8 +_,8 @@
+ 			{
+ 				return;
+ 			}
+-			bool flag = base.IsActive;
++			bool isActive = base.IsActive;
+-			if (!flag)
++			if (!isActive)
+ 			{
+ 				audioSystem.PauseAll();
+ 				SoundEngine.StopAmbientSounds();
+@@ -10663,7 +_,7 @@
+ 							if (cloudAlpha > 0f && (double)(player[myPlayer].position.Y / 16f) > rockLayer && player[myPlayer].position.Y / 16f < (float)(maxTilesY - 350) && !player[myPlayer].ZoneSnow && !player[myPlayer].ZoneDungeon)
+ 							{
+ 								float trackVolume5 = musicFade[i];
+-								audioSystem.UpdateAmbientCueState(i, flag, ref trackVolume5, ambientVolume * num8);
++								audioSystem.UpdateAmbientCueState(i, isActive, ref trackVolume5, ambientVolume * num8);
+ 								musicFade[i] = trackVolume5;
+ 							}
+ 							else
+@@ -10676,7 +_,7 @@
+ 						else if (cloudAlpha > 0f && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (double)(screenHeight / 2) && !player[myPlayer].ZoneSnow)
+ 						{
+ 							float trackVolume7 = musicFade[i];
+-							audioSystem.UpdateAmbientCueState(i, flag, ref trackVolume7, ambientVolume * num8);
++							audioSystem.UpdateAmbientCueState(i, isActive, ref trackVolume7, ambientVolume * num8);
+ 							musicFade[i] = trackVolume7;
+ 						}
+ 						else
+@@ -10707,7 +_,7 @@
+ 							if (!gameMenu && Math.Abs(windSpeedCurrent) >= num6 / 50f && (double)(player[myPlayer].position.Y / 16f) > rockLayer && player[myPlayer].position.Y / 16f < (float)(maxTilesY - 350) && !player[myPlayer].ZoneDungeon)
+ 							{
+ 								float trackVolume = musicFade[i];
+-								audioSystem.UpdateAmbientCueState(i, flag, ref trackVolume, ambientVolume * num5);
++								audioSystem.UpdateAmbientCueState(i, isActive, ref trackVolume, ambientVolume * num5);
+ 								musicFade[i] = trackVolume;
+ 							}
+ 							else
+@@ -10720,7 +_,7 @@
+ 						else if (!gameMenu && Math.Abs(windSpeedCurrent) >= num6 / 50f && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (double)(screenHeight / 2))
+ 						{
+ 							float trackVolume3 = musicFade[i];
+-							audioSystem.UpdateAmbientCueState(i, flag, ref trackVolume3, ambientVolume * num5);
++							audioSystem.UpdateAmbientCueState(i, isActive, ref trackVolume3, ambientVolume * num5);
+ 							musicFade[i] = trackVolume3;
+ 						}
+ 						else
+@@ -10736,7 +_,7 @@
+ 						float tempFade = musicFade[i];
+ 						if (i == curMusic)
+ 						{
+-							audioSystem.UpdateCommonTrack(flag, i, num2, ref tempFade);
++							audioSystem.UpdateCommonTrack(isActive, i, num2, ref tempFade);
+ 						}
+ 						else
+ 						{
+@@ -16042,7 +_,7 @@
+ 		{
+ 			cloudAlpha = maxRaining;
+ 		}
+-		bool flag2 = base.IsActive;
++		bool isActive = base.IsActive;
+ 		if (netMode == 1)
+ 		{
+ 			TrySyncingMyPlayer();
+@@ -16067,7 +_,7 @@
+ 		{
+ 			LocalGolfState.Update();
+ 		}
+-		if ((flag2 || netMode == 1) && cloudAlpha > 0f)
++		if ((isActive || netMode == 1) && cloudAlpha > 0f)
+ 		{
+ 			Rain.MakeRain();
+ 		}
+@@ -55695,7 +_,7 @@
+ 	{
+ 		if (netMode != 2 && currentDayRateIteration == 0)
+ 		{
+-			bool flag = base.IsActive;
++			bool isActive = base.IsActive;
+ 			if (thunderDelay > 0)
+ 			{
+ 				thunderDelay--;
+@@ -55713,7 +_,7 @@
+ 					{
+ 						center.Y = num2;
+ 					}
+-					if (flag)
++					if (isActive)
+ 					{
+ 						SoundEngine.PlaySound(43, center);
+ 					}
+@@ -60037,7 +_,7 @@
+ 
+ 	private void DrawRainInMenu()
+ 	{
+-		bool flag = base.IsActive;
++		bool isActive = base.IsActive;
+ 		Microsoft.Xna.Framework.Rectangle[] array = new Microsoft.Xna.Framework.Rectangle[6];
+ 		for (int i = 0; i < array.Length; i++)
+ 		{
+@@ -60050,7 +_,7 @@
+ 			{
+ 				Rain rain = Main.rain[j];
+ 				spriteBatch.Draw(TextureAssets.Rain.Value, rain.position - screenPosition, array[rain.type], color, rain.rotation, Vector2.Zero, rain.scale, SpriteEffects.None, 0f);
+-				if (flag)
++				if (isActive)
+ 				{
+ 					rain.Update();
+ 				}

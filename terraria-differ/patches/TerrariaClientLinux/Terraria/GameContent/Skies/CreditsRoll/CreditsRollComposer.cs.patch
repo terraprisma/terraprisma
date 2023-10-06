@@ -1,0 +1,32 @@
+--- decompiled/TerrariaClientWindows/Terraria/GameContent/Skies/CreditsRoll/CreditsRollComposer.cs
++++ decompiled/TerrariaClientLinux/Terraria/GameContent/Skies/CreditsRoll/CreditsRollComposer.cs
+@@ -806,9 +_,9 @@
+ 			.With(new Actions.NPCs.Fade(3, 85));
+ 		float x = 1.5f;
+ 		Segments.AnimationSegmentWithActions<NPC> item3 = new Segments.NPCSegment(num + 45, 74, sceneAnchorPosition + new Vector2(-80f, -70f), _originAtBottom).Then(new Actions.NPCs.Fade(255)).With(new Actions.NPCs.Fade(-5, 51)).Then(new Actions.NPCs.Move(new Vector2(x, 0f), 85))
+-			.With(new Actions.NPCs.MoveWithRotor(new Vector2(10f, 0f), (float)Math.PI * 2f / 85f, new Vector2(0f, 1f), 85))
++			.With(new Actions.NPCs.MoveWithRotor(new Vector2(10f, 0f), MathF.PI * 2f / 85f, new Vector2(0f, 1f), 85))
+ 			.Then(new Actions.NPCs.Move(new Vector2(x, 0f), 85))
+-			.With(new Actions.NPCs.MoveWithRotor(new Vector2(4f, 0f), (float)Math.PI * 2f / 85f, new Vector2(0f, 1f), 85))
++			.With(new Actions.NPCs.MoveWithRotor(new Vector2(4f, 0f), MathF.PI * 2f / 85f, new Vector2(0f, 1f), 85))
+ 			.With(new Actions.NPCs.Fade(3, 85));
+ 		Segments.AnimationSegmentWithActions<NPC> item4 = new Segments.NPCSegment(num + 180, 656, sceneAnchorPosition + new Vector2(20f, 0f), _originAtBottom).Then(new Actions.NPCs.Variant(1)).Then(new Actions.NPCs.LookAt(1)).Then(new Actions.NPCs.Fade(255))
+ 			.With(new Actions.NPCs.Fade(-5, 51))
+@@ -845,7 +_,7 @@
+ 			Main.instance.LoadItem(num2);
+ 			Asset<Texture2D> asset = TextureAssets.Item[num2];
+ 			DrawData data = new DrawData(asset.Value, Vector2.Zero, null, Color.White, 0f, asset.Size() / 2f, 1f, SpriteEffects.None);
+-			Vector2 initialVelocity = Vector2.UnitY * -12f + Main.rand.NextVector2Circular(6f, 3f).RotatedBy((float)(i - num / 2) * ((float)Math.PI * 2f) * 0.1f);
++			Vector2 initialVelocity = Vector2.UnitY * -12f + Main.rand.NextVector2Circular(6f, 3f).RotatedBy((float)(i - num / 2) * (MathF.PI * 2f) * 0.1f);
+ 			Vector2 gravityPerFrame = Vector2.UnitY * 0.2f;
+ 			Segments.AnimationSegmentWithActions<Segments.LooseSprite> item = new Segments.SpriteSegment(asset, startTime, data, sceneAnchorPosition).Then(new Actions.Sprites.SimulateGravity(initialVelocity, gravityPerFrame, Main.rand.NextFloatDirection() * 0.2f, 60)).With(new Actions.Sprites.Fade(0f, 60));
+ 			_segments.Add(item);
+@@ -911,7 +_,7 @@
+ 		Vector2 anchorOffset = sceneAnchorPosition + new Vector2(num3, -8f);
+ 		for (int i = 0; i < num6; i++)
+ 		{
+-			Vector2 initialVelocity = Vector2.UnitY * -5f + Main.rand.NextVector2Circular(2.5f, 0.3f + Main.rand.NextFloat() * 0.2f).RotatedBy((float)(i - num6 / 2) * ((float)Math.PI * 2f) * 0.1f);
++			Vector2 initialVelocity = Vector2.UnitY * -5f + Main.rand.NextVector2Circular(2.5f, 0.3f + Main.rand.NextFloat() * 0.2f).RotatedBy((float)(i - num6 / 2) * (MathF.PI * 2f) * 0.1f);
+ 			Vector2 gravityPerFrame = Vector2.UnitY * 0.1f;
+ 			int targetTime = num + i * 10;
+ 			DrawData data4 = drawData;

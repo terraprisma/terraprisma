@@ -1,0 +1,11 @@
+--- decompiled/TerrariaServerWindows/Terraria/UI/ItemTooltip.cs
++++ decompiled/TerrariaServerMac/Terraria/UI/ItemTooltip.cs
+@@ -74,7 +_,7 @@
+ 		{
+ 			text = globalProcessor(text);
+ 		}
+-		_tooltipLines = text.Split('\n');
++		_tooltipLines = text.Split(new char[1] { '\n' });
+ 		_processedText = text;
+ 	}
+ 

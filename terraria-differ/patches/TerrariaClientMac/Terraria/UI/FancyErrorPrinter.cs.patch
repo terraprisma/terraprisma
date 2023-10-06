@@ -1,0 +1,11 @@
+--- decompiled/TerrariaClientWindows/Terraria/UI/FancyErrorPrinter.cs
++++ decompiled/TerrariaClientMac/Terraria/UI/FancyErrorPrinter.cs
+@@ -131,7 +_,7 @@
+ 	{
+ 		if (Platform.IsWindows && !Main.dedServ)
+ 		{
+-			MessageBox.Show(preparedMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
++			MessageBox.Show(preparedMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+ 		}
+ 	}
+ }

@@ -1,0 +1,1465 @@
+--- decompiled/TerrariaServerWindows/Terraria/NPC.cs
++++ decompiled/TerrariaServerLinux/Terraria/NPC.cs
+@@ -17401,13 +_,13 @@
+ 							velocity.Y = -6f;
+ 						}
+ 						rotation = velocity.Y * (float)direction * 0.3f;
+-						if (rotation < (float)Math.PI * -2f / 5f)
++						if (rotation < MathF.PI * -2f / 5f)
+ 						{
+-							rotation = (float)Math.PI * -2f / 5f;
++							rotation = MathF.PI * -2f / 5f;
+ 						}
+-						if (rotation > (float)Math.PI * 2f / 5f)
++						if (rotation > MathF.PI * 2f / 5f)
+ 						{
+-							rotation = (float)Math.PI * 2f / 5f;
++							rotation = MathF.PI * 2f / 5f;
+ 						}
+ 						if (this.ai[3] == 1f)
+ 						{
+@@ -17444,20 +_,20 @@
+ 							velocity.Y = -6f;
+ 						}
+ 						rotation = velocity.Y * (float)direction * 0.3f;
+-						if (rotation < (float)Math.PI * -2f / 5f)
++						if (rotation < MathF.PI * -2f / 5f)
+ 						{
+-							rotation = (float)Math.PI * -2f / 5f;
++							rotation = MathF.PI * -2f / 5f;
+ 						}
+-						if (rotation > (float)Math.PI * 2f / 5f)
++						if (rotation > MathF.PI * 2f / 5f)
+ 						{
+-							rotation = (float)Math.PI * 2f / 5f;
++							rotation = MathF.PI * 2f / 5f;
+ 						}
+ 						if (Collision.GetWaterLine(base.Top.ToTileCoordinates(), out var waterLineHeight))
+ 						{
+ 							float y2 = waterLineHeight + 0f - position.Y;
+ 							velocity.Y = y2;
+ 							velocity.Y = MathHelper.Clamp(velocity.Y, -2f, 0.5f);
+-							rotation = -(float)Math.PI / 5f * (float)direction;
++							rotation = -MathF.PI / 5f * (float)direction;
+ 							velocity.X *= 0.95f;
+ 							if (this.ai[3] == 0f)
+ 							{
+@@ -18529,7 +_,7 @@
+ 					num303 *= num305;
+ 					num304 *= num305;
+ 					float num307 = 0.0125f;
+-					Vector2 vector34 = new Vector2(num303, num304).RotatedByRandom(num307 * ((float)Math.PI * 2f));
++					Vector2 vector34 = new Vector2(num303, num304).RotatedByRandom(num307 * (MathF.PI * 2f));
+ 					num303 = vector34.X;
+ 					num304 = vector34.Y;
+ 					int num308 = 25;
+@@ -21267,7 +_,7 @@
+ 							vector51.Y -= num484 * 1f;
+ 							if (IsMechQueenUp)
+ 							{
+-								Vector2 vector52 = (rotation + (float)Math.PI / 2f).ToRotationVector2() * num487 + velocity * 0.5f;
++								Vector2 vector52 = (rotation + MathF.PI / 2f).ToRotationVector2() * num487 + velocity * 0.5f;
+ 								num483 = vector52.X;
+ 								num484 = vector52.Y;
+ 								vector51 = base.Center - vector52 * 3f;
+@@ -23365,7 +_,7 @@
+ 				{
+ 					velocity.Y -= 0.3f;
+ 				}
+-				rotation += MathHelper.Clamp(velocity.X / 10f * (float)direction, -(float)Math.PI / 10f, (float)Math.PI / 10f);
++				rotation += MathHelper.Clamp(velocity.X / 10f * (float)direction, -MathF.PI / 10f, MathF.PI / 10f);
+ 			}
+ 			else if (this.ai[0] == 5f)
+ 			{
+@@ -23547,7 +_,7 @@
+ 			}
+ 			if (type == 531)
+ 			{
+-				rotation += (float)Math.PI / 2f;
++				rotation += MathF.PI / 2f;
+ 			}
+ 			float num627 = 0.5f;
+ 			if (collideX)
+@@ -23653,7 +_,7 @@
+ 					Main.dust[num629].scale = 1.5f;
+ 					Main.dust[num629].noGravity = true;
+ 					Main.dust[num629].velocity = Main.dust[num629].velocity * 0.25f + Vector2.Normalize(vector79) * 1f;
+-					Main.dust[num629].velocity = Main.dust[num629].velocity.RotatedBy(-(float)Math.PI / 2f * (float)direction);
++					Main.dust[num629].velocity = Main.dust[num629].velocity.RotatedBy(-MathF.PI / 2f * (float)direction);
+ 					position -= netOffset;
+ 				}
+ 				if (this.ai[1] == 5f)
+@@ -25341,7 +_,7 @@
+ 				position += netOffset;
+ 				int num765 = Main.rand.Next(2) * 2 - 1;
+ 				Vector2 vector95 = base.Bottom + new Vector2((float)(num765 * 22) * scale, -22f * scale);
+-				Dust dust5 = Dust.NewDustPerfect(vector95, 228, ((float)Math.PI / 2f + -(float)Math.PI / 2f * (float)num765 + Main.rand.NextFloatDirection() * ((float)Math.PI / 4f)).ToRotationVector2() * (2f + Main.rand.NextFloat()));
++				Dust dust5 = Dust.NewDustPerfect(vector95, 228, (MathF.PI / 2f + -MathF.PI / 2f * (float)num765 + Main.rand.NextFloatDirection() * (MathF.PI / 4f)).ToRotationVector2() * (2f + Main.rand.NextFloat()));
+ 				Dust dust = dust5;
+ 				dust.velocity += velocity;
+ 				dust5.noGravity = true;
+@@ -28806,7 +_,7 @@
+ 				velocity.Y = this.ai[3];
+ 				if (type == 373)
+ 				{
+-					float num1064 = (float)Math.PI / 30f;
++					float num1064 = MathF.PI / 30f;
+ 					float num1065 = this.ai[2];
+ 					float num1066 = (float)(Math.Cos(num1064 * localAI[1]) - 0.5) * num1065;
+ 					position.X -= num1066 * (float)(-direction);
+@@ -28849,7 +_,7 @@
+ 					rotation = velocity.ToRotation();
+ 					if (direction == -1)
+ 					{
+-						rotation += (float)Math.PI;
++						rotation += MathF.PI;
+ 					}
+ 					netUpdate = true;
+ 				}
+@@ -28904,7 +_,7 @@
+ 				rotation = velocity.ToRotation();
+ 				if (direction == -1)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 				}
+ 			}
+ 		}
+@@ -28960,7 +_,7 @@
+ 					frame.Y = 0;
+ 					float num1071 = this.ai[1] / num1069;
+ 					Vector2 spinningpoint = new Vector2(0f, -30f);
+-					spinningpoint = spinningpoint.RotatedBy(num1071 * 1.5f * ((float)Math.PI * 2f)) * new Vector2(1f, 0.4f);
++					spinningpoint = spinningpoint.RotatedBy(num1071 * 1.5f * (MathF.PI * 2f)) * new Vector2(1f, 0.4f);
+ 					for (int num1072 = 0; num1072 < 4; num1072++)
+ 					{
+ 						Vector2 vector137 = Vector2.Zero;
+@@ -29046,13 +_,13 @@
+ 		{
+ 			TargetClosest(faceTarget: false);
+ 			rotation = velocity.ToRotation();
+-			if (rotation < -(float)Math.PI / 2f)
++			if (rotation < -MathF.PI / 2f)
+ 			{
+-				rotation += (float)Math.PI;
++				rotation += MathF.PI;
+ 			}
+-			if (rotation > (float)Math.PI / 2f)
++			if (rotation > MathF.PI / 2f)
+ 			{
+-				rotation -= (float)Math.PI;
++				rotation -= MathF.PI;
+ 			}
+ 			if (Math.Sign(velocity.X) != 0)
+ 			{
+@@ -29155,7 +_,7 @@
+ 					flag58 = true;
+ 				}
+ 				float num1100 = 8f;
+-				flag58 = flag58 && vector140.ToRotation() > (float)Math.PI / num1100 && vector140.ToRotation() < (float)Math.PI - (float)Math.PI / num1100;
++				flag58 = flag58 && vector140.ToRotation() > MathF.PI / num1100 && vector140.ToRotation() < MathF.PI - MathF.PI / num1100;
+ 				bool flag59 = num1099 < num1082;
+ 				bool flag60 = num1099 > num1081;
+ 				if (flag59 || flag60 || !flag58)
+@@ -29302,7 +_,7 @@
+ 				int num1104 = Dust.NewDust(position, width, height, 31, 0f, 0f, 100, default(Color), 1.5f);
+ 				Dust dust = Main.dust[num1104];
+ 				dust.velocity *= 1.4f;
+-				Main.dust[num1104].position = ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * ((float)Main.rand.NextDouble() * 96f) + base.Center;
++				Main.dust[num1104].position = ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * ((float)Main.rand.NextDouble() * 96f) + base.Center;
+ 			}
+ 			for (int num1105 = 0; num1105 < 40; num1105++)
+ 			{
+@@ -29310,7 +_,7 @@
+ 				Main.dust[num1106].noGravity = true;
+ 				Dust dust = Main.dust[num1106];
+ 				dust.velocity *= 2f;
+-				Main.dust[num1106].position = ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * ((float)Main.rand.NextDouble() * 96f) + base.Center;
++				Main.dust[num1106].position = ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * ((float)Main.rand.NextDouble() * 96f) + base.Center;
+ 				Main.dust[num1106].velocity = Main.dust[num1106].velocity / 2f + Vector2.Normalize(Main.dust[num1106].position - base.Center);
+ 				if (Main.rand.Next(2) == 0)
+ 				{
+@@ -29318,7 +_,7 @@
+ 					Main.dust[num1106].noGravity = true;
+ 					dust = Main.dust[num1106];
+ 					dust.velocity *= 1.2f;
+-					Main.dust[num1106].position = ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * ((float)Main.rand.NextDouble() * 96f) + base.Center;
++					Main.dust[num1106].position = ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * ((float)Main.rand.NextDouble() * 96f) + base.Center;
+ 					Main.dust[num1106].velocity = Main.dust[num1106].velocity / 2f + Vector2.Normalize(Main.dust[num1106].position - base.Center);
+ 				}
+ 				if (Main.rand.Next(4) == 0)
+@@ -29326,7 +_,7 @@
+ 					num1106 = Dust.NewDust(position, width, height, 226, 0f, 0f, 100, default(Color), 0.7f);
+ 					dust = Main.dust[num1106];
+ 					dust.velocity *= 1.2f;
+-					Main.dust[num1106].position = ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * ((float)Main.rand.NextDouble() * 96f) + base.Center;
++					Main.dust[num1106].position = ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * ((float)Main.rand.NextDouble() * 96f) + base.Center;
+ 					Main.dust[num1106].velocity = Main.dust[num1106].velocity / 2f + Vector2.Normalize(Main.dust[num1106].position - base.Center);
+ 				}
+ 			}
+@@ -29642,7 +_,7 @@
+ 							float[] array3 = new float[8];
+ 							for (int num1132 = 0; num1132 < array3.Length; num1132++)
+ 							{
+-								array3[num1132] = Vector2.Distance(base.Center + Vector2.UnitY.RotatedBy((float)num1132 * (-(float)Math.PI / 4f)) * 50f, Main.player[target].Center);
++								array3[num1132] = Vector2.Distance(base.Center + Vector2.UnitY.RotatedBy((float)num1132 * (-MathF.PI / 4f)) * 50f, Main.player[target].Center);
+ 							}
+ 							int num1133 = 0;
+ 							for (int num1134 = 1; num1134 < array3.Length; num1134++)
+@@ -30243,19 +_,19 @@
+ 				}
+ 				else if (this.ai[1] < 40f)
+ 				{
+-					rotation = Vector2.UnitY.RotatedBy(this.ai[1] / 40f * ((float)Math.PI * 2f)).Y * 0.2f;
++					rotation = Vector2.UnitY.RotatedBy(this.ai[1] / 40f * (MathF.PI * 2f)).Y * 0.2f;
+ 				}
+ 				else if (this.ai[1] < 80f)
+ 				{
+-					rotation = Vector2.UnitY.RotatedBy(this.ai[1] / 20f * ((float)Math.PI * 2f)).Y * 0.3f;
++					rotation = Vector2.UnitY.RotatedBy(this.ai[1] / 20f * (MathF.PI * 2f)).Y * 0.3f;
+ 				}
+ 				else if (this.ai[1] < 120f)
+ 				{
+-					rotation = Vector2.UnitY.RotatedBy(this.ai[1] / 10f * ((float)Math.PI * 2f)).Y * 0.4f;
++					rotation = Vector2.UnitY.RotatedBy(this.ai[1] / 10f * (MathF.PI * 2f)).Y * 0.4f;
+ 				}
+ 				else
+ 				{
+-					rotation = (this.ai[1] - 120f) / 30f * ((float)Math.PI * 2f);
++					rotation = (this.ai[1] - 120f) / 30f * (MathF.PI * 2f);
+ 				}
+ 			}
+ 			else if (this.ai[0] == 2f)
+@@ -30568,8 +_,8 @@
+ 						flag75 = false;
+ 					}
+ 					float num1203 = Main.rand.Next(6, 19);
+-					float num1204 = (float)Math.PI * 2f / num1203;
++					float num1204 = MathF.PI * 2f / num1203;
+-					float num1205 = (float)Math.PI * 2f * Main.rand.NextFloat();
++					float num1205 = MathF.PI * 2f * Main.rand.NextFloat();
+ 					float num1206 = 1f + Main.rand.NextFloat() * 2f;
+ 					float num1207 = 1f + Main.rand.NextFloat();
+ 					float fadeIn = 0.4f + Main.rand.NextFloat();
+@@ -30638,7 +_,7 @@
+ 					}
+ 					if (flag77)
+ 					{
+-						float num1211 = (float)(Main.rand.Next(4) < 2).ToDirectionInt() * ((float)Math.PI / 8f + (float)Math.PI / 4f * Main.rand.NextFloat());
++						float num1211 = (float)(Main.rand.Next(4) < 2).ToDirectionInt() * (MathF.PI / 8f + MathF.PI / 4f * Main.rand.NextFloat());
+ 						Vector2 vector168 = new Vector2(0f, (0f - Main.rand.NextFloat()) * 0.5f - 0.5f).RotatedBy(num1211) * 6f;
+ 						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), vec2.X, vec2.Y, vector168.X, vector168.Y, 622, 0, 0f, Main.myPlayer);
+ 					}
+@@ -30918,7 +_,7 @@
+ 					{
+ 						localAI[1] = 0.75f;
+ 					}
+-					float num1229 = (float)Math.PI * 2f * (num1219 % (float)(num1227 * num1228)) / (float)(num1227 * num1228) - (float)Math.PI / 2f;
++					float num1229 = MathF.PI * 2f * (num1219 % (float)(num1227 * num1228)) / (float)(num1227 * num1228) - MathF.PI / 2f;
+ 					localAI[0] = new Vector2((float)Math.Cos(num1229) * vector170.X, (float)Math.Sin(num1229) * vector170.Y).ToRotation();
+ 					if (num1219 % (float)num1228 == 0f)
+ 					{
+@@ -30926,7 +_,7 @@
+ 						Vector2 vector176 = Utils.Vector2FromElipse(localAI[0].ToRotationVector2(), vector170 * localAI[1]);
+ 						Vector2 vector177 = base.Center + Vector2.Normalize(vector176) * vector170.Length() * 0.4f + vector175;
+ 						Vector2 vector178 = Vector2.Normalize(vector176) * 8f;
+-						float ai = ((float)Math.PI * 2f * (float)Main.rand.NextDouble() - (float)Math.PI) / 30f + (float)Math.PI / 180f * num1218;
++						float ai = (MathF.PI * 2f * (float)Main.rand.NextDouble() - MathF.PI) / 30f + MathF.PI / 180f * num1218;
+ 						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), vector177.X, vector177.Y, vector178.X, vector178.Y, 452, 30, 0f, Main.myPlayer, 0f, ai);
+ 					}
+ 				}
+@@ -30937,7 +_,7 @@
+ 					{
+ 						localAI[1] = 0.75f;
+ 					}
+-					float num1230 = (float)Math.PI * 2f * (num1219 % (float)(num1227 * num1228)) / (float)(num1227 * num1228) - (float)Math.PI / 2f;
++					float num1230 = MathF.PI * 2f * (num1219 % (float)(num1227 * num1228)) / (float)(num1227 * num1228) - MathF.PI / 2f;
+ 					localAI[0] = new Vector2((float)Math.Cos(num1230) * vector170.X, (float)Math.Sin(num1230) * vector170.Y).ToRotation();
+ 				}
+ 			}
+@@ -31206,7 +_,7 @@
+ 					{
+ 						localAI[1] = 0.75f;
+ 					}
+-					float num1246 = (float)Math.PI * 2f * (this.ai[1] % (float)(num1244 * num1245)) / (float)(num1244 * num1245) - (float)Math.PI / 2f;
++					float num1246 = MathF.PI * 2f * (this.ai[1] % (float)(num1244 * num1245)) / (float)(num1244 * num1245) - MathF.PI / 2f;
+ 					localAI[0] = new Vector2((float)Math.Cos(num1246) * vector170.X, (float)Math.Sin(num1246) * vector170.Y).ToRotation();
+ 					if (this.ai[1] % (float)num1245 == 0f)
+ 					{
+@@ -31214,7 +_,7 @@
+ 						Vector2 vector208 = Utils.Vector2FromElipse(localAI[0].ToRotationVector2(), vector170 * localAI[1]);
+ 						Vector2 vector209 = base.Center + Vector2.Normalize(vector208) * vector170.Length() * 0.4f + vector207;
+ 						Vector2 vector210 = Vector2.Normalize(vector208) * 8f;
+-						float ai2 = ((float)Math.PI * 2f * (float)Main.rand.NextDouble() - (float)Math.PI) / 30f + (float)Math.PI / 180f * num1218;
++						float ai2 = (MathF.PI * 2f * (float)Main.rand.NextDouble() - MathF.PI) / 30f + MathF.PI / 180f * num1218;
+ 						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), vector209.X, vector209.Y, vector210.X, vector210.Y, 452, 5, 0f, Main.myPlayer, 0f, ai2);
+ 					}
+ 					break;
+@@ -31361,7 +_,7 @@
+ 			{
+ 				damage = 0;
+ 				dontTakeDamage = true;
+-				rotation = MathHelper.Lerp(rotation, (float)Math.PI / 12f, 0.07f);
++				rotation = MathHelper.Lerp(rotation, MathF.PI / 12f, 0.07f);
+ 				this.ai[1]++;
+ 				if (this.ai[1] >= 32f)
+ 				{
+@@ -31485,7 +_,7 @@
+ 								num1262 = 229;
+ 								num1263 = 1.65f;
+ 							}
+-							Vector2 vector215 = center22 + ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * vector211 / 2f;
++							Vector2 vector215 = center22 + ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * vector211 / 2f;
+ 							int num1264 = Dust.NewDust(vector215 - Vector2.One * 8f, 16, 16, num1262, velocity.X / 2f, velocity.Y / 2f);
+ 							Main.dust[num1264].velocity = Vector2.Normalize(center22 - vector215) * 3.5f * (10f - (float)num1260 * 2f) / 10f;
+ 							Main.dust[num1264].noGravity = true;
+@@ -31506,9 +_,9 @@
+ 						{
+ 							num1265 = 1f;
+ 						}
+-						spinningpoint9 = spinningpoint9.RotatedBy((0f - num1265) * ((float)Math.PI * 2f) / 6f);
++						spinningpoint9 = spinningpoint9.RotatedBy((0f - num1265) * (MathF.PI * 2f) / 6f);
+-						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, spinningpoint9.X, spinningpoint9.Y, 455, 75, 0f, Main.myPlayer, num1265 * ((float)Math.PI * 2f) / 540f, whoAmI);
++						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, spinningpoint9.X, spinningpoint9.Y, 455, 75, 0f, Main.myPlayer, num1265 * (MathF.PI * 2f) / 540f, whoAmI);
+-						this.ai[2] = (spinningpoint9.ToRotation() + (float)Math.PI * 3f) * num1265;
++						this.ai[2] = (spinningpoint9.ToRotation() + MathF.PI * 3f) * num1265;
+ 						netUpdate = true;
+ 					}
+ 					localAI[1] += 0.05f;
+@@ -31522,10 +_,10 @@
+ 					{
+ 						num1267 *= -1f;
+ 					}
+-					num1267 += (float)Math.PI * -3f;
++					num1267 += MathF.PI * -3f;
+-					num1267 += num1266 * ((float)Math.PI * 2f) / 540f;
++					num1267 += num1266 * (MathF.PI * 2f) / 540f;
+ 					localAI[0] = num1267;
+-					this.ai[2] = (num1267 + (float)Math.PI * 3f) * num1266;
++					this.ai[2] = (num1267 + MathF.PI * 3f) * num1266;
+ 				}
+ 				else
+ 				{
+@@ -31668,14 +_,14 @@
+ 			if (num1274 == 2)
+ 			{
+ 				Vector2 vector222 = new Vector2(27f, 59f);
+-				float num1276 = (float)Math.PI * 2f * ((float)Main.timeForVisualEffects % 600f) / 600f;
++				float num1276 = MathF.PI * 2f * ((float)Main.timeForVisualEffects % 600f) / 600f;
+ 				localAI[0] = new Vector2((float)Math.Cos(num1276) * vector222.X, (float)Math.Sin(num1276) * vector222.Y).ToRotation();
+ 				localAI[1] = 0.75f;
+ 				if (this.ai[1] == 0f)
+ 				{
+ 					Vector2 vector223 = num1276.ToRotationVector2();
+ 					vector223 = Vector2.One;
+-					Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, vector223.X, vector223.Y, 455, 1, 0f, Main.myPlayer, (float)Math.PI / 300f, whoAmI);
++					Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, vector223.X, vector223.Y, 455, 1, 0f, Main.myPlayer, MathF.PI / 300f, whoAmI);
+ 				}
+ 				this.ai[1]++;
+ 				if (this.ai[1] >= 600f)
+@@ -31871,10 +_,10 @@
+ 				{
+ 					num1286 = 0.75f;
+ 					localAI[0] = 0f;
+-					localAI[1] = (float)Math.Sin(this.ai[1] * ((float)Math.PI * 2f) / 15f) * 0.35f;
++					localAI[1] = (float)Math.Sin(this.ai[1] * (MathF.PI * 2f) / 15f) * 0.35f;
+ 					if (localAI[1] < 0f)
+ 					{
+-						localAI[0] = (float)Math.PI;
++						localAI[0] = MathF.PI;
+ 					}
+ 				}
+ 				else if (this.ai[1] < 120f)
+@@ -31884,7 +_,7 @@
+ 					{
+ 						localAI[1] += 0.025f;
+ 					}
+-					localAI[0] += (float)Math.PI / 15f;
++					localAI[0] += MathF.PI / 15f;
+ 				}
+ 				else
+ 				{
+@@ -32028,8 +_,8 @@
+ 							break;
+ 					}
+ 					Vector2 spinningpoint10 = Vector2.UnitY * -30f;
+-					Vector2 value8 = spinningpoint10.RotatedBy((float)num1292 * ((float)Math.PI * 2f) / 6f);
++					Vector2 value8 = spinningpoint10.RotatedBy((float)num1292 * (MathF.PI * 2f) / 6f);
+-					Vector2 value9 = spinningpoint10.RotatedBy((float)num1293 * ((float)Math.PI * 2f) / 6f);
++					Vector2 value9 = spinningpoint10.RotatedBy((float)num1293 * (MathF.PI * 2f) / 6f);
+ 					Vector2 vector234 = Vector2.Lerp(value8, value9, num1291 - (float)(int)num1291);
+ 					float value10 = vector234.Length() / 30f;
+ 					localAI[0] = vector234.ToRotation();
+@@ -32054,7 +_,7 @@
+ 				}
+ 				else if (num1281 < 105f)
+ 				{
+-					localAI[0] = localAI[0].AngleLerp(this.ai[2] - (float)Math.PI / 2f, 0.2f);
++					localAI[0] = localAI[0].AngleLerp(this.ai[2] - MathF.PI / 2f, 0.2f);
+ 					localAI[2] = MathHelper.Lerp(localAI[2], 0.75f, 0.2f);
+ 					if (num1281 == 75f)
+ 					{
+@@ -32073,8 +_,8 @@
+ 						}
+ 					}
+ 					velocity.Y *= 0.96f;
+-					this.ai[2] = (Main.player[target].Center - base.Center).ToRotation() + (float)Math.PI / 2f;
++					this.ai[2] = (Main.player[target].Center - base.Center).ToRotation() + MathF.PI / 2f;
+-					rotation = rotation.AngleTowards(this.ai[2], (float)Math.PI / 30f);
++					rotation = rotation.AngleTowards(this.ai[2], MathF.PI / 30f);
+ 				}
+ 				else if (num1281 < 120f)
+ 				{
+@@ -32083,7 +_,7 @@
+ 					{
+ 						netUpdate = true;
+ 					}
+-					Vector2 vector235 = (this.ai[2] - (float)Math.PI / 2f).ToRotationVector2() * 12f;
++					Vector2 vector235 = (this.ai[2] - MathF.PI / 2f).ToRotationVector2() * 12f;
+ 					velocity = vector235 * 2f;
+ 					for (int num1298 = 0; num1298 < 1000; num1298++)
+ 					{
+@@ -32121,17 +_,17 @@
+ 				else if (num1281 < 45f)
+ 				{
+ 					localAI[0] = 0f;
+-					localAI[1] = (float)Math.Sin((num1281 - 15f) * ((float)Math.PI * 2f) / 15f) * 0.5f;
++					localAI[1] = (float)Math.Sin((num1281 - 15f) * (MathF.PI * 2f) / 15f) * 0.5f;
+ 					if (localAI[1] < 0f)
+ 					{
+-						localAI[0] = (float)Math.PI;
++						localAI[0] = MathF.PI;
+ 					}
+ 				}
+ 				else if (num1281 < 185f)
+ 				{
+ 					if (num1281 == 45f)
+ 					{
+-						this.ai[2] = (float)(Main.rand.Next(2) == 0).ToDirectionInt() * ((float)Math.PI * 2f) / 40f;
++						this.ai[2] = (float)(Main.rand.Next(2) == 0).ToDirectionInt() * (MathF.PI * 2f) / 40f;
+ 						netUpdate = true;
+ 					}
+ 					if ((num1281 - 15f - 30f) % 40f == 0f)
+@@ -32147,12 +_,12 @@
+ 					Vector2 vector236 = localAI[0].ToRotationVector2() * vector229 * localAI[1];
+ 					float num1299 = MathHelper.Lerp(8f, 20f, (num1281 - 15f - 30f) / 140f);
+ 					velocity = Vector2.Normalize(vector236) * num1299;
+-					rotation = rotation.AngleLerp(velocity.ToRotation() + (float)Math.PI / 2f, 0.2f);
++					rotation = rotation.AngleLerp(velocity.ToRotation() + MathF.PI / 2f, 0.2f);
+ 					if ((num1281 - 15f - 30f) % 10f == 0f && Main.netMode != 1)
+ 					{
+ 						Vector2 vector237 = base.Center + Vector2.Normalize(vector236) * vector229.Length() * 0.4f;
+ 						Vector2 vector238 = Vector2.Normalize(vector236) * 8f;
+-						float ai3 = ((float)Math.PI * 2f * (float)Main.rand.NextDouble() - (float)Math.PI) / 30f + (float)Math.PI / 180f * this.ai[2];
++						float ai3 = (MathF.PI * 2f * (float)Main.rand.NextDouble() - MathF.PI) / 30f + MathF.PI / 180f * this.ai[2];
+ 						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), vector237.X, vector237.Y, vector238.X, vector238.Y, 452, 35, 0f, Main.myPlayer, 0f, ai3);
+ 					}
+ 				}
+@@ -32211,7 +_,7 @@
+ 							num1302 = 229;
+ 							num1303 = 1.65f;
+ 						}
+-						Vector2 vector239 = center27 + ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * vector229 / 2f;
++						Vector2 vector239 = center27 + ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * vector229 / 2f;
+ 						int num1304 = Dust.NewDust(vector239 - Vector2.One * 8f, 16, 16, num1302, velocity.X / 2f, velocity.Y / 2f);
+ 						Main.dust[num1304].velocity = Vector2.Normalize(center27 - vector239) * 3.5f * (10f - (float)num1300 * 2f) / 10f;
+ 						Main.dust[num1304].noGravity = true;
+@@ -32231,9 +_,9 @@
+ 						{
+ 							num1305 = 1f;
+ 						}
+-						spinningpoint11 = spinningpoint11.RotatedBy((0f - num1305) * ((float)Math.PI * 2f) / 6f);
++						spinningpoint11 = spinningpoint11.RotatedBy((0f - num1305) * (MathF.PI * 2f) / 6f);
+-						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, spinningpoint11.X, spinningpoint11.Y, 455, 50, 0f, Main.myPlayer, num1305 * ((float)Math.PI * 2f) / 540f, whoAmI);
++						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, spinningpoint11.X, spinningpoint11.Y, 455, 50, 0f, Main.myPlayer, num1305 * (MathF.PI * 2f) / 540f, whoAmI);
+-						this.ai[2] = (spinningpoint11.ToRotation() + (float)Math.PI * 3f) * num1305;
++						this.ai[2] = (spinningpoint11.ToRotation() + MathF.PI * 3f) * num1305;
+ 						netUpdate = true;
+ 					}
+ 					localAI[1] += 0.05f;
+@@ -32247,10 +_,10 @@
+ 					{
+ 						num1307 *= -1f;
+ 					}
+-					num1307 += (float)Math.PI * -3f;
++					num1307 += MathF.PI * -3f;
+-					num1307 += num1306 * ((float)Math.PI * 2f) / 540f;
++					num1307 += num1306 * (MathF.PI * 2f) / 540f;
+ 					localAI[0] = num1307;
+-					this.ai[2] = (num1307 + (float)Math.PI * 3f) * num1306;
++					this.ai[2] = (num1307 + MathF.PI * 3f) * num1306;
+ 				}
+ 				else
+ 				{
+@@ -32371,7 +_,7 @@
+ 				Vector2 spinningpoint12 = Vector2.UnitY * -height / 2f;
+ 				for (int num1329 = 0; num1329 < 6; num1329++)
+ 				{
+-					int num1330 = Dust.NewDust(base.Center - Vector2.One * 4f + spinningpoint12.RotatedBy((float)num1329 * ((float)Math.PI * 2f) / 6f), 0, 0, 229);
++					int num1330 = Dust.NewDust(base.Center - Vector2.One * 4f + spinningpoint12.RotatedBy((float)num1329 * (MathF.PI * 2f) / 6f), 0, 0, 229);
+ 					Main.dust[num1330].velocity = -Vector2.UnitY;
+ 					Main.dust[num1330].noGravity = true;
+ 					Main.dust[num1330].scale = 0.7f;
+@@ -32380,7 +_,7 @@
+ 				spinningpoint12 = Vector2.UnitY * -height / 6f;
+ 				for (int num1331 = 0; num1331 < 3; num1331++)
+ 				{
+-					int num1332 = Dust.NewDust(base.Center - Vector2.One * 4f + spinningpoint12.RotatedBy((float)num1331 * ((float)Math.PI * 2f) / 6f), 0, 0, 229, 0f, -2f);
++					int num1332 = Dust.NewDust(base.Center - Vector2.One * 4f + spinningpoint12.RotatedBy((float)num1331 * (MathF.PI * 2f) / 6f), 0, 0, 229, 0f, -2f);
+ 					Main.dust[num1332].noGravity = true;
+ 					Main.dust[num1332].scale = 1.5f;
+ 					Main.dust[num1332].customData = this;
+@@ -34787,7 +_,7 @@
+ 			{
+ 				localAI[0] = 0f;
+ 			}
+-			velocity = new Vector2(0f, (float)Math.Sin((float)Math.PI * 2f * this.ai[0] / 300f) * 0.5f);
++			velocity = new Vector2(0f, (float)Math.Sin(MathF.PI * 2f * this.ai[0] / 300f) * 0.5f);
+ 			Point origin = base.Bottom.ToTileCoordinates();
+ 			int maxDistance = 10;
+ 			int num1471 = 20;
+@@ -35045,7 +_,7 @@
+ 						num1492 = 226;
+ 						num1493 = 0.65f;
+ 					}
+-					Vector2 vector287 = center39 + ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * (12f - (float)(num1490 * 2));
++					Vector2 vector287 = center39 + ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * (12f - (float)(num1490 * 2));
+ 					int num1494 = Dust.NewDust(vector287 - Vector2.One * 12f, 24, 24, num1492, velocity.X / 2f, velocity.Y / 2f);
+ 					Dust dust = Main.dust[num1494];
+ 					dust.position -= new Vector2(2f);
+@@ -35586,7 +_,7 @@
+ 			{
+ 				velocity.Y = 12f;
+ 			}
+-			rotation = velocity.ToRotation() - (float)Math.PI / 2f;
++			rotation = velocity.ToRotation() - MathF.PI / 2f;
+ 			if (type != 519)
+ 			{
+ 				return;
+@@ -35648,7 +_,7 @@
+ 				}
+ 				return;
+ 			}
+-			rotation = velocity.ToRotation() - (float)Math.PI / 2f;
++			rotation = velocity.ToRotation() - MathF.PI / 2f;
+ 			if (type != 522)
+ 			{
+ 				return;
+@@ -35767,8 +_,8 @@
+ 				dust23.fadeIn = 0.5f;
+ 				dust23.noLight = true;
+ 			}
+-			localAI[0] += (float)Math.PI / 60f;
++			localAI[0] += MathF.PI / 60f;
+-			localAI[1] = 0.25f + Vector2.UnitY.RotatedBy(this.ai[1] * ((float)Math.PI * 2f) / 60f).Y * 0.25f;
++			localAI[1] = 0.25f + Vector2.UnitY.RotatedBy(this.ai[1] * (MathF.PI * 2f) / 60f).Y * 0.25f;
+ 			if (this.ai[1] >= num1545)
+ 			{
+ 				flag97 = true;
+@@ -35776,7 +_,7 @@
+ 				{
+ 					for (int num1550 = 0; num1550 < 4; num1550++)
+ 					{
+-						Vector2 vector300 = new Vector2(0f, 0f - num1548).RotatedBy((float)Math.PI / 2f * (float)num1550);
++						Vector2 vector300 = new Vector2(0f, 0f - num1548).RotatedBy(MathF.PI / 2f * (float)num1550);
+ 						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, vector300.X, vector300.Y, 593, damage, 0f, Main.myPlayer);
+ 					}
+ 				}
+@@ -36435,7 +_,7 @@
+ 				if (this.ai[0] <= 120f)
+ 				{
+ 					float num1590 = this.ai[0] / 120f;
+-					velocity.Y = (float)Math.Cos(num1590 * ((float)Math.PI * 2f)) * 0.25f - 0.25f;
++					velocity.Y = (float)Math.Cos(num1590 * (MathF.PI * 2f)) * 0.25f - 0.25f;
+ 				}
+ 				else
+ 				{
+@@ -36482,10 +_,10 @@
+ 					{
+ 						if (!(Main.rand.NextFloat() < num1591))
+ 						{
+-							float num1593 = Main.rand.NextFloat() * ((float)Math.PI * 2f);
++							float num1593 = Main.rand.NextFloat() * (MathF.PI * 2f);
+ 							float num1594 = Main.rand.NextFloat();
+ 							Vector2 vector311 = vector310 + num1593.ToRotationVector2() * (110f + 600f * num1594);
+-							Vector2 vector312 = (num1593 - (float)Math.PI).ToRotationVector2() * (14f + 0f * Main.rand.NextFloat() + 8f * num1594);
++							Vector2 vector312 = (num1593 - MathF.PI).ToRotationVector2() * (14f + 0f * Main.rand.NextFloat() + 8f * num1594);
+ 							Dust dust26 = Dust.NewDustPerfect(vector311, 264, vector312);
+ 							dust26.scale = 0.9f;
+ 							dust26.fadeIn = 1.15f + num1594 * 0.3f;
+@@ -36497,14 +_,14 @@
+ 				}
+ 				if (this.ai[0] == 100f || this.ai[0] == 160f || this.ai[0] == 220f || this.ai[0] == 280f || this.ai[0] == 340f || this.ai[0] == 370f || this.ai[0] == 400f || this.ai[0] == 430f || this.ai[0] == 460f || this.ai[0] == 500f || this.ai[0] == 520f || this.ai[0] == 540f)
+ 				{
+-					float num1595 = Main.rand.NextFloat() * ((float)Math.PI * 2f);
++					float num1595 = Main.rand.NextFloat() * (MathF.PI * 2f);
+ 					float num1596 = 120f;
+ 					for (int num1597 = 0; (float)num1597 < num1596; num1597++)
+ 					{
+-						float num1598 = (float)num1597 / num1596 * ((float)Math.PI * 2f);
++						float num1598 = (float)num1597 / num1596 * (MathF.PI * 2f);
+ 						float num1599 = Main.rand.NextFloat();
+ 						Vector2 vector313 = base.Center + new Vector2(0f, -20f) + num1598.ToRotationVector2() * (810f - this.ai[0]);
+-						Vector2 vector314 = (num1598 - (float)Math.PI).ToRotationVector2() * (14f + 5f * (this.ai[0] / 600f) + 8f * num1599);
++						Vector2 vector314 = (num1598 - MathF.PI).ToRotationVector2() * (14f + 5f * (this.ai[0] / 600f) + 8f * num1599);
+ 						Dust dust27 = Dust.NewDustPerfect(vector313, 264, vector314);
+ 						dust27.scale = 0.9f;
+ 						dust27.fadeIn = 1.15f + num1599 * 0.3f;
+@@ -36599,10 +_,10 @@
+ 					{
+ 						if (!(Main.rand.NextFloat() < num1602))
+ 						{
+-							float num1604 = Main.rand.NextFloat() * ((float)Math.PI * 2f);
++							float num1604 = Main.rand.NextFloat() * (MathF.PI * 2f);
+ 							float num1605 = Main.rand.NextFloat();
+ 							Vector2 vector316 = vector315 + num1604.ToRotationVector2() * (70f + 600f * num1605);
+-							Vector2 vector317 = (num1604 - (float)Math.PI / 2f - (float)Math.PI / 8f).ToRotationVector2() * (12f + 9f * Main.rand.NextFloat() + 4f * num1605);
++							Vector2 vector317 = (num1604 - MathF.PI / 2f - MathF.PI / 8f).ToRotationVector2() * (12f + 9f * Main.rand.NextFloat() + 4f * num1605);
+ 							Dust dust28 = Dust.NewDustPerfect(vector316, 240, vector317);
+ 							dust28.scale = 0.8f;
+ 							dust28.fadeIn = 0.95f + num1605 * 0.3f;
+@@ -36973,7 +_,7 @@
+ 					{
+ 						num9 *= -1;
+ 					}
+-					float num10 = ((num5 % 2 == 0) ? 0f : ((float)Math.PI)) + (0.5f - Main.rand.NextFloat()) * ((float)Math.PI / 4f) + (float)num9 * ((float)Math.PI / 4f) * (float)(num5 % 2 == 0).ToDirectionInt();
++					float num10 = ((num5 % 2 == 0) ? 0f : MathF.PI) + (0.5f - Main.rand.NextFloat()) * (MathF.PI / 4f) + (float)num9 * (MathF.PI / 4f) * (float)(num5 % 2 == 0).ToDirectionInt();
+ 					float num11 = 100f + 50f * Main.rand.NextFloat();
+ 					int num12 = list2[0].Item2;
+ 					if (i != 0)
+@@ -36982,7 +_,7 @@
+ 					}
+ 					if (num5 == 0)
+ 					{
+-						num10 = (0.5f - Main.rand.NextFloat()) * ((float)Math.PI / 4f);
++						num10 = (0.5f - Main.rand.NextFloat()) * (MathF.PI / 4f);
+ 						num11 = 100f + 100f * Main.rand.NextFloat();
+ 					}
+ 					Vector2 vector = (-Vector2.UnitY).RotatedBy(num10) * num11;
+@@ -37062,7 +_,7 @@
+ 				{
+ 					num9 *= -1;
+ 				}
+-				float num10 = ((num5 % 2 == 0) ? 0f : ((float)Math.PI)) + (0.5f - Main.rand.NextFloat()) * ((float)Math.PI / 4f) + (float)num9 * ((float)Math.PI / 4f) * (float)(num5 % 2 == 0).ToDirectionInt();
++				float num10 = ((num5 % 2 == 0) ? 0f : MathF.PI) + (0.5f - Main.rand.NextFloat()) * (MathF.PI / 4f) + (float)num9 * (MathF.PI / 4f) * (float)(num5 % 2 == 0).ToDirectionInt();
+ 				float num11 = 100f + 50f * Main.rand.NextFloat();
+ 				int num12 = list2[0].Item2;
+ 				if (i != 0)
+@@ -37071,7 +_,7 @@
+ 				}
+ 				if (num5 == 0)
+ 				{
+-					num10 = (0.5f - Main.rand.NextFloat()) * ((float)Math.PI / 4f);
++					num10 = (0.5f - Main.rand.NextFloat()) * (MathF.PI / 4f);
+ 					num11 = 100f + 100f * Main.rand.NextFloat();
+ 				}
+ 				Vector2 vector = (-Vector2.UnitY).RotatedBy(num10) * num11;
+@@ -37382,7 +_,7 @@
+ 				haltMovement = true;
+ 				if ((int)this.ai[1] % 4 == 0 && this.ai[1] >= 28f)
+ 				{
+-					PunchCameraModifier modifier5 = new PunchCameraModifier(base.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 20f, 6f, 20, 1000f, "Deerclops");
++					PunchCameraModifier modifier5 = new PunchCameraModifier(base.Center, (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2(), 20f, 6f, 20, 1000f, "Deerclops");
+ 					Main.instance.CameraModifiers.Add(modifier5);
+ 					if (Main.netMode != 2)
+ 					{
+@@ -37416,7 +_,7 @@
+ 				haltMovement = true;
+ 				if ((int)this.ai[1] % 4 == 0 && this.ai[1] >= 28f)
+ 				{
+-					PunchCameraModifier modifier3 = new PunchCameraModifier(base.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 20f, 6f, 20, 1000f, "Deerclops");
++					PunchCameraModifier modifier3 = new PunchCameraModifier(base.Center, (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2(), 20f, 6f, 20, 1000f, "Deerclops");
+ 					Main.instance.CameraModifiers.Add(modifier3);
+ 				}
+ 				if (this.ai[1] == 40f)
+@@ -37444,7 +_,7 @@
+ 				haltMovement = true;
+ 				if ((int)this.ai[1] % 4 == 0 && this.ai[1] >= 28f)
+ 				{
+-					PunchCameraModifier modifier2 = new PunchCameraModifier(base.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 20f, 6f, 20, 1000f, "Deerclops");
++					PunchCameraModifier modifier2 = new PunchCameraModifier(base.Center, (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2(), 20f, 6f, 20, 1000f, "Deerclops");
+ 					Main.instance.CameraModifiers.Add(modifier2);
+ 				}
+ 				if (this.ai[1] >= 40f)
+@@ -37468,7 +_,7 @@
+ 				haltMovement = true;
+ 				if ((int)this.ai[1] % 4 == 0 && this.ai[1] >= 28f)
+ 				{
+-					PunchCameraModifier modifier = new PunchCameraModifier(base.Center, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2(), 20f, 6f, 20, 1000f, "Deerclops");
++					PunchCameraModifier modifier = new PunchCameraModifier(base.Center, (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2(), 20f, 6f, 20, 1000f, "Deerclops");
+ 					Main.instance.CameraModifiers.Add(modifier);
+ 				}
+ 				if (this.ai[1] == 30f)
+@@ -37549,7 +_,7 @@
+ 				Vector2 vector = targetData.Center + new Vector2(num2 * direction * 20, (0f - upBiasPerSpike) * (float)howMany + (float)num2 * upBiasPerSpike / (float)distancedByThisManyTiles);
+ 				Vector2 vector2 = new Vector2(num3 * 16 + 8, num4 * 16 + 8);
+ 				Vector2 vector3 = (vector - vector2).SafeNormalize(-Vector2.UnitY);
+-				vector3 = new Vector2(0f, -1f).RotatedBy((float)(whichOne * direction) * 0.7f * ((float)Math.PI / 4f / (float)howMany));
++				vector3 = new Vector2(0f, -1f).RotatedBy((float)(whichOne * direction) * 0.7f * (MathF.PI / 4f / (float)howMany));
+ 				int num5 = Main.rand.Next(Main.projFrames[962] * 4);
+ 				num5 = 6 + Main.rand.Next(6);
+ 				Projectile.NewProjectile(GetSpawnSource_ForProjectile(), new Vector2(num3 * 16 + 8, num4 * 16 - 8), vector3 * (8f + Main.rand.NextFloat() * 8f), 962, num, 0f, Main.myPlayer, 0f, num5);
+@@ -37677,7 +_,7 @@
+ 		if (WorldGen.ActiveAndWalkableTile(num2, num3))
+ 		{
+ 			Vector2 vector = new Vector2(num2 * 16 + 8, num3 * 16 - 8);
+-			Vector2 vector2 = new Vector2(0f, -1f).RotatedBy((float)(whichOne * dir) * 0.7f * ((float)Math.PI / 4f / (float)howMany));
++			Vector2 vector2 = new Vector2(0f, -1f).RotatedBy((float)(whichOne * dir) * 0.7f * (MathF.PI / 4f / (float)howMany));
+ 			Projectile.NewProjectile(GetSpawnSource_ForProjectile(), vector, vector2, 961, num, 0f, Main.myPlayer, 0f, 0.1f + Main.rand.NextFloat() * 0.1f + (float)xOffset * 1.1f / (float)howMany);
+ 		}
+ 	}
+@@ -38866,7 +_,7 @@
+ 						for (int j = 0; j < num15; j++)
+ 						{
+ 							Vector2 spinningpoint = new Vector2(9f, 0f);
+-							spinningpoint = spinningpoint.RotatedBy((float)(-j) * ((float)Math.PI * 2f) / (float)num14, Vector2.Zero);
++							spinningpoint = spinningpoint.RotatedBy((float)(-j) * (MathF.PI * 2f) / (float)num14, Vector2.Zero);
+ 							Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, spinningpoint.X, spinningpoint.Y, 926, num, 0f, Main.myPlayer);
+ 						}
+ 					}
+@@ -39063,7 +_,7 @@
+ 				{
+ 					dust.velocity *= 0.005f;
+ 					dust.scale = 3f * Utils.GetLerpValue(0.7f, 0f, progress, clamped: true) * Utils.GetLerpValue(0f, 0.3f, progress, clamped: true);
+-					dust.velocity = ((float)Math.PI * 2f * ((float)i / 4f) + (float)Math.PI / 4f).ToRotationVector2() * 8f * Utils.GetLerpValue(1f, 0f, progress, clamped: true);
++					dust.velocity = (MathF.PI * 2f * ((float)i / 4f) + MathF.PI / 4f).ToRotationVector2() * 8f * Utils.GetLerpValue(1f, 0f, progress, clamped: true);
+ 					dust.velocity += velocity * 0.3f;
+ 					float num6 = 0f;
+ 					if (effectType == 4)
+@@ -39433,7 +_,7 @@
+ 				}
+ 				if (flag2 && num36 != 5 && num36 != 12)
+ 				{
+-					velocity = DirectionFrom(targetData5.Center).SafeNormalize(Vector2.Zero).RotatedBy((float)Math.PI / 2f * (float)(targetData5.Center.X > base.Center.X).ToDirectionInt()) * 20f;
++					velocity = DirectionFrom(targetData5.Center).SafeNormalize(Vector2.Zero).RotatedBy(MathF.PI / 2f * (float)(targetData5.Center.X > base.Center.X).ToDirectionInt()) * 20f;
+ 				}
+ 				this.ai[0] = num36;
+ 				this.ai[1] = 0f;
+@@ -39467,10 +_,10 @@
+ 				if ((int)this.ai[1] % num91 == 0 && this.ai[1] < 60f)
+ 				{
+ 					float ai3 = this.ai[1] / 60f;
+-					Vector2 vector38 = new Vector2(0f, -6f).RotatedBy((float)Math.PI / 2f * Main.rand.NextFloatDirection());
++					Vector2 vector38 = new Vector2(0f, -6f).RotatedBy(MathF.PI / 2f * Main.rand.NextFloatDirection());
+ 					if (flag3)
+ 					{
+-						vector38 = new Vector2(0f, -10f).RotatedBy((float)Math.PI * 2f * Main.rand.NextFloat());
++						vector38 = new Vector2(0f, -10f).RotatedBy(MathF.PI * 2f * Main.rand.NextFloat());
+ 					}
+ 					if (Main.netMode != 1)
+ 					{
+@@ -39550,7 +_,7 @@
+ 					for (int n = 0; n < num83; n++)
+ 					{
+ 						int num85 = (int)this.ai[1] / 4;
+-						Vector2 vector30 = Vector2.UnitX.RotatedBy((float)Math.PI / (float)(num82 * 2) + (float)num85 * ((float)Math.PI / (float)num82) + 0f);
++						Vector2 vector30 = Vector2.UnitX.RotatedBy(MathF.PI / (float)(num82 * 2) + (float)num85 * (MathF.PI / (float)num82) + 0f);
+ 						if (!flag2)
+ 						{
+ 							vector30.X += ((vector30.X > 0f) ? 0.5f : (-0.5f));
+@@ -39651,11 +_,11 @@
+ 				}
+ 				if ((int)this.ai[1] % 42 == 0 && this.ai[1] < 42f)
+ 				{
+-					float num64 = (float)Math.PI * 2f * Main.rand.NextFloat();
++					float num64 = MathF.PI * 2f * Main.rand.NextFloat();
+ 					for (float num65 = 0f; num65 < 1f; num65 += 1f / 13f)
+ 					{
+ 						float num66 = num65;
+-						Vector2 vector22 = Vector2.UnitY.RotatedBy((float)Math.PI / 2f + (float)Math.PI * 2f * num66 + num64);
++						Vector2 vector22 = Vector2.UnitY.RotatedBy(MathF.PI / 2f + MathF.PI * 2f * num66 + num64);
+ 						if (Main.netMode != 1)
+ 						{
+ 							Projectile.NewProjectile(GetSpawnSource_ForProjectile(), vector20 + vector22.RotatedBy(-1.5707963705062866) * 30f, vector22 * 8f, 872, num9, 0f, Main.myPlayer, 0f, num66);
+@@ -39695,7 +_,7 @@
+ 					for (float num30 = 0f; num30 < 1f; num30 += num29)
+ 					{
+ 						float num31 = (num30 + num29 * 0.5f + (float)num26 * num29 * 0.5f) % 1f;
+-						float ai = (float)Math.PI * 2f * (num31 + (float)num27);
++						float ai = MathF.PI * 2f * (num31 + (float)num27);
+ 						if (Main.netMode != 1)
+ 						{
+ 							Projectile.NewProjectile(GetSpawnSource_ForProjectile(), vector9, Vector2.Zero, 923, num10, 0f, Main.myPlayer, ai, whoAmI);
+@@ -40004,7 +_,7 @@
+ 				if ((int)this.ai[1] % num22 == 0 && flag11)
+ 				{
+ 					_ = this.ai[1] / 60f;
+-					Vector2 vector7 = (vector7 = new Vector2(0f, -20f).RotatedBy((float)Math.PI * 2f * num23));
++					Vector2 vector7 = (vector7 = new Vector2(0f, -20f).RotatedBy(MathF.PI * 2f * num23));
+ 					if (Main.netMode != 1)
+ 					{
+ 						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center + vector6, vector7, 873, num8, 0f, Main.myPlayer, target, num23);
+@@ -40284,10 +_,10 @@
+ 				{
+ 					velocity.X = Math.Min(3f, Math.Max(-3f, velocity.X));
+ 					ai[1] = Main.rand.Next(450, 600);
+-					ai[0] = Main.rand.NextFloat() * ((float)Math.PI * 2f);
++					ai[0] = Main.rand.NextFloat() * (MathF.PI * 2f);
+-					if (flag && ai[0] > (float)Math.PI)
++					if (flag && ai[0] > MathF.PI)
+ 					{
+-						ai[0] -= (float)Math.PI;
++						ai[0] -= MathF.PI;
+ 					}
+ 					netUpdate = true;
+ 				}
+@@ -40385,7 +_,7 @@
+ 					for (int l = 0; l < num18; l++)
+ 					{
+ 						position += netOffset;
+-						Vector2 vector3 = (Vector2.Normalize(velocity) * new Vector2((float)width / 2f, height) * 0.75f * 0.5f).RotatedBy((float)(l - (num18 / 2 - 1)) * ((float)Math.PI * 2f) / (float)num18) + base.Center;
++						Vector2 vector3 = (Vector2.Normalize(velocity) * new Vector2((float)width / 2f, height) * 0.75f * 0.5f).RotatedBy((float)(l - (num18 / 2 - 1)) * (MathF.PI * 2f) / (float)num18) + base.Center;
+ 						Vector2 vector4 = vector3 - base.Center;
+ 						int num19 = Dust.NewDust(vector3 + vector4, 0, 0, 5, vector4.X * 2f, vector4.Y * 2f, 100, default(Color), 1.4f);
+ 						Main.dust[num19].noGravity = true;
+@@ -40433,7 +_,7 @@
+ 				float num15 = base.Center.DirectionTo(nPCAimedTarget.Center).ToRotation() - 0.47123894f * (float)spriteDirection;
+ 				if (spriteDirection == -1)
+ 				{
+-					num15 += (float)Math.PI;
++					num15 += MathF.PI;
+ 				}
+ 				if (spriteDirection != direction)
+ 				{
+@@ -40470,7 +_,7 @@
+ 				float num20 = base.Center.DirectionFrom(nPCAimedTarget.Center).ToRotation() - 0.47123894f * (float)spriteDirection;
+ 				if (spriteDirection == -1)
+ 				{
+-					num20 += (float)Math.PI;
++					num20 += MathF.PI;
+ 				}
+ 				bool flag2 = ai[1] < num3;
+ 				if (spriteDirection != direction && flag2)
+@@ -40533,7 +_,7 @@
+ 				float num12 = base.Center.DirectionTo(nPCAimedTarget.Center).ToRotation() - 0.47123894f * (float)spriteDirection;
+ 				if (spriteDirection == -1)
+ 				{
+-					num12 += (float)Math.PI;
++					num12 += MathF.PI;
+ 				}
+ 				if (spriteDirection != direction)
+ 				{
+@@ -40796,7 +_,7 @@
+ 					{
+ 						TargetClosest();
+ 						ai[2] = 0f;
+-						ai[0] = Main.rand.NextFloat() * ((float)Math.PI * 2f);
++						ai[0] = Main.rand.NextFloat() * (MathF.PI * 2f);
+ 						if (Distance(Main.player[target].Center) > 700f)
+ 						{
+ 							ai[0] = AngleTo(Main.player[target].Center) + Main.rand.NextFloatDirection() * 0.3f;
+@@ -40805,7 +_,7 @@
+ 					}
+ 				}
+ 				TargetClosest();
+-				ai[0] = Main.rand.NextFloat() * ((float)Math.PI * 2f);
++				ai[0] = Main.rand.NextFloat() * (MathF.PI * 2f);
+ 				if (Distance(Main.player[target].Center) > 700f)
+ 				{
+ 					ai[0] = AngleTo(Main.player[target].Center) + Main.rand.NextFloatDirection() * 0.3f;
+@@ -40860,7 +_,7 @@
+ 			}
+ 			if (collideX)
+ 			{
+-				ai[0] = 0f - ai[0] + (float)Math.PI;
++				ai[0] = 0f - ai[0] + MathF.PI;
+ 				velocity.X *= -0.2f;
+ 			}
+ 		}
+@@ -40878,7 +_,7 @@
+ 						TargetClosest();
+ 						velocity.Y = -1f;
+ 						ai[2] = 0f;
+-						ai[0] = Main.rand.NextFloat() * ((float)Math.PI / 4f) - (float)Math.PI / 2f;
++						ai[0] = Main.rand.NextFloat() * (MathF.PI / 4f) - MathF.PI / 2f;
+ 						if (Distance(Main.player[target].Center) > 700f)
+ 						{
+ 							ai[0] = AngleTo(Main.player[target].Center) + Main.rand.NextFloatDirection() * 0.3f;
+@@ -41542,12 +_,12 @@
+ 					float circleHeight = 22f;
+ 					if (num7 <= 65f)
+ 					{
+-						num6 = (float)Math.PI / 8f;
++						num6 = MathF.PI / 8f;
+ 						circleHeight = 14f;
+ 					}
+ 					else if (num7 <= 130f)
+ 					{
+-						num6 = -(float)Math.PI / 8f;
++						num6 = -MathF.PI / 8f;
+ 						circleHeight = 18f;
+ 					}
+ 					num6 *= (float)direction;
+@@ -41754,7 +_,7 @@
+ 					float num3 = ai[3] - 15f;
+ 					float num4 = 22f;
+ 					int num5 = (int)(num3 / 50f);
+-					num2 = (float)Math.Cos((float)num5 * 1f) * ((float)Math.PI * 2f) / 16f;
++					num2 = (float)Math.Cos((float)num5 * 1f) * (MathF.PI * 2f) / 16f;
+ 					num4 = (float)Math.Cos((float)num5 * 2f) * 10f + 8f;
+ 					num2 *= (float)direction;
+ 					Vector2 fairyCircleOffset = GetFairyCircleOffset(num3 / 50f, num2, num4);
+@@ -41910,7 +_,7 @@
+ 
+ 	private Vector2 GetFairyCircleOffset(float elapsedTime, float circleRotation, float circleHeight)
+ 	{
+-		return ((((float)Math.PI * 2f * elapsedTime + (float)Math.PI / 2f).ToRotationVector2() + new Vector2(0f, -1f)) * new Vector2(6 * -direction, circleHeight)).RotatedBy(circleRotation);
++		return (((MathF.PI * 2f * elapsedTime + MathF.PI / 2f).ToRotationVector2() + new Vector2(0f, -1f)) * new Vector2(6 * -direction, circleHeight)).RotatedBy(circleRotation);
+ 	}
+ 
+ 	private bool GetFairyTreasureCoords(out Point treasureCoords)
+@@ -42042,7 +_,7 @@
+ 		int num16 = 4;
+ 		float num17 = 6f;
+ 		float num18 = 20f;
+-		float num19 = (float)Math.PI * 2f / (float)(num15 / 2);
++		float num19 = MathF.PI * 2f / (float)(num15 / 2);
+ 		int num20 = 75;
+ 		Vector2 center = base.Center;
+ 		Player player = Main.player[target];
+@@ -42089,15 +_,15 @@
+ 		float num21 = (float)Math.Atan2(player.Center.Y - center.Y, player.Center.X - center.X);
+ 		if (spriteDirection == 1)
+ 		{
+-			num21 += (float)Math.PI;
++			num21 += MathF.PI;
+ 		}
+ 		if (num21 < 0f)
+ 		{
+-			num21 += (float)Math.PI * 2f;
++			num21 += MathF.PI * 2f;
+ 		}
+-		if (num21 > (float)Math.PI * 2f)
++		if (num21 > MathF.PI * 2f)
+ 		{
+-			num21 -= (float)Math.PI * 2f;
++			num21 -= MathF.PI * 2f;
+ 		}
+ 		if (ai[0] == -1f)
+ 		{
+@@ -42164,11 +_,11 @@
+ 		}
+ 		if (rotation < 0f)
+ 		{
+-			rotation += (float)Math.PI * 2f;
++			rotation += MathF.PI * 2f;
+ 		}
+-		if (rotation > (float)Math.PI * 2f)
++		if (rotation > MathF.PI * 2f)
+ 		{
+-			rotation -= (float)Math.PI * 2f;
++			rotation -= MathF.PI * 2f;
+ 		}
+ 		if (rotation > num21 - num22 && rotation < num21 + num22)
+ 		{
+@@ -42225,7 +_,7 @@
+ 				int num24 = 36;
+ 				for (int i = 0; i < num24; i++)
+ 				{
+-					Vector2 vector = (Vector2.Normalize(velocity) * new Vector2((float)width / 2f, height) * 0.75f * 0.5f).RotatedBy((float)(i - (num24 / 2 - 1)) * ((float)Math.PI * 2f) / (float)num24) + base.Center;
++					Vector2 vector = (Vector2.Normalize(velocity) * new Vector2((float)width / 2f, height) * 0.75f * 0.5f).RotatedBy((float)(i - (num24 / 2 - 1)) * (MathF.PI * 2f) / (float)num24) + base.Center;
+ 					Vector2 vector2 = vector - base.Center;
+ 					int num25 = Dust.NewDust(vector + vector2, 0, 0, 172, vector2.X * 2f, vector2.Y * 2f, 100, default(Color), 1.4f);
+ 					Main.dust[num25].noGravity = true;
+@@ -42287,12 +_,12 @@
+ 			{
+ 				if (ai[2] == 0f && num26 != direction)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 				}
+ 				direction = num26;
+ 				if (spriteDirection != -direction)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 				}
+ 				spriteDirection = -direction;
+ 			}
+@@ -42344,7 +_,7 @@
+ 							direction = num26;
+ 							if (spriteDirection == 1)
+ 							{
+-								rotation += (float)Math.PI;
++								rotation += MathF.PI;
+ 							}
+ 							spriteDirection = -direction;
+ 						}
+@@ -42378,7 +_,7 @@
+ 			for (int j = 0; j < num28; j++)
+ 			{
+ 				Vector2 vector4 = (Vector2.Normalize(velocity) * new Vector2((float)(width + 50) / 2f, height) * 0.75f).RotatedBy((double)(j - (num28 / 2 - 1)) * Math.PI / (double)(float)num28) + center;
+-				Vector2 vector5 = ((float)(Main.rand.NextDouble() * 3.1415927410125732) - (float)Math.PI / 2f).ToRotationVector2() * Main.rand.Next(3, 8);
++				Vector2 vector5 = ((float)(Main.rand.NextDouble() * 3.1415927410125732) - MathF.PI / 2f).ToRotationVector2() * Main.rand.Next(3, 8);
+ 				int num29 = Dust.NewDust(vector4 + vector5, 0, 0, 172, vector5.X * 2f, vector5.Y * 2f, 100, default(Color), 1.4f);
+ 				Main.dust[num29].noGravity = true;
+ 				Main.dust[num29].noLight = true;
+@@ -42453,7 +_,7 @@
+ 				direction = num30;
+ 				if (spriteDirection != -direction)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 				}
+ 				spriteDirection = -direction;
+ 			}
+@@ -42552,12 +_,12 @@
+ 			{
+ 				if (ai[2] == 0f && num31 != direction)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 				}
+ 				direction = num31;
+ 				if (spriteDirection != -direction)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 				}
+ 				spriteDirection = -direction;
+ 			}
+@@ -42605,7 +_,7 @@
+ 							direction = num31;
+ 							if (spriteDirection == 1)
+ 							{
+-								rotation += (float)Math.PI;
++								rotation += MathF.PI;
+ 							}
+ 							spriteDirection = -direction;
+ 						}
+@@ -42618,7 +_,7 @@
+ 							direction = num31;
+ 							if (spriteDirection == 1)
+ 							{
+-								rotation += (float)Math.PI;
++								rotation += MathF.PI;
+ 							}
+ 							spriteDirection = -direction;
+ 						}
+@@ -42646,7 +_,7 @@
+ 			for (int k = 0; k < num33; k++)
+ 			{
+ 				Vector2 vector10 = (Vector2.Normalize(velocity) * new Vector2((float)(width + 50) / 2f, height) * 0.75f).RotatedBy((double)(k - (num33 / 2 - 1)) * Math.PI / (double)(float)num33) + center;
+-				Vector2 vector11 = ((float)(Main.rand.NextDouble() * 3.1415927410125732) - (float)Math.PI / 2f).ToRotationVector2() * Main.rand.Next(3, 8);
++				Vector2 vector11 = ((float)(Main.rand.NextDouble() * 3.1415927410125732) - MathF.PI / 2f).ToRotationVector2() * Main.rand.Next(3, 8);
+ 				int num34 = Dust.NewDust(vector10 + vector11, 0, 0, 172, vector11.X * 2f, vector11.Y * 2f, 100, default(Color), 1.4f);
+ 				Main.dust[num34].noGravity = true;
+ 				Main.dust[num34].noLight = true;
+@@ -42677,7 +_,7 @@
+ 					Vector2 vector12 = Vector2.Normalize(velocity) * (width + 20) / 2f + center;
+ 					int num35 = NewNPC(GetSpawnSourceForNPCFromNPCAI(), (int)vector12.X, (int)vector12.Y + 45, 371);
+ 					Main.npc[num35].target = target;
+-					Main.npc[num35].velocity = Vector2.Normalize(velocity).RotatedBy((float)Math.PI / 2f * (float)direction) * num17;
++					Main.npc[num35].velocity = Vector2.Normalize(velocity).RotatedBy(MathF.PI / 2f * (float)direction) * num17;
+ 					Main.npc[num35].netUpdate = true;
+ 					Main.npc[num35].ai[3] = (float)Main.rand.Next(80, 121) / 100f;
+ 				}
+@@ -42782,7 +_,7 @@
+ 			{
+ 				if (ai[2] == 0f && num36 != direction)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 					for (int l = 0; l < oldPos.Length; l++)
+ 					{
+ 						oldPos[l] = Vector2.Zero;
+@@ -42791,7 +_,7 @@
+ 				direction = num36;
+ 				if (spriteDirection != -direction)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 				}
+ 				spriteDirection = -direction;
+ 			}
+@@ -42828,7 +_,7 @@
+ 							direction = num36;
+ 							if (spriteDirection == 1)
+ 							{
+-								rotation += (float)Math.PI;
++								rotation += MathF.PI;
+ 							}
+ 							spriteDirection = -direction;
+ 						}
+@@ -42859,7 +_,7 @@
+ 			for (int m = 0; m < num38; m++)
+ 			{
+ 				Vector2 vector13 = (Vector2.Normalize(velocity) * new Vector2((float)(width + 50) / 2f, height) * 0.75f).RotatedBy((double)(m - (num38 / 2 - 1)) * Math.PI / (double)(float)num38) + center;
+-				Vector2 vector14 = ((float)(Main.rand.NextDouble() * 3.1415927410125732) - (float)Math.PI / 2f).ToRotationVector2() * Main.rand.Next(3, 8);
++				Vector2 vector14 = ((float)(Main.rand.NextDouble() * 3.1415927410125732) - MathF.PI / 2f).ToRotationVector2() * Main.rand.Next(3, 8);
+ 				int num39 = Dust.NewDust(vector13 + vector14, 0, 0, 172, vector14.X * 2f, vector14.Y * 2f, 100, default(Color), 1.4f);
+ 				Main.dust[num39].noGravity = true;
+ 				Main.dust[num39].noLight = true;
+@@ -42908,7 +_,7 @@
+ 				{
+ 					if (ai[2] == 0f && num40 != direction)
+ 					{
+-						rotation += (float)Math.PI;
++						rotation += MathF.PI;
+ 						for (int n = 0; n < oldPos.Length; n++)
+ 						{
+ 							oldPos[n] = Vector2.Zero;
+@@ -42917,7 +_,7 @@
+ 					direction = num40;
+ 					if (spriteDirection != -direction)
+ 					{
+-						rotation += (float)Math.PI;
++						rotation += MathF.PI;
+ 					}
+ 					spriteDirection = -direction;
+ 				}
+@@ -43450,7 +_,7 @@
+ 			position = spinningpoint - base.Size / 2f + nPC.velocity;
+ 			velocity.X = 0f;
+ 			velocity.Y = 0f;
+-			rotation = num30 * 0.75f + (float)Math.PI;
++			rotation = num30 * 0.75f + MathF.PI;
+ 		}
+ 	}
+ 
+@@ -44902,7 +_,7 @@
+ 		if (type == 412)
+ 		{
+ 			position += netOffset;
+-			Vector2 vector3 = base.Center + (rotation - (float)Math.PI / 2f).ToRotationVector2() * 8f;
++			Vector2 vector3 = base.Center + (rotation - MathF.PI / 2f).ToRotationVector2() * 8f;
+ 			Vector2 vector4 = rotation.ToRotationVector2() * 16f;
+ 			Dust obj = Main.dust[Dust.NewDust(vector3 + vector4, 0, 0, 6, velocity.X, velocity.Y, 100, Color.Transparent, 1f + Main.rand.NextFloat() * 3f)];
+ 			obj.noGravity = true;
+@@ -45509,7 +_,7 @@
+ 			{
+ 				float num78 = Vector2.Distance(Main.player[target].Center, base.Center);
+ 				int num79 = 0;
+-				if (Vector2.Normalize(Main.player[target].Center - base.Center).ToRotation().AngleTowards(velocity.ToRotation(), (float)Math.PI / 2f) == velocity.ToRotation() && num78 < 350f)
++				if (Vector2.Normalize(Main.player[target].Center - base.Center).ToRotation().AngleTowards(velocity.ToRotation(), MathF.PI / 2f) == velocity.ToRotation() && num78 < 350f)
+ 				{
+ 					num79 = 4;
+ 				}
+@@ -46430,7 +_,7 @@
+ 			Lighting.AddLight(base.Center, Main.hslToRgb((float)Main.timeForVisualEffects / 360f % 1f, 0.6f, 0.65f).ToVector3() * Utils.Remap(ai[1], 30f, 90f, 0f, 0.7f));
+ 			if (Main.rand.NextFloat() > Utils.Remap(ai[1], 30f, 60f, 1f, 0.5f))
+ 			{
+-				Dust.NewDustPerfect(Main.rand.NextVector2FromRectangle(hitbox) + Main.rand.NextVector2Circular(8f, 0f) + new Vector2(0f, 4f), 309, new Vector2(0f, -2f).RotatedBy(num5 * ((float)Math.PI * 2f) * 0.11f), 0, default(Color), 1.7f - Math.Abs(num5) * 1.3f);
++				Dust.NewDustPerfect(Main.rand.NextVector2FromRectangle(hitbox) + Main.rand.NextVector2Circular(8f, 0f) + new Vector2(0f, 4f), 309, new Vector2(0f, -2f).RotatedBy(num5 * (MathF.PI * 2f) * 0.11f), 0, default(Color), 1.7f - Math.Abs(num5) * 1.3f);
+ 			}
+ 			if (ai[1] > 60f && Main.rand.Next(15) == 0)
+ 			{
+@@ -46440,7 +_,7 @@
+ 					ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.ShimmerBlock, new ParticleOrchestraSettings
+ 					{
+ 						PositionInWorld = vector,
+-						MovementVector = DirectionTo(vector).RotatedBy((float)Math.PI * 9f / 20f * (float)(Main.rand.Next(2) * 2 - 1)) * Main.rand.NextFloat()
++						MovementVector = DirectionTo(vector).RotatedBy(MathF.PI * 9f / 20f * (float)(Main.rand.Next(2) * 2 - 1)) * Main.rand.NextFloat()
+ 					});
+ 				}
+ 			}
+@@ -49568,7 +_,7 @@
+ 					bool flag3 = vector10.Length() < 30f;
+ 					if (!flag3)
+ 					{
+-						float x = ((float)Math.PI / 4f).ToRotationVector2().X;
++						float x = (MathF.PI / 4f).ToRotationVector2().X;
+ 						Vector2 vector11 = Vector2.Normalize(vector10);
+ 						if (vector11.X > x || vector11.X < 0f - x)
+ 						{
+@@ -54102,7 +_,7 @@
+ 		float num23 = num17 + (float)num21 + num22;
+ 		float num24 = 60f;
+ 		float num25 = 1f;
+-		float num26 = (float)Math.PI * 2f * (num25 / num24);
++		float num26 = MathF.PI * 2f * (num25 / num24);
+ 		float num27 = 0.1f;
+ 		float num28 = 32f;
+ 		float num29 = 90f;
+@@ -54178,7 +_,7 @@
+ 						rotation = vector2.ToRotation();
+ 						if (spriteDirection == -1)
+ 						{
+-							rotation += (float)Math.PI;
++							rotation += MathF.PI;
+ 						}
+ 						velocity = vector2 * num10;
+ 						break;
+@@ -54197,7 +_,7 @@
+ 						rotation = vector.ToRotation();
+ 						if (spriteDirection == -1)
+ 						{
+-							rotation += (float)Math.PI;
++							rotation += MathF.PI;
+ 						}
+ 						velocity = vector * num28;
+ 						break;
+@@ -54298,7 +_,7 @@
+ 				rotation = v.ToRotation();
+ 				if (spriteDirection == -1)
+ 				{
+-					rotation += (float)Math.PI;
++					rotation += MathF.PI;
+ 				}
+ 				velocity = v * num19;
+ 			}
+@@ -54439,7 +_,7 @@
+ 				{
+ 					for (int m = 0; m < 1; m++)
+ 					{
+-						Vector2 vector8 = base.Center + ((float)Math.PI * 2f * Main.rand.NextFloat()).ToRotationVector2() * new Vector2(2f, 1f) * 300f * (0.6f + Main.rand.NextFloat() * 0.4f);
++						Vector2 vector8 = base.Center + (MathF.PI * 2f * Main.rand.NextFloat()).ToRotationVector2() * new Vector2(2f, 1f) * 300f * (0.6f + Main.rand.NextFloat() * 0.4f);
+ 						if (Vector2.Distance(vector8, targetData.Center) > 100f)
+ 						{
+ 							Point point2 = vector8.ToPoint();
+@@ -54502,20 +_,20 @@
+ 				num46 = 0f;
+ 				if (spriteDirection == -1)
+ 				{
+-					num46 -= (float)Math.PI;
++					num46 -= MathF.PI;
+ 				}
+ 				if (ai[1] >= num13)
+ 				{
+-					num46 += (float)spriteDirection * (float)Math.PI / 12f;
++					num46 += (float)spriteDirection * MathF.PI / 12f;
+ 					num47 = 0.05f;
+ 				}
+ 				break;
+ 			case 4:
+ 				num47 = 0.01f;
+-				num46 = (float)Math.PI;
++				num46 = MathF.PI;
+ 				if (spriteDirection == 1)
+ 				{
+-					num46 += (float)Math.PI;
++					num46 += MathF.PI;
+ 				}
+ 				break;
+ 			case 6:
+@@ -54523,13 +_,13 @@
+ 				num46 = 0f;
+ 				if (spriteDirection == -1)
+ 				{
+-					num46 -= (float)Math.PI;
++					num46 -= MathF.PI;
+ 				}
+ 				break;
+ 		}
+ 		if (spriteDirection == -1)
+ 		{
+-			num46 += (float)Math.PI;
++			num46 += MathF.PI;
+ 		}
+ 		if (num47 != 0f)
+ 		{
+@@ -55565,7 +_,7 @@
+ 				localAI[0] += 1f;
+ 				if (localAI[0] > 60f && Main.rand.Next(10) == 0)
+ 				{
+-					Vector2 vec = base.Center + (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2() * 400f * (0.3f + 0.7f * Main.rand.NextFloat());
++					Vector2 vec = base.Center + (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2() * 400f * (0.3f + 0.7f * Main.rand.NextFloat());
+ 					Point point = vec.ToTileCoordinates();
+ 					if (!WorldGen.SolidTile(point.X, point.Y))
+ 					{
+@@ -56961,7 +_,7 @@
+ 					{
+ 						NPC nPC2 = Main.npc[item2];
+ 						Vector2 center2 = nPC2.Center;
+-						float num16 = (float)((num15 + flag5.ToInt() + 1) / 2) * ((float)Math.PI * 2f) * 0.4f / (float)list2.Count;
++						float num16 = (float)((num15 + flag5.ToInt() + 1) / 2) * (MathF.PI * 2f) * 0.4f / (float)list2.Count;
+ 						if (num15 % 2 == 1)
+ 						{
+ 							num16 *= -1f;
+@@ -57281,7 +_,7 @@
+ 					float[] array = new float[num29];
+ 					for (int num30 = 0; num30 < array.Length; num30++)
+ 					{
+-						array[num30] = Vector2.Distance(base.Center + spinningpoint.RotatedBy((float)num30 * ((float)Math.PI * 2f) / (float)num29 - (float)Math.PI / 2f), player.Center);
++						array[num30] = Vector2.Distance(base.Center + spinningpoint.RotatedBy((float)num30 * (MathF.PI * 2f) / (float)num29 - MathF.PI / 2f), player.Center);
+ 					}
+ 					int num31 = 0;
+ 					for (int num32 = 1; num32 < array.Length; num32++)
+@@ -57297,7 +_,7 @@
+ 					{
+ 						if (num31 != num34)
+ 						{
+-							Vector2 center6 = base.Center + spinningpoint.RotatedBy((float)num34 * ((float)Math.PI * 2f) / (float)num29 - (float)Math.PI / 2f);
++							Vector2 center6 = base.Center + spinningpoint.RotatedBy((float)num34 * (MathF.PI * 2f) / (float)num29 - MathF.PI / 2f);
+ 							if (num33-- > 0)
+ 							{
+ 								int num35 = NewNPC(GetSpawnSourceForNPCFromNPCAI(), (int)center6.X, (int)center6.Y + height / 2, 440, whoAmI);
+@@ -57314,7 +_,7 @@
+ 						}
+ 					}
+ 					this.ai[2] = Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, 0f, 0f, 490, 0, 0f, Main.myPlayer, 0f, whoAmI);
+-					base.Center += spinningpoint.RotatedBy((float)num31 * ((float)Math.PI * 2f) / (float)num29 - (float)Math.PI / 2f);
++					base.Center += spinningpoint.RotatedBy((float)num31 * (MathF.PI * 2f) / (float)num29 - MathF.PI / 2f);
+ 					netUpdate = true;
+ 					list6.Clear();
+ 				}
+@@ -57526,12 +_,12 @@
+ 					}
+ 					Vector2 vector15 = base.Center + new Vector2(direction * 30, 12f);
+ 					float num46 = 8f;
+-					float num47 = (float)Math.PI * 2f / 25f;
++					float num47 = MathF.PI * 2f / 25f;
+ 					for (int num48 = 0; (float)num48 < 5f; num48++)
+ 					{
+ 						Vector2 spinningpoint2 = vec3 * num46;
+-						spinningpoint2 = spinningpoint2.RotatedBy(num47 * (float)num48 - ((float)Math.PI * 2f / 5f - num47) / 2f);
++						spinningpoint2 = spinningpoint2.RotatedBy(num47 * (float)num48 - (MathF.PI * 2f / 5f - num47) / 2f);
+-						float ai = (Main.rand.NextFloat() - 0.5f) * 0.3f * ((float)Math.PI * 2f) / 60f;
++						float ai = (Main.rand.NextFloat() - 0.5f) * 0.3f * (MathF.PI * 2f) / 60f;
+ 						int num49 = NewNPC(GetSpawnSourceForNPCFromNPCAI(), (int)vector15.X, (int)vector15.Y + 7, 522, 0, 0f, ai, spinningpoint2.X, spinningpoint2.Y);
+ 						Main.npc[num49].velocity = spinningpoint2;
+ 						Main.npc[num49].netUpdate = true;
+@@ -57781,13 +_,13 @@
+ 		{
+ 			spriteDirection = -Math.Sign(velocity.X);
+ 		}
+-		if (rotation < -(float)Math.PI / 2f)
++		if (rotation < -MathF.PI / 2f)
+ 		{
+-			rotation += (float)Math.PI;
++			rotation += MathF.PI;
+ 		}
+-		if (rotation > (float)Math.PI / 2f)
++		if (rotation > MathF.PI / 2f)
+ 		{
+-			rotation -= (float)Math.PI;
++			rotation -= MathF.PI;
+ 		}
+ 		num13 *= num12;
+ 		if (Main.expertMode)
+@@ -57810,7 +_,7 @@
+ 				flag6 = true;
+ 			}
+ 			float num22 = 8f;
+-			flag6 = flag6 && vector.ToRotation() > (float)Math.PI / num22 && vector.ToRotation() < (float)Math.PI - (float)Math.PI / num22;
++			flag6 = flag6 && vector.ToRotation() > MathF.PI / num22 && vector.ToRotation() < MathF.PI - MathF.PI / num22;
+ 			if (num21 > num4 || !flag6)
+ 			{
+ 				velocity.X = (velocity.X * (num5 - 1f) + vector2.X) / num5;
+@@ -58493,7 +_,7 @@
+ 			}
+ 			if (Main.rand.Next(80) == 0)
+ 			{
+-				Vector2 vector2 = (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2();
++				Vector2 vector2 = (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2();
+ 				Dust dust2 = Dust.NewDustPerfect(base.Center, 272, vector2);
+ 				dust2.velocity *= 1.1f;
+ 				dust2.noGravity = true;
+@@ -58670,7 +_,7 @@
+ 		float num = rotation + 0.47123894f * (float)spriteDirection;
+ 		if (spriteDirection == -1)
+ 		{
+-			num += (float)Math.PI;
++			num += MathF.PI;
+ 		}
+ 		mouthDirection = num.ToRotationVector2();
+ 		mouthPosition = base.Center + mouthDirection * 50f;
+@@ -60066,7 +_,7 @@
+ 				float num45 = velocity.ToRotation();
+ 				if (velocity.X < 0f)
+ 				{
+-					num45 += (float)Math.PI;
++					num45 += MathF.PI;
+ 				}
+ 				if (ai[0] != 2f)
+ 				{
+@@ -60114,7 +_,7 @@
+ 				float num230 = velocity.ToRotation();
+ 				if (velocity.X < 0f)
+ 				{
+-					num230 += (float)Math.PI;
++					num230 += MathF.PI;
+ 				}
+ 				rotation = rotation.AngleTowards(num230, 0.02f);
+ 				if (ai[0] != 0f)
+@@ -60678,15 +_,15 @@
+ 						spriteDirection = direction;
+ 					}
+ 					float num223 = (float)Math.Atan2(velocity.Y * (float)direction, velocity.X * (float)direction);
+-					if (Math.Abs(rotation - num223) >= (float)Math.PI)
++					if (Math.Abs(rotation - num223) >= MathF.PI)
+ 					{
+ 						if (num223 < rotation)
+ 						{
+-							rotation -= (float)Math.PI * 2f;
++							rotation -= MathF.PI * 2f;
+ 						}
+ 						else
+ 						{
+-							rotation += (float)Math.PI * 2f;
++							rotation += MathF.PI * 2f;
+ 						}
+ 					}
+ 					rotation = (rotation * 4f + num223) / 5f;
+@@ -77718,12 +_,12 @@
+ 		else if (oldType == 406 && newType == 405)
+ 		{
+ 			float num3 = Main.rand.Next(10, 21);
+-			float num4 = (float)Math.PI * 2f * Main.rand.NextFloat();
++			float num4 = MathF.PI * 2f * Main.rand.NextFloat();
+ 			Vector2 vector = new Vector2(22f, 22f);
+ 			for (float num5 = 0f; num5 < num3; num5 += 1f)
+ 			{
+ 				Dust dust = Main.dust[Dust.NewDust(base.Center, 0, 0, 229)];
+-				Vector2 vector2 = Vector2.UnitY.RotatedBy(num5 * ((float)Math.PI * 2f) / num3 + num4);
++				Vector2 vector2 = Vector2.UnitY.RotatedBy(num5 * (MathF.PI * 2f) / num3 + num4);
+ 				dust.position = base.Center + vector2 * vector / 2f;
+ 				dust.velocity = vector2;
+ 				dust.noGravity = true;
+@@ -79042,9 +_,9 @@
+ 					Gore.NewGore(position + new Vector2(0f, 0f), velocity, 1005 + ((Main.rand.Next(5) == 0) ? 1 : 0), scale);
+ 					Gore.NewGore(position + new Vector2(18f, 28f), velocity, 1000, scale);
+ 					int num73 = Gore.NewGore(position + new Vector2(-40f, 70f), velocity, 1001, scale);
+-					Main.gore[num73].rotation = (float)Math.PI;
++					Main.gore[num73].rotation = MathF.PI;
+ 					num73 = Gore.NewGore(position + new Vector2(4f, 28f), velocity, 1002, scale);
+-					Main.gore[num73].rotation = (float)Math.PI;
++					Main.gore[num73].rotation = MathF.PI;
+ 					Gore.NewGore(position + new Vector2(36f, 90f), velocity, 1003, scale);
+ 					Gore.NewGore(position + new Vector2(32f, 90f), velocity, 1004, scale);
+ 				}
+@@ -79698,7 +_,7 @@
+ 			{
+ 				int num131 = Dust.NewDust(base.Center, 0, 0, 66, 0f, 0f, 0, Color.Transparent);
+ 				Main.dust[num131].position = base.Center;
+-				Main.dust[num131].velocity = spinningpoint.RotatedBy((float)Math.PI * 2f * num130 / num129) * vector14 * (0.8f + Main.rand.NextFloat() * 0.4f) * 2f;
++				Main.dust[num131].velocity = spinningpoint.RotatedBy(MathF.PI * 2f * num130 / num129) * vector14 * (0.8f + Main.rand.NextFloat() * 0.4f) * 2f;
+ 				Main.dust[num131].color = Color.SkyBlue;
+ 				Main.dust[num131].noGravity = true;
+ 				Dust dust = Main.dust[num131];
+@@ -80105,7 +_,7 @@
+ 				for (int num165 = 0; (double)num165 < 10.0 + dmg / 10.0; num165++)
+ 				{
+ 					int num166 = width / 4;
+-					Vector2 vector16 = ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * Main.rand.Next(24, 41) / 8f;
++					Vector2 vector16 = ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * Main.rand.Next(24, 41) / 8f;
+ 					int num167 = Dust.NewDust(base.Center - Vector2.One * num166, num166 * 2, num166 * 2, 229);
+ 					Dust dust45 = Main.dust[num167];
+ 					Vector2 vector17 = Vector2.Normalize(dust45.position - base.Center);
+@@ -80127,7 +_,7 @@
+ 				for (int num168 = 0; num168 < 60; num168++)
+ 				{
+ 					int num169 = width / 4;
+-					Vector2 vector18 = ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * Main.rand.Next(24, 41) / 8f;
++					Vector2 vector18 = ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * Main.rand.Next(24, 41) / 8f;
+ 					int num170 = Dust.NewDust(base.Center - Vector2.One * num169, num169 * 2, num169 * 2, 229);
+ 					Dust dust46 = Main.dust[num170];
+ 					Vector2 vector19 = Vector2.Normalize(dust46.position - base.Center);
+@@ -80419,7 +_,7 @@
+ 				{
+ 					for (int num197 = 0; num197 < 4; num197++)
+ 					{
+-						float num198 = (float)(num197 < 2).ToDirectionInt() * ((float)Math.PI / 8f + (float)Math.PI / 4f * Main.rand.NextFloat());
++						float num198 = (float)(num197 < 2).ToDirectionInt() * (MathF.PI / 8f + MathF.PI / 4f * Main.rand.NextFloat());
+ 						Vector2 vector23 = new Vector2(0f, (0f - Main.rand.NextFloat()) * 0.5f - 0.5f).RotatedBy(num198) * 6f;
+ 						Projectile.NewProjectile(GetSpawnSource_ForProjectile(), base.Center.X, base.Center.Y, vector23.X, vector23.Y, 594, 0, 0f, Main.myPlayer);
+ 					}
+@@ -80956,7 +_,7 @@
+ 				for (int num267 = 0; num267 < 60; num267++)
+ 				{
+ 					int num268 = 25;
+-					Vector2 vector24 = ((float)Main.rand.NextDouble() * ((float)Math.PI * 2f)).ToRotationVector2() * Main.rand.Next(24, 41) / 8f;
++					Vector2 vector24 = ((float)Main.rand.NextDouble() * (MathF.PI * 2f)).ToRotationVector2() * Main.rand.Next(24, 41) / 8f;
+ 					int num269 = Dust.NewDust(base.Center - Vector2.One * num268, num268 * 2, num268 * 2, 212);
+ 					Dust dust61 = Main.dust[num269];
+ 					Vector2 vector25 = Vector2.Normalize(dust61.position - base.Center);

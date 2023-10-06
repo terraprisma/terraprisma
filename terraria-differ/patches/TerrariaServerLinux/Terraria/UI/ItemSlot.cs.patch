@@ -1,0 +1,33 @@
+--- decompiled/TerrariaServerWindows/Terraria/UI/ItemSlot.cs
++++ decompiled/TerrariaServerLinux/Terraria/UI/ItemSlot.cs
+@@ -2967,8 +_,8 @@
+ 		num4 *= 0.785f;
+ 		Color color = Color.White * num4 * num;
+ 		value = TextureAssets.HotbarRadial[1].Value;
+-		float num5 = (float)Math.PI * 2f / (float)radial.RadialCount;
++		float num5 = MathF.PI * 2f / (float)radial.RadialCount;
+-		float num6 = -(float)Math.PI / 2f;
++		float num6 = -MathF.PI / 2f;
+ 		for (int i = 0; i < radial.RadialCount; i++)
+ 		{
+ 			int num7 = radial.Bindings[i];
+@@ -3005,8 +_,8 @@
+ 		float num4 = 1f - (1f - num3) * (1f - num3);
+ 		num4 *= 0.785f;
+ 		Color color = Color.White * num4 * num;
+-		float num5 = (float)Math.PI * 2f / (float)player.QuicksRadial.RadialCount;
++		float num5 = MathF.PI * 2f / (float)player.QuicksRadial.RadialCount;
+-		float num6 = -(float)Math.PI / 2f;
++		float num6 = -MathF.PI / 2f;
+ 		Item item = player.QuickHeal_GetItemToUse();
+ 		Item item2 = player.QuickMana_GetItemToUse();
+ 		Item item3 = null;
+@@ -3084,7 +_,7 @@
+ 			int num3 = player.DpadRadial.Bindings[i];
+ 			if (num3 != -1)
+ 			{
+-				Draw(sb, player.inventory, 14, num3, position + new Vector2(value.Width / 3, 0f).RotatedBy(-(float)Math.PI / 2f + (float)Math.PI / 2f * (float)i) + new Vector2(-26f * Main.inventoryScale), Color.White);
++				Draw(sb, player.inventory, 14, num3, position + new Vector2(value.Width / 3, 0f).RotatedBy(-MathF.PI / 2f + MathF.PI / 2f * (float)i) + new Vector2(-26f * Main.inventoryScale), Color.White);
+ 			}
+ 		}
+ 	}

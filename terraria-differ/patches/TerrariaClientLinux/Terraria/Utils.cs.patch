@@ -1,0 +1,170 @@
+--- decompiled/TerrariaClientWindows/Terraria/Utils.cs
++++ decompiled/TerrariaClientLinux/Terraria/Utils.cs
+@@ -160,7 +_,7 @@
+ 
+ 	public static float Turn01ToCyclic010(float value)
+ 	{
+-		return 1f - ((float)Math.Cos(value * ((float)Math.PI * 2f)) * 0.5f + 0.5f);
++		return 1f - ((float)Math.Cos(value * (MathF.PI * 2f)) * 0.5f + 0.5f);
+ 	}
+ 
+ 	public static float PingPongFrom01To010(float value)
+@@ -368,7 +_,7 @@
+ 
+ 	public static Vector2 GetDayTimeAsDirectionIn24HClock(float timeFrom0To24)
+ 	{
+-		return new Vector2(0f, -1f).RotatedBy(timeFrom0To24 / 24f * ((float)Math.PI * 2f));
++		return new Vector2(0f, -1f).RotatedBy(timeFrom0To24 / 24f * (MathF.PI * 2f));
+ 	}
+ 
+ 	public static string[] ConvertMonoArgsToDotNet(string[] brokenArgs)
+@@ -442,14 +_,14 @@
+ 		List<TextSnippet> list2 = new List<TextSnippet>();
+ 		foreach (TextSnippet textSnippet in array)
+ 		{
+-			string[] array2 = textSnippet.Text.Split('\n');
++			string[] array2 = textSnippet.Text.Split(new char[1] { '\n' });
+ 			for (int j = 0; j < array2.Length - 1; j++)
+ 			{
+ 				list2.Add(textSnippet.CopyMorph(array2[j]));
+ 				list.Add(list2);
+ 				list2 = new List<TextSnippet>();
+ 			}
+-			list2.Add(textSnippet.CopyMorph(array2[array2.Length - 1]));
++			list2.Add(textSnippet.CopyMorph(array2[^1]));
+ 		}
+ 		list.Add(list2);
+ 		if (maxWidth != -1)
+@@ -473,7 +_,7 @@
+ 						{
+ 							num3 = 0;
+ 						}
+-						string[] array3 = list3[l].Text.Split(' ');
++						string[] array3 = list3[l].Text.Split(new char[1] { ' ' });
+ 						int num4 = num3;
+ 						if (array3.Length > 1)
+ 						{
+@@ -523,12 +_,12 @@
+ 	{
+ 		string[] array = new string[maxLines];
+ 		int num = 0;
+-		List<string> list = new List<string>(text.Split('\n'));
+-		List<string> list2 = new List<string>(list[0].Split(' '));
++		List<string> list = new List<string>(text.Split(new char[1] { '\n' }));
++		List<string> list2 = new List<string>(list[0].Split(new char[1] { ' ' }));
+ 		for (int i = 1; i < list.Count && i < maxLines; i++)
+ 		{
+ 			list2.Add("\n");
+-			list2.AddRange(list[i].Split(' '));
++			list2.AddRange(list[i].Split(new char[1] { ' ' }));
+ 		}
+ 		bool flag = true;
+ 		while (list2.Count > 0)
+@@ -697,7 +_,7 @@
+ 		int num = Main.rand.Next(3, 7);
+ 		for (int i = 0; i < num; i++)
+ 		{
+-			int num2 = Gore.NewGore(position, (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2() * new Vector2(2f, 0.7f) * 0.7f, Main.rand.Next(11, 14));
++			int num2 = Gore.NewGore(position, (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2() * new Vector2(2f, 0.7f) * 0.7f, Main.rand.Next(11, 14));
+ 			Main.gore[num2].scale = 0.7f;
+ 			Main.gore[num2].velocity *= 0.5f;
+ 		}
+@@ -705,7 +_,7 @@
+ 		{
+ 			Dust obj = Main.dust[Dust.NewDust(position, 14, 14, 16, 0f, 0f, 100, default(Color), 1.5f)];
+ 			obj.position += new Vector2(5f);
+-			obj.velocity = (Main.rand.NextFloat() * ((float)Math.PI * 2f)).ToRotationVector2() * new Vector2(2f, 0.7f) * 0.7f * (0.5f + 0.5f * Main.rand.NextFloat());
++			obj.velocity = (Main.rand.NextFloat() * (MathF.PI * 2f)).ToRotationVector2() * new Vector2(2f, 0.7f) * 0.7f * (0.5f + 0.5f * Main.rand.NextFloat());
+ 		}
+ 	}
+ 
+@@ -837,7 +_,7 @@
+ 		return new Vector2((float)rect.X + r.NextFloat() * (float)rect.Width, (float)rect.Y + r.NextFloat() * (float)rect.Height);
+ 	}
+ 
+-	public static Vector2 NextVector2Unit(this UnifiedRandom r, float startRotation = 0f, float rotationRange = (float)Math.PI * 2f)
++	public static Vector2 NextVector2Unit(this UnifiedRandom r, float startRotation = 0f, float rotationRange = MathF.PI * 2f)
+ 	{
+ 		return (startRotation + rotationRange * r.NextFloat()).ToRotationVector2();
+ 	}
+@@ -1325,7 +_,7 @@
+ 	{
+ 		float num = currentVelocity.Length();
+ 		float targetAngle = currentPosition.AngleTo(targetPosition);
+-		return currentVelocity.ToRotation().AngleTowards(targetAngle, (float)Math.PI / 180f).ToRotationVector2() * num;
++		return currentVelocity.ToRotation().AngleTowards(targetAngle, MathF.PI / 180f).ToRotationVector2() * num;
+ 	}
+ 
+ 	public static float Distance(this Vector2 Origin, Vector2 Target)
+@@ -1421,7 +_,7 @@
+ 		float angle;
+ 		if (targetAngle < curAngle)
+ 		{
+-			float num = targetAngle + (float)Math.PI * 2f;
++			float num = targetAngle + MathF.PI * 2f;
+ 			angle = ((num - curAngle > curAngle - targetAngle) ? MathHelper.Lerp(curAngle, targetAngle, amount) : MathHelper.Lerp(curAngle, num, amount));
+ 		}
+ 		else
+@@ -1430,7 +_,7 @@
+ 			{
+ 				return curAngle;
+ 			}
+-			float num = targetAngle - (float)Math.PI * 2f;
++			float num = targetAngle - MathF.PI * 2f;
+ 			angle = ((targetAngle - curAngle > curAngle - num) ? MathHelper.Lerp(curAngle, num, amount) : MathHelper.Lerp(curAngle, targetAngle, amount));
+ 		}
+ 		return MathHelper.WrapAngle(angle);
+@@ -1442,14 +_,14 @@
+ 		targetAngle = MathHelper.WrapAngle(targetAngle);
+ 		if (curAngle < targetAngle)
+ 		{
+-			if (targetAngle - curAngle > (float)Math.PI)
++			if (targetAngle - curAngle > MathF.PI)
+ 			{
+-				curAngle += (float)Math.PI * 2f;
++				curAngle += MathF.PI * 2f;
+ 			}
+ 		}
+-		else if (curAngle - targetAngle > (float)Math.PI)
++		else if (curAngle - targetAngle > MathF.PI)
+ 		{
+-			curAngle -= (float)Math.PI * 2f;
++			curAngle -= MathF.PI * 2f;
+ 		}
+ 		curAngle += MathHelper.Clamp(targetAngle - curAngle, 0f - maxChange, maxChange);
+ 		return MathHelper.WrapAngle(curAngle);
+@@ -1944,7 +_,7 @@
+ 		Vector2 vector = start;
+ 		Vector2 vector2 = Vector2.Normalize(end - start);
+ 		float num = (end - start).Length();
+-		float rotation = vector2.ToRotation() - (float)Math.PI / 2f;
++		float rotation = vector2.ToRotation() - MathF.PI / 2f;
+ 		if (vector2.HasNaNs())
+ 		{
+ 			return;
+@@ -2058,7 +_,7 @@
+ 		else
+ 		{
+ 			flag = true;
+-			rot -= (float)Math.PI * 3f / 4f;
++			rot -= MathF.PI * 3f / 4f;
+ 		}
+ 		if (cursorSlot == 4 || cursorSlot == 5)
+ 		{
+@@ -2069,13 +_,13 @@
+ 				float num = rot;
+ 				if (num < 0f)
+ 				{
+-					num += (float)Math.PI * 2f;
++					num += MathF.PI * 2f;
+ 				}
+ 				for (float num2 = 0f; num2 < 4f; num2 += 1f)
+ 				{
+-					if (Math.Abs(num - (float)Math.PI / 2f * num2) <= (float)Math.PI / 4f)
++					if (Math.Abs(num - MathF.PI / 2f * num2) <= MathF.PI / 4f)
+ 					{
+-						rot = (float)Math.PI / 2f * num2;
++						rot = MathF.PI / 2f * num2;
+ 						break;
+ 					}
+ 				}

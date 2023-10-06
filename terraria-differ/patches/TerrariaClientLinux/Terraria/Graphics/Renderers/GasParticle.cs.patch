@@ -1,0 +1,11 @@
+--- decompiled/TerrariaClientWindows/Terraria/Graphics/Renderers/GasParticle.cs
++++ decompiled/TerrariaClientLinux/Terraria/Graphics/Renderers/GasParticle.cs
+@@ -57,7 +_,7 @@
+ 		float fromValue = _timeSinceSpawn / TimeToLive;
+ 		Scale = Vector2.One * InitialScale * Utils.Remap(fromValue, 0f, 0.95f, 1f, 1.3f);
+ 		Opacity = MathHelper.Clamp(Utils.Remap(fromValue, 0f, FadeInNormalizedTime, 0f, 1f) * Utils.Remap(fromValue, FadeOutNormalizedTime, 1f, 1f, 0f), 0f, 1f) * 0.85f;
+-		Rotation = (float)_internalIndentifier * 0.4002029f + _timeSinceSpawn * ((float)Math.PI * 2f) / 480f * 0.5f;
++		Rotation = (float)_internalIndentifier * 0.4002029f + _timeSinceSpawn * (MathF.PI * 2f) / 480f * 0.5f;
+ 		Velocity *= SlowdownScalar;
+ 		if (LightColorTint != Color.Transparent)
+ 		{

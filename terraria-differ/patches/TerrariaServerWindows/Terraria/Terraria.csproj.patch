@@ -1,0 +1,33 @@
+--- decompiled/TerrariaClientWindows/Terraria/Terraria.csproj
++++ decompiled/TerrariaServerWindows/Terraria/Terraria.csproj
+@@ -6,7 +_,7 @@
+     <Version>1.4.4.9</Version>
+     <Company>Re-Logic</Company>
+     <Company>Copyright © 2022 Re-Logic</Company>
+-    <RootNamespace>Terraria</RootNamespace>
++    <RootNamespace>TerrariaServer</RootNamespace>
+   </PropertyGroup>
+   <ItemGroup>
+     <Reference Include="CsvHelper" />
+@@ -15,14 +_,11 @@
+     <Reference Include="Microsoft.Xna.Framework.Game" />
+     <Reference Include="Microsoft.Xna.Framework.Graphics" />
+     <Reference Include="Microsoft.Xna.Framework.Xact" />
+-    <Reference Include="MP3Sharp" />
+     <Reference Include="Newtonsoft.Json" />
+-    <Reference Include="NVorbis" />
+     <Reference Include="RailSDK.Net" />
+     <ProjectReference Include="../ReLogic/ReLogic.csproj" />
+     <EmbeddedResource Include="../ReLogic/bin/$(Configuration)/$(TargetFramework)/ReLogic.dll" />
+     <Reference Include="Steamworks.NET" />
+-    <Reference Include="SteelSeriesEngineWrapper" />
+     <Reference Include="System" />
+     <Reference Include="System.Core" />
+     <Reference Include="System.Drawing" />
+@@ -37,6 +_,5 @@
+     <EmbeddedResource Include="IO/Data/*" />
+     <EmbeddedResource Include="Libraries/**" />
+     <EmbeddedResource Include="Localization/Content/**" />
+-    <EmbeddedResource Include="Microsoft/**" />
+   </ItemGroup>
+ </Project>

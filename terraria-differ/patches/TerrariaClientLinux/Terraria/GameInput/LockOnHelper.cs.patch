@@ -1,0 +1,25 @@
+--- decompiled/TerrariaClientWindows/Terraria/GameInput/LockOnHelper.cs
++++ decompiled/TerrariaClientLinux/Terraria/GameInput/LockOnHelper.cs
+@@ -423,7 +_,7 @@
+ 		t.A = 220;
+ 		Color t2 = Main.OurFavoriteColor;
+ 		t2.A = 220;
+-		float num = 0.94f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f)) * 0.06f;
++		float num = 0.94f + (float)Math.Sin(Main.GlobalTimeWrappedHourly * (MathF.PI * 2f)) * 0.06f;
+ 		t2 *= num;
+ 		t *= num;
+ 		Utils.Swap(ref t, ref t2);
+@@ -480,11 +_,11 @@
+ 				}
+ 				for (int j = 0; (float)j < num13; j++)
+ 				{
+-					float num14 = (float)Math.PI * 2f / num13 * (float)j + Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f) * 0.25f;
++					float num14 = MathF.PI * 2f / num13 * (float)j + Main.GlobalTimeWrappedHourly * (MathF.PI * 2f) * 0.25f;
+ 					Vector2 vector2 = new Vector2(0f, num12 / 2).RotatedBy(num14);
+ 					Vector2 pos3 = vector + vector2 - Main.screenPosition;
+ 					pos3 = Main.ReverseGravitySupport(pos3);
+-					float rotation = num14 * (float)((gravDir == 1f) ? 1 : (-1)) + (float)Math.PI * (float)((gravDir == 1f) ? 1 : 0);
++					float rotation = num14 * (float)((gravDir == 1f) ? 1 : (-1)) + MathF.PI * (float)((gravDir == 1f) ? 1 : 0);
+ 					spriteBatch.Draw(value, pos3, rectangle, t * num11, rotation, rectangle.Size() / 2f, new Vector2(0.58f, 1f) * num2 * num5 * (1f + num11) / 2f, SpriteEffects.None, 0f);
+ 					spriteBatch.Draw(value, pos3, rectangle2, t2 * num11 * num11, rotation, rectangle2.Size() / 2f, new Vector2(0.58f, 1f) * num2 * num5 * (1f + num11) / 2f, SpriteEffects.None, 0f);
+ 				}

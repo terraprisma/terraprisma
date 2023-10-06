@@ -1,0 +1,61 @@
+--- decompiled/TerrariaClientWindows/Terraria/Social/Steam/WorkshopSocialModule.cs
++++ decompiled/TerrariaClientMac/Terraria/Social/Steam/WorkshopSocialModule.cs
+@@ -28,7 +_,9 @@
+ 		_publisherInstances = new List<WorkshopHelper.UGCBased.APublisherInstance>();
+ 		base.ProgressReporter = new WorkshopProgressReporter(_publisherInstances);
+ 		base.SupportedTags = new SupportedWorkshopTags();
+-		_contentBaseFolder = Main.SavePath + Path.DirectorySeparatorChar + "Workshop";
++		string savePath = Main.SavePath;
++		char directorySeparatorChar = Path.DirectorySeparatorChar;
++		_contentBaseFolder = savePath + directorySeparatorChar + "Workshop";
+ 		_downloader = WorkshopHelper.UGCBased.Downloader.Create();
+ 		_publishedItems = WorkshopHelper.UGCBased.PublishedItemsFinder.Create();
+ 		WorkshopIssueReporter workshopIssueReporter = new WorkshopIssueReporter();
+@@ -66,7 +_,11 @@
+ 
+ 	public override List<string> GetListOfSubscribedWorldPaths()
+ 	{
+-		return _downloader.WorldPaths.Select((string folderPath) => folderPath + Path.DirectorySeparatorChar + "world.wld").ToList();
++		return _downloader.WorldPaths.Select(delegate(string folderPath)
++		{
++			char directorySeparatorChar = Path.DirectorySeparatorChar;
++			return folderPath + directorySeparatorChar + "world.wld";
++		}).ToList();
+ 	}
+ 
+ 	public override List<string> GetListOfSubscribedResourcePackPaths()
+@@ -158,7 +_,13 @@
+ 
+ 	private string GetTemporaryFolderPath()
+ 	{
+-		return string.Concat(str2: SteamUser.GetSteamID().m_SteamID.ToString(), str0: _contentBaseFolder, str1: Path.DirectorySeparatorChar.ToString(), str3: Path.DirectorySeparatorChar.ToString());
++		ulong steamID = SteamUser.GetSteamID().m_SteamID;
++		string contentBaseFolder = _contentBaseFolder;
++		char directorySeparatorChar = Path.DirectorySeparatorChar;
++		string text = directorySeparatorChar.ToString();
++		string text2 = steamID.ToString();
++		directorySeparatorChar = Path.DirectorySeparatorChar;
++		return contentBaseFolder + text + text2 + directorySeparatorChar;
+ 	}
+ 
+ 	private bool MakeTemporaryFolder(string temporaryFolderPath)
+@@ -196,7 +_,8 @@
+ 		{
+ 			return false;
+ 		}
++		char directorySeparatorChar = Path.DirectorySeparatorChar;
+-		if (AWorkshopEntry.TryReadingManifest(text + Path.DirectorySeparatorChar + "workshop.json", out info))
++		if (AWorkshopEntry.TryReadingManifest(text + directorySeparatorChar + "workshop.json", out info))
+ 		{
+ 			return true;
+ 		}
+@@ -211,7 +_,8 @@
+ 		{
+ 			return false;
+ 		}
++		char directorySeparatorChar = Path.DirectorySeparatorChar;
+-		if (AWorkshopEntry.TryReadingManifest(fullPath + Path.DirectorySeparatorChar + "workshop.json", out info))
++		if (AWorkshopEntry.TryReadingManifest(fullPath + directorySeparatorChar + "workshop.json", out info))
+ 		{
+ 			return true;
+ 		}
