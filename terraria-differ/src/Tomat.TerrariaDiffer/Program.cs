@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using DotnetPatcher.Decompile;
 using DotnetPatcher.Diff;
 
@@ -55,7 +57,6 @@ internal static class Program {
         }
 
         DecompileAndDiff(decompilation_configuration);
-        
     }
 
     private static void NullifyInstance(Type type) {
