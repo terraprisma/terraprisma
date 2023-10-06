@@ -6,7 +6,6 @@ using System.Reflection;
 using Mono.Cecil;
 using MonoMod;
 using MethodBody = Mono.Cecil.Cil.MethodBody;
-using MethodImplAttributes = Mono.Cecil.MethodImplAttributes;
 
 namespace Tomat.TerrariaModernizer;
 
@@ -15,7 +14,9 @@ namespace Tomat.TerrariaModernizer;
 ///     relinking it to FNA and updating to .NET 7.0.
 /// </summary>
 public sealed class ModernizerModder : MonoModder {
-    private static readonly string[] libs_to_remove = { "mscorlib", "System.Core", "System", "Microsoft.Xna.Framework", "System.Windows.Forms", "Microsoft.Xna.Framework.Graphics", "Microsoft.Xna.Framework.Game", "System.Drawing" };
+    private static readonly string[] libs_to_remove = { "System.Core", "System", "Microsoft.Xna.Framework", "System.Windows.Forms", "Microsoft.Xna.Framework.Graphics", "Microsoft.Xna.Framework.Game", "System.Drawing" };
+
+    private static readonly string[] private_system_libraries = { "System.Private.CoreLib" };
 
     private static readonly Dictionary<string, string> assembly_remap = new() {
         { "CsvHelper", "CsvHelper" },
@@ -47,38 +48,30 @@ public sealed class ModernizerModder : MonoModder {
 
         AddReference("System.Runtime");
         AddReference(Assembly.GetExecutingAssembly().GetName());
+        // Module.ImportReference(typeof(object));
 
         base.MapDependencies();
     }
 
     public override IMetadataTokenProvider Relinker(IMetadataTokenProvider mtp, IGenericParameterProvider context) {
+        // Module.AssemblyReferences.Remove(Module.AssemblyReferences.FirstOrDefault(x => x.Name == lib));
+
         var relinkedMember = base.Relinker(mtp, context);
 
-        if (relinkedMember is TypeReference type && libs_to_remove.Contains(type.Scope.Name))
+        if (relinkedMember is TypeReference type && libs_to_remove.Contains(type.Scope.Name)) {
+            /*var a = Module.ImportReference(Module.ImportReference(Type.GetType(type.FullName)) ?? FindType(type.FullName));
+            return a;*/
             return Module.ImportReference(FindType(type.FullName));
+        }
 
         return relinkedMember;
     }
 
-    public override void PatchRefs(ModuleDefinition mod) {
-        base.PatchRefs(mod);
+    public override void PatchRefs() {
+        base.PatchRefs();
 
-        // for (var i = 0; i < mod.AssemblyReferences.Count; i++) {
-        //     if (libs_to_remove.Contains(mod.AssemblyReferences[i].Name))
-        //         mod.AssemblyReferences.RemoveAt(i--);
-        // }
-
-        foreach (var lib in libs_to_remove)
+        foreach (var lib in private_system_libraries)
             Module.AssemblyReferences.Remove(Module.AssemblyReferences.FirstOrDefault(x => x.Name == lib));
-
-        foreach (var (name, newName) in assembly_remap) {
-            var index = Module.AssemblyReferences.IndexOf(Module.AssemblyReferences.FirstOrDefault(x => x.Name == name));
-
-            if (index != -1) {
-                Module.AssemblyReferences.RemoveAt(index);
-                AddReference(newName);
-            }
-        }
     }
 
     private void AddReference(AssemblyName name) {
