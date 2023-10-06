@@ -7,7 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MonoMod.Patcher" Version="25.0.0-prerelease.2"/>
+        <PackageReference Include="MonoMod.Patcher" Version="25.0.0-prerelease.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="ReLogic">
+            <HintPath>lib\ReLogic.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\FNA\FNA.csproj" />
     </ItemGroup>
 
 </Project>

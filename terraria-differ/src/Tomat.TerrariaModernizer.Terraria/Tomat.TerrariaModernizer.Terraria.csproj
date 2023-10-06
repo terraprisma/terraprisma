@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="MonoMod.Patcher" Version="25.0.0-prerelease.2" />
+    </ItemGroup>
+
 </Project>

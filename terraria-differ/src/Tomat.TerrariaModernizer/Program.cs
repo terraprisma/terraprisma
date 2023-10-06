@@ -4,8 +4,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 using Mono.Cecil;
+using Tomat.TerrariaModernizer.ReLogic;
+using Tomat.TerrariaModernizer.ReLogic.Patches;
+using Tomat.TerrariaModernizer.Terraria;
+using Tomat.TerrariaModernizer.Terraria.Patches;
 
 namespace Tomat.TerrariaModernizer;
 
@@ -107,6 +112,7 @@ internal static class Program {
         PatchNetVersion(modder.Module);
         modder.ReadMod(typeof(ReLogic.MonoModRules).Assembly.Location);
         modder.MapDependencies();
+        ReLogicPatcher.Patch(modder.Module);
         modder.AutoPatch();
         modder.Write();
     }
@@ -121,6 +127,7 @@ internal static class Program {
         PatchNetVersion(modder.Module);
         modder.ReadMod(typeof(Terraria.MonoModRules).Assembly.Location);
         modder.MapDependencies();
+        TerrariaPatcher.Patch(modder.Module);
         modder.AutoPatch();
         modder.Write();
     }
@@ -149,6 +156,17 @@ internal static class Program {
         module.Assembly.CustomAttributes.Add(new CustomAttribute(module.ImportReference(typeof(DebuggableAttribute).GetConstructor(new[] { typeof(DebuggableAttribute.DebuggingModes) }))) {
             ConstructorArguments = {
                 new CustomAttributeArgument(module.ImportReference(typeof(DebuggableAttribute.DebuggingModes)), dbgAttr!.DebuggingFlags),
+            },
+        });
+
+        module.Assembly.CustomAttributes.Add(new CustomAttribute(module.ImportReference(typeof(InternalsVisibleToAttribute).GetConstructor(new[] { typeof(string) }))) {
+            ConstructorArguments = {
+                new CustomAttributeArgument(module.ImportReference(typeof(string)), "Tomat.TerrariaModernizer.ReLogic"),
+            },
+        });
+        module.Assembly.CustomAttributes.Add(new CustomAttribute(module.ImportReference(typeof(InternalsVisibleToAttribute).GetConstructor(new[] { typeof(string) }))) {
+            ConstructorArguments = {
+                new CustomAttributeArgument(module.ImportReference(typeof(string)), "Tomat.TerrariaModernizer.Terraria"),
             },
         });
     }
