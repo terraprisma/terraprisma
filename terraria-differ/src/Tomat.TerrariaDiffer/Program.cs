@@ -91,7 +91,7 @@ internal static class Program {
                     "-password",
                     password,
                     "-dir",
-                    manifest.Name,
+                    Path.Combine("downloads", manifest.Name),
                     //"-remember-password",
                 },
             }
@@ -113,7 +113,7 @@ internal static class Program {
             var formatting = FormattingOptionsFactory.CreateKRStyle();
             formatting.IndentationString = "    ";
             var decompiler = new Decompiler(
-                Path.Combine(node.DepotName, node.RelativePathToExecutable),
+                Path.Combine("downloads", node.DepotName, node.RelativePathToExecutable),
                 dirName,
                 new DecompilerSettings {
                     CSharpFormattingOptions = FormattingOptionsFactory.CreateKRStyle()
