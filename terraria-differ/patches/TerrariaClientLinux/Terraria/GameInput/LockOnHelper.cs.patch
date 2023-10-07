@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameInput/LockOnHelper.cs
 +++ decompiled/TerrariaClientLinux/Terraria/GameInput/LockOnHelper.cs
-@@ -423,7 +_,7 @@
+@@ -364,7 +_,7 @@
  		t.A = 220;
  		Color t2 = Main.OurFavoriteColor;
  		t2.A = 220;
@@ -9,10 +9,10 @@
  		t2 *= num;
  		t *= num;
  		Utils.Swap(ref t, ref t2);
-@@ -480,11 +_,11 @@
+@@ -411,11 +_,11 @@
+ 					vector = pos2;
  				}
- 				for (int j = 0; (float)j < num13; j++)
- 				{
+ 				for (int j = 0; (float)j < num13; j++) {
 -					float num14 = (float)Math.PI * 2f / num13 * (float)j + Main.GlobalTimeWrappedHourly * ((float)Math.PI * 2f) * 0.25f;
 +					float num14 = MathF.PI * 2f / num13 * (float)j + Main.GlobalTimeWrappedHourly * (MathF.PI * 2f) * 0.25f;
  					Vector2 vector2 = new Vector2(0f, num12 / 2).RotatedBy(num14);

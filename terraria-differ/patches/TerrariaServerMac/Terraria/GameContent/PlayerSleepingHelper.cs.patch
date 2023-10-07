@@ -1,9 +1,9 @@
 --- decompiled/TerrariaServerWindows/Terraria/GameContent/PlayerSleepingHelper.cs
 +++ decompiled/TerrariaServerMac/Terraria/GameContent/PlayerSleepingHelper.cs
-@@ -70,7 +_,7 @@
+@@ -58,7 +_,7 @@
+ 		if (isSleeping != state) {
  			isSleeping = state;
- 			if (state)
- 			{
+ 			if (state) {
 -				player.fullRotation = (float)Math.PI / 2f * (float)(-player.direction);
 +				player.fullRotation = MathF.PI / 2f * (float)(-player.direction);
  				return;

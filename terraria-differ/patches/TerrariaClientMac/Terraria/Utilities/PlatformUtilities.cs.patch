@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/Utilities/PlatformUtilities.cs
 +++ decompiled/TerrariaClientMac/Terraria/Utilities/PlatformUtilities.cs
-@@ -1,12 +_,44 @@
+@@ -1,12 +_,43 @@
  using System;
  using System.IO;
 +using System.Runtime.InteropServices;
@@ -17,8 +17,7 @@
 +		SDL.SDL_Surface* ptr = (SDL.SDL_Surface*)(void*)intPtr;
 +		Marshal.Copy(data, 0, ptr->pixels, srcW * srcH * 4);
 +		SDL.SDL_UnlockSurface(intPtr);
-+		if (srcW != dstW || srcH != dstH)
-+		{
++		if (srcW != dstW || srcH != dstH) {
 +			IntPtr intPtr2 = SDL.SDL_CreateRGBSurface(0u, dstW, dstH, 32, 255u, 65280u, 16711680u, 4278190080u);
 +			SDL.SDL_SetSurfaceBlendMode(intPtr, SDL.SDL_BlendMode.SDL_BLENDMODE_NONE);
 +			SDL.SDL_BlitScaled(intPtr, IntPtr.Zero, intPtr2, IntPtr.Zero);

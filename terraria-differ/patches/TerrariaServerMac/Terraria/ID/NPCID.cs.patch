@@ -1,35 +1,35 @@
 --- decompiled/TerrariaServerWindows/Terraria/ID/NPCID.cs
 +++ decompiled/TerrariaServerMac/Terraria/ID/NPCID.cs
-@@ -5430,7 +_,7 @@
- 					new NPCBestiaryDrawModifiers(0)
- 					{
+@@ -4725,7 +_,7 @@
+ 					43,
+ 					new NPCBestiaryDrawModifiers(0) {
  						Position = new Vector2(4f, -6f),
 -						Rotation = (float)Math.PI * 3f / 4f
 +						Rotation = MathF.PI * 3f / 4f
  					}
  				},
  				{
-@@ -5522,7 +_,7 @@
- 					new NPCBestiaryDrawModifiers(0)
- 					{
+@@ -4805,7 +_,7 @@
+ 					56,
+ 					new NPCBestiaryDrawModifiers(0) {
  						Position = new Vector2(4f, -6f),
 -						Rotation = (float)Math.PI * 3f / 4f
 +						Rotation = MathF.PI * 3f / 4f
  					}
  				},
  				{
-@@ -5809,7 +_,7 @@
- 					new NPCBestiaryDrawModifiers(0)
- 					{
+@@ -5056,7 +_,7 @@
+ 					101,
+ 					new NPCBestiaryDrawModifiers(0) {
  						Position = new Vector2(-2f, 6f),
 -						Rotation = (float)Math.PI * 3f / 4f
 +						Rotation = MathF.PI * 3f / 4f
  					}
  				},
  				{
-@@ -6314,7 +_,7 @@
- 					new NPCBestiaryDrawModifiers(0)
- 					{
+@@ -5497,7 +_,7 @@
+ 					175,
+ 					new NPCBestiaryDrawModifiers(0) {
  						Position = new Vector2(4f, -2f),
 -						Rotation = (float)Math.PI * 3f / 4f
 +						Rotation = MathF.PI * 3f / 4f

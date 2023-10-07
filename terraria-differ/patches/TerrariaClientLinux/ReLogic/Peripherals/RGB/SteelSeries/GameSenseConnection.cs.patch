@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/ReLogic/Peripherals/RGB/SteelSeries/GameSenseConnection.cs
 +++ decompiled/TerrariaClientLinux/ReLogic/Peripherals/RGB/SteelSeries/GameSenseConnection.cs
-@@ -370,7 +_,7 @@
+@@ -320,7 +_,7 @@
  				JObject jObject = JObject.Parse(text);
  				coreProps coreProps = default(coreProps);
  				coreProps.address = (string)jObject.GetValue("address");
@@ -8,4 +8,4 @@
 +				string[] array = coreProps.address.Split(new char[1] { ':' });
  				Convert.ToUInt16(array[1]);
  				result = array[1];
- 				return result;
+ 			} catch (Exception e) {

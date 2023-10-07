@@ -1,7 +1,7 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/ItemTrader.cs
 +++ decompiled/TerrariaClientMac/Terraria/GameContent/ItemTrader.cs
-@@ -40,7 +_,7 @@
- 		{
+@@ -38,7 +_,7 @@
+ 		for (int i = 0; i < typesInOrder.Length - 1; i++) {
  			AddOption_OneWay(typesInOrder[i], 1, typesInOrder[i + 1], 1);
  		}
 -		AddOption_OneWay(typesInOrder[typesInOrder.Length - 1], 1, typesInOrder[0], 1);

@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/HitTile.cs
 +++ decompiled/TerrariaClientLinux/Terraria/HitTile.cs
-@@ -192,7 +_,7 @@
+@@ -170,7 +_,7 @@
  		hitTileObject.damage += damageAmount;
  		hitTileObject.timeToLive = 60;
  		hitTileObject.animationTimeElapsed = 0;

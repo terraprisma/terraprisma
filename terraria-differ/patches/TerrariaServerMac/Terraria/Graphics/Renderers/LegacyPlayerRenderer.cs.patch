@@ -1,12 +1,11 @@
 --- decompiled/TerrariaServerWindows/Terraria/Graphics/Renderers/LegacyPlayerRenderer.cs
 +++ decompiled/TerrariaServerMac/Terraria/Graphics/Renderers/LegacyPlayerRenderer.cs
-@@ -478,9 +_,9 @@
+@@ -402,8 +_,8 @@
+ 				float lerpValue = Utils.GetLerpValue(300f, 270f, drawPlayer.brainOfConfusionDodgeAnimationCounter);
  				float y = MathHelper.Lerp(2f, 120f, lerpValue);
- 				if (lerpValue >= 0f && lerpValue <= 1f)
- 				{
--					for (float num12 = 0f; num12 < (float)Math.PI * 2f; num12 += (float)Math.PI / 3f)
-+					for (float num12 = 0f; num12 < MathF.PI * 2f; num12 += MathF.PI / 3f)
- 					{
+ 				if (lerpValue >= 0f && lerpValue <= 1f) {
+-					for (float num12 = 0f; num12 < (float)Math.PI * 2f; num12 += (float)Math.PI / 3f) {
++					for (float num12 = 0f; num12 < MathF.PI * 2f; num12 += MathF.PI / 3f) {
 -						position = vector2 + new Vector2(0f, y).RotatedBy((float)Math.PI * 2f * lerpValue * 0.5f + num12);
 +						position = vector2 + new Vector2(0f, y).RotatedBy(MathF.PI * 2f * lerpValue * 0.5f + num12);
  						DrawPlayer(camera, drawPlayer, position, drawPlayer.fullRotation, drawPlayer.fullRotationOrigin, lerpValue);

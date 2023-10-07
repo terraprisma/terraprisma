@@ -9,31 +9,28 @@ namespace NATUPNPLib;
 [TypeIdentifier]
 public interface IStaticPortMapping
 {
+	void _VtblGap1_2();
+
 	[DispId(3)]
-	int InternalPort
-	{
-		[MethodImpl(MethodImplOptions.InternalCall)]
+	int InternalPort {
+		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
 		[DispId(3)]
 		get;
 	}
 
 	[DispId(4)]
-	string Protocol
-	{
-		[MethodImpl(MethodImplOptions.InternalCall)]
+	string Protocol {
+		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
 		[DispId(4)]
 		[return: MarshalAs(UnmanagedType.BStr)]
 		get;
 	}
 
 	[DispId(5)]
-	string InternalClient
-	{
-		[MethodImpl(MethodImplOptions.InternalCall)]
+	string InternalClient {
+		[MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
 		[DispId(5)]
 		[return: MarshalAs(UnmanagedType.BStr)]
 		get;
 	}
-
-	void _VtblGap1_2();
 }

@@ -1,34 +1,34 @@
 --- decompiled/TerrariaServerWindows/Terraria/Graphics/Capture/CaptureInterface.cs
 +++ decompiled/TerrariaServerMac/Terraria/Graphics/Capture/CaptureInterface.cs
-@@ -218,7 +_,7 @@
+@@ -190,7 +_,7 @@
  							num3 *= -1f;
  						}
  					}
 -					Utils.DrawCursorSingle(sb, color, num3 - (float)Math.PI / 2f, Main.cursorScale * num, Main.ReverseGravitySupport(zero - Main.screenPosition), 4, specialMode);
 +					Utils.DrawCursorSingle(sb, color, num3 - MathF.PI / 2f, Main.cursorScale * num, Main.ReverseGravitySupport(zero - Main.screenPosition), 4, specialMode);
- 				}
- 				else
- 				{
-@@ -242,7 +_,7 @@
- 					{
+ 				} else {
+ 					Point result = EdgeA;
+ 					if (EdgeBPinned) {
+@@ -209,7 +_,7 @@
+ 					} else {
  						GetMapCoords(result.X, result.Y, 1, out result);
  					}
 -					Utils.DrawCursorSingle(sb, color, num3 - (float)Math.PI / 2f, Main.cursorScale * num, result.ToVector2(), 4);
 +					Utils.DrawCursorSingle(sb, color, num3 - MathF.PI / 2f, Main.cursorScale * num, result.ToVector2(), 4);
  				}
  			}
- 			if (!EdgeBPinned)
-@@ -288,7 +_,7 @@
+ 			if (!EdgeBPinned) {
+@@ -246,7 +_,7 @@
  						num6 *= -1f;
  					}
  				}
 -				Utils.DrawCursorSingle(sb, color2, num6 - (float)Math.PI / 2f, Main.cursorScale * num, Main.ReverseGravitySupport(zero2 - Main.screenPosition), 5, specialMode2);
 +				Utils.DrawCursorSingle(sb, color2, num6 - MathF.PI / 2f, Main.cursorScale * num, Main.ReverseGravitySupport(zero2 - Main.screenPosition), 5, specialMode2);
- 			}
- 			else
- 			{
-@@ -312,7 +_,7 @@
- 				{
+ 			} else {
+ 				Point result3 = EdgeB;
+ 				if (EdgeAPinned) {
+@@ -265,7 +_,7 @@
+ 				} else {
  					GetMapCoords(result3.X, result3.Y, 1, out result3);
  				}
 -				Utils.DrawCursorSingle(sb, color2, num6 - (float)Math.PI / 2f, Main.cursorScale * num, result3.ToVector2(), 5);

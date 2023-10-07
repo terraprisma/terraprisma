@@ -1,23 +1,22 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/UI/States/UIGamepadHelper.cs
 +++ decompiled/TerrariaClientMac/Terraria/GameContent/UI/States/UIGamepadHelper.cs
-@@ -89,11 +_,11 @@
- 		{
- 			if (stripOnLeft.Length > k)
- 			{
+@@ -72,10 +_,10 @@
+ 		}
+ 		for (int k = num2; k < num; k++) {
+ 			if (stripOnLeft.Length > k) {
 -				stripOnLeft[k].Right = stripOnRight[stripOnRight.Length - 1].ID;
 +				stripOnLeft[k].Right = stripOnRight[^1].ID;
  			}
- 			if (stripOnRight.Length > k)
- 			{
+ 			if (stripOnRight.Length > k) {
 -				stripOnRight[k].Left = stripOnLeft[stripOnLeft.Length - 1].ID;
 +				stripOnRight[k].Left = stripOnLeft[^1].ID;
  			}
  		}
  	}
-@@ -161,7 +_,7 @@
+@@ -132,7 +_,7 @@
+ 	public void LinkVerticalStripBottomSideToSingle(UILinkPoint[] strip, UILinkPoint theSingle)
  	{
- 		if (strip != null && theSingle != null)
- 		{
+ 		if (strip != null && theSingle != null) {
 -			PairUpDown(strip[strip.Length - 1], theSingle);
 +			PairUpDown(strip[^1], theSingle);
  		}

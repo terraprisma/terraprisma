@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/RGB/KeybindsMenuShader.cs
 +++ decompiled/TerrariaClientLinux/Terraria/GameContent/RGB/KeybindsMenuShader.cs
-@@ -15,7 +_,7 @@
+@@ -14,7 +_,7 @@
  	}, IsTransparent = true)]
  	private void ProcessHighDetail(RgbDevice device, Fragment fragment, EffectDetailLevel quality, float time)
  	{
@@ -8,4 +8,4 @@
 +		float num = (float)Math.Cos(time * (MathF.PI / 2f)) * 0.2f + 0.8f;
  		Vector4 color = _baseColor * num;
  		color.W = _baseColor.W;
- 		for (int i = 0; i < fragment.Count; i++)
+ 		for (int i = 0; i < fragment.Count; i++) {

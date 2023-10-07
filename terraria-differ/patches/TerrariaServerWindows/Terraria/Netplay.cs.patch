@@ -19,30 +19,25 @@
  	public static MessageBuffer fullBuffer = new MessageBuffer();
  
  	private static int _currentRequestId;
-@@ -149,10 +_,49 @@
+@@ -136,10 +_,40 @@
  
  	private static void OpenPort(int port)
  	{
 +		string localIPAddress = GetLocalIPAddress();
-+		if (_upnpnat == null)
-+		{
++		if (_upnpnat == null) {
 +			_upnpnat = (UPnPNAT)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("AE1E00AA-3FD5-403C-8A27-2BBDC30CD0E1")));
 +			_mappings = _upnpnat.StaticPortMappingCollection;
 +		}
-+		if (_mappings == null)
-+		{
++		if (_mappings == null) {
 +			return;
 +		}
 +		bool flag = false;
-+		foreach (IStaticPortMapping mapping in _mappings)
-+		{
-+			if (mapping.InternalPort == port && mapping.InternalClient == localIPAddress && mapping.Protocol == "TCP")
-+			{
++		foreach (IStaticPortMapping mapping in _mappings) {
++			if (mapping.InternalPort == port && mapping.InternalClient == localIPAddress && mapping.Protocol == "TCP") {
 +				flag = true;
 +			}
 +		}
-+		if (!flag)
-+		{
++		if (!flag) {
 +			_mappings.Add(port, "TCP", port, localIPAddress, bEnabled: true, "Terraria Server");
 +		}
  	}
@@ -51,19 +46,15 @@
  	{
 +		string localIPAddress = GetLocalIPAddress();
 +		bool flag = false;
-+		if (_mappings == null)
-+		{
++		if (_mappings == null) {
 +			return;
 +		}
-+		foreach (IStaticPortMapping mapping in _mappings)
-+		{
-+			if (mapping.InternalPort == port && mapping.InternalClient == localIPAddress && mapping.Protocol == "TCP")
-+			{
++		foreach (IStaticPortMapping mapping in _mappings) {
++			if (mapping.InternalPort == port && mapping.InternalClient == localIPAddress && mapping.Protocol == "TCP") {
 +				flag = true;
 +			}
 +		}
-+		if (!flag)
-+		{
++		if (!flag) {
 +			_mappings.Remove(port, "TCP");
 +		}
  	}

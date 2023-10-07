@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/Events/MoonlordDeathDrama.cs
 +++ decompiled/TerrariaClientLinux/Terraria/GameContent/Events/MoonlordDeathDrama.cs
-@@ -240,13 +_,13 @@
+@@ -215,13 +_,13 @@
  	public static void ThrowPieces(Vector2 MoonlordCoreCenter, int DramaSeed)
  	{
  		UnifiedRandom r = new UnifiedRandom(DramaSeed);

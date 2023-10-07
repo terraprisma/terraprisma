@@ -1,6 +1,6 @@
 --- decompiled/TerrariaServerWindows/Terraria/GameContent/UI/States/UIWorldLoad.cs
 +++ decompiled/TerrariaServerMac/Terraria/GameContent/UI/States/UIWorldLoad.cs
-@@ -105,7 +_,7 @@
+@@ -94,7 +_,7 @@
  
  	private void UpdateGamepadSquiggle()
  	{

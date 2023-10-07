@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/WindowsLaunch.cs
 +++ decompiled/TerrariaServerWindows/Terraria/WindowsLaunch.cs
-@@ -66,6 +_,8 @@
+@@ -62,6 +_,8 @@
  			stream.Read(array, 0, array.Length);
  			return Assembly.Load(array);
  		};

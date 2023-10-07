@@ -3,6 +3,8 @@ using System.IO;
 using System.Reflection;
 using DotnetPatcher.Decompile;
 using DotnetPatcher.Diff;
+using ICSharpCode.Decompiler;
+using ICSharpCode.Decompiler.CSharp.OutputVisitor;
 
 namespace Tomat.TerrariaDiffer;
 
@@ -108,8 +110,16 @@ internal static class Program {
                 Directory.Delete(dirName, true);
             Directory.CreateDirectory(dirName);
 
-            var decompiler = new Decompiler(Path.Combine(node.DepotName, node.RelativePathToExecutable), dirName);
-            decompiler.Decompile(new[] { "ReLogic" });
+            var formatting = FormattingOptionsFactory.CreateKRStyle();
+            formatting.IndentationString = "    ";
+            var decompiler = new Decompiler(
+                Path.Combine(node.DepotName, node.RelativePathToExecutable),
+                dirName,
+                new DecompilerSettings {
+                    CSharpFormattingOptions = FormattingOptionsFactory.CreateKRStyle()
+                }
+            );
+            decompiler.Decompile(new[] { "ReLogic", /*"LogitechLedEnginesWrapper",*/ "RailSDK.Net", "SteelSeriesEngineWrapper" });
         }
 
         foreach (var child in node.Children)

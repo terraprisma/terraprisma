@@ -1,7 +1,7 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/UI/WiresUI.cs
 +++ decompiled/TerrariaClientMac/Terraria/GameContent/UI/WiresUI.cs
-@@ -370,11 +_,11 @@
- 						{
+@@ -315,11 +_,11 @@
+ 						if (i == 3) {
  							num5 = 0f;
  						}
 -						vector4 = vector2 + Vector2.UnitX.RotatedBy(num5 * ((float)Math.PI * 2f) / num3 - (float)Math.PI / num4) * 45f;
@@ -14,12 +14,12 @@
  						break;
  					case 4:
  						flag2 = false;
-@@ -397,7 +_,7 @@
+@@ -339,7 +_,7 @@
+ 					case 2:
  					case 3:
- 					case 5:
- 					{
+ 					case 5: {
 -						float value = (vector4 - vector2).ToRotation().AngleTowards(num, (float)Math.PI * 2f / (num3 * 2f)) - num;
 +						float value = (vector4 - vector2).ToRotation().AngleTowards(num, MathF.PI * 2f / (num3 * 2f)) - num;
- 						if (num2 >= 20f && Math.Abs(value) < 0.01f)
- 						{
+ 						if (num2 >= 20f && Math.Abs(value) < 0.01f) {
  							flag3 = true;
+ 						}

@@ -1,9 +1,9 @@
 --- decompiled/TerrariaServerWindows/ReLogic/Content/Sources/FileSystemContentSource.cs
 +++ decompiled/TerrariaServerLinux/ReLogic/Content/Sources/FileSystemContentSource.cs
-@@ -21,7 +_,9 @@
+@@ -20,7 +_,9 @@
+ 	{
  		_basePath = Path.GetFullPath(basePath);
- 		if (!_basePath.EndsWith("/") && !_basePath.EndsWith("\\"))
- 		{
+ 		if (!_basePath.EndsWith("/") && !_basePath.EndsWith("\\")) {
 -			_basePath += Path.DirectorySeparatorChar;
 +			string basePath2 = _basePath;
 +			char directorySeparatorChar = Path.DirectorySeparatorChar;

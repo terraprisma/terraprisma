@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/Skies/AmbientSky.cs
 +++ decompiled/TerrariaClientMac/Terraria/GameContent/Skies/AmbientSky.cs
-@@ -1295,7 +_,7 @@
+@@ -1194,7 +_,7 @@
  
  		private void ZigzagMove(int frameCount)
  		{
@@ -9,7 +9,7 @@
  		}
  
  		private void ChasePlayerTop(int frameCount)
-@@ -1319,7 +_,7 @@
+@@ -1217,7 +_,7 @@
  			Depth = random.NextFloat() * 3f + 3f;
  			Texture = Main.Assets.Request<Texture2D>("Images/Backgrounds/Ambience/Meteor");
  			Frame = new SpriteFrame(1, 4);
@@ -18,7 +18,7 @@
  			float num = (float)(Main.worldSurface * 16.0 - 0.0) / vector.Y;
  			float num2 = 1200f;
  			float num3 = num / num2;
-@@ -1332,7 +_,7 @@
+@@ -1232,7 +_,7 @@
  			BrightnessLerper = 0.5f;
  			FinalOpacityMultiplier = 1f;
  			FramingSpeed = 5;

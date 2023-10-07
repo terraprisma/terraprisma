@@ -1,6 +1,6 @@
 --- decompiled/TerrariaServerWindows/ReLogic/Peripherals/RGB/RgbKey.cs
 +++ decompiled/TerrariaServerLinux/ReLogic/Peripherals/RGB/RgbKey.cs
-@@ -126,7 +_,7 @@
+@@ -124,7 +_,7 @@
  
  	private void UpdateFlashingEffect()
  	{

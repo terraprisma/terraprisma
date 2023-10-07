@@ -1,7 +1,7 @@
 --- decompiled/TerrariaServerWindows/Terraria/DataStructures/PlayerDrawSet.cs
 +++ decompiled/TerrariaServerLinux/Terraria/DataStructures/PlayerDrawSet.cs
-@@ -1259,7 +_,7 @@
- 						{
+@@ -1054,14 +_,14 @@
+ 						if (drawPlayer.nebulaLevelLife < 1) {
  							continue;
  						}
 -						num20 = (float)Math.PI * 2f / (float)drawPlayer.nebulaLevelLife;
@@ -9,8 +9,7 @@
  						num22 = drawPlayer.nebulaLevelLife;
  						break;
  					case 1:
-@@ -1267,7 +_,7 @@
- 						{
+ 						if (drawPlayer.nebulaLevelMana < 1) {
  							continue;
  						}
 -						num20 = (float)Math.PI * -2f / (float)drawPlayer.nebulaLevelMana;
@@ -18,8 +17,8 @@
  						num22 = drawPlayer.nebulaLevelMana;
  						num19 = (float)(-drawPlayer.miscCounter) / 180f;
  						num21 = 20f;
-@@ -1278,7 +_,7 @@
- 						{
+@@ -1071,7 +_,7 @@
+ 						if (drawPlayer.nebulaLevelDamage < 1) {
  							continue;
  						}
 -						num20 = (float)Math.PI * 2f / (float)drawPlayer.nebulaLevelDamage;
@@ -27,7 +26,7 @@
  						num22 = drawPlayer.nebulaLevelDamage;
  						num19 = (float)drawPlayer.miscCounter / 180f;
  						num21 = 30f;
-@@ -1290,7 +_,7 @@
+@@ -1082,7 +_,7 @@
  					Dust dust20 = Dust.NewDustDirect(Position, drawPlayer.width, drawPlayer.height, type2, 0f, 0f, 100, default(Color), 1.5f);
  					dust20.noGravity = true;
  					dust20.velocity = Vector2.Zero;

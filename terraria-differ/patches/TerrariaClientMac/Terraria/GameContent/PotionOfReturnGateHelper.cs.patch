@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/PotionOfReturnGateHelper.cs
 +++ decompiled/TerrariaClientMac/Terraria/GameContent/PotionOfReturnGateHelper.cs
-@@ -130,9 +_,9 @@
+@@ -118,9 +_,9 @@
  			DrawData item = drawData;
  			item.color = new Color(127, 50, 127, 0) * _opacity;
  			item.scale *= 1.1f;
@@ -11,4 +11,4 @@
 +			item.position += ((Main.GlobalTimeWrappedHourly / 5f + num2) * (MathF.PI * 2f)).ToRotationVector2() * (x * 1f + 2f);
  			drawDataList.Add(item);
  		}
- 		if (selectionMode != 0)
+ 		if (selectionMode != 0) {

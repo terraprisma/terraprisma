@@ -7,10 +7,10 @@
  using Terraria.GameContent;
  
  namespace Terraria.IO;
-@@ -10,7 +_,9 @@
+@@ -9,7 +_,9 @@
+ 	public void ValidateResourePack(ResourcePack pack)
  	{
- 		if ((AssetReaderCollection)Main.instance.Services.GetService(typeof(AssetReaderCollection)) != null)
- 		{
+ 		if ((AssetReaderCollection)Main.instance.Services.GetService(typeof(AssetReaderCollection)) != null) {
 -			pack.GetContentSource().GetAllAssetsStartingWith("Images" + Path.DirectorySeparatorChar);
 +			IContentSource contentSource = pack.GetContentSource();
 +			char directorySeparatorChar = Path.DirectorySeparatorChar;

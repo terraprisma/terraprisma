@@ -1,20 +1,19 @@
 --- decompiled/TerrariaClientWindows/Terraria/UI/Chat/ChatManager.cs
 +++ decompiled/TerrariaClientLinux/Terraria/UI/Chat/ChatManager.cs
-@@ -140,11 +_,11 @@
+@@ -127,10 +_,10 @@
  				result.Y = Math.Max(result.Y, vector.Y + size.Y);
  				continue;
  			}
 -			string[] array = textSnippet.Text.Split('\n');
 +			string[] array = textSnippet.Text.Split(new char[1] { '\n' });
  			string[] array2 = array;
- 			for (int j = 0; j < array2.Length; j++)
- 			{
+ 			for (int j = 0; j < array2.Length; j++) {
 -				string[] array3 = array2[j].Split(' ');
 +				string[] array3 = array2[j].Split(new char[1] { ' ' });
- 				for (int k = 0; k < array3.Length; k++)
- 				{
- 					if (k != 0)
-@@ -221,13 +_,13 @@
+ 				for (int k = 0; k < array3.Length; k++) {
+ 					if (k != 0) {
+ 						vector.X += x * baseScale.X * num;
+@@ -196,12 +_,12 @@
  				result.X = Math.Max(result.X, vector.X);
  				continue;
  			}
@@ -22,15 +21,14 @@
 +			string[] array = textSnippet.Text.Split(new char[1] { '\n' });
  			array = Regex.Split(textSnippet.Text, "(\n)");
  			bool flag = true;
- 			foreach (string text in array)
- 			{
+ 			foreach (string text in array) {
  				string[] array2 = Regex.Split(text, "( )");
 -				array2 = text.Split(' ');
 +				array2 = text.Split(new char[1] { ' ' });
- 				if (text == "\n")
- 				{
+ 				if (text == "\n") {
  					vector.Y += (float)font.LineSpacing * num3 * baseScale.Y;
-@@ -305,7 +_,7 @@
+ 					vector.X = position.X;
+@@ -270,14 +_,14 @@
  	{
  		Vector2 vector = position;
  		Vector2 result = vector;
@@ -39,21 +37,20 @@
  		float x = font.MeasureString(" ").X;
  		Color color = baseColor;
  		float num = 1f;
-@@ -313,7 +_,7 @@
+ 		float num2 = 0f;
  		string[] array2 = array;
- 		for (int i = 0; i < array2.Length; i++)
- 		{
+ 		for (int i = 0; i < array2.Length; i++) {
 -			string[] array3 = array2[i].Split(':');
 +			string[] array3 = array2[i].Split(new char[1] { ':' });
- 			foreach (string text2 in array3)
- 			{
- 				if (text2.StartsWith("sss"))
-@@ -338,7 +_,7 @@
+ 			foreach (string text2 in array3) {
+ 				if (text2.StartsWith("sss")) {
+ 					if (text2.StartsWith("sss1")) {
+@@ -293,7 +_,7 @@
  					}
  					continue;
  				}
 -				string[] array4 = text2.Split(' ');
 +				string[] array4 = text2.Split(new char[1] { ' ' });
- 				for (int k = 0; k < array4.Length; k++)
- 				{
- 					if (k != 0)
+ 				for (int k = 0; k < array4.Length; k++) {
+ 					if (k != 0) {
+ 						vector.X += x * baseScale.X * num;

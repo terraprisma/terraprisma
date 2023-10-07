@@ -1,6 +1,6 @@
 --- decompiled/TerrariaServerWindows/Terraria/GameContent/VoidLensHelper.cs
 +++ decompiled/TerrariaServerMac/Terraria/GameContent/VoidLensHelper.cs
-@@ -89,9 +_,9 @@
+@@ -84,9 +_,9 @@
  			DrawData item = drawData;
  			item.color = new Color(127, 50, 127, 0) * _opacity;
  			item.scale *= 1.1f;
@@ -11,4 +11,4 @@
 +			item.position += ((Main.GlobalTimeWrappedHourly / 5f + num) * (MathF.PI * 2f)).ToRotationVector2() * (x * 1f + 2f);
  			drawDataList.Add(item);
  		}
- 		if (selectionMode != 0)
+ 		if (selectionMode != 0) {

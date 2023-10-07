@@ -1,7 +1,7 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/UI/Elements/UIAchievementListItem.cs
 +++ decompiled/TerrariaClientLinux/Terraria/GameContent/UI/Elements/UIAchievementListItem.cs
-@@ -273,6 +_,7 @@
- 		{
+@@ -250,6 +_,7 @@
+ 		if (!_achievement.IsCompleted && uIAchievementListItem._achievement.IsCompleted) {
  			return 1;
  		}
 +		int id = _achievement.Id;

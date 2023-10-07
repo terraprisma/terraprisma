@@ -7,5 +7,5 @@
 -		Rotation = (float)_internalIndentifier * 0.4002029f + _timeSinceSpawn * ((float)Math.PI * 2f) / 480f * 0.5f;
 +		Rotation = (float)_internalIndentifier * 0.4002029f + _timeSinceSpawn * (MathF.PI * 2f) / 480f * 0.5f;
  		Velocity *= SlowdownScalar;
- 		if (LightColorTint != Color.Transparent)
- 		{
+ 		if (LightColorTint != Color.Transparent) {
+ 			Color color = LightColorTint * Opacity;

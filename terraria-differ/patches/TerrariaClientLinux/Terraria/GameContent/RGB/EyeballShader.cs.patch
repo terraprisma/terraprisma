@@ -1,11 +1,11 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/RGB/EyeballShader.cs
 +++ decompiled/TerrariaClientLinux/Terraria/GameContent/RGB/EyeballShader.cs
-@@ -68,7 +_,7 @@
+@@ -66,7 +_,7 @@
+ 		_pupilOffset = (_targetOffset + _pupilOffset) * 0.5f;
  		_timeUntilPupilMove -= elapsedTime;
- 		if (num)
- 		{
+ 		if (num) {
 -			float num2 = (float)_random.NextDouble() * ((float)Math.PI * 2f);
 +			float num2 = (float)_random.NextDouble() * (MathF.PI * 2f);
  			float num3;
- 			if (_isSpawning)
- 			{
+ 			if (_isSpawning) {
+ 				_timeUntilPupilMove = (float)_random.NextDouble() * 0.4f + 0.3f;

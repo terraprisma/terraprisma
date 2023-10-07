@@ -1,9 +1,9 @@
 --- decompiled/TerrariaServerWindows/Terraria/UI/FancyErrorPrinter.cs
 +++ decompiled/TerrariaServerLinux/Terraria/UI/FancyErrorPrinter.cs
-@@ -131,7 +_,7 @@
+@@ -114,7 +_,7 @@
+ 	private static void ShowTheBox(string preparedMessage)
  	{
- 		if (Platform.IsWindows && !Main.dedServ)
- 		{
+ 		if (Platform.IsWindows && !Main.dedServ) {
 -			MessageBox.Show(preparedMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
 +			MessageBox.Show(preparedMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
  		}

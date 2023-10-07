@@ -35,485 +35,416 @@
  	private static ChromaEngine _engine;
  
  	private const string GAME_NAME_ID = "TERRARIA";
-@@ -51,492 +_,6 @@
+@@ -51,423 +_,6 @@
  
  	private static VendorColorProfile _steelSeriesColorProfile;
  
--	private static Dictionary<string, EventLocalization> _localizedEvents = new Dictionary<string, EventLocalization>
--	{
+-	private static Dictionary<string, EventLocalization> _localizedEvents = new Dictionary<string, EventLocalization> {
 -		{
 -			"KEY_MOUSELEFT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Left Mouse Button"
 -			}
 -		},
 -		{
 -			"KEY_MOUSERIGHT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Right Mouse Button"
 -			}
 -		},
 -		{
 -			"KEY_UP",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Up"
 -			}
 -		},
 -		{
 -			"KEY_DOWN",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Down"
 -			}
 -		},
 -		{
 -			"KEY_LEFT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Left"
 -			}
 -		},
 -		{
 -			"KEY_RIGHT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Right"
 -			}
 -		},
 -		{
 -			"KEY_JUMP",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Jump"
 -			}
 -		},
 -		{
 -			"KEY_THROW",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Throw"
 -			}
 -		},
 -		{
 -			"KEY_INVENTORY",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Inventory"
 -			}
 -		},
 -		{
 -			"KEY_GRAPPLE",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Grapple"
 -			}
 -		},
 -		{
 -			"KEY_SMARTSELECT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Smart Select"
 -			}
 -		},
 -		{
 -			"KEY_SMARTCURSOR",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Smart Cursor"
 -			}
 -		},
 -		{
 -			"KEY_QUICKMOUNT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Quick Mount"
 -			}
 -		},
 -		{
 -			"KEY_QUICKHEAL",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Quick Heal"
 -			}
 -		},
 -		{
 -			"KEY_QUICKMANA",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Quick Mana"
 -			}
 -		},
 -		{
 -			"KEY_QUICKBUFF",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Quick Buff"
 -			}
 -		},
 -		{
 -			"KEY_MAPZOOMIN",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Map Zoom In"
 -			}
 -		},
 -		{
 -			"KEY_MAPZOOMOUT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Map Zoom Out"
 -			}
 -		},
 -		{
 -			"KEY_MAPALPHAUP",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Map Transparency Up"
 -			}
 -		},
 -		{
 -			"KEY_MAPALPHADOWN",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Map Transparency Down"
 -			}
 -		},
 -		{
 -			"KEY_MAPFULL",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Map Full"
 -			}
 -		},
 -		{
 -			"KEY_MAPSTYLE",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Map Style"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR1",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 1"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR2",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 2"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR3",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 3"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR4",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 4"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR5",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 5"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR6",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 6"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR7",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 7"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR8",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 8"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR9",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 9"
 -			}
 -		},
 -		{
 -			"KEY_HOTBAR10",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar 10"
 -			}
 -		},
 -		{
 -			"KEY_HOTBARMINUS",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar Minus"
 -			}
 -		},
 -		{
 -			"KEY_HOTBARPLUS",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Hotbar Plus"
 -			}
 -		},
 -		{
 -			"KEY_DPADRADIAL1",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Dpad Radial 1"
 -			}
 -		},
 -		{
 -			"KEY_DPADRADIAL2",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Dpad Radial 2"
 -			}
 -		},
 -		{
 -			"KEY_DPADRADIAL3",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Dpad Radial 3"
 -			}
 -		},
 -		{
 -			"KEY_DPADRADIAL4",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Dpad Radial 4"
 -			}
 -		},
 -		{
 -			"KEY_RADIALHOTBAR",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Radial Hotbar"
 -			}
 -		},
 -		{
 -			"KEY_RADIALQUICKBAR",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Radial Quickbar"
 -			}
 -		},
 -		{
 -			"KEY_DPADSNAP1",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Dpad Snap 1"
 -			}
 -		},
 -		{
 -			"KEY_DPADSNAP2",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Dpad Snap 2"
 -			}
 -		},
 -		{
 -			"KEY_DPADSNAP3",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Dpad Snap 3"
 -			}
 -		},
 -		{
 -			"KEY_DPADSNAP4",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Dpad Snap 4"
 -			}
 -		},
 -		{
 -			"KEY_MENUUP",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Menu Up"
 -			}
 -		},
 -		{
 -			"KEY_MENUDOWN",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Menu Down"
 -			}
 -		},
 -		{
 -			"KEY_MENULEFT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Menu Left"
 -			}
 -		},
 -		{
 -			"KEY_MENURIGHT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Menu Right"
 -			}
 -		},
 -		{
 -			"KEY_LOCKON",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Lock On"
 -			}
 -		},
 -		{
 -			"KEY_VIEWZOOMIN",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zoom In"
 -			}
 -		},
 -		{
 -			"KEY_VIEWZOOMOUT",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zoom Out"
 -			}
 -		},
 -		{
 -			"KEY_TOGGLECREATIVEMENU",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Toggle Creative Menu"
 -			}
 -		},
 -		{
 -			"DO_RAINBOWS",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Theme"
 -			}
 -		},
 -		{
 -			"ZONE1",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 1"
 -			}
 -		},
 -		{
 -			"ZONE2",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 2"
 -			}
 -		},
 -		{
 -			"ZONE3",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 3"
 -			}
 -		},
 -		{
 -			"ZONE4",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 4"
 -			}
 -		},
 -		{
 -			"ZONE5",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 5"
 -			}
 -		},
 -		{
 -			"ZONE6",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 6"
 -			}
 -		},
 -		{
 -			"ZONE7",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 7"
 -			}
 -		},
 -		{
 -			"ZONE8",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 8"
 -			}
 -		},
 -		{
 -			"ZONE9",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 9"
 -			}
 -		},
 -		{
 -			"ZONE10",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 10"
 -			}
 -		},
 -		{
 -			"ZONE11",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 11"
 -			}
 -		},
 -		{
 -			"ZONE12",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Zone 12"
 -			}
 -		},
 -		{
 -			"LIFE",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Life Percent"
 -			}
 -		},
 -		{
 -			"MANA",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Mana Percent"
 -			}
 -		},
 -		{
 -			"BREATH",
--			new EventLocalization
--			{
+-			new EventLocalization {
 -				DefaultDisplayName = "Breath Percent"
 -			}
 -		}
@@ -528,7 +459,7 @@
  	public static void BindTo(Preferences preferences)
  	{
  		preferences.OnSave += Configuration_OnSave;
-@@ -573,165 +_,6 @@
+@@ -503,144 +_,6 @@
  		preferences.Put("SteelSeriesColorProfile", _steelSeriesColorProfile);
  	}
  
@@ -539,42 +470,34 @@
 -		_engine.AddDeviceGroup("Logitech", new LogitechDeviceGroup(_logitechColorProfile));
 -		_engine.AddDeviceGroup("SteelSeries", new SteelSeriesDeviceGroup(_steelSeriesColorProfile, "TERRARIA", "Terraria", IconColor.Green));
 -		_engine.FrameTimeInSeconds = 1f / _rgbUpdateRate;
--		if (_useRazer)
--		{
+-		if (_useRazer) {
 -			_engine.EnableDeviceGroup("Razer");
 -		}
--		if (_useCorsair)
--		{
+-		if (_useCorsair) {
 -			_engine.EnableDeviceGroup("Corsair");
 -		}
--		if (_useLogitech)
--		{
+-		if (_useLogitech) {
 -			_engine.EnableDeviceGroup("Logitech");
 -		}
--		if (_useSteelSeries)
--		{
+-		if (_useSteelSeries) {
 -			_engine.EnableDeviceGroup("SteelSeries");
 -		}
 -		LoadSpecialRulesForDevices();
 -		AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
--		if (Platform.IsWindows)
--		{
+-		if (Platform.IsWindows) {
 -			Application.ApplicationExit += OnProcessExit;
 -		}
 -	}
 -
 -	private static void LoadSpecialRulesForDevices()
 -	{
--		Event_LifePercent = new IntRgbGameValueTracker
--		{
+-		Event_LifePercent = new IntRgbGameValueTracker {
 -			EventName = "LIFE"
 -		};
--		Event_ManaPercent = new IntRgbGameValueTracker
--		{
+-		Event_ManaPercent = new IntRgbGameValueTracker {
 -			EventName = "MANA"
 -		};
--		Event_BreathPercent = new IntRgbGameValueTracker
--		{
+-		Event_BreathPercent = new IntRgbGameValueTracker {
 -			EventName = "BREATH"
 -		};
 -		LoadSpecialRulesFor_GameSense();
@@ -582,8 +505,7 @@
 -
 -	public static void UpdateEvents()
 -	{
--		if (Main.gameMenu)
--		{
+-		if (Main.gameMenu) {
 -			Event_LifePercent.Update(0, isVisible: false);
 -			Event_ManaPercent.Update(0, isVisible: false);
 -			Event_BreathPercent.Update(0, isVisible: false);
@@ -617,10 +539,8 @@
 -		LoadSpecialRulesFor_SecondaryDevice(eventsToBind, "ZONE12", "zone12", new RGBZonedDevice("twelve"));
 -		AddGameplayEvents(eventsToBind);
 -		gameSenseSpecificInfo.MiscEvents = new List<ARgbGameValueTracker> { Event_LifePercent, Event_ManaPercent, Event_BreathPercent };
--		foreach (Bind_Event item in gameSenseSpecificInfo.EventsToBind)
--		{
--			if (_localizedEvents.TryGetValue(item.eventName, out var value))
--			{
+-		foreach (Bind_Event item in gameSenseSpecificInfo.EventsToBind) {
+-			if (_localizedEvents.TryGetValue(item.eventName, out var value)) {
 -				item.defaultDisplayName = value.DefaultDisplayName;
 -				item.localizedDisplayNames = value.LocalizedNames;
 -			}
@@ -637,10 +557,8 @@
 -
 -	private static void LoadSpecialRulesFor_SecondaryDevice(List<Bind_Event> eventsToBind, string eventName, string contextFrameKey, AbstractIlluminationDevice_Zone zone)
 -	{
--		Bind_Event item = new Bind_Event("TERRARIA", eventName, 0, 10, EventIconId.Default, new AbstractHandler[1]
--		{
--			new ContextColorEventHandlerType
--			{
+-		Bind_Event item = new Bind_Event("TERRARIA", eventName, 0, 10, EventIconId.Default, new AbstractHandler[1] {
+-			new ContextColorEventHandlerType {
 -				ContextFrameKey = contextFrameKey,
 -				DeviceZone = zone
 -			}
@@ -652,39 +570,31 @@
 -	{
 -		Dictionary<string, byte> xnaKeyNamesToSteelSeriesKeyIndex = HIDCodes.XnaKeyNamesToSteelSeriesKeyIndex;
 -		Color white = Color.White;
--		foreach (KeyValuePair<string, List<string>> item3 in PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus)
--		{
+-		foreach (KeyValuePair<string, List<string>> item3 in PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus) {
 -			string key = item3.Key;
 -			List<string> value = item3.Value;
 -			List<byte> list = new List<byte>();
--			foreach (string item4 in value)
--			{
--				if (xnaKeyNamesToSteelSeriesKeyIndex.TryGetValue(item4, out var value2))
--				{
+-			foreach (string item4 in value) {
+-				if (xnaKeyNamesToSteelSeriesKeyIndex.TryGetValue(item4, out var value2)) {
 -					list.Add(value2);
 -				}
 -			}
 -			RGBPerkeyZoneCustom deviceZone = new RGBPerkeyZoneCustom(list.ToArray());
--			new ColorStatic
--			{
+-			new ColorStatic {
 -				red = white.R,
 -				green = white.G,
 -				blue = white.B
 -			};
--			Bind_Event item = new Bind_Event("TERRARIA", "KEY_" + key.ToUpper(), 0, 10, EventIconId.Default, new AbstractHandler[1]
--			{
--				new ContextColorEventHandlerType
--				{
+-			Bind_Event item = new Bind_Event("TERRARIA", "KEY_" + key.ToUpper(), 0, 10, EventIconId.Default, new AbstractHandler[1] {
+-				new ContextColorEventHandlerType {
 -					ContextFrameKey = key,
 -					DeviceZone = deviceZone
 -				}
 -			});
 -			eventsToBind.Add(item);
 -		}
--		Bind_Event item2 = new Bind_Event("TERRARIA", "DO_RAINBOWS", 0, 10, EventIconId.Default, new AbstractHandler[1]
--		{
--			new PartialBitmapEventHandlerType
--			{
+-		Bind_Event item2 = new Bind_Event("TERRARIA", "DO_RAINBOWS", 0, 10, EventIconId.Default, new AbstractHandler[1] {
+-			new PartialBitmapEventHandlerType {
 -				EventsToExclude = eventsToBind.Select((Bind_Event x) => x.eventName).ToArray()
 -			}
 -		});
@@ -693,8 +603,8 @@
 -
  	public static void DisableAllDeviceGroups()
  	{
- 		if (_engine != null)
-@@ -740,132 +_,12 @@
+ 		if (_engine != null) {
+@@ -648,127 +_,12 @@
  		}
  	}
  
@@ -735,8 +645,7 @@
 -		RegisterShader("Dungeon", new DungeonShader(), CommonConditions.UndergroundBiome.Dungeon, ShaderLayer.BiomeModifier);
 -		RegisterShader("Granite", new CavernShader(new Color(14, 19, 46), new Color(5, 0, 30), 0.5f), CommonConditions.UndergroundBiome.Granite, ShaderLayer.BiomeModifier);
 -		RegisterShader("Marble", new CavernShader(new Color(100, 100, 100), new Color(20, 20, 20), 0.5f), CommonConditions.UndergroundBiome.Marble, ShaderLayer.BiomeModifier);
--		RegisterShader("Gem Cave", new GemCaveShader(color, new Color(25, 25, 25), new Vector4[7]
--		{
+-		RegisterShader("Gem Cave", new GemCaveShader(color, new Color(25, 25, 25), new Vector4[7] {
 -			Color.White.ToVector4(),
 -			Color.Yellow.ToVector4(),
 -			Color.Orange.ToVector4(),
@@ -744,19 +653,16 @@
 -			Color.Green.ToVector4(),
 -			Color.Blue.ToVector4(),
 -			Color.Purple.ToVector4()
--		})
--		{
+-		}) {
 -			CycleTime = 100f,
 -			ColorRarity = 20f,
 -			TimeRate = 0.25f
 -		}, CommonConditions.UndergroundBiome.GemCave, ShaderLayer.BiomeModifier);
 -		Vector4[] array = new Vector4[12];
--		for (int i = 0; i < array.Length; i++)
--		{
+-		for (int i = 0; i < array.Length; i++) {
 -			array[i] = Main.hslToRgb((float)i / (float)array.Length, 1f, 0.5f).ToVector4();
 -		}
--		RegisterShader("Shimmer", new GemCaveShader(Color.Silver * 0.5f, new Color(125, 55, 125), array)
--		{
+-		RegisterShader("Shimmer", new GemCaveShader(Color.Silver * 0.5f, new Color(125, 55, 125), array) {
 -			CycleTime = 2f,
 -			ColorRarity = 4f,
 -			TimeRate = 0.5f
@@ -823,8 +729,7 @@
 +	public static void UpdateEvents()
  	{
 -		new BasicDebugDrawer(Main.instance.GraphicsDevice);
--		Filters.Scene.OnPostDraw += delegate
--		{
+-		Filters.Scene.OnPostDraw += delegate {
 -		};
  	}
  }

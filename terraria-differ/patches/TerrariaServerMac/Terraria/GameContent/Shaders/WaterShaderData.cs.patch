@@ -1,6 +1,6 @@
 --- decompiled/TerrariaServerWindows/Terraria/GameContent/Shaders/WaterShaderData.cs
 +++ decompiled/TerrariaServerMac/Terraria/GameContent/Shaders/WaterShaderData.cs
-@@ -166,7 +_,7 @@
+@@ -161,7 +_,7 @@
  			destination.X += vector2.X;
  			destination.Y += vector2.Y;
  			graphicsDevice.SamplerStates[0] = SamplerState.PointClamp;

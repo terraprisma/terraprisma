@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/Localization/LanguageManager.cs
 +++ decompiled/TerrariaClientMac/Terraria/Localization/LanguageManager.cs
-@@ -66,8 +_,8 @@
+@@ -64,8 +_,8 @@
  			string textValue = GetTextValue(key);
  			textValue.Replace(",", "").Replace(".", "").Replace("\"", "")
  				.Trim();
@@ -8,10 +8,10 @@
 -			string[] array2 = textValue.Split(' ');
 +			string[] array = textValue.Split(new char[1] { ' ' });
 +			string[] array2 = textValue.Split(new char[1] { ' ' });
- 			if (array.Length == array2.Length)
- 			{
- 				string[] array3 = array;
-@@ -181,7 +_,8 @@
+ 			if (array.Length != array2.Length) {
+ 				break;
+ 			}
+@@ -160,7 +_,8 @@
  	public void UseSources(List<IContentSource> sourcesFromLowestToHighest)
  	{
  		string name = ActiveCulture.Name;
@@ -19,5 +19,5 @@
 -		string assetNameStart = ("Localization" + Path.DirectorySeparatorChar + name).ToLower();
 +		string assetNameStart = ("Localization" + directorySeparatorChar + name).ToLower();
  		LoadLanguage(ActiveCulture, processCopyCommands: false);
- 		foreach (IContentSource item in sourcesFromLowestToHighest)
- 		{
+ 		foreach (IContentSource item in sourcesFromLowestToHighest) {
+ 			foreach (string item2 in item.GetAllAssetsStartingWith(assetNameStart)) {

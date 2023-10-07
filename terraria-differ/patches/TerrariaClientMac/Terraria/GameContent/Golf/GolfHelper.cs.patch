@@ -1,63 +1,63 @@
 --- decompiled/TerrariaClientWindows/Terraria/GameContent/Golf/GolfHelper.cs
 +++ decompiled/TerrariaClientMac/Terraria/GameContent/Golf/GolfHelper.cs
-@@ -185,7 +_,7 @@
+@@ -163,7 +_,7 @@
+ 		{
  			SoundEngine.PlaySound(SoundID.Item129, Center);
- 			for (float num = 0f; num < 1f; num += 0.085f)
- 			{
+ 			for (float num = 0f; num < 1f; num += 0.085f) {
 -				Dust dust = Dust.NewDustPerfect(Center, 278, (num * ((float)Math.PI * 2f)).ToRotationVector2() * new Vector2(2f, 0.5f));
 +				Dust dust = Dust.NewDustPerfect(Center, 278, (num * (MathF.PI * 2f)).ToRotationVector2() * new Vector2(2f, 0.5f));
  				dust.fadeIn = 1.2f;
  				dust.noGravity = true;
  				dust.velocity.X *= 0.7f;
-@@ -199,7 +_,7 @@
- 			for (int i = 0; (float)i < num3; i++)
- 			{
+@@ -176,7 +_,7 @@
+ 			float num3 = Main.rand.Next(5, 10);
+ 			for (int i = 0; (float)i < num3; i++) {
  				int num4 = Main.rand.Next(5, 22);
 -				Vector2 value = (((float)i - num3 / 2f) * ((float)Math.PI * 2f) / 256f - (float)Math.PI / 2f).ToRotationVector2() * new Vector2(5f, 1f) * (0.25f + Main.rand.NextFloat() * 0.05f);
 +				Vector2 value = (((float)i - num3 / 2f) * (MathF.PI * 2f) / 256f - MathF.PI / 2f).ToRotationVector2() * new Vector2(5f, 1f) * (0.25f + Main.rand.NextFloat() * 0.05f);
  				Color color = Main.hslToRgb((num2 + (float)i / num3) % 1f, 0.7f, 0.7f);
  				color.A = 127;
- 				for (int j = 0; j < num4; j++)
-@@ -217,7 +_,7 @@
+ 				for (int j = 0; j < num4; j++) {
+@@ -192,7 +_,7 @@
+ 				}
  			}
- 			for (float num5 = 0f; num5 < 1f; num5 += 0.2f)
- 			{
+ 			for (float num5 = 0f; num5 < 1f; num5 += 0.2f) {
 -				Dust dust3 = Dust.NewDustPerfect(Center, 278, (num5 * ((float)Math.PI * 2f)).ToRotationVector2() * new Vector2(1f, 0.5f));
 +				Dust dust3 = Dust.NewDustPerfect(Center, 278, (num5 * (MathF.PI * 2f)).ToRotationVector2() * new Vector2(1f, 0.5f));
  				dust3.fadeIn = 1.2f;
  				dust3.noGravity = true;
  				dust3.velocity.X *= 0.7f;
-@@ -229,7 +_,7 @@
+@@ -203,7 +_,7 @@
+ 			}
  			float num6 = Main.rand.NextFloatDirection();
- 			for (float num7 = 0f; num7 < 1f; num7 += 0.15f)
- 			{
+ 			for (float num7 = 0f; num7 < 1f; num7 += 0.15f) {
 -				Dust dust4 = Dust.NewDustPerfect(Center, 278, (num6 + num7 * ((float)Math.PI * 2f)).ToRotationVector2() * 4f);
 +				Dust dust4 = Dust.NewDustPerfect(Center, 278, (num6 + num7 * (MathF.PI * 2f)).ToRotationVector2() * 4f);
  				dust4.fadeIn = 1.5f;
  				dust4.velocity *= 0.5f + num7 * 0.8f;
  				dust4.noGravity = true;
-@@ -246,7 +_,7 @@
+@@ -219,7 +_,7 @@
+ 		public static void EmitGolfballExplosion_v1(Vector2 Center)
  		{
- 			for (float num = 0f; num < 1f; num += 0.085f)
- 			{
+ 			for (float num = 0f; num < 1f; num += 0.085f) {
 -				Dust dust = Dust.NewDustPerfect(Center, 278, (num * ((float)Math.PI * 2f)).ToRotationVector2() * new Vector2(2f, 0.5f));
 +				Dust dust = Dust.NewDustPerfect(Center, 278, (num * (MathF.PI * 2f)).ToRotationVector2() * new Vector2(2f, 0.5f));
  				dust.fadeIn = 1.2f;
  				dust.noGravity = true;
  				dust.velocity.X *= 0.7f;
-@@ -256,7 +_,7 @@
+@@ -228,7 +_,7 @@
+ 				dust.color = Color.Lerp(Color.Silver, Color.White, 0.5f);
  			}
- 			for (float num2 = 0f; num2 < 1f; num2 += 0.2f)
- 			{
+ 			for (float num2 = 0f; num2 < 1f; num2 += 0.2f) {
 -				Dust dust2 = Dust.NewDustPerfect(Center, 278, (num2 * ((float)Math.PI * 2f)).ToRotationVector2() * new Vector2(1f, 0.5f));
 +				Dust dust2 = Dust.NewDustPerfect(Center, 278, (num2 * (MathF.PI * 2f)).ToRotationVector2() * new Vector2(1f, 0.5f));
  				dust2.fadeIn = 1.2f;
  				dust2.noGravity = true;
  				dust2.velocity.X *= 0.7f;
-@@ -267,7 +_,7 @@
+@@ -238,7 +_,7 @@
+ 			}
  			float num3 = Main.rand.NextFloatDirection();
- 			for (float num4 = 0f; num4 < 1f; num4 += 0.15f)
- 			{
+ 			for (float num4 = 0f; num4 < 1f; num4 += 0.15f) {
 -				Dust dust3 = Dust.NewDustPerfect(Center, 278, (num3 + num4 * ((float)Math.PI * 2f)).ToRotationVector2() * 4f);
 +				Dust dust3 = Dust.NewDustPerfect(Center, 278, (num3 + num4 * (MathF.PI * 2f)).ToRotationVector2() * 4f);
  				dust3.fadeIn = 1.5f;

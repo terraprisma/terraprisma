@@ -11,5 +11,5 @@
 -    <Reference Include="Microsoft.Xna.Framework.Graphics" />
 -    <Reference Include="Microsoft.Xna.Framework.Xact" />
      <Reference Include="Newtonsoft.Json" />
-     <Reference Include="RailSDK.Net" />
-     <ProjectReference Include="../ReLogic/ReLogic.csproj" />
+     <ProjectReference Include="../RailSDK.Net/RailSDK.Net.csproj" />
+     <EmbeddedResource Include="../RailSDK.Net/bin/$(Configuration)/$(TargetFramework)/RailSDK.Net.dll" />

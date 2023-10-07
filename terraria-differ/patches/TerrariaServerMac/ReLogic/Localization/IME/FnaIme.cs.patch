@@ -17,15 +17,14 @@
 +
  	private void OnCharCallback(char key)
  	{
- 		if (base.IsEnabled)
-@@ -29,6 +_,10 @@
+ 		if (base.IsEnabled) {
+@@ -27,6 +_,9 @@
+ 	protected override void Dispose(bool disposing)
  	{
- 		if (!_disposedValue)
- 		{
-+			if (disposing)
-+			{
+ 		if (!_disposedValue) {
++			if (disposing) {
 +				TextInputEXT.TextInput -= OnCharCallback;
 +			}
- 			if (base.IsEnabled)
- 			{
+ 			if (base.IsEnabled) {
  				Disable();
+ 			}

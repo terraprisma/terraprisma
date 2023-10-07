@@ -1,6 +1,6 @@
 --- decompiled/TerrariaServerWindows/Terraria/GameContent/RGB/EmpressShader.cs
 +++ decompiled/TerrariaServerLinux/Terraria/GameContent/RGB/EmpressShader.cs
-@@ -31,7 +_,7 @@
+@@ -29,7 +_,7 @@
  			Point gridPositionOfIndex = fragment.GetGridPositionOfIndex(i);
  			Vector2 canvasPositionOfIndex = fragment.GetCanvasPositionOfIndex(i);
  			float staticNoise = NoiseHelper.GetStaticNoise(gridPositionOfIndex.X);

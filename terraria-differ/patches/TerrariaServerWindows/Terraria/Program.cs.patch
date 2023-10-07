@@ -7,22 +7,21 @@
  using System.IO;
  using System.Reflection;
  using System.Runtime.CompilerServices;
-@@ -157,10 +_,6 @@
+@@ -137,9 +_,6 @@
  
  	private static void InitializeConsoleOutput()
  	{
--		if (Debugger.IsAttached)
--		{
+-		if (Debugger.IsAttached) {
 -			return;
 -		}
- 		try
- 		{
+ 		try {
  			Console.OutputEncoding = Encoding.UTF8;
-@@ -200,6 +_,7 @@
+ 			if (Platform.IsWindows) {
+@@ -171,6 +_,7 @@
  
  	public static void RunGame()
  	{
 +		Main.dedServ = true;
  		LanguageManager.Instance.SetLanguage(GameCulture.DefaultCulture);
- 		if (Platform.IsOSX)
- 		{
+ 		if (Platform.IsOSX) {
+ 			Main.OnEngineLoad += delegate {

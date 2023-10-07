@@ -1,6 +1,6 @@
 --- decompiled/TerrariaServerWindows/Terraria/Graphics/TileBatch.cs
 +++ decompiled/TerrariaServerMac/Terraria/Graphics/TileBatch.cs
-@@ -1,369 +_,421 @@
+@@ -1,335 +_,390 @@
  using System;
 +using System.Collections.Generic;
  using Microsoft.Xna.Framework;
@@ -151,24 +151,19 @@
 -
 -	private void Allocate()
 -	{
--		if (_vertexBuffer == null || _vertexBuffer.IsDisposed)
--		{
+-		if (_vertexBuffer == null || _vertexBuffer.IsDisposed) {
 -			_vertexBuffer = new DynamicVertexBuffer(_graphicsDevice, typeof(VertexPositionColorTexture), 8192, BufferUsage.WriteOnly);
 -			_vertexBufferPosition = 0;
--			_vertexBuffer.ContentLost += delegate
--			{
+-			_vertexBuffer.ContentLost += delegate {
 -				_vertexBufferPosition = 0;
 -			};
 -		}
--		if (_indexBuffer != null && !_indexBuffer.IsDisposed)
--		{
+-		if (_indexBuffer != null && !_indexBuffer.IsDisposed) {
 -			return;
 -		}
--		if (_fallbackIndexData == null)
--		{
+-		if (_fallbackIndexData == null) {
 -			_fallbackIndexData = new short[12288];
--			for (int i = 0; i < 2048; i++)
--			{
+-			for (int i = 0; i < 2048; i++) {
 -				_fallbackIndexData[i * 6] = (short)(i * 4);
 -				_fallbackIndexData[i * 6 + 1] = (short)(i * 4 + 1);
 -				_fallbackIndexData[i * 6 + 2] = (short)(i * 4 + 2);
@@ -179,8 +174,7 @@
 -		}
 -		_indexBuffer = new DynamicIndexBuffer(_graphicsDevice, typeof(short), 12288, BufferUsage.WriteOnly);
 -		_indexBuffer.SetData(_fallbackIndexData);
--		_indexBuffer.ContentLost += delegate
--		{
+-		_indexBuffer.ContentLost += delegate {
 -			_indexBuffer.SetData(_fallbackIndexData);
 -		};
 -	}
@@ -195,12 +189,10 @@
 -
 -	public void Dispose()
 -	{
--		if (_vertexBuffer != null)
--		{
+-		if (_vertexBuffer != null) {
 -			_vertexBuffer.Dispose();
 -		}
--		if (_indexBuffer != null)
--		{
+-		if (_indexBuffer != null) {
 -			_indexBuffer.Dispose();
 -		}
 -	}
@@ -240,8 +232,7 @@
 +
 +	public void Begin(SpriteSortMode sortMode, BlendState blendState, SamplerState samplerState, DepthStencilState depthStencilState, RasterizerState rasterizerState, Effect effect, Matrix transformationMatrix)
 +	{
-+		if (sortMode != 0 && sortMode != SpriteSortMode.Texture)
-+		{
++		if (sortMode != 0 && sortMode != SpriteSortMode.Texture) {
 +			throw new NotImplementedException("TileBatch only supports SpriteSortMode.Deferred and SpriteSortMode.Texture.");
 +		}
 +		_sortMode = sortMode;
@@ -251,12 +242,9 @@
 +
 +	public void End()
 +	{
-+		if (_sortMode == SpriteSortMode.Deferred)
-+		{
++		if (_sortMode == SpriteSortMode.Deferred) {
 +			DrawBatch();
-+		}
-+		else if (_sortMode == SpriteSortMode.Texture)
-+		{
++		} else if (_sortMode == SpriteSortMode.Texture) {
 +			SortedDrawBatch();
 +		}
  	}
@@ -308,13 +296,10 @@
 +	{
 +		float z;
 +		float w;
-+		if (sourceRectangle.HasValue)
-+		{
++		if (sourceRectangle.HasValue) {
 +			z = (float)sourceRectangle.Value.Width * scale;
 +			w = (float)sourceRectangle.Value.Height * scale;
-+		}
-+		else
-+		{
++		} else {
 +			z = (float)texture.Width * scale;
 +			w = (float)texture.Height * scale;
 +		}
@@ -339,8 +324,7 @@
 -	private static short[] CreateIndexData()
 -	{
 -		short[] array = new short[12288];
--		for (int i = 0; i < 2048; i++)
--		{
+-		for (int i = 0; i < 2048; i++) {
 -			array[i * 6] = (short)(i * 4);
 -			array[i * 6 + 1] = (short)(i * 4 + 1);
 -			array[i * 6 + 2] = (short)(i * 4 + 2);
@@ -353,37 +337,30 @@
 -
 -	private unsafe void InternalDraw(Texture2D texture, ref Vector4 destination, bool scaleDestination, ref Rectangle? sourceRectangle, ref VertexColors colors, ref Vector2 origin, SpriteEffects effects, float rotation)
 -	{
--		if (_queuedSpriteCount >= _spriteDataQueue.Length)
--		{
+-		if (_queuedSpriteCount >= _spriteDataQueue.Length) {
 -			Array.Resize(ref _spriteDataQueue, _spriteDataQueue.Length << 1);
 -		}
--		fixed (SpriteData* ptr = &_spriteDataQueue[_queuedSpriteCount])
--		{
+-		fixed (SpriteData* ptr = &_spriteDataQueue[_queuedSpriteCount]) {
 -			float num = destination.Z;
 -			float num2 = destination.W;
--			if (sourceRectangle.HasValue)
--			{
+-			if (sourceRectangle.HasValue) {
 -				Rectangle value = sourceRectangle.Value;
 -				ptr->Source.X = value.X;
 -				ptr->Source.Y = value.Y;
 -				ptr->Source.Z = value.Width;
 -				ptr->Source.W = value.Height;
--				if (scaleDestination)
--				{
+-				if (scaleDestination) {
 -					num *= (float)value.Width;
 -					num2 *= (float)value.Height;
 -				}
--			}
--			else
--			{
+-			} else {
 -				float num3 = texture.Width;
 -				float num4 = texture.Height;
 -				ptr->Source.X = 0f;
 -				ptr->Source.Y = 0f;
 -				ptr->Source.Z = num3;
 -				ptr->Source.W = num4;
--				if (scaleDestination)
--				{
+-				if (scaleDestination) {
 -					num *= num3;
 -					num2 *= num4;
 -				}
@@ -398,8 +375,7 @@
 -			ptr->Colors = colors;
 -			ptr->Rotation = rotation;
 -		}
--		if (_spriteTextures == null || _spriteTextures.Length != _spriteDataQueue.Length)
--		{
+-		if (_spriteTextures == null || _spriteTextures.Length != _spriteDataQueue.Length) {
 -			Array.Resize(ref _spriteTextures, _spriteDataQueue.Length);
 -		}
 -		_spriteTextures[_queuedSpriteCount++] = texture;
@@ -407,8 +383,7 @@
 -
 -	public void End()
 -	{
--		if (_queuedSpriteCount != 0)
--		{
+-		if (_queuedSpriteCount != 0) {
 -			FlushRenderState();
 -			Flush();
 -		}
@@ -423,15 +398,12 @@
 +	internal void InternalDraw(Texture2D texture, Vector4 destinationRectangle, Rectangle? sourceRectangle, VertexColors colors, float rotation, Vector2 origin, SpriteEffects effect, float depth)
 +	{
 +		Vector4 sourceRectangle2 = default(Vector4);
-+		if (sourceRectangle.HasValue)
-+		{
++		if (sourceRectangle.HasValue) {
 +			sourceRectangle2.X = sourceRectangle.Value.X;
 +			sourceRectangle2.Y = sourceRectangle.Value.Y;
 +			sourceRectangle2.Z = sourceRectangle.Value.Width;
 +			sourceRectangle2.W = sourceRectangle.Value.Height;
-+		}
-+		else
-+		{
++		} else {
 +			sourceRectangle2.X = 0f;
 +			sourceRectangle2.Y = 0f;
 +			sourceRectangle2.Z = texture.Width;
@@ -443,14 +415,12 @@
 +		Vector2 texCoordBR = default(Vector2);
 +		texCoordBR.X = (sourceRectangle2.X + sourceRectangle2.Z) / (float)texture.Width;
 +		texCoordBR.Y = (sourceRectangle2.Y + sourceRectangle2.W) / (float)texture.Height;
-+		if ((effect & SpriteEffects.FlipVertically) != 0)
-+		{
++		if ((effect & SpriteEffects.FlipVertically) != 0) {
 +			float y = texCoordBR.Y;
 +			texCoordBR.Y = texCoordTL.Y;
 +			texCoordTL.Y = y;
 +		}
-+		if ((effect & SpriteEffects.FlipHorizontally) != 0)
-+		{
++		if ((effect & SpriteEffects.FlipHorizontally) != 0) {
 +			float x = texCoordBR.X;
 +			texCoordBR.X = texCoordTL.X;
 +			texCoordTL.X = x;
@@ -462,8 +432,7 @@
 +	{
 +		_spriteBatch = new SpriteBatch(graphicsDevice);
 +		_graphicsDevice = graphicsDevice;
-+		for (int i = 0; i < 32; i++)
-+		{
++		for (int i = 0; i < 32; i++) {
 +			_batchDrawGroups.Add(new BatchDrawGroup());
 +		}
 +		_sortedIndexBuffer = new DynamicIndexBuffer(graphicsDevice, IndexElementSize.SixteenBits, 12288, BufferUsage.WriteOnly);
@@ -484,12 +453,9 @@
 +	{
 +		Array.Sort(batchDrawGroup.BatchDraws, 0, batchDrawGroup.BatchDrawCount, TextureComparer.Instance);
  		int num = 0;
--		for (int i = 0; i < _queuedSpriteCount; i++)
--		{
--			if (_spriteTextures[i] != texture2D)
--			{
--				if (i > num)
--				{
+-		for (int i = 0; i < _queuedSpriteCount; i++) {
+-			if (_spriteTextures[i] != texture2D) {
+-				if (i > num) {
 -					RenderBatch(texture2D, _spriteDataQueue, num, i - num);
 -				}
 -				num = i;
@@ -506,41 +472,31 @@
 -		_graphicsDevice.Textures[0] = texture;
 -		float num = 1f / (float)texture.Width;
 -		float num2 = 1f / (float)texture.Height;
--		while (count > 0)
--		{
+-		while (count > 0) {
 -			SetDataOptions options = SetDataOptions.NoOverwrite;
 -			int num3 = count;
--			if (num3 > 2048 - _vertexBufferPosition)
--			{
+-			if (num3 > 2048 - _vertexBufferPosition) {
 -				num3 = 2048 - _vertexBufferPosition;
--				if (num3 < 256)
--				{
+-				if (num3 < 256) {
 -					_vertexBufferPosition = 0;
 -					options = SetDataOptions.Discard;
 -					num3 = count;
--					if (num3 > 2048)
--					{
+-					if (num3 > 2048) {
 -						num3 = 2048;
 -					}
 -				}
 -			}
--			fixed (SpriteData* ptr = &sprites[offset])
--			{
--				fixed (VertexPositionColorTexture* ptr3 = &_vertices[0])
--				{
+-			fixed (SpriteData* ptr = &sprites[offset]) {
+-				fixed (VertexPositionColorTexture* ptr3 = &_vertices[0]) {
 -					SpriteData* ptr2 = ptr;
 -					VertexPositionColorTexture* ptr4 = ptr3;
--					for (int i = 0; i < num3; i++)
--					{
+-					for (int i = 0; i < num3; i++) {
 -						float num4;
 -						float num5;
--						if (ptr2->Rotation != 0f)
--						{
+-						if (ptr2->Rotation != 0f) {
 -							num4 = (float)Math.Cos(ptr2->Rotation);
 -							num5 = (float)Math.Sin(ptr2->Rotation);
--						}
--						else
--						{
+-						} else {
 -							num4 = 1f;
 -							num5 = 0f;
 -						}
@@ -550,20 +506,17 @@
 -						ptr4[1].Color = ptr2->Colors.TopRightColor;
 -						ptr4[2].Color = ptr2->Colors.BottomRightColor;
 -						ptr4[3].Color = ptr2->Colors.BottomLeftColor;
--						for (int j = 0; j < 4; j++)
--						{
+-						for (int j = 0; j < 4; j++) {
 -							float num8 = CORNER_OFFSET_X[j];
 -							float num9 = CORNER_OFFSET_Y[j];
 -							float num10 = (num8 - num6) * ptr2->Destination.Z;
 -							float num11 = (num9 - num7) * ptr2->Destination.W;
 -							float x = ptr2->Destination.X + num10 * num4 - num11 * num5;
 -							float y = ptr2->Destination.Y + num10 * num5 + num11 * num4;
--							if ((ptr2->Effects & SpriteEffects.FlipVertically) != 0)
--							{
+-							if ((ptr2->Effects & SpriteEffects.FlipVertically) != 0) {
 -								num9 = 1f - num9;
 -							}
--							if ((ptr2->Effects & SpriteEffects.FlipHorizontally) != 0)
--							{
+-							if ((ptr2->Effects & SpriteEffects.FlipHorizontally) != 0) {
 -								num8 = 1f - num8;
 -							}
 -							ptr4->Position.X = x;
@@ -587,11 +540,9 @@
 -			_vertexBufferPosition += num3;
 -			offset += num3;
 -			count -= num3;
-+		for (int i = 0; i < batchDrawGroup.BatchDrawCount; i++)
-+		{
++		for (int i = 0; i < batchDrawGroup.BatchDrawCount; i++) {
 +			BatchDrawInfo batchDrawInfo = batchDrawGroup.BatchDraws[i];
-+			for (int j = 0; j < batchDrawInfo.Count; j++)
-+			{
++			for (int j = 0; j < batchDrawInfo.Count; j++) {
 +				int num2 = batchDrawInfo.Index * 4 + j * 4;
 +				_sortedIndexData[num] = (short)num2;
 +				_sortedIndexData[num + 1] = (short)(num2 + 1);
@@ -607,27 +558,23 @@
 +
 +	private void SortedDrawBatch()
 +	{
-+		if (_lastBatchDrawGroupIndex == 0 && _batchDrawGroups[_lastBatchDrawGroupIndex].SpriteCount == 0)
-+		{
++		if (_lastBatchDrawGroupIndex == 0 && _batchDrawGroups[_lastBatchDrawGroupIndex].SpriteCount == 0) {
 +			return;
 +		}
 +		FlushRemainingBatch();
 +		VertexBuffer vertexBuffer = _graphicsDevice.GetVertexBuffers()[0].VertexBuffer;
 +		_graphicsDevice.Indices = _sortedIndexBuffer;
-+		for (int i = 0; i <= _lastBatchDrawGroupIndex; i++)
-+		{
++		for (int i = 0; i <= _lastBatchDrawGroupIndex; i++) {
 +			BatchDrawGroup batchDrawGroup = _batchDrawGroups[i];
 +			int vertexCount = batchDrawGroup.VertexCount;
 +			vertexBuffer.SetData(_batchDrawGroups[i].VertexArray, 0, vertexCount);
 +			SortAndApplyIndexData(batchDrawGroup);
 +			int num = 0;
-+			for (int j = 0; j < batchDrawGroup.BatchDrawCount; j++)
-+			{
++			for (int j = 0; j < batchDrawGroup.BatchDrawCount; j++) {
 +				BatchDrawInfo batchDrawInfo = batchDrawGroup.BatchDraws[j];
 +				_graphicsDevice.Textures[0] = batchDrawInfo.Texture;
 +				int num2 = batchDrawInfo.Count;
-+				for (; j + 1 < batchDrawGroup.BatchDrawCount && batchDrawInfo.Texture == batchDrawGroup.BatchDraws[j + 1].Texture; j++)
-+				{
++				for (; j + 1 < batchDrawGroup.BatchDrawCount && batchDrawInfo.Texture == batchDrawGroup.BatchDraws[j + 1].Texture; j++) {
 +					num2 += batchDrawGroup.BatchDraws[j + 1].Count;
 +				}
 +				_graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, num2 * 4, num, num2 * 2);
@@ -641,19 +588,16 @@
 +
 +	private void DrawBatch()
 +	{
-+		if (_lastBatchDrawGroupIndex == 0 && _batchDrawGroups[_lastBatchDrawGroupIndex].SpriteCount == 0)
-+		{
++		if (_lastBatchDrawGroupIndex == 0 && _batchDrawGroups[_lastBatchDrawGroupIndex].SpriteCount == 0) {
 +			return;
 +		}
 +		FlushRemainingBatch();
 +		VertexBuffer vertexBuffer = _graphicsDevice.GetVertexBuffers()[0].VertexBuffer;
-+		for (int i = 0; i <= _lastBatchDrawGroupIndex; i++)
-+		{
++		for (int i = 0; i <= _lastBatchDrawGroupIndex; i++) {
 +			BatchDrawGroup batchDrawGroup = _batchDrawGroups[i];
 +			int vertexCount = batchDrawGroup.VertexCount;
 +			vertexBuffer.SetData(_batchDrawGroups[i].VertexArray, 0, vertexCount);
-+			for (int j = 0; j < batchDrawGroup.BatchDrawCount; j++)
-+			{
++			for (int j = 0; j < batchDrawGroup.BatchDrawCount; j++) {
 +				BatchDrawInfo batchDrawInfo = batchDrawGroup.BatchDraws[j];
 +				_graphicsDevice.Textures[0] = batchDrawInfo.Texture;
 +				_graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, batchDrawInfo.Count * 4, batchDrawInfo.Index * 6, batchDrawInfo.Count * 2);
@@ -678,13 +622,10 @@
 +		BatchDrawGroup batchDrawGroup = _batchDrawGroups[_lastBatchDrawGroupIndex];
 +		float num5;
 +		float num6;
-+		if (rotation != 0f)
-+		{
++		if (rotation != 0f) {
 +			num5 = (float)Math.Cos(rotation);
 +			num6 = (float)Math.Sin(rotation);
-+		}
-+		else
-+		{
++		} else {
 +			num5 = 1f;
 +			num6 = 0f;
 +		}
@@ -722,21 +663,16 @@
 +	private void UpdateCurrentBatchDraw(Texture2D texture)
 +	{
 +		BatchDrawGroup batchDrawGroup = _batchDrawGroups[_lastBatchDrawGroupIndex];
-+		if (batchDrawGroup.SpriteCount >= 2048)
-+		{
++		if (batchDrawGroup.SpriteCount >= 2048) {
 +			_currentBatchDrawInfo.Count = 2048 - _currentBatchDrawInfo.Index;
 +			_batchDrawGroups[_lastBatchDrawGroupIndex].AddBatch(_currentBatchDrawInfo);
 +			_currentBatchDrawInfo = new BatchDrawInfo(texture);
 +			_lastBatchDrawGroupIndex++;
-+			if (_lastBatchDrawGroupIndex >= _batchDrawGroups.Count)
-+			{
++			if (_lastBatchDrawGroupIndex >= _batchDrawGroups.Count) {
 +				_batchDrawGroups.Add(new BatchDrawGroup());
 +			}
-+		}
-+		else if (texture != _currentBatchDrawInfo.Texture)
-+		{
-+			if (batchDrawGroup.SpriteCount != 0 || _lastBatchDrawGroupIndex != 0)
-+			{
++		} else if (texture != _currentBatchDrawInfo.Texture) {
++			if (batchDrawGroup.SpriteCount != 0 || _lastBatchDrawGroupIndex != 0) {
 +				_currentBatchDrawInfo.Count = batchDrawGroup.SpriteCount - _currentBatchDrawInfo.Index;
 +				batchDrawGroup.AddBatch(_currentBatchDrawInfo);
 +			}
@@ -747,8 +683,7 @@
 +	private void FlushRemainingBatch()
 +	{
 +		BatchDrawGroup batchDrawGroup = _batchDrawGroups[_lastBatchDrawGroupIndex];
-+		if (_currentBatchDrawInfo.Index != batchDrawGroup.SpriteCount)
-+		{
++		if (_currentBatchDrawInfo.Index != batchDrawGroup.SpriteCount) {
 +			_currentBatchDrawInfo.Count = batchDrawGroup.SpriteCount - _currentBatchDrawInfo.Index;
 +			batchDrawGroup.AddBatch(_currentBatchDrawInfo);
  		}

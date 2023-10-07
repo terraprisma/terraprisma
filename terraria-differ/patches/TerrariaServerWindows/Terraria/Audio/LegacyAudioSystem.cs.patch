@@ -1,24 +1,20 @@
 --- decompiled/TerrariaClientWindows/Terraria/Audio/LegacyAudioSystem.cs
 +++ decompiled/TerrariaServerWindows/Terraria/Audio/LegacyAudioSystem.cs
-@@ -76,44 +_,12 @@
+@@ -68,37 +_,11 @@
  
  	private IAudioTrack FindReplacementTrack(List<IContentSource> sources, string assetPath)
  	{
 -		IAudioTrack audioTrack = null;
 +		IAudioTrack result = null;
- 		for (int i = 0; i < sources.Count; i++)
- 		{
+ 		for (int i = 0; i < sources.Count; i++) {
 -			IContentSource contentSource = sources[i];
--			if (!contentSource.HasAsset(assetPath))
--			{
+-			if (!contentSource.HasAsset(assetPath)) {
 -				continue;
 -			}
 -			string extension = contentSource.GetExtension(assetPath);
--			try
--			{
+-			try {
 -				IAudioTrack audioTrack2 = null;
--				switch (extension)
--				{
+-				switch (extension) {
 -					case ".ogg":
 -						audioTrack2 = new OGGAudioTrack(contentSource.OpenStream(assetPath));
 -						break;
@@ -29,14 +25,11 @@
 -						audioTrack2 = new MP3AudioTrack(contentSource.OpenStream(assetPath));
 -						break;
 -				}
--				if (audioTrack2 != null)
--				{
+-				if (audioTrack2 != null) {
 -					audioTrack?.Dispose();
 -					audioTrack = audioTrack2;
 -				}
--			}
--			catch
--			{
+-			} catch {
 -				string textToShow = "A resource pack failed to load " + assetPath + "!";
 -				Main.IssueReporter.AddReport(textToShow);
 -				Main.IssueReporterIndicator.AttemptLettingPlayerKnow();

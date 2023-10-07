@@ -1,29 +1,26 @@
 --- decompiled/TerrariaClientWindows/Terraria/IO/WorldFile.cs
 +++ decompiled/TerrariaClientLinux/Terraria/IO/WorldFile.cs
-@@ -586,7 +_,9 @@
- 			{
- 				for (int num = Main.worldPathName.Length - 1; num >= 0; num--)
- 				{
--					if (Main.worldPathName.Substring(num, 1) == (Path.DirectorySeparatorChar.ToString() ?? ""))
+@@ -522,7 +_,9 @@
+ 		if (!FileUtilities.Exists(Main.worldPathName, flag) && Main.autoGen) {
+ 			if (!flag) {
+ 				for (int num = Main.worldPathName.Length - 1; num >= 0; num--) {
+-					if (Main.worldPathName.Substring(num, 1) == (Path.DirectorySeparatorChar.ToString() ?? "")) {
 +					string text = Main.worldPathName.Substring(num, 1);
 +					char directorySeparatorChar = Path.DirectorySeparatorChar;
-+					if (text == (directorySeparatorChar.ToString() ?? ""))
- 					{
++					if (text == (directorySeparatorChar.ToString() ?? "")) {
  						Utils.TryCreatingDirectory(Main.worldPathName.Substring(0, num));
  						break;
-@@ -595,16 +_,16 @@
+ 					}
+@@ -530,13 +_,13 @@
  			}
  			WorldGen.clearWorld();
  			Main.ActiveWorldFileData = CreateMetadata((Main.worldName == "") ? "World" : Main.worldName, flag, Main.GameMode);
 -			string text = (Main.AutogenSeedName ?? "").Trim();
 +			string text2 = (Main.AutogenSeedName ?? "").Trim();
--			if (text.Length == 0)
-+			if (text2.Length == 0)
- 			{
+-			if (text.Length == 0) {
++			if (text2.Length == 0) {
  				Main.ActiveWorldFileData.SetSeedToRandom();
- 			}
- 			else
- 			{
+ 			} else {
 -				Main.ActiveWorldFileData.SetSeed(text);
 +				Main.ActiveWorldFileData.SetSeed(text2);
  			}

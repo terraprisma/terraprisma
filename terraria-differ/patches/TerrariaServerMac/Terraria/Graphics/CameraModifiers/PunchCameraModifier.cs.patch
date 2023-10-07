@@ -8,4 +8,4 @@
 +		float num = (float)Math.Cos((float)_framesLasted / 60f * _vibrationCyclesPerSecond * (MathF.PI * 2f));
  		float num2 = Utils.Remap(_framesLasted, 0f, _framesToLast, 1f, 0f);
  		float num3 = Utils.Remap(Vector2.Distance(_startPosition, cameraInfo.OriginalCameraCenter), 0f, _distanceFalloff, 1f, 0f);
- 		if (_distanceFalloff == -1f)
+ 		if (_distanceFalloff == -1f) {

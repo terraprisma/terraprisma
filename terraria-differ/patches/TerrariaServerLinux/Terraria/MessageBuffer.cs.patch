@@ -1,7 +1,7 @@
 --- decompiled/TerrariaServerWindows/Terraria/MessageBuffer.cs
 +++ decompiled/TerrariaServerLinux/Terraria/MessageBuffer.cs
-@@ -3597,7 +_,7 @@
- 					{
+@@ -2888,7 +_,7 @@
+ 					if (!vector3.HasNaNs()) {
  						int type4 = 90;
  						float num61 = 0f;
 -						float num62 = (float)Math.PI / 15f;
