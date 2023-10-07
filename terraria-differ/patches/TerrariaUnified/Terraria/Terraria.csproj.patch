@@ -1,0 +1,14 @@
+--- decompiled/TerrariaBuildable/Terraria/Terraria.csproj
++++ decompiled/TerrariaUnified/Terraria/Terraria.csproj
+@@ -14,10 +_,7 @@
+   <ItemGroup>
+     <Reference Include="CsvHelper" />
+     <Reference Include="Ionic.Zip.CF" />
+-    <Reference Include="Microsoft.Xna.Framework" />
+-    <Reference Include="Microsoft.Xna.Framework.Game" />
+-    <Reference Include="Microsoft.Xna.Framework.Graphics" />
+-    <Reference Include="Microsoft.Xna.Framework.Xact" />
++    <Reference Include="FNA" />
+     <Reference Include="MP3Sharp" />
+     <Reference Include="Newtonsoft.Json" />
+     <Reference Include="NVorbis" />
