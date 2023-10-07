@@ -23,4 +23,14 @@
         <ProjectReference Include="..\Tomat.TerrariaModernizer.Terraria\Tomat.TerrariaModernizer.Terraria.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <ReferencePathWithRefAssemblies Update="C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\7.0.1\ref\net7.0\System.Windows.dll" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="System.Windows.Forms">
+            <HintPath>lib\System.Windows.Forms.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
 </Project>

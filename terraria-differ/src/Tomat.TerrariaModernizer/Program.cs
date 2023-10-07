@@ -87,8 +87,8 @@ internal static class Program {
         Console.WriteLine(typeof(MP3Sharp.MP3SharpException).Assembly.Location);
         Console.WriteLine(typeof(NVorbis.VorbisReader).Assembly.Location);
         Console.WriteLine(typeof(Microsoft.Xna.Framework.Vector2).Assembly.Location);
-        Console.WriteLine(typeof(System.Windows.Forms.Application));
-        Console.WriteLine(typeof(System.Drawing.Graphics));
+        // Console.WriteLine(typeof(System.Windows.Forms.Application));
+        Console.WriteLine(typeof(System.Drawing.Graphics).Assembly.Location);
     }
 
     private static void PatchRailSdk(string workspace) {

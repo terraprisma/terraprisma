@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using Mono.Cecil;
 using MonoMod;
-using Newtonsoft.Json.Linq;
 using MethodBody = Mono.Cecil.Cil.MethodBody;
 
 namespace Tomat.TerrariaModernizer;
@@ -28,9 +27,11 @@ public sealed class ModernizerModder : MonoModder {
     };
 
     private readonly string workspace;
+    private readonly Assembly formsAssembly;
 
     public ModernizerModder(string workspace) {
         this.workspace = workspace;
+        formsAssembly = Assembly.LoadFile(Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location)!, "System.Windows.Forms.dll"));
     }
 
     public override void MapDependencies() {
@@ -58,8 +59,12 @@ public sealed class ModernizerModder : MonoModder {
         var relinkedMember = base.Relinker(mtp, context);
 
         if (relinkedMember is TypeReference type) {
-            if (libs_to_remove.Contains(type.Scope.Name))
+            if (libs_to_remove.Contains(type.Scope.Name)) {
+                if (type.Namespace.StartsWith("System.Windows.Forms"))
+                    return Module.ImportReference(formsAssembly.GetType(type.FullName));
+
                 return Module.ImportReference(FindType(type.FullName));
+            }
         }
 
         return relinkedMember;
