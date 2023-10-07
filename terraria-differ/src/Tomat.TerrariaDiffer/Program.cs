@@ -227,12 +227,11 @@ internal static class Program {
         var patchDirName = Path.Combine("patches", node.WorkspaceName);
         if (!Directory.Exists(patchDirName))
             Directory.CreateDirectory(patchDirName);
-        
-        // Create this directory if it doesn't exist. Not a big deal
-        // if (!Directory.Exists(Path.Combine("decompiled", parent.WorkspaceName)))
-        //     Directory.CreateDirectory(Path.Combine("decompiled", parent.WorkspaceName));
 
-        var patcher = new Patcher(Path.Combine("decompiled", parent.WorkspaceName), Path.Combine("patches", parent.WorkspaceName), Path.Combine("decompiled", node.WorkspaceName));
+        if (/*Environment.GetEnvironmentVariable("REGENERATE_MOD_SOURCES") == "1" &&*/ Directory.Exists(Path.Combine("decompiled", node.WorkspaceName)))
+            Directory.Delete(Path.Combine("decompiled", node.WorkspaceName), true);
+
+        var patcher = new Patcher(Path.Combine("decompiled", parent.WorkspaceName), Path.Combine("patches", node.WorkspaceName), Path.Combine("decompiled", node.WorkspaceName));
         patcher.Patch();
 
         foreach (var child in node.Children)
