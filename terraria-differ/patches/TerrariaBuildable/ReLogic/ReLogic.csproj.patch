@@ -1,0 +1,36 @@
+--- decompiled/TerrariaClientWindows/ReLogic/ReLogic.csproj
++++ decompiled/TerrariaBuildable/ReLogic/ReLogic.csproj
+@@ -2,23 +_,26 @@
+   <Import Project="../Configuration.targets" />
+   <PropertyGroup>
+     <OutputType>Library</OutputType>
+-    <Nullable>enable</Nullable>
++    <Nullable>disable</Nullable>
+     <Version>1.0.0.0</Version>
+     <Company>Re-Logic</Company>
+     <Company>Copyright © Re-Logic 2017</Company>
+     <RootNamespace>ReLogic</RootNamespace>
++    <TargetFramework>net48</TargetFramework>
++    <LangVersion>latest</LangVersion>
+   </PropertyGroup>
+   <ItemGroup>
+-    <Reference Include="Ionic.Zip.CF" />
+-    <Reference Include="Microsoft.Xna.Framework" />
+-    <Reference Include="Microsoft.Xna.Framework.Game" />
+-    <Reference Include="Microsoft.Xna.Framework.Graphics" />
+-    <Reference Include="Newtonsoft.Json" />
+-    <Reference Include="SteelSeriesEngineWrapper" />
++    <Reference Include="../Terraria/Libraries/DotNetZip/Ionic.Zip.CF.dll" />
++    <Reference Include="../Terraria/Libraries/XNA/Microsoft.Xna.Framework.dll" />
++    <Reference Include="../Terraria/Libraries/XNA/Microsoft.Xna.Framework.Game.dll" />
++    <Reference Include="../Terraria/Libraries/XNA/Microsoft.Xna.Framework.Graphics.dll" />
++    <Reference Include="../Terraria/Libraries/JSON.NET/Newtonsoft.Json.dll" />
+     <Reference Include="System" />
+     <Reference Include="System.Core" />
+     <Reference Include="System.Drawing" />
+     <Reference Include="System.Windows.Forms" />
++    <ProjectReference Include="../RailSDK/RailSDK.csproj" />
++    <ProjectReference Include="../SteelSeriesEngineWrapper/SteelSeriesEngineWrapper.csproj" />
+   </ItemGroup>
+   <ItemGroup>
+     <EmbeddedResource Include="Microsoft/**" />

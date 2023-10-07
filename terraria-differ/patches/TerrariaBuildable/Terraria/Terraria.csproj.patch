@@ -1,0 +1,42 @@
+--- decompiled/TerrariaClientWindows/Terraria/Terraria.csproj
++++ decompiled/TerrariaBuildable/Terraria/Terraria.csproj
+@@ -2,11 +_,14 @@
+   <Import Project="../Configuration.targets" />
+   <PropertyGroup>
+     <OutputType>WinExe</OutputType>
+-    <Nullable>enable</Nullable>
++    <Nullable>disable</Nullable>
+     <Version>1.4.4.9</Version>
+     <Company>Re-Logic</Company>
+     <Company>Copyright © 2022 Re-Logic</Company>
+     <RootNamespace>Terraria</RootNamespace>
++    <TargetFramework>net48</TargetFramework>
++    <LangVersion>latest</LangVersion>
++    <PlatformTarget>x86</PlatformTarget>
+   </PropertyGroup>
+   <ItemGroup>
+     <Reference Include="CsvHelper" />
+@@ -18,13 +_,11 @@
+     <Reference Include="MP3Sharp" />
+     <Reference Include="Newtonsoft.Json" />
+     <Reference Include="NVorbis" />
+-    <ProjectReference Include="../RailSDK.Net/RailSDK.Net.csproj" />
+-    <EmbeddedResource Include="../RailSDK.Net/bin/$(Configuration)/$(TargetFramework)/RailSDK.Net.dll" />
++    <Reference Include="NVorbis.System.ValueTuple" />
++    <ProjectReference Include="../RailSDK/RailSDK.csproj" />
+     <ProjectReference Include="../ReLogic/ReLogic.csproj" />
+-    <EmbeddedResource Include="../ReLogic/bin/$(Configuration)/$(TargetFramework)/ReLogic.dll" />
+     <Reference Include="Steamworks.NET" />
+     <ProjectReference Include="../SteelSeriesEngineWrapper/SteelSeriesEngineWrapper.csproj" />
+-    <EmbeddedResource Include="../SteelSeriesEngineWrapper/bin/$(Configuration)/$(TargetFramework)/SteelSeriesEngineWrapper.dll" />
+     <Reference Include="System" />
+     <Reference Include="System.Core" />
+     <Reference Include="System.Drawing" />
+@@ -37,7 +_,6 @@
+     <EmbeddedResource Include="GameContent/Metadata/MaterialData/*" />
+     <EmbeddedResource Include="GameContent/WorldBuilding/*" />
+     <EmbeddedResource Include="IO/Data/*" />
+-    <EmbeddedResource Include="Libraries/**" />
+     <EmbeddedResource Include="Localization/Content/**" />
+     <EmbeddedResource Include="Microsoft/**" />
+   </ItemGroup>

@@ -169,6 +169,13 @@ internal static class Program {
     }
 
     private static void DiffModNodes(DiffNode node, DiffNode? parent = null) {
+        if (Environment.GetEnvironmentVariable("ONLY_NODE") is string onlyNode && node.WorkspaceName != onlyNode) {
+            Console.WriteLine($"Skipping {node.WorkspaceName} since it isn't the expected node ({onlyNode})...");
+            foreach (var child in node.Children)
+                DiffModNodes(child, node);
+            return;
+        }
+
         if (node is not ModDiffNode modNode) {
             Console.WriteLine($"Skipping {node.WorkspaceName} since it isn't a mod node...");
             foreach (var child in node.Children)
@@ -185,7 +192,7 @@ internal static class Program {
 
         var patchDirName = Path.Combine("patches", node.WorkspaceName);
         if (Directory.Exists(patchDirName))
-            Directory.Delete(patchDirName);
+            Directory.Delete(patchDirName, true);
         Directory.CreateDirectory(patchDirName);
 
         var differ = new Differ(Path.Combine("decompiled", parent.WorkspaceName), patchDirName, Path.Combine("decompiled", node.WorkspaceName));
@@ -196,6 +203,13 @@ internal static class Program {
     }
 
     private static void PatchModNodes(DiffNode node, DiffNode? parent = null) {
+        if (Environment.GetEnvironmentVariable("ONLY_NODE") is string onlyNode && node.WorkspaceName != onlyNode) {
+            Console.WriteLine($"Skipping {node.WorkspaceName} since it isn't the expected node ({onlyNode})...");
+            foreach (var child in node.Children)
+                PatchModNodes(child, node);
+            return;
+        }
+
         if (node is not ModDiffNode /*modNode*/) {
             Console.WriteLine($"Skipping {node.WorkspaceName} since it isn't a mod node...");
             foreach (var child in node.Children)
