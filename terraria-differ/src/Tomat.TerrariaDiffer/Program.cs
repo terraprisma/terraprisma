@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using DotnetPatcher.Decompile;
 using DotnetPatcher.Diff;
+using DotnetPatcher.Patch;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp.OutputVisitor;
 
@@ -15,7 +16,7 @@ internal static class Program {
     private static readonly Manifest terraria_mac = new(105603, "TerrariaMac");
     private const string file_exclusion_regex = "^.*(?<!\\.xnb)(?<!\\.xwb)(?<!\\.xsb)(?<!\\.xgs)(?<!\\.bat)(?<!\\.txt)(?<!\\.xml)(?<!\\.msi)$";
 
-    private static readonly DepotDiffNode decompilation_configuration = new(
+    private static readonly DiffNode patch_configuration = new DepotDiffNode(
         "TerrariaRelease",
         "TerrariaClientWindows",
         "Terraria.exe",
@@ -43,6 +44,15 @@ internal static class Program {
                 "TerrariaServerMac",
                 "Terraria.app/Contents/Resources/TerrariaServer.exe"
             )
+        ),
+        new ModDiffNode(
+            "TerrariaBuildable",
+            new ModDiffNode(
+                "TerrariaUnified",
+                new ModDiffNode(
+                    "TerrariaModernized"
+                )
+            )
         )
     );
 
@@ -58,7 +68,13 @@ internal static class Program {
             DownloadManifest(depotDownloaderAsm, username, password, terraria_mac);
         }
 
-        DecompileAndDiff(decompilation_configuration);
+        DecompileAndDiffDepotNodes(patch_configuration);
+
+        if (Environment.GetEnvironmentVariable("DIFF_MODS") == "1")
+            DiffModNodes(patch_configuration);
+
+        if (Environment.GetEnvironmentVariable("PATCH_MODS") == "1")
+            PatchModNodes(patch_configuration);
     }
 
     private static void NullifyInstance(Type type) {
@@ -98,7 +114,14 @@ internal static class Program {
         );
     }
 
-    private static void DecompileAndDiff(DepotDiffNode node, DepotDiffNode? parent = null) {
+    private static void DecompileAndDiffDepotNodes(DiffNode node, DiffNode? parent = null) {
+        if (node is not DepotDiffNode depotNode) {
+            Console.WriteLine($"Skipping {node.WorkspaceName} since it isn't a depot node...");
+            foreach (var child in node.Children)
+                DecompileAndDiffDepotNodes(child, node);
+            return;
+        }
+
         const string decompilation_dir = "decompiled";
         const string patches_dir = "patches";
         var dirName = Path.Combine(decompilation_dir, node.WorkspaceName);
@@ -113,7 +136,7 @@ internal static class Program {
             var formatting = FormattingOptionsFactory.CreateKRStyle();
             formatting.IndentationString = "    ";
             var decompiler = new Decompiler(
-                Path.Combine("downloads", node.DepotName, node.RelativePathToExecutable),
+                Path.Combine("downloads", depotNode.DepotName, depotNode.RelativePathToExecutable),
                 dirName,
                 new DecompilerSettings {
                     CSharpFormattingOptions = FormattingOptionsFactory.CreateKRStyle()
@@ -123,10 +146,13 @@ internal static class Program {
         }
 
         foreach (var child in node.Children)
-            DecompileAndDiff(child, node);
+            DecompileAndDiffDepotNodes(child, node);
 
-        if (parent is null)
+        if (parent is null) {
+            // Create an empty patches directory for the root node.
+            Directory.CreateDirectory(Path.Combine(patches_dir, node.WorkspaceName));
             return;
+        }
 
         if (Environment.GetEnvironmentVariable("SKIP_DIFFING") == "1")
             return;
@@ -140,5 +166,62 @@ internal static class Program {
 
         var differ = new Differ(Path.Combine(decompilation_dir, parent.WorkspaceName), patchDirName, dirName);
         differ.Diff();
+    }
+
+    private static void DiffModNodes(DiffNode node, DiffNode? parent = null) {
+        if (node is not ModDiffNode modNode) {
+            Console.WriteLine($"Skipping {node.WorkspaceName} since it isn't a mod node...");
+            foreach (var child in node.Children)
+                DiffModNodes(child, node);
+            return;
+        }
+
+        if (parent is null) {
+            Console.WriteLine($"Skipping {node.WorkspaceName} since it is a root node...");
+            return;
+        }
+
+        Console.WriteLine($"Diffing {node.WorkspaceName}...");
+
+        var patchDirName = Path.Combine("patches", node.WorkspaceName);
+        if (Directory.Exists(patchDirName))
+            Directory.Delete(patchDirName);
+        Directory.CreateDirectory(patchDirName);
+
+        var differ = new Differ(Path.Combine("decompiled", parent.WorkspaceName), patchDirName, Path.Combine("decompiled", node.WorkspaceName));
+        differ.Diff();
+        
+        foreach (var child in node.Children)
+            DiffModNodes(child, node);
+    }
+
+    private static void PatchModNodes(DiffNode node, DiffNode? parent = null) {
+        if (node is not ModDiffNode /*modNode*/) {
+            Console.WriteLine($"Skipping {node.WorkspaceName} since it isn't a mod node...");
+            foreach (var child in node.Children)
+                PatchModNodes(child, node);
+            return;
+        }
+
+        if (parent is null) {
+            Console.WriteLine($"Skipping {node.WorkspaceName} since it is a root node...");
+            return;
+        }
+
+        Console.WriteLine($"Patching {node.WorkspaceName}...");
+
+        var patchDirName = Path.Combine("patches", node.WorkspaceName);
+        if (!Directory.Exists(patchDirName))
+            Directory.CreateDirectory(patchDirName);
+        
+        // Create this directory if it doesn't exist. Not a big deal
+        // if (!Directory.Exists(Path.Combine("decompiled", parent.WorkspaceName)))
+        //     Directory.CreateDirectory(Path.Combine("decompiled", parent.WorkspaceName));
+
+        var patcher = new Patcher(Path.Combine("decompiled", parent.WorkspaceName), Path.Combine("patches", parent.WorkspaceName), Path.Combine("decompiled", node.WorkspaceName));
+        patcher.Patch();
+
+        foreach (var child in node.Children)
+            PatchModNodes(child, node);
     }
 }

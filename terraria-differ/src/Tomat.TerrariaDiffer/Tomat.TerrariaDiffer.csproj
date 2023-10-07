@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DepotDownloader\DepotDownloader\DepotDownloader.csproj"/>
-        <ProjectReference Include="..\DotnetPatcher\DotnetPatcher\DotnetPatcher.csproj"/>
+        <ProjectReference Include="..\DepotDownloader\DepotDownloader\DepotDownloader.csproj" />
+        <ProjectReference Include="..\DotnetPatcher\DotnetPatcher\DotnetPatcher.csproj" />
     </ItemGroup>
 
 </Project>
