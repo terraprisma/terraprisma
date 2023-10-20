@@ -1,0 +1,23 @@
+--- decompiled/TerrariaBuildable/Terraria/Initializers/ChromaInitializer.cs
++++ decompiled/TerrariaUnified/Terraria/Initializers/ChromaInitializer.cs
+@@ -2,7 +_,6 @@
+ using System.Collections.Generic;
+ using System.Diagnostics;
+ using System.Linq;
+-using System.Windows.Forms;
+ using Microsoft.Xna.Framework;
+ using ReLogic.Graphics;
+ using ReLogic.OS;
+@@ -524,9 +_,11 @@
+ 		}
+ 		LoadSpecialRulesForDevices();
+ 		AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
++		/*
+-		if (Platform.IsWindows) {
++		 if (Platform.IsWindows) {
+ 			Application.ApplicationExit += OnProcessExit;
+ 		}
++		*/
+ 	}
+ 
+ 	private static void LoadSpecialRulesForDevices()

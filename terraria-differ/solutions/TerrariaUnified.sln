@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteelSeriesEngineWrapper", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terraria", "..\decompiled\TerrariaUnified\Terraria\Terraria.csproj", "{91C6D039-9983-433A-A434-35DAB5621648}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FNA", "..\src\FNA\FNA.csproj", "{0AAA0779-8983-46C9-938B-EBDAF894CF0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{91C6D039-9983-433A-A434-35DAB5621648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91C6D039-9983-433A-A434-35DAB5621648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91C6D039-9983-433A-A434-35DAB5621648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AAA0779-8983-46C9-938B-EBDAF894CF0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AAA0779-8983-46C9-938B-EBDAF894CF0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AAA0779-8983-46C9-938B-EBDAF894CF0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AAA0779-8983-46C9-938B-EBDAF894CF0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
