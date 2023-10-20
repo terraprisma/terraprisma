@@ -90,6 +90,15 @@
  			if (!hasFocus && netMode == 0) {
  				if (!Platform.IsOSX) {
  					base.IsMouseVisible = true;
+@@ -37294,6 +_,8 @@
+ 		}
+ 		Assets.TransferCompletedAssets();
+ 		Exit();
++		if (Platform.IsOSX)
++			SDL2.SDL.SDL_DestroyWindow(base.Window.Handle);
+ 	}
+ 
+ 	private void Main_Exiting(object sender, EventArgs e)
 @@ -40783,6 +_,7 @@
  		return result;
  	}
