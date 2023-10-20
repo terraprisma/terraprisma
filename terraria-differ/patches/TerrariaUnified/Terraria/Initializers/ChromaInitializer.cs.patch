@@ -1,14 +1,26 @@
 --- decompiled/TerrariaBuildable/Terraria/Initializers/ChromaInitializer.cs
 +++ decompiled/TerrariaUnified/Terraria/Initializers/ChromaInitializer.cs
-@@ -2,7 +_,6 @@
+@@ -2,10 +_,8 @@
  using System.Collections.Generic;
  using System.Diagnostics;
  using System.Linq;
 -using System.Windows.Forms;
  using Microsoft.Xna.Framework;
  using ReLogic.Graphics;
- using ReLogic.OS;
-@@ -524,9 +_,11 @@
+-using ReLogic.OS;
+ using ReLogic.Peripherals.RGB;
+ using ReLogic.Peripherals.RGB.Corsair;
+ using ReLogic.Peripherals.RGB.Logitech;
+@@ -505,6 +_,8 @@
+ 
+ 	private static void AddDevices()
+ 	{
++		if (Main.dedServ)
++			return;
+ 		_engine.AddDeviceGroup("Razer", new RazerDeviceGroup(_razerColorProfile));
+ 		_engine.AddDeviceGroup("Corsair", new CorsairDeviceGroup(_corsairColorProfile));
+ 		_engine.AddDeviceGroup("Logitech", new LogitechDeviceGroup(_logitechColorProfile));
+@@ -524,13 +_,17 @@
  		}
  		LoadSpecialRulesForDevices();
  		AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
@@ -21,3 +33,80 @@
  	}
  
  	private static void LoadSpecialRulesForDevices()
+ 	{
++		if (Main.dedServ)
++			return;
+ 		Event_LifePercent = new IntRgbGameValueTracker {
+ 			EventName = "LIFE"
+ 		};
+@@ -545,6 +_,8 @@
+ 
+ 	public static void UpdateEvents()
+ 	{
++		if (Main.dedServ)
++			return;
+ 		if (Main.gameMenu) {
+ 			Event_LifePercent.Update(0, isVisible: false);
+ 			Event_ManaPercent.Update(0, isVisible: false);
+@@ -562,6 +_,8 @@
+ 
+ 	private static void LoadSpecialRulesFor_GameSense()
+ 	{
++		if (Main.dedServ)
++			return;
+ 		GameSenseSpecificInfo gameSenseSpecificInfo = new GameSenseSpecificInfo();
+ 		List<Bind_Event> eventsToBind = (gameSenseSpecificInfo.EventsToBind = new List<Bind_Event>());
+ 		LoadSpecialRulesFor_GameSense_Keyboard(eventsToBind);
+@@ -590,6 +_,8 @@
+ 
+ 	private static void AddGameplayEvents(List<Bind_Event> eventsToBind)
+ 	{
++		if (Main.dedServ)
++			return;
+ 		eventsToBind.Add(new Bind_Event("TERRARIA", Event_LifePercent.EventName, 0, 100, EventIconId.Health, new AbstractHandler[0]));
+ 		eventsToBind.Add(new Bind_Event("TERRARIA", Event_ManaPercent.EventName, 0, 100, EventIconId.Mana, new AbstractHandler[0]));
+ 		eventsToBind.Add(new Bind_Event("TERRARIA", Event_BreathPercent.EventName, 0, 100, EventIconId.Air, new AbstractHandler[0]));
+@@ -597,6 +_,8 @@
+ 
+ 	private static void LoadSpecialRulesFor_SecondaryDevice(List<Bind_Event> eventsToBind, string eventName, string contextFrameKey, AbstractIlluminationDevice_Zone zone)
+ 	{
++		if (Main.dedServ)
++			return;
+ 		Bind_Event item = new Bind_Event("TERRARIA", eventName, 0, 10, EventIconId.Default, new AbstractHandler[1] {
+ 			new ContextColorEventHandlerType {
+ 				ContextFrameKey = contextFrameKey,
+@@ -608,6 +_,8 @@
+ 
+ 	private static void LoadSpecialRulesFor_GameSense_Keyboard(List<Bind_Event> eventsToBind)
+ 	{
++		if (Main.dedServ)
++			return;
+ 		Dictionary<string, byte> xnaKeyNamesToSteelSeriesKeyIndex = HIDCodes.XnaKeyNamesToSteelSeriesKeyIndex;
+ 		Color white = Color.White;
+ 		foreach (KeyValuePair<string, List<string>> item3 in PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus) {
+@@ -650,12 +_,16 @@
+ 
+ 	private static void OnProcessExit(object sender, EventArgs e)
+ 	{
++		if (Main.dedServ)
++			return;
+ 		DisableAllDeviceGroups();
+ 	}
+ 
+ 	public static void Load()
+ 	{
+ 		_engine = Main.Chroma;
++		if (Main.dedServ)
++			return;
+ 		AddDevices();
+ 		Color color = new Color(46, 23, 12);
+ 		RegisterShader("Base", new SurfaceBiomeShader(Color.Green, color), CommonConditions.InMenu, ShaderLayer.Menu);
+@@ -761,6 +_,8 @@
+ 
+ 	private static void RegisterShader(string name, ChromaShader shader, ChromaCondition condition, ShaderLayer layer)
+ 	{
++		if (Main.dedServ)
++			return;
+ 		_engine.RegisterShader(shader, condition, layer);
+ 	}
+ 

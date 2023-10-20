@@ -23,6 +23,23 @@
  
  	public static bool IsMono = Type.GetType("Mono.Runtime") != null;
  
+@@ -137,7 +_,7 @@
+ 
+ 	private static void InitializeConsoleOutput()
+ 	{
+-		if (Debugger.IsAttached) {
++		if (Debugger.IsAttached && !Main.dedServ) {
+ 			return;
+ 		}
+ 		try {
+@@ -163,6 +_,7 @@
+ 		LaunchParameters = Utils.ParseArguements(args);
+ 		SavePath = (LaunchParameters.ContainsKey("-savedirectory") ? LaunchParameters["-savedirectory"] : Platform.Get<IPathService>().GetStoragePath("Terraria"));
+ 		ThreadPool.SetMinThreads(8, 8);
++		Main.dedServ = LaunchParameters.ContainsKey("-server");
+ 		InitializeConsoleOutput();
+ 		SetupLogging();
+ 		Platform.Get<IWindowService>().SetQuickEditEnabled(enabled: false);
 @@ -224,7 +_,8 @@
  			if (Main.dedServ) {
  				Console.WriteLine(Language.GetTextValue("Error.ServerCrash"), DateTime.Now, text);
