@@ -1,0 +1,10 @@
+--- decompiled/TerrariaBuildable/Terraria/WindowsLaunch.cs
++++ decompiled/TerrariaUnified/Terraria/WindowsLaunch.cs
+@@ -62,6 +_,7 @@
+ 			stream.Read(array, 0, array.Length);
+ 			return Assembly.Load(array);
+ 		};
++		Environment.SetEnvironmentVariable("FNA_WORKAROUND_WINDOW_RESIZABLE", "1");
+ 		Program.LaunchGame(args);
+ 	}
+ }

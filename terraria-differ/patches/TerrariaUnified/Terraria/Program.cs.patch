@@ -11,6 +11,18 @@
  using Terraria.Initializers;
  using Terraria.Localization;
  using Terraria.Social;
+@@ -18,9 +_,9 @@
+ 
+ public static class Program
+ {
+-	public static bool IsXna = true;
++	public static bool IsXna = false;
+ 
+-	public static bool IsFna = false;
++	public static bool IsFna = true;
+ 
+ 	public static bool IsMono = Type.GetType("Mono.Runtime") != null;
+ 
 @@ -224,7 +_,8 @@
  			if (Main.dedServ) {
  				Console.WriteLine(Language.GetTextValue("Error.ServerCrash"), DateTime.Now, text);
