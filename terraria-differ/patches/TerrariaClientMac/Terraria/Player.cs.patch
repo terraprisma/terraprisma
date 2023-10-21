@@ -1,12 +1,13 @@
 --- decompiled/TerrariaClientWindows/Terraria/Player.cs
 +++ decompiled/TerrariaClientMac/Terraria/Player.cs
-@@ -40996,8 +_,7 @@
+@@ -40996,8 +_,8 @@
  		if (gotToReadName && player.name.Length <= nameLen) {
  			player2.name = player.name;
  		} else {
 -			string[] array = playerPath.Replace('/', Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
 -			player2.name = array[array.Length - 1].Split('.')[0];
-+			player2.name = playerPath.Replace('/', Path.DirectorySeparatorChar).Split(new char[1] { Path.DirectorySeparatorChar })[^1].Split(new char[1] { '.' })[0];
++			string[] array = playerPath.Replace('/', Path.DirectorySeparatorChar).Split(new char[1] { Path.DirectorySeparatorChar });
++			player2.name = array[array.Length - 1].Split(new char[1] { '.' })[0];
  		}
  		playerFileData.Player = player2;
  		return playerFileData;

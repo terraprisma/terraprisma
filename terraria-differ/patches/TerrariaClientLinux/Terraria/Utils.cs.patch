@@ -1,6 +1,6 @@
 --- decompiled/TerrariaClientWindows/Terraria/Utils.cs
 +++ decompiled/TerrariaClientLinux/Terraria/Utils.cs
-@@ -386,13 +_,13 @@
+@@ -386,7 +_,7 @@
  		List<List<TextSnippet>> list = new List<List<TextSnippet>>();
  		List<TextSnippet> list2 = new List<TextSnippet>();
  		foreach (TextSnippet textSnippet in array) {
@@ -9,13 +9,6 @@
  			for (int j = 0; j < array2.Length - 1; j++) {
  				list2.Add(textSnippet.CopyMorph(array2[j]));
  				list.Add(list2);
- 				list2 = new List<TextSnippet>();
- 			}
--			list2.Add(textSnippet.CopyMorph(array2[array2.Length - 1]));
-+			list2.Add(textSnippet.CopyMorph(array2[^1]));
- 		}
- 		list.Add(list2);
- 		if (maxWidth != -1) {
 @@ -410,7 +_,7 @@
  						if (num3 < 0) {
  							num3 = 0;

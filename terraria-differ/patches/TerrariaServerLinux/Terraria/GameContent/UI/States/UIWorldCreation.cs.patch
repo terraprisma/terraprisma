@@ -9,23 +9,3 @@
  		if (array.Length != 4) {
  			return;
  		}
-@@ -880,15 +_,15 @@
- 			for (int n = 0; n < array3.Length; n++) {
- 				array3[n].Down = uILinkPoint2.ID;
- 			}
--			array3[array3.Length - 1].Down = uILinkPoint3.ID;
--			uILinkPoint3.Up = array3[array3.Length - 1].ID;
-+			array3[^1].Down = uILinkPoint3.ID;
-+			uILinkPoint3.Up = array3[^1].ID;
- 			uILinkPoint2.Up = array3[0].ID;
- 		} else {
- 			for (int num2 = 0; num2 < array2.Length; num2++) {
- 				array2[num2].Down = uILinkPoint2.ID;
- 			}
--			array2[array2.Length - 1].Down = uILinkPoint3.ID;
--			uILinkPoint3.Up = array2[array2.Length - 1].ID;
-+			array2[^1].Down = uILinkPoint3.ID;
-+			uILinkPoint3.Up = array2[^1].ID;
- 			uILinkPoint2.Up = array2[0].ID;
- 		}
- 		uILinkPoint3.Left = uILinkPoint2.ID;

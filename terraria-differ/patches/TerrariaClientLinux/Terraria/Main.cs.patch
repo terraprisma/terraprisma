@@ -913,15 +913,6 @@
  			Rain.MakeRain();
  		}
  		if (netMode != 1) {
-@@ -15696,7 +_,7 @@
- 			}
- 			if (string.Concat(pressedKeys[j]) == "Back" && (flag2 || flag) && text.Length > 0) {
- 				TextSnippet[] array = ChatManager.ParseMessage(text, Microsoft.Xna.Framework.Color.White).ToArray();
--				text = ((!array[array.Length - 1].DeleteWhole) ? text.Substring(0, text.Length - 1) : text.Substring(0, text.Length - array[array.Length - 1].TextOriginal.Length));
-+				text = ((!array[^1].DeleteWhole) ? text.Substring(0, text.Length - 1) : text.Substring(0, text.Length - array[^1].TextOriginal.Length));
- 			}
- 		}
- 		return text;
 @@ -16581,7 +_,7 @@
  		}
  		string bestiaryNotes = item.BestiaryNotes;

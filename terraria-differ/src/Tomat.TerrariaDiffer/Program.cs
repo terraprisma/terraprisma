@@ -154,6 +154,7 @@ internal static class Program {
                 dirName,
                 new DecompilerSettings {
                     CSharpFormattingOptions = FormattingOptionsFactory.CreateKRStyle(),
+                    Ranges = false,
                 }
             );
             decompiler.Decompile(new[] { "ReLogic", /*"LogitechLedEnginesWrapper",*/ "RailSDK.Net", "SteelSeriesEngineWrapper" });
