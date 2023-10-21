@@ -839,15 +839,6 @@
  				bool num3 = form.WindowState == FormWindowState.Minimized;
  				bool flag = Form.ActiveForm == form;
  				hasFocus |= flag;
-@@ -16582,7 +_,7 @@
- 		}
- 		string bestiaryNotes = item.BestiaryNotes;
- 		if (!string.IsNullOrWhiteSpace(bestiaryNotes)) {
--			string[] array = bestiaryNotes.Split('\n');
-+			string[] array = bestiaryNotes.Split(new char[1] { '\n' });
- 			foreach (string text2 in array) {
- 				toolTipLine[numLines++] = text2;
- 			}
 @@ -28967,18 +_,18 @@
  	public void PrepareDrawnEntityDrawing(Entity entity, int intendedShader, Matrix? overrideMatrix)
  	{
@@ -871,15 +862,6 @@
  		}
  		CurrentDrawnEntityShader = intendedShader;
  	}
-@@ -37930,7 +_,7 @@
- 			array9[0] = statusText;
- 			array[0] = true;
- 			num2 = 300;
--			int num10 = statusText.Split('\n').Length - 1;
-+			int num10 = statusText.Split(new char[1] { '\n' }).Length - 1;
- 			array7[0] = 1f - (float)num10 * 0.04f;
- 			array4[0] = num10 * -18;
- 			array4[1] = num10 * 28;
 @@ -43475,24 +_,24 @@
  		int num18 = mouseX;
  		int num19 = mouseY;

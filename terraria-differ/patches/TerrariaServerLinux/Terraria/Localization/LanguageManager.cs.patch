@@ -1,16 +1,5 @@
 --- decompiled/TerrariaServerWindows/Terraria/Localization/LanguageManager.cs
 +++ decompiled/TerrariaServerLinux/Terraria/Localization/LanguageManager.cs
-@@ -64,8 +_,8 @@
- 			string textValue = GetTextValue(key);
- 			textValue.Replace(",", "").Replace(".", "").Replace("\"", "")
- 				.Trim();
--			string[] array = textValue.Split(' ');
--			string[] array2 = textValue.Split(' ');
-+			string[] array = textValue.Split(new char[1] { ' ' });
-+			string[] array2 = textValue.Split(new char[1] { ' ' });
- 			if (array.Length != array2.Length) {
- 				break;
- 			}
 @@ -160,7 +_,8 @@
  	public void UseSources(List<IContentSource> sourcesFromLowestToHighest)
  	{

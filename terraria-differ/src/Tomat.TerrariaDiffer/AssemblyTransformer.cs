@@ -61,6 +61,13 @@ public static class AssemblyTransformer {
             if (assembly.GetType("System.MathF") is { } mathF) {
                 editsMade |= mathF.Fields.Remove(mathF.Fields.FirstOrDefault(x => x.Name == "PI"));
             }
+
+            if (assembly.GetType("System.String") is { } stringType) {
+                if (stringType.Methods.FirstOrDefault(x => x.Name == "Split" && x.Parameters.Count == 2 && x.Parameters[1].ParameterType.Name == "StringSplitOptions") is { } split) {
+                    split.Parameters[1].HasDefault = false;
+                    split.Parameters[1].IsOptional = false;
+                }
+            }
         }
         else if (assembly.Name == "FNA.dll") {
             if (assembly.GetType("Microsoft.Xna.Framework.Color") is { } color) {
