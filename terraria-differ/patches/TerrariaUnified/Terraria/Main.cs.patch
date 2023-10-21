@@ -1,0 +1,218 @@
+--- decompiled/TerrariaBuildable/Terraria/Main.cs
++++ decompiled/TerrariaUnified/Terraria/Main.cs
+@@ -12,7 +_,6 @@
+ using System.Text.RegularExpressions;
+ using System.Threading;
+ using System.Threading.Tasks;
+-using System.Windows.Forms;
+ using Microsoft.Win32;
+ using Microsoft.Xna.Framework;
+ using Microsoft.Xna.Framework.Content;
+@@ -3744,6 +_,10 @@
+ 
+ 	protected void CheckBunny()
+ 	{
++		// TODO: Reimplement; Windows can use Microsoft.Win32.Registry and *nix
++		// can use Mono-esque checks with directories.
++		runningCollectorsEdition = false;
++		/*
+ 		try {
+ 			RegistryKey currentUser = Registry.CurrentUser;
+ 			currentUser = currentUser.CreateSubKey("Software\\Terraria");
+@@ -3753,6 +_,7 @@
+ 		} catch {
+ 			runningCollectorsEdition = false;
+ 		}
++		*/
+ 	}
+ 
+ 	private static void TryPickingDefaultUIScale(float displayHeight)
+@@ -3791,6 +_,7 @@
+ 		}
+ 		PendingBorderlessState = screenBorderless;
+ 		screenBorderlessPendingResizes = (screenBorderless ? 6 : 0);
++		/*
+ 		if (Platform.IsWindows && !dedServ) {
+ 			Form form = (Form)Control.FromHandle(instance.Window.Handle);
+ 			if (screenBorderless) {
+@@ -3803,6 +_,7 @@
+ 			}
+ 			form.BringToFront();
+ 		}
++		*/
+ 		int currentValue2 = graphics.PreferredBackBufferWidth;
+ 		int currentValue3 = graphics.PreferredBackBufferHeight;
+ 		configuration.Get("DisplayWidth", ref currentValue2);
+@@ -4098,9 +_,13 @@
+ 				if (num >= 2) {
+ 					terrariasFixedTiming = binaryReader.ReadBoolean();
+ 				}
++				if (num >= 91)
++					binaryReader.ReadBoolean();
++				/*
+ 				if (num >= 91 && binaryReader.ReadBoolean() && !dedServ && Platform.IsWindows) {
+ 					((Form)Control.FromHandle(base.Window.Handle)).WindowState = FormWindowState.Maximized;
+ 				}
++				*/
+ 				if (num >= 4) {
+ 					int width = binaryReader.ReadInt32();
+ 					int height = binaryReader.ReadInt32();
+@@ -5216,7 +_,7 @@
+ 		}
+ 	}
+ 
+-	public Main()
++	public Main() : base(headlessMode: dedServ)
+ 	{
+ 		instance = this;
+ 		UnpausedUpdateSeed = (ulong)Guid.NewGuid().GetHashCode();
+@@ -9285,6 +_,7 @@
+ 		if (SocialAPI.Workshop != null) {
+ 			SocialAPI.Workshop.LoadEarlyContent();
+ 		}
++		CaptureManager.Instance = new CaptureManager();
+ 		AssetSourceController.UseResourcePacks(AssetInitializer.CreateResourcePackList(base.Services));
+ 		AssetInitializer.LoadSplashAssets(asyncLoadForSounds: true);
+ 		ChromaInitializer.Load();
+@@ -13580,6 +_,7 @@
+ 			}
+ 			UpdateOldNPCShop();
+ 			hasFocus = base.IsActive;
++			/*
+ 			if (Platform.IsWindows) {
+ 				Form form = Control.FromHandle(base.Window.Handle) as Form;
+ 				bool num3 = form.WindowState == FormWindowState.Minimized;
+@@ -13589,6 +_,7 @@
+ 					hasFocus = false;
+ 				}
+ 			}
++			*/
+ 			if (!hasFocus && netMode == 0) {
+ 				if (!Platform.IsOSX) {
+ 					base.IsMouseVisible = true;
+@@ -37294,6 +_,8 @@
+ 		}
+ 		Assets.TransferCompletedAssets();
+ 		Exit();
++		if (Platform.IsOSX)
++			SDL2.SDL.SDL_DestroyWindow(base.Window.Handle);
+ 	}
+ 
+ 	private void Main_Exiting(object sender, EventArgs e)
+@@ -40783,6 +_,7 @@
+ 		return result;
+ 	}
+ 
++	/*
+ 	private static void SetDisplayModeAsBorderless(ref int width, ref int height, Form form)
+ 	{
+ 		if (screenBorderless && !graphics.IsFullScreen && screenBorderlessPendingResizes > 0) {
+@@ -40793,7 +_,9 @@
+ 			TryPickingDefaultUIScale(height);
+ 		}
+ 	}
++	*/
+ 
++	/*
+ 	private static void ApplyBorderlessResolution(Form form)
+ 	{
+ 		if (screenBorderlessPendingResizes > 0) {
+@@ -40805,12 +_,15 @@
+ 			form.Height = bounds.Height;
+ 		}
+ 	}
++	*/
+ 
++	/*
+ 	private static void SetBorderlessFormStyle(Form form)
+ 	{
+ 		form.Location = new System.Drawing.Point(0, 0);
+ 		form.FormBorderStyle = FormBorderStyle.None;
+ 	}
++	*/
+ 
+ 	public static void OpenCharacterSelectUI()
+ 	{
+@@ -52050,6 +_,8 @@
+ 	public static void SetDisplayMode(int width, int height, bool fullscreen)
+ 	{
+ 		bool flag = false;
++		screenMaximized = false;
++		/*
+ 		Form form = null;
+ 		if (Platform.IsWindows) {
+ 			form = (Form)Control.FromHandle(instance.Window.Handle);
+@@ -52062,6 +_,7 @@
+ 		} else {
+ 			screenMaximized = false;
+ 		}
++		*/
+ 		bool flag2 = false;
+ 		int num3;
+ 		int num4;
+@@ -52075,12 +_,14 @@
+ 					TryPickingDefaultUIScale(800f);
+ 				}
+ 			}
++			/*
+ 			if (Platform.IsWindows) {
+ 				form.MinimumSize = new Size(0, 0);
+ 				if (!fullscreen && !flag3) {
+ 					SetDisplayModeAsBorderless(ref width, ref height, form);
+ 				}
+ 			}
++			*/
+ 			if (width > maxScreenW) {
+ 				float num = (float)height / (float)width;
+ 				width = maxScreenW;
+@@ -52104,6 +_,7 @@
+ 			}
+ 		} else {
+ 			PlayerInput.RawMouseScale = Vector2.One;
++			/*
+ 			if (Platform.IsWindows) {
+ 				form.MinimumSize = new Size(minScreenW, minScreenH);
+ 				if (flag) {
+@@ -52111,12 +_,14 @@
+ 					height = displayHeight[0];
+ 				}
+ 			}
++			*/
+ 			width = Math.Min(width, maxScreenW);
+ 			height = Math.Min(height, maxScreenH);
+ 			num3 = graphics.GraphicsDevice.Viewport.Width;
+ 			num4 = graphics.GraphicsDevice.Viewport.Height;
+ 			flag2 = graphics.PreferredBackBufferWidth != graphics.GraphicsDevice.Viewport.Width || graphics.PreferredBackBufferHeight != graphics.GraphicsDevice.Viewport.Height;
+ 		}
++		/*
+ 		if (Platform.IsWindows && !fullscreen && !flag2) {
+ 			if (form.ClientSize.Width < graphics.PreferredBackBufferWidth) {
+ 				width = form.ClientSize.Width;
+@@ -52127,8 +_,11 @@
+ 				flag2 = true;
+ 			}
+ 		}
++		*/
++		/*
+ 		width &= 0x7FFFFFFE;
+ 		height &= 0x7FFFFFFE;
++		*/
+ 		width = Math.Max(width, minScreenW);
+ 		height = Math.Max(height, minScreenH);
+ 		if (graphics.IsFullScreen != fullscreen) {
+@@ -52155,6 +_,7 @@
+ 			PendingResolutionWidth = screenWidth;
+ 			PendingResolutionHeight = screenHeight;
+ 			PlayerInput.CacheOriginalScreenDimensions();
++			/*
+ 			if (Platform.IsWindows && !fullscreen) {
+ 				if (screenBorderless) {
+ 					ApplyBorderlessResolution(form);
+@@ -52165,6 +_,7 @@
+ 				form.SendToBack();
+ 				form.BringToFront();
+ 			}
++			*/
+ 			Lighting.Initialize();
+ 			if (!drawToScreen && !_isResizingAndRemakingTargets) {
+ 				_isResizingAndRemakingTargets = true;
