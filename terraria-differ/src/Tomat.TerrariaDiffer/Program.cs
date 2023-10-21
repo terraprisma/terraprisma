@@ -129,17 +129,31 @@ internal static class Program {
         if (Environment.GetEnvironmentVariable("SKIP_DECOMPILATION") != "1") {
             Console.WriteLine($"Decompiling {node.WorkspaceName}...");
 
+            Console.WriteLine("Transforming assemblies...");
+
             if (Directory.Exists(dirName))
                 Directory.Delete(dirName, true);
             Directory.CreateDirectory(dirName);
 
-            var formatting = FormattingOptionsFactory.CreateKRStyle();
-            formatting.IndentationString = "    ";
+            var depotDir = Path.Combine("downloads", depotNode.DepotName);
+            if (!Directory.Exists(depotDir))
+                throw new Exception($"Depot {depotNode.DepotName} was not downloaded!");
+
+            var clonedDir = Path.Combine("cloned", depotNode.WorkspaceName);
+            if (Directory.Exists(clonedDir))
+                Directory.Delete(clonedDir, true);
+            CopyRecursively(depotDir, clonedDir);
+            var exePath = Path.Combine(clonedDir, depotNode.RelativePathToExecutable);
+
+            AssemblyTransformer.TransformAssembliesForAssembly(exePath);
+
+            // var formatting = FormattingOptionsFactory.CreateKRStyle();
+            // formatting.IndentationString = "    ";
             var decompiler = new Decompiler(
-                Path.Combine("downloads", depotNode.DepotName, depotNode.RelativePathToExecutable),
+                exePath,
                 dirName,
                 new DecompilerSettings {
-                    CSharpFormattingOptions = FormattingOptionsFactory.CreateKRStyle()
+                    CSharpFormattingOptions = FormattingOptionsFactory.CreateKRStyle(),
                 }
             );
             decompiler.Decompile(new[] { "ReLogic", /*"LogitechLedEnginesWrapper",*/ "RailSDK.Net", "SteelSeriesEngineWrapper" });
@@ -169,7 +183,7 @@ internal static class Program {
     }
 
     private static void DiffModNodes(DiffNode node, DiffNode? parent = null) {
-        if (Environment.GetEnvironmentVariable("ONLY_NODE") is string onlyNode && node.WorkspaceName != onlyNode) {
+        if (Environment.GetEnvironmentVariable("ONLY_NODE") is { } onlyNode && node.WorkspaceName != onlyNode) {
             Console.WriteLine($"Skipping {node.WorkspaceName} since it isn't the expected node ({onlyNode})...");
             foreach (var child in node.Children)
                 DiffModNodes(child, node);
@@ -197,7 +211,7 @@ internal static class Program {
 
         var differ = new Differ(Path.Combine("decompiled", parent.WorkspaceName), patchDirName, Path.Combine("decompiled", node.WorkspaceName));
         differ.Diff();
-        
+
         foreach (var child in node.Children)
             DiffModNodes(child, node);
     }
@@ -228,7 +242,7 @@ internal static class Program {
         if (!Directory.Exists(patchDirName))
             Directory.CreateDirectory(patchDirName);
 
-        if (/*Environment.GetEnvironmentVariable("REGENERATE_MOD_SOURCES") == "1" &&*/ Directory.Exists(Path.Combine("decompiled", node.WorkspaceName)))
+        if ( /*Environment.GetEnvironmentVariable("REGENERATE_MOD_SOURCES") == "1" &&*/ Directory.Exists(Path.Combine("decompiled", node.WorkspaceName)))
             Directory.Delete(Path.Combine("decompiled", node.WorkspaceName), true);
 
         var patcher = new Patcher(Path.Combine("decompiled", parent.WorkspaceName), Path.Combine("patches", node.WorkspaceName), Path.Combine("decompiled", node.WorkspaceName));
@@ -236,5 +250,13 @@ internal static class Program {
 
         foreach (var child in node.Children)
             PatchModNodes(child, node);
+    }
+
+    private static void CopyRecursively(string fromDir, string toDir) {
+        foreach (var dir in Directory.GetDirectories(fromDir, "*", SearchOption.AllDirectories))
+            Directory.CreateDirectory(dir.Replace(fromDir, toDir));
+
+        foreach (var file in Directory.GetFiles(fromDir, "*", SearchOption.AllDirectories))
+            File.Copy(file, file.Replace(fromDir, toDir), true);
     }
 }
