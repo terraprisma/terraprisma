@@ -61,6 +61,20 @@ public static class AssemblyTransformer {
                 editsMade |= mathF.Fields.Remove(mathF.Fields.FirstOrDefault(x => x.Name == "PI"));
             }
         }
+        else if (assembly.Name == "FNA.dll") {
+            if (assembly.GetType("Microsoft.Xna.Framework.Color") is { } color) {
+                var constructors = color.Methods.Where(x => x.Name == ".ctor" && x.Parameters.Count == 4).ToList();
+
+                foreach (var constructor in constructors) {
+                    var alpha = constructor.Parameters.FirstOrDefault(x => x.Name == "alpha");
+
+                    if (alpha is not null && alpha.Name == "alpha") {
+                        alpha.Name = "a";
+                        editsMade = true;
+                    }
+                }
+            }
+        }
 
         return editsMade;
     }
