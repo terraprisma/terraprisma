@@ -82,6 +82,15 @@ public static class AssemblyTransformer {
                     }
                 }
             }
+
+            if (assembly.GetType("Microsoft.Xna.Framework.Graphics.SpriteBatch") is { } spriteBatch) {
+                var method = spriteBatch.Methods.FirstOrDefault(x => x.Name == "Begin" && x.Parameters.Count == 7 && x.Parameters.Any(y => y.ParameterType.Name == "Matrix"));
+
+                if (method is not null && method.Parameters[6].Name != "transformMatrix") {
+                    method.Parameters[6].Name = "transformMatrix";
+                    editsMade = true;
+                }
+            }
         }
 
         return editsMade;
