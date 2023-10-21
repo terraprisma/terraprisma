@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Mono.Cecil;
@@ -77,5 +78,14 @@ public static class AssemblyTransformer {
         }
 
         return editsMade;
+    }
+
+    private static bool AddParamArrayAttribute(ParameterDefinition parameter, ModuleDefinition module) {
+        if (parameter.CustomAttributes.Any(x => x.AttributeType.Name == "ParamArrayAttribute"))
+            return false;
+
+        var paramArrayAttribute = new CustomAttribute(module.ImportReference(typeof(ParamArrayAttribute).GetConstructor(Type.EmptyTypes)!));
+        parameter.CustomAttributes.Add(paramArrayAttribute);
+        return true;
     }
 }
