@@ -1,6 +1,14 @@
 --- decompiled/TerrariaBuildable/Terraria/Terraria.csproj
 +++ decompiled/TerrariaUnified/Terraria/Terraria.csproj
-@@ -8,9 +_,8 @@
+@@ -1,6 +_,6 @@
+ <Project Sdk="Microsoft.NET.Sdk">
+ 
+-    <Import Project="../Configuration.targets"/>
++    <Import Project="../Configuration.targets" />
+ 
+     <PropertyGroup>
+         <OutputType>WinExe</OutputType>
+@@ -8,37 +_,82 @@
          <Company>Re-Logic</Company>
          <Company>Copyright © 2022 Re-Logic</Company>
          <RootNamespace>Terraria</RootNamespace>
@@ -11,21 +19,102 @@
      </PropertyGroup>
  
      <ItemGroup>
-@@ -19,17 +_,11 @@
-         <ProjectReference Include="../SteelSeriesEngineWrapper/SteelSeriesEngineWrapper.csproj"/>
-         <Reference Include="CsvHelper"/>
-         <Reference Include="Ionic.Zip.CF"/>
+-        <ProjectReference Include="../RailSDK/RailSDK.csproj"/>
+-        <ProjectReference Include="../ReLogic/ReLogic.csproj"/>
+-        <ProjectReference Include="../SteelSeriesEngineWrapper/SteelSeriesEngineWrapper.csproj"/>
+-        <Reference Include="CsvHelper"/>
+-        <Reference Include="Ionic.Zip.CF"/>
 -        <Reference Include="Microsoft.Xna.Framework"/>
 -        <Reference Include="Microsoft.Xna.Framework.Game"/>
 -        <Reference Include="Microsoft.Xna.Framework.Graphics"/>
 -        <Reference Include="Microsoft.Xna.Framework.Xact"/>
-         <Reference Include="MP3Sharp"/>
-         <Reference Include="Newtonsoft.Json"/>
-         <Reference Include="NVorbis"/>
-         <Reference Include="NVorbis.System.ValueTuple"/>
-         <Reference Include="Steamworks.NET"/>
+-        <Reference Include="MP3Sharp"/>
+-        <Reference Include="Newtonsoft.Json"/>
+-        <Reference Include="NVorbis"/>
+-        <Reference Include="NVorbis.System.ValueTuple"/>
+-        <Reference Include="Steamworks.NET"/>
 -        <Reference Include="System.Windows.Forms"/>
 -        <Reference Include="WindowsBase"/>
+-    </ItemGroup>
+-
+-    <ItemGroup>
+-        <EmbeddedResource Include="GameContent/Creative/Content/*"/>
+-        <EmbeddedResource Include="GameContent/Metadata/MaterialData/*"/>
+-        <EmbeddedResource Include="GameContent/WorldBuilding/*"/>
+-        <EmbeddedResource Include="IO/Data/*"/>
+-        <EmbeddedResource Include="Localization/Content/**"/>
+-        <EmbeddedResource Include="Microsoft/**"/>
++        <PackageReference Include="CsvHelper" Version="30.0.1" />
++        <PackageReference Include="MP3Sharp" Version="1.0.5" />
++        <PackageReference Include="NVorbis" Version="0.10.5" />
++        <ProjectReference Include="../RailSDK/RailSDK.csproj" />
++        <ProjectReference Include="../ReLogic/ReLogic.csproj" />
++        <ProjectReference Include="../SteelSeriesEngineWrapper/SteelSeriesEngineWrapper.csproj" />
++        <Reference Include="Steamworks.NET" />
++    </ItemGroup>
++
++    <ItemGroup>
++        <EmbeddedResource Include="GameContent/Creative/Content/*" />
++        <EmbeddedResource Include="GameContent/Metadata/MaterialData/*" />
++        <EmbeddedResource Include="GameContent/WorldBuilding/*" />
++        <EmbeddedResource Include="IO/Data/*" />
++        <EmbeddedResource Include="Localization/Content/**" />
++        <EmbeddedResource Include="Microsoft/**" />
++    </ItemGroup>
++
++    <ItemGroup>
++        <None Update="Libraries\Natives\aarch64\*">
++            <Link>Libraries\Natives\aarch64\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\linux-x64\*">
++            <Link>Libraries\Natives\linux-x64\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\osx-x64\*">
++            <Link>Libraries\Natives\osx-x64\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\win-x64\*">
++            <Link>Libraries\Natives\win-x64\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\win-x86\*">
++            <Link>Libraries\Natives\win-x86\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\aarch64\Managed\*">
++            <Link>Libraries\Natives\aarch64\Managed\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\linux-x64\Managed\*">
++            <Link>Libraries\Natives\linux-x64\Managed\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\osx-x64\Managed\*">
++            <Link>Libraries\Natives\osx-x64\Managed\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\win-x64\Managed\*">
++            <Link>Libraries\Natives\win-x64\Managed\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="Libraries\Natives\win-x86\Managed\*">
++            <Link>Libraries\Natives\win-x86\Managed\%(Filename)%(Extension)</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="MoltenVK_icd.json">
++            <Link>MoltenVK_icd.json</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="ChromaAppInfo.xml">
++            <Link>ChromaAppInfo.xml</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
++        <None Update="steam_appid.txt">
++            <Link>steam_appid.txt</Link>
++            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++        </None>
      </ItemGroup>
  
-     <ItemGroup>
+ </Project>

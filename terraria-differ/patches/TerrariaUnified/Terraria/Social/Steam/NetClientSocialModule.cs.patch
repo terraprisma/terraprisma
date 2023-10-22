@@ -1,0 +1,13 @@
+--- decompiled/TerrariaBuildable/Terraria/Social/Steam/NetClientSocialModule.cs
++++ decompiled/TerrariaUnified/Terraria/Social/Steam/NetClientSocialModule.cs
+@@ -205,7 +_,9 @@
+ 	{
+ 		WeGameHelper.WriteDebugString(" SendAuthTicket");
+ 		if (_authTicket == HAuthTicket.Invalid) {
++			SteamNetworkingIdentity identity = new SteamNetworkingIdentity();
++			identity.SetSteamID(SteamUser.GetSteamID());
+-			_authTicket = SteamUser.GetAuthSessionTicket(_authData, _authData.Length, out _authDataLength);
++			_authTicket = SteamUser.GetAuthSessionTicket(_authData, _authData.Length, out _authDataLength, ref identity);
+ 		}
+ 		int num = (int)(_authDataLength + 3);
+ 		byte[] array = new byte[num];
