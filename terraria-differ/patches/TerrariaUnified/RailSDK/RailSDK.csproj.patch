@@ -5,7 +5,7 @@
          <Company>Copyright © 2018</Company>
          <RootNamespace>RailSDK.Net</RootNamespace>
 -        <TargetFramework>net40</TargetFramework>
-+        <TargetFramework>net6.0</TargetFramework>
++        <TargetFramework>net8.0</TargetFramework>
          <LangVersion>latest</LangVersion>
      </PropertyGroup>
  
