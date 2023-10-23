@@ -11,7 +11,7 @@
  
      <ItemGroup>
 +        <PackageReference Include="DotNetZip" Version="1.16.0"/>
-+        <PackageReference Include="Newtonsoft.Json" Version="9.0.1"/>
++        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
          <ProjectReference Include="../RailSDK/RailSDK.csproj"/>
          <ProjectReference Include="../SteelSeriesEngineWrapper/SteelSeriesEngineWrapper.csproj"/>
 -        <Reference Include="../Terraria/Libraries/DotNetZip/Ionic.Zip.CF.dll"/>

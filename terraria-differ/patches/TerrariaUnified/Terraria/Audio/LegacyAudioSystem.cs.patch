@@ -13,3 +13,22 @@
  		for (int i = 0; i < sources.Count; i++) {
  			IContentSource contentSource = sources[i];
  			if (!contentSource.HasAsset(assetPath)) {
+@@ -103,11 +_,17 @@
+ 
+ 	public LegacyAudioSystem()
+ 	{
++        /*
+ 		Engine = new AudioEngine("Content\\TerrariaMusic.xgs");
+ 		SoundBank = new SoundBank(Engine, "Content\\Sound Bank.xsb");
+ 		Engine.Update();
+ 		WaveBank = new WaveBank(Engine, "Content\\Wave Bank.xwb", 0, 512);
++		*/
++        Engine = new AudioEngine(Path.Combine(Main.instance.Content.RootDirectory, "TerrariaMusic.xgs"));
++        SoundBank = new SoundBank(Engine, Path.Combine(Main.instance.Content.RootDirectory, "Sound Bank.xsb"));
+-		Engine.Update();
++        Engine.Update();
++        WaveBank = new WaveBank(Engine, Path.Combine(Main.instance.Content.RootDirectory, "Wave Bank.xwb"), 0, 512);
++        Engine.Update();
+ 		AudioTracks = new IAudioTrack[Main.maxMusic];
+ 		TrackNamesByIndex = new Dictionary<int, string>();
+ 		DefaultTrackByIndex = new Dictionary<int, IAudioTrack>();
