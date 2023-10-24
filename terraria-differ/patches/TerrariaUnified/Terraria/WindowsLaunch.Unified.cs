@@ -132,11 +132,11 @@ partial class WindowsLaunch
 		TryGetSocialMode(out SocialMode mode);
 		List<string> contentDirectories = [];
 
-        contentDirectories.Add("Content");
-        contentDirectories.Add(Path.Combine("..", "Content"));
-        contentDirectories.Add(Path.Combine("..", "Terraria", "Content"));
+		contentDirectories.Add("Content");
+		contentDirectories.Add(Path.Combine("..", "Content"));
+		contentDirectories.Add(Path.Combine("..", "Terraria", "Content"));
 
-        switch (mode)
+		switch (mode)
 		{
 			case SocialMode.Steam:
 				contentDirectories.AddRange(ResolveSteamContentDirectories().Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => Path.Combine(x, "Content")));
