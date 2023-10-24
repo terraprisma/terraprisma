@@ -135,10 +135,13 @@
  		tServer.StartInfo.Arguments = text;
  		if (libPath != "") {
  			ProcessStartInfo startInfo = tServer.StartInfo;
-@@ -40615,6 +_,12 @@
+@@ -40615,6 +_,15 @@
  			titleLinks[i].Draw(spriteBatch, anchorPosition);
  			anchorPosition.X += 30f;
  		}
++
++		if (!unifiedBranding)
++			return;
 +
 +		anchorPosition = new Vector2(18f, 26f * 3f);
 +		for (int i = 0; i < unifiedLinks.Count; i++) {
@@ -148,18 +151,19 @@
  	}
  
  	private static void DrawVersionNumber(Microsoft.Xna.Framework.Color menuColor, float upBump)
-@@ -40647,7 +_,10 @@
+@@ -40647,6 +_,12 @@
  				num2 = 2;
  			}
  			spriteBatch.DrawString(FontAssets.MouseText.Value, text, new Vector2(origin.X + (float)num + 10f, (float)screenHeight - origin.Y + (float)num2 - 2f - upBump), color, 0f, origin, 1f, SpriteEffects.None, 0f);
--		}
++
++			if (!unifiedBranding)
++				continue;
 +
 +			spriteBatch.DrawString(FontAssets.MouseText.Value, $"Terraria Unified v{unifiedVersion}", new Vector2(origin.X + num + 10f, origin.Y * 2f + num2 - 2f), color, 0f, origin, 1f, SpriteEffects.None, 0f);
 +			spriteBatch.DrawString(FontAssets.MouseText.Value, $".NET {Environment.Version} / x{(Environment.Is64BitProcess ? "64" : "86")}", new Vector2(origin.X + num + 10f, origin.Y * 2f + num2 - 2f + 26f), color, 0f, origin, 1f, SpriteEffects.None, 0f);
-+        }
+ 		}
  	}
  
- 	private static void ClearVisualPostProcessEffects()
 @@ -40776,13 +_,17 @@
  
  	private static bool IsBorderlessDisplayAvailable()
