@@ -66,26 +66,15 @@
  	{
  		instance = this;
  		UnpausedUpdateSeed = (ulong)Guid.NewGuid().GetHashCode();
-@@ -5225,8 +_,18 @@
+@@ -5225,7 +_,7 @@
  			Map = new WorldMap(maxTilesX, maxTilesY);
  			Configuration.Load();
  			graphics = new GraphicsDeviceManager(this as Game);
 -			base.Content.RootDirectory = "Content";
-+			base.Content.RootDirectory = ResolveContentDirectory();
++			base.Content.RootDirectory = WindowsLaunch.GetContentDirectory();
  		}
-+	}
-+	
-+	private static string ResolveContentDirectory() {
-+		string[] candidates = { "Content", Path.Combine("..", "Content"), Path.Combine("..", "Terraria", "Content") };
-+		foreach (var candidate in candidates)
-+		{
-+			if (Directory.Exists(candidate))
-+				return candidate;
-+		}
-+		return "Content";
  	}
  
- 	private static void SetDisplayMonitor()
 @@ -9285,6 +_,7 @@
  		if (SocialAPI.Workshop != null) {
  			SocialAPI.Workshop.LoadEarlyContent();
