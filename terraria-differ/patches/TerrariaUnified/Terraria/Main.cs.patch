@@ -126,8 +126,18 @@
  		tServer.StartInfo.Arguments = text;
  		if (libPath != "") {
  			ProcessStartInfo startInfo = tServer.StartInfo;
-@@ -40783,6 +_,7 @@
+@@ -40776,13 +_,17 @@
+ 
+ 	private static bool IsBorderlessDisplayAvailable()
+ 	{
++		/*
+ 		bool result = false;
+ 		if (Platform.IsWindows) {
+ 			result = true;
+ 		}
  		return result;
++		*/
++		return true;
  	}
  
 +	/*
@@ -177,7 +187,7 @@
  		bool flag2 = false;
  		int num3;
  		int num4;
-@@ -52075,12 +_,14 @@
+@@ -52075,12 +_,16 @@
  					TryPickingDefaultUIScale(800f);
  				}
  			}
@@ -189,9 +199,20 @@
  				}
  			}
 +			*/
++			if (!fullscreen && !flag3)
++				instance.Window.IsBorderlessEXT = screenBorderless;
  			if (width > maxScreenW) {
  				float num = (float)height / (float)width;
  				width = maxScreenW;
+@@ -52092,7 +_,7 @@
+ 				width = (int)(num2 * (float)height);
+ 			}
+ 			PlayerInput.RawMouseScale = new Vector2((float)width / (float)instance.Window.ClientBounds.Width, (float)height / (float)instance.Window.ClientBounds.Height);
+-			if (!graphics.IsFullScreen) {
++			if (!graphics.IsFullScreen && !screenBorderless) {
+ 				num3 = Math.Max(graphics.PreferredBackBufferWidth, graphics.GraphicsDevice.Viewport.Width);
+ 				num4 = Math.Max(graphics.PreferredBackBufferHeight, graphics.GraphicsDevice.Viewport.Height);
+ 				if (num3 != graphics.PreferredBackBufferWidth || num4 != graphics.PreferredBackBufferHeight) {
 @@ -52104,6 +_,7 @@
  			}
  		} else {
@@ -200,11 +221,12 @@
  			if (Platform.IsWindows) {
  				form.MinimumSize = new Size(minScreenW, minScreenH);
  				if (flag) {
-@@ -52111,12 +_,14 @@
+@@ -52111,12 +_,15 @@
  					height = displayHeight[0];
  				}
  			}
 +			*/
++			instance.Window.IsBorderlessEXT = false;
  			width = Math.Min(width, maxScreenW);
  			height = Math.Min(height, maxScreenH);
  			num3 = graphics.GraphicsDevice.Viewport.Width;
@@ -215,7 +237,7 @@
  		if (Platform.IsWindows && !fullscreen && !flag2) {
  			if (form.ClientSize.Width < graphics.PreferredBackBufferWidth) {
  				width = form.ClientSize.Width;
-@@ -52127,8 +_,11 @@
+@@ -52127,10 +_,19 @@
  				flag2 = true;
  			}
  		}
@@ -226,7 +248,15 @@
 +		*/
  		width = Math.Max(width, minScreenW);
  		height = Math.Max(height, minScreenH);
++		if (screenBorderless)
++		{
++			graphics.PreferredBackBufferWidth = width;
++			graphics.PreferredBackBufferHeight = height;
++			graphics.ApplyChanges();
++		}
  		if (graphics.IsFullScreen != fullscreen) {
+ 			graphics.PreferredBackBufferWidth = width;
+ 			graphics.PreferredBackBufferHeight = height;
 @@ -52155,6 +_,7 @@
  			PendingResolutionWidth = screenWidth;
  			PendingResolutionHeight = screenHeight;
