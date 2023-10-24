@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ReLogic.OS.Windows;
 
-internal static partial class NativeMethods
+partial class NativeMethods
 {
 	[DllImport("user32.dll", CharSet = CharSet.Unicode)]
 	public static extern IntPtr SetWindowLongPtr(IntPtr hWnd, int nIndex, IntPtr dwNewLong);

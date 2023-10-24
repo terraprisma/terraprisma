@@ -1,64 +1,30 @@
 --- decompiled/TerrariaBuildable/Terraria/WindowsLaunch.cs
 +++ decompiled/TerrariaUnified/Terraria/WindowsLaunch.cs
-@@ -1,5 +_,7 @@
- using System;
-+using System.Collections.Generic;
- using System.IO;
-+using System.Linq;
- using System.Reflection;
+@@ -1,12 +_,9 @@
+-using System;
+-using System.IO;
+-using System.Reflection;
  using System.Runtime.InteropServices;
  using Terraria.Social;
-@@ -51,6 +_,7 @@
+ 
+ namespace Terraria;
+ 
+-public static class WindowsLaunch
++public static partial class WindowsLaunch
+ {
+ 	public delegate bool HandlerRoutine(CtrlTypes ctrlType);
+ 
+@@ -48,6 +_,7 @@
+ 	[DllImport("Kernel32")]
+ 	public static extern bool SetConsoleCtrlHandler(HandlerRoutine handler, bool add);
+ 
++	/*
  	[STAThread]
  	private static void Main(string[] args)
  	{
-+		/*
- 		AppDomain.CurrentDomain.AssemblyResolve += delegate(object sender, ResolveEventArgs sargs) {
- 			string resourceName = new AssemblyName(sargs.Name).Name + ".dll";
- 			string text = Array.Find(typeof(Program).Assembly.GetManifestResourceNames(), (string element) => element.EndsWith(resourceName));
-@@ -62,6 +_,44 @@
- 			stream.Read(array, 0, array.Length);
- 			return Assembly.Load(array);
+@@ -64,4 +_,5 @@
  		};
--		Program.LaunchGame(args);
-+		*/
-+		Environment.SetEnvironmentVariable("FNA_WORKAROUND_WINDOW_RESIZABLE", "1");
-+		bool dedServ = args.Contains("-server");
-+		if (dedServ) {
-+			_handleRoutine = ConsoleCtrlCheck;
-+			SetConsoleCtrlHandler(_handleRoutine, add: true);
-+		}
-+		InitNative();
-+		Program.LaunchGame(args, monoArgs: !OperatingSystem.IsWindows());
-+	}
-+
-+	private static void InitNative()
-+	{
-+		string platform = OperatingSystem.IsWindows()
-+			? "win"
-+			: OperatingSystem.IsMacOS()
-+				? "osx"
-+				: OperatingSystem.IsLinux()
-+					? "linux"
-+					: throw new PlatformNotSupportedException();
-+		
-+		// TODO: Support arm64/aarch64...
-+		string arch = Environment.Is64BitProcess ? "x64" : "x86";
-+		string path = Path.Combine("Libraries", "Natives", platform + '-' + arch);
-+		foreach (string file in Directory.GetFiles(path))
-+			NativeLibrary.Load(file);
-+		
-+		string managedPath = Path.Combine(path, "Managed");
-+		List<Assembly> dependentAssemblies = new List<Assembly>();
-+		foreach (string file in Directory.GetFiles(managedPath))
-+			dependentAssemblies.Add(Assembly.LoadFrom(file));
-+
-+		AppDomain.CurrentDomain.AssemblyResolve += (_, args) => {
-+			foreach (Assembly assembly in dependentAssemblies)
-+				if (assembly.FullName == args.Name)
-+					return assembly;
-+			
-+			return null;
-+		};
+ 		Program.LaunchGame(args);
  	}
++	*/
  }

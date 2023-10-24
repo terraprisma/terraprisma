@@ -119,6 +119,24 @@
  	}
  
  	private void Main_Exiting(object sender, EventArgs e)
+@@ -40542,6 +_,9 @@
+ 		text = ((!ActiveWorldFileData.IsCloudSave) ? (text + SanitizePathArgument("world", worldPathName)) : (text + SanitizePathArgument("cloudworld", worldPathName)));
+ 		text = text + " -worldrollbackstokeep " + WorldRollingBackupsCountToKeep;
+ 		tServer = new Process();
++		tServer.StartInfo.FileName = "dotnet";
++		text = "Terraria.dll -server " + text;
++		/*
+ 		if (Platform.IsLinux) {
+ 			tServer.StartInfo.FileName = "TerrariaServer";
+ 		} else if (Platform.IsOSX) {
+@@ -40549,6 +_,7 @@
+ 		} else {
+ 			tServer.StartInfo.FileName = "TerrariaServer.exe";
+ 		}
++		*/
+ 		tServer.StartInfo.Arguments = text;
+ 		if (libPath != "") {
+ 			ProcessStartInfo startInfo = tServer.StartInfo;
 @@ -40783,6 +_,7 @@
  		return result;
  	}

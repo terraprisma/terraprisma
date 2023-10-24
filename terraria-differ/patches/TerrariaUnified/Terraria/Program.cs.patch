@@ -35,8 +35,11 @@
  		try {
  			Console.OutputEncoding = Encoding.UTF8;
  			if (Platform.IsWindows) {
-@@ -163,6 +_,7 @@
+@@ -161,8 +_,10 @@
+ 			TrySettingFNAToOpenGL(args);
+ 		}
  		LaunchParameters = Utils.ParseArguements(args);
++		WindowsLaunch.InitializeWithParsedArguments(LaunchParameters);
  		SavePath = (LaunchParameters.ContainsKey("-savedirectory") ? LaunchParameters["-savedirectory"] : Platform.Get<IPathService>().GetStoragePath("Terraria"));
  		ThreadPool.SetMinThreads(8, 8);
 +		Main.dedServ = LaunchParameters.ContainsKey("-server");
