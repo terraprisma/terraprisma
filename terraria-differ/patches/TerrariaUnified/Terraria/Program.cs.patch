@@ -11,17 +11,20 @@
  using Terraria.Initializers;
  using Terraria.Localization;
  using Terraria.Social;
-@@ -18,9 +_,9 @@
+@@ -18,11 +_,11 @@
  
  public static class Program
  {
 -	public static bool IsXna = true;
-+	public static bool IsXna = false;
++	public const bool IsXna = false;
  
 -	public static bool IsFna = false;
-+	public static bool IsFna = true;
++	public const bool IsFna = true;
  
- 	public static bool IsMono = Type.GetType("Mono.Runtime") != null;
+-	public static bool IsMono = Type.GetType("Mono.Runtime") != null;
++	public const bool IsMono = false;
+ 
+ 	public const bool IsDebug = false;
  
 @@ -137,9 +_,11 @@
  
