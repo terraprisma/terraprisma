@@ -1,6 +1,6 @@
 --- decompiled/TerrariaBuildable/Terraria/Terraria.csproj
 +++ decompiled/TerrariaUnified/Terraria/Terraria.csproj
-@@ -8,28 +_,18 @@
+@@ -8,28 +_,19 @@
          <Company>Re-Logic</Company>
          <Company>Copyright © 2022 Re-Logic</Company>
          <RootNamespace>Terraria</RootNamespace>
@@ -8,6 +8,7 @@
 +        <TargetFramework>net8.0</TargetFramework>
          <LangVersion>latest</LangVersion>
 -        <PlatformTarget>x86</PlatformTarget>
++        <ApplicationIcon>icon.ico</ApplicationIcon>
      </PropertyGroup>
  
      <ItemGroup>
