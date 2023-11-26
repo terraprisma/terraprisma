@@ -1,9 +1,0 @@
-[submodule "terraria-differ/src/DepotDownloader"]
-	path = terraria-differ/src/DepotDownloader
-	url = https://github.com/SteamRE/DepotDownloader
-[submodule "terraria-differ/src/DotnetPatcher"]
-	path = terraria-differ/src/DotnetPatcher
-	url = https://github.com/steviegt6/DotnetPatcher.git
-[submodule "terraria-differ/src/FNA"]
-	path = terraria-differ/src/FNA
-	url = https://github.com/steviegt6/FNA.git
